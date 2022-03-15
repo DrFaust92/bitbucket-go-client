@@ -1,4 +1,4 @@
-# Go API client for swagger
+# Go API client for bitbucket
 
 Code against the Bitbucket API to automate simple tasks, embed Bitbucket data into your own site, build mobile or desktop apps, or even add custom UI add-ons into Bitbucket itself using the Connect framework.
 
@@ -13,7 +13,7 @@ For more information, please visit [https://support.atlassian.com/bitbucket-clou
 ## Installation
 Put the package under your project folder and add the following in import:
 ```golang
-import "./swagger"
+import "./bitbucket"
 ```
 
 ## Documentation for API Endpoints

@@ -19179,32 +19179,46 @@ components:
           commit:
             $ref: '#/components/schemas/commit'
         description: A commit comment.
-    ref:
-      title: Ref
-      required:
-      - type
+    deployments_ddev_paginated_environments:
+      title: Paginated Deployment Environments
       type: object
       properties:
-        type:
+        page:
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        values:
+          minItems: 0
+          type: array
+          description: The values of the current page.
+          items:
+            $ref: '#/components/schemas/deployments_ddev_deployment_environment'
+        size:
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        pagelen:
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
           type: string
-        links:
-          $ref: '#/components/schemas/ref_links'
-        name:
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
           type: string
-          description: The name of the ref.
-        target:
-          $ref: '#/components/schemas/commit'
-      description: "A ref object, representing a branch or tag in a repository."
-      example:
-        name: name
-        links:
-          self:
-            name: name
-            href: http://example.com/aeiou
-          commits: null
-          html: null
-        type: type
-        target: ""
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
+      description: A paged list of environments
     deployment_state_completed_status_failed:
       allOf:
       - $ref: '#/components/schemas/deployment_state_completed_status'
@@ -19969,70 +19983,32 @@ components:
         - ""
         page: 1
         pagelen: 1
-    issue:
-      allOf:
-      - $ref: '#/components/schemas/object'
-      - title: Issue
-        type: object
-        properties:
-          links:
-            $ref: '#/components/schemas/issue_links'
-          id:
-            type: integer
-          repository:
-            $ref: '#/components/schemas/repository'
-          title:
-            type: string
-          reporter:
-            $ref: '#/components/schemas/user'
-          assignee:
-            $ref: '#/components/schemas/user'
-          created_on:
-            type: string
-            format: date-time
-          updated_on:
-            type: string
-            format: date-time
-          edited_on:
-            type: string
-            format: date-time
-          state:
-            type: string
-            enum:
-            - new
-            - open
-            - resolved
-            - on hold
-            - invalid
-            - duplicate
-            - wontfix
-            - closed
-          kind:
-            type: string
-            enum:
-            - bug
-            - enhancement
-            - proposal
-            - task
-          priority:
-            type: string
-            enum:
-            - trivial
-            - minor
-            - major
-            - critical
-            - blocker
-          milestone:
-            $ref: '#/components/schemas/milestone'
-          version:
-            $ref: '#/components/schemas/version'
-          component:
-            $ref: '#/components/schemas/component'
-          votes:
-            type: integer
-          content:
-            $ref: '#/components/schemas/Rendered Pull Request Markup_title'
-        description: An issue.
+    ref:
+      title: Ref
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        links:
+          $ref: '#/components/schemas/ref_links'
+        name:
+          type: string
+          description: The name of the ref.
+        target:
+          $ref: '#/components/schemas/commit'
+      description: "A ref object, representing a branch or tag in a repository."
+      example:
+        name: name
+        links:
+          self:
+            name: name
+            href: http://example.com/aeiou
+          commits: null
+          html: null
+        type: type
+        target: ""
     webhook_subscription:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -21277,46 +21253,19 @@ components:
       - title: Pipeline State
         type: object
         description: The representation of the progress state of a pipeline.
-    deployments_ddev_paginated_environments:
-      title: Paginated Deployment Environments
-      type: object
-      properties:
-        page:
-          type: integer
-          description: Page number of the current results. This is an optional element
-            that is not provided in all responses.
-        values:
-          minItems: 0
-          type: array
-          description: The values of the current page.
-          items:
-            $ref: '#/components/schemas/deployments_ddev_deployment_environment'
-        size:
-          type: integer
-          description: "Total number of objects in the response. This is an optional\
-            \ element that is not provided in all responses, as it can be expensive\
-            \ to compute."
-        pagelen:
-          type: integer
-          description: Current number of objects on the existing page. The default
-            value is 10 with 100 being the maximum allowed value. Individual APIs
-            may enforce different values.
-        next:
-          type: string
-          description: Link to the next page if it exists. The last page of a collection
-            does not have this value. Use this link to navigate the result set and
-            refrain from constructing your own URLs.
-          format: uri
-        previous:
-          type: string
-          description: Link to previous page if it exists. A collections first page
-            does not have this value. This is an optional element that is not provided
-            in all responses. Some result sets strictly support forward navigation
-            and never provide previous links. Clients must anticipate that backwards
-            navigation is not always available. Use this link to navigate the result
-            set and refrain from constructing your own URLs.
-          format: uri
-      description: A paged list of environments
+    author:
+      allOf:
+      - $ref: '#/components/schemas/object'
+      - title: Author
+        type: object
+        properties:
+          raw:
+            type: string
+            description: The raw author value from the repository. This may be the
+              only value available if the author does not match a user in Bitbucket.
+          user:
+            $ref: '#/components/schemas/account'
+        description: The author of a change in a repository
     jira_project:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -21396,8 +21345,9 @@ components:
             description: The UUID identifying the environment.
         description: A Bitbucket Deployment Environment Lock.
       x-bb-default-fields:
-      - environmentUuid
-      - name
+      - '*'
+      - lock_opener.*
+      - owner.*
       x-bb-batch-url: "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch"
       x-bb-batch-max-size: 100
     pipeline_step:
@@ -22179,7 +22129,7 @@ components:
               $ref: '#/components/schemas/group'
           value:
             type: integer
-            description: <staticmethod object at 0x7f6ed5c0b410>
+            description: <staticmethod object at 0x7faf03249890>
         description: A branch restriction rule.
     pipeline_step_state_completed_result:
       allOf:
@@ -22549,6 +22499,70 @@ components:
           type: type
         page: 1
         pagelen: 1
+    issue:
+      allOf:
+      - $ref: '#/components/schemas/object'
+      - title: Issue
+        type: object
+        properties:
+          links:
+            $ref: '#/components/schemas/issue_links'
+          id:
+            type: integer
+          repository:
+            $ref: '#/components/schemas/repository'
+          title:
+            type: string
+          reporter:
+            $ref: '#/components/schemas/user'
+          assignee:
+            $ref: '#/components/schemas/user'
+          created_on:
+            type: string
+            format: date-time
+          updated_on:
+            type: string
+            format: date-time
+          edited_on:
+            type: string
+            format: date-time
+          state:
+            type: string
+            enum:
+            - new
+            - open
+            - resolved
+            - on hold
+            - invalid
+            - duplicate
+            - wontfix
+            - closed
+          kind:
+            type: string
+            enum:
+            - bug
+            - enhancement
+            - proposal
+            - task
+          priority:
+            type: string
+            enum:
+            - trivial
+            - minor
+            - major
+            - critical
+            - blocker
+          milestone:
+            $ref: '#/components/schemas/milestone'
+          version:
+            $ref: '#/components/schemas/version'
+          component:
+            $ref: '#/components/schemas/component'
+          votes:
+            type: integer
+          content:
+            $ref: '#/components/schemas/Rendered Pull Request Markup_title'
+        description: An issue.
     participant:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -22836,42 +22850,6 @@ components:
             description: The default merge strategy for pull requests targeting this
               branch.
         description: "A branch object, representing a branch in a repository."
-    page:
-      title: Page
-      type: object
-      properties:
-        size:
-          minimum: 0
-          type: integer
-          description: "Total number of objects in the response. This is an optional\
-            \ element that is not provided in all responses, as it can be expensive\
-            \ to compute."
-        page:
-          minimum: 1
-          type: integer
-          description: Page number of the current results. This is an optional element
-            that is not provided in all responses.
-        pagelen:
-          minimum: 1
-          type: integer
-          description: Current number of objects on the existing page. The default
-            value is 10 with 100 being the maximum allowed value. Individual APIs
-            may enforce different values.
-        next:
-          type: string
-          description: Link to the next page if it exists. The last page of a collection
-            does not have this value. Use this link to navigate the result set and
-            refrain from constructing your own URLs.
-          format: uri
-        previous:
-          type: string
-          description: Link to previous page if it exists. A collections first page
-            does not have this value. This is an optional element that is not provided
-            in all responses. Some result sets strictly support forward navigation
-            and never provide previous links. Clients must anticipate that backwards
-            navigation is not always available. Use this link to navigate the result
-            set and refrain from constructing your own URLs.
-          format: uri
     deployment_state_undeployed:
       allOf:
       - $ref: '#/components/schemas/deployment_state'
@@ -23189,19 +23167,42 @@ components:
             enum:
             - FAILED
         description: A Bitbucket Pipelines FAILED pipeline result.
-    author:
-      allOf:
-      - $ref: '#/components/schemas/object'
-      - title: Author
-        type: object
-        properties:
-          raw:
-            type: string
-            description: The raw author value from the repository. This may be the
-              only value available if the author does not match a user in Bitbucket.
-          user:
-            $ref: '#/components/schemas/account'
-        description: The author of a change in a repository
+    page:
+      title: Page
+      type: object
+      properties:
+        size:
+          minimum: 0
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        page:
+          minimum: 1
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        pagelen:
+          minimum: 1
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
     paginated_pipeline_known_hosts:
       title: Paginated Pipeline Known Hosts
       type: object
@@ -23555,21 +23556,6 @@ components:
         html:
           $ref: '#/components/schemas/Link'
       example: null
-    ref_links:
-      type: object
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        commits:
-          $ref: '#/components/schemas/Link'
-        html:
-          $ref: '#/components/schemas/Link'
-      example:
-        self:
-          name: name
-          href: http://example.com/aeiou
-        commits: null
-        html: null
     pullrequest_links:
       type: object
       properties:
@@ -23728,22 +23714,21 @@ components:
           type: boolean
           description: Indicates if branch is enabled or not.
       example: null
-    issue_links:
+    ref_links:
       type: object
       properties:
         self:
           $ref: '#/components/schemas/Link'
+        commits:
+          $ref: '#/components/schemas/Link'
         html:
           $ref: '#/components/schemas/Link'
-        comments:
-          $ref: '#/components/schemas/Link'
-        attachments:
-          $ref: '#/components/schemas/Link'
-        watch:
-          $ref: '#/components/schemas/Link'
-        vote:
-          $ref: '#/components/schemas/Link'
-      example: null
+      example:
+        self:
+          name: name
+          href: http://example.com/aeiou
+        commits: null
+        html: null
     repository_links:
       type: object
       properties:
@@ -23978,6 +23963,22 @@ components:
         data: {}
         detail: detail
         message: message
+    issue_links:
+      type: object
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        html:
+          $ref: '#/components/schemas/Link'
+        comments:
+          $ref: '#/components/schemas/Link'
+        attachments:
+          $ref: '#/components/schemas/Link'
+        watch:
+          $ref: '#/components/schemas/Link'
+        vote:
+          $ref: '#/components/schemas/Link'
+      example: null
     workspace_links:
       type: object
       properties:
@@ -24049,7 +24050,7 @@ components:
             team: Read your team membership information
             team:write: Read and modify your team membership information
             account:write: Read and modify your account information
-x-revision: 487cb82dbde5
+x-revision: 7b608fcdb723
 x-atlassian-narrative:
   documents:
   - body: "\nThe purpose of this section is to describe how to authenticate when making\
