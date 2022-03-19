@@ -148,8 +148,8 @@ func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOp
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-RepositoriesApiService List repositories for a user
-Returns a paginated list of all repositories owned by the specified account or UUID.  The result can be narrowed down based on the authenticated user&#x27;s role.  E.g. with &#x60;?role&#x3D;contributor&#x60;, only those repositories that the authenticated user has write access to are returned (this includes any repo the user is an admin on, as that implies write access).  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+RepositoriesApiService List repositories in a workspace
+Returns a paginated list of all repositories owned by the specified workspace.  The result can be narrowed down based on the authenticated user&#x27;s role.  E.g. with &#x60;?role&#x3D;contributor&#x60;, only those repositories that the authenticated user has write access to are returned (this includes any repo the user is an admin on, as that implies write access).  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;. 
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceGetOpts - Optional Parameters:

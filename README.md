@@ -243,7 +243,7 @@ Class | Method | HTTP request | Description
 *ReportsApi* | [**GetReport**](docs/ReportsApi.md#getreport) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId} | Get a report
 *ReportsApi* | [**GetReportsForCommit**](docs/ReportsApi.md#getreportsforcommit) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports | List reports
 *RepositoriesApi* | [**RepositoriesGet**](docs/RepositoriesApi.md#repositoriesget) | **Get** /repositories | List public repositories
-*RepositoriesApi* | [**RepositoriesWorkspaceGet**](docs/RepositoriesApi.md#repositoriesworkspaceget) | **Get** /repositories/{workspace} | List repositories for a user
+*RepositoriesApi* | [**RepositoriesWorkspaceGet**](docs/RepositoriesApi.md#repositoriesworkspaceget) | **Get** /repositories/{workspace} | List repositories in a workspace
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlugdelete) | **Delete** /repositories/{workspace}/{repo_slug} | Delete a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugfilehistorycommitpathget) | **Get** /repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path} | List commits that modified a file
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugForksGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugforksget) | **Get** /repositories/{workspace}/{repo_slug}/forks | List repository forks
@@ -287,7 +287,7 @@ Class | Method | HTTP request | Description
 *SnippetsApi* | [**SnippetsWorkspaceEncodedIdWatchGet**](docs/SnippetsApi.md#snippetsworkspaceencodedidwatchget) | **Get** /snippets/{workspace}/{encoded_id}/watch | Check if the current user is watching a snippet
 *SnippetsApi* | [**SnippetsWorkspaceEncodedIdWatchPut**](docs/SnippetsApi.md#snippetsworkspaceencodedidwatchput) | **Put** /snippets/{workspace}/{encoded_id}/watch | Watch a snippet
 *SnippetsApi* | [**SnippetsWorkspaceEncodedIdWatchersGet**](docs/SnippetsApi.md#snippetsworkspaceencodedidwatchersget) | **Get** /snippets/{workspace}/{encoded_id}/watchers | List users watching a snippet
-*SnippetsApi* | [**SnippetsWorkspaceGet**](docs/SnippetsApi.md#snippetsworkspaceget) | **Get** /snippets/{workspace} | List snippets for user
+*SnippetsApi* | [**SnippetsWorkspaceGet**](docs/SnippetsApi.md#snippetsworkspaceget) | **Get** /snippets/{workspace} | List snippets in a workspace
 *SnippetsApi* | [**SnippetsWorkspacePost**](docs/SnippetsApi.md#snippetsworkspacepost) | **Post** /snippets/{workspace} | Create a snippet for a workspace
 *SourceApi* | [**RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet**](docs/SourceApi.md#repositoriesworkspacereposlugfilehistorycommitpathget) | **Get** /repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path} | List commits that modified a file
 *SourceApi* | [**RepositoriesWorkspaceRepoSlugSrcCommitPathGet**](docs/SourceApi.md#repositoriesworkspacereposlugsrccommitpathget) | **Get** /repositories/{workspace}/{repo_slug}/src/{commit}/{path} | Get file or directory contents

@@ -5,7 +5,7 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**RepositoriesGet**](RepositoriesApi.md#RepositoriesGet) | **Get** /repositories | List public repositories
-[**RepositoriesWorkspaceGet**](RepositoriesApi.md#RepositoriesWorkspaceGet) | **Get** /repositories/{workspace} | List repositories for a user
+[**RepositoriesWorkspaceGet**](RepositoriesApi.md#RepositoriesWorkspaceGet) | **Get** /repositories/{workspace} | List repositories in a workspace
 [**RepositoriesWorkspaceRepoSlugDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugDelete) | **Delete** /repositories/{workspace}/{repo_slug} | Delete a repository
 [**RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet) | **Get** /repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path} | List commits that modified a file
 [**RepositoriesWorkspaceRepoSlugForksGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugForksGet) | **Get** /repositories/{workspace}/{repo_slug}/forks | List repository forks
@@ -63,9 +63,9 @@ Name | Type | Description  | Notes
 
 # **RepositoriesWorkspaceGet**
 > PaginatedRepositories RepositoriesWorkspaceGet(ctx, workspace, optional)
-List repositories for a user
+List repositories in a workspace
 
-Returns a paginated list of all repositories owned by the specified account or UUID.  The result can be narrowed down based on the authenticated user's role.  E.g. with `?role=contributor`, only those repositories that the authenticated user has write access to are returned (this includes any repo the user is an admin on, as that implies write access).  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+Returns a paginated list of all repositories owned by the specified workspace.  The result can be narrowed down based on the authenticated user's role.  E.g. with `?role=contributor`, only those repositories that the authenticated user has write access to are returned (this includes any repo the user is an admin on, as that implies write access).  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
 
 ### Required Parameters
 

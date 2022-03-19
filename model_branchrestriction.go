@@ -24,6 +24,6 @@ type Branchrestriction struct {
 	Pattern string `json:"pattern"`
 	Users []Account `json:"users,omitempty"`
 	Groups []Group `json:"groups,omitempty"`
-	// <staticmethod object at 0x7faf03249890>
+	// <staticmethod object at 0x7fb158577810>
 	Value int32 `json:"value,omitempty"`
 }

@@ -2743,7 +2743,7 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdWatchersGet(ctx context.C
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-SnippetsApiService List snippets for user
+SnippetsApiService List snippets in a workspace
 Identical to [&#x60;/snippets&#x60;](/cloud/bitbucket/rest/api-group-snippets/#api-snippets-get), except that the result is further filtered by the snippet owner and only those that are owned by &#x60;{workspace}&#x60; are returned.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;. 

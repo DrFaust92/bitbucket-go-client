@@ -27,7 +27,7 @@ Method | HTTP request | Description
 [**SnippetsWorkspaceEncodedIdWatchGet**](SnippetsApi.md#SnippetsWorkspaceEncodedIdWatchGet) | **Get** /snippets/{workspace}/{encoded_id}/watch | Check if the current user is watching a snippet
 [**SnippetsWorkspaceEncodedIdWatchPut**](SnippetsApi.md#SnippetsWorkspaceEncodedIdWatchPut) | **Put** /snippets/{workspace}/{encoded_id}/watch | Watch a snippet
 [**SnippetsWorkspaceEncodedIdWatchersGet**](SnippetsApi.md#SnippetsWorkspaceEncodedIdWatchersGet) | **Get** /snippets/{workspace}/{encoded_id}/watchers | List users watching a snippet
-[**SnippetsWorkspaceGet**](SnippetsApi.md#SnippetsWorkspaceGet) | **Get** /snippets/{workspace} | List snippets for user
+[**SnippetsWorkspaceGet**](SnippetsApi.md#SnippetsWorkspaceGet) | **Get** /snippets/{workspace} | List snippets in a workspace
 [**SnippetsWorkspacePost**](SnippetsApi.md#SnippetsWorkspacePost) | **Post** /snippets/{workspace} | Create a snippet for a workspace
 
 # **SnippetsGet**
@@ -726,7 +726,7 @@ Name | Type | Description  | Notes
 
 # **SnippetsWorkspaceGet**
 > PaginatedSnippets SnippetsWorkspaceGet(ctx, workspace, optional)
-List snippets for user
+List snippets in a workspace
 
 Identical to [`/snippets`](/cloud/bitbucket/rest/api-group-snippets/#api-snippets-get), except that the result is further filtered by the snippet owner and only those that are owned by `{workspace}` are returned.
 
