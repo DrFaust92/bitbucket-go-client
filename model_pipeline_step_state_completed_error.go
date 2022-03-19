@@ -11,6 +11,6 @@ package bitbucket
 
 type PipelineStepStateCompletedError struct {
 	// The name of the result (ERROR)
-	Name string `json:"name,omitempty"`
+	Name   string             `json:"name,omitempty"`
 	Error_ *PipelineStepError `json:"error,omitempty"`
 }

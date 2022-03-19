@@ -11,7 +11,7 @@ package bitbucket
 
 type ErrorError struct {
 	Message string `json:"message"`
-	Detail string `json:"detail,omitempty"`
+	Detail  string `json:"detail,omitempty"`
 	// Optional structured data that is endpoint-specific.
 	Data *interface{} `json:"data,omitempty"`
 }

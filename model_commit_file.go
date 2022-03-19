@@ -13,9 +13,9 @@ package bitbucket
 type CommitFile struct {
 	Type_ string `json:"type"`
 	// The path in the repository
-	Path string `json:"path,omitempty"`
-	Commit *Commit `json:"commit,omitempty"`
-	Attributes string `json:"attributes,omitempty"`
+	Path       string  `json:"path,omitempty"`
+	Commit     *Commit `json:"commit,omitempty"`
+	Attributes string  `json:"attributes,omitempty"`
 	// The escaped version of the path as it appears in a diff. If the path does not require escaping this will be the same as path.
 	EscapedPath string `json:"escaped_path,omitempty"`
 }

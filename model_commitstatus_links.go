@@ -10,6 +10,6 @@
 package bitbucket
 
 type CommitstatusLinks struct {
-	Self *Link `json:"self,omitempty"`
+	Self   *Link `json:"self,omitempty"`
 	Commit *Link `json:"commit,omitempty"`
 }

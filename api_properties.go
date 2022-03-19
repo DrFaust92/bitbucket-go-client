@@ -1,4 +1,3 @@
-
 /*
  * Bitbucket API
  *
@@ -12,11 +11,11 @@ package bitbucket
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
 )
 
 // Linger please
@@ -25,6 +24,7 @@ var (
 )
 
 type PropertiesApiService service
+
 /*
 PropertiesApiService Delete a commit application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
@@ -42,7 +42,6 @@ func (a *PropertiesApiService) DeleteCommitHostedPropertyValue(ctx context.Conte
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -90,10 +89,9 @@ func (a *PropertiesApiService) DeleteCommitHostedPropertyValue(ctx context.Conte
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -101,6 +99,7 @@ func (a *PropertiesApiService) DeleteCommitHostedPropertyValue(ctx context.Conte
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Delete a pull request application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
@@ -118,7 +117,6 @@ func (a *PropertiesApiService) DeletePullRequestHostedPropertyValue(ctx context.
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -166,10 +164,9 @@ func (a *PropertiesApiService) DeletePullRequestHostedPropertyValue(ctx context.
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -177,6 +174,7 @@ func (a *PropertiesApiService) DeletePullRequestHostedPropertyValue(ctx context.
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Delete a repository application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
@@ -193,7 +191,6 @@ func (a *PropertiesApiService) DeleteRepositoryHostedPropertyValue(ctx context.C
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -240,10 +237,9 @@ func (a *PropertiesApiService) DeleteRepositoryHostedPropertyValue(ctx context.C
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -251,6 +247,7 @@ func (a *PropertiesApiService) DeleteRepositoryHostedPropertyValue(ctx context.C
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Delete a user application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
@@ -266,7 +263,6 @@ func (a *PropertiesApiService) DeleteUserHostedPropertyValue(ctx context.Context
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -312,10 +308,9 @@ func (a *PropertiesApiService) DeleteUserHostedPropertyValue(ctx context.Context
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -323,6 +318,7 @@ func (a *PropertiesApiService) DeleteUserHostedPropertyValue(ctx context.Context
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Get a commit application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
@@ -340,7 +336,6 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -388,10 +383,9 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -399,6 +393,7 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Get a pull request application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
@@ -416,7 +411,6 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -464,10 +458,9 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -475,6 +468,7 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Get a repository application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
@@ -491,7 +485,6 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -538,10 +531,9 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -549,6 +541,7 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Get a user application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
@@ -564,7 +557,6 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -610,10 +602,9 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -621,6 +612,7 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Update a commit application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
@@ -638,7 +630,6 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -686,10 +677,9 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -697,6 +687,7 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Update a pull request application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
@@ -714,7 +705,6 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -762,10 +752,9 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -773,6 +762,7 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Update a repository application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
@@ -789,7 +779,6 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -836,10 +825,9 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr
@@ -847,6 +835,7 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 
 	return localVarHttpResponse, nil
 }
+
 /*
 PropertiesApiService Update a user application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
@@ -862,7 +851,6 @@ func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -908,10 +896,9 @@ func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr

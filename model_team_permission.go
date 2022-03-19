@@ -11,8 +11,8 @@ package bitbucket
 
 // A user's permission for a given team.
 type TeamPermission struct {
-	Type_ string `json:"type"`
+	Type_      string `json:"type"`
 	Permission string `json:"permission,omitempty"`
-	User *User `json:"user,omitempty"`
-	Team *Team `json:"team,omitempty"`
+	User       *User  `json:"user,omitempty"`
+	Team       *Team  `json:"team,omitempty"`
 }

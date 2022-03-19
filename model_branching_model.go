@@ -13,6 +13,6 @@ type BranchingModel struct {
 	Type_ string `json:"type"`
 	// The active branch types.
 	BranchTypes []BranchingModelBranchTypes `json:"branch_types,omitempty"`
-	Development *BranchingModelDevelopment `json:"development,omitempty"`
-	Production *BranchingModelDevelopment `json:"production,omitempty"`
+	Development *BranchingModelDevelopment  `json:"development,omitempty"`
+	Production  *BranchingModelDevelopment  `json:"production,omitempty"`
 }

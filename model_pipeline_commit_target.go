@@ -10,6 +10,6 @@
 package bitbucket
 
 type PipelineCommitTarget struct {
-	Commit *Commit `json:"commit,omitempty"`
+	Commit   *Commit           `json:"commit,omitempty"`
 	Selector *PipelineSelector `json:"selector,omitempty"`
 }

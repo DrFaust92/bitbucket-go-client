@@ -10,11 +10,11 @@
 package bitbucket
 
 type SearchResultPage struct {
-	Size int64 `json:"size,omitempty"`
-	Page int32 `json:"page,omitempty"`
-	Pagelen int32 `json:"pagelen,omitempty"`
-	QuerySubstituted bool `json:"query_substituted,omitempty"`
-	Next string `json:"next,omitempty"`
-	Previous string `json:"previous,omitempty"`
-	Values []SearchCodeSearchResult `json:"values,omitempty"`
+	Size             int64                    `json:"size,omitempty"`
+	Page             int32                    `json:"page,omitempty"`
+	Pagelen          int32                    `json:"pagelen,omitempty"`
+	QuerySubstituted bool                     `json:"query_substituted,omitempty"`
+	Next             string                   `json:"next,omitempty"`
+	Previous         string                   `json:"previous,omitempty"`
+	Values           []SearchCodeSearchResult `json:"values,omitempty"`
 }

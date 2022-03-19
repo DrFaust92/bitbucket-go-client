@@ -10,10 +10,10 @@
 package bitbucket
 
 type IssueLinks struct {
-	Self *Link `json:"self,omitempty"`
-	Html *Link `json:"html,omitempty"`
-	Comments *Link `json:"comments,omitempty"`
+	Self        *Link `json:"self,omitempty"`
+	Html        *Link `json:"html,omitempty"`
+	Comments    *Link `json:"comments,omitempty"`
 	Attachments *Link `json:"attachments,omitempty"`
-	Watch *Link `json:"watch,omitempty"`
-	Vote *Link `json:"vote,omitempty"`
+	Watch       *Link `json:"watch,omitempty"`
+	Vote        *Link `json:"vote,omitempty"`
 }

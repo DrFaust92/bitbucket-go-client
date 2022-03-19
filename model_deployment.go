@@ -12,8 +12,8 @@ package bitbucket
 type Deployment struct {
 	Type_ string `json:"type"`
 	// The UUID identifying the deployment.
-	Uuid string `json:"uuid,omitempty"`
-	State *DeploymentState `json:"state,omitempty"`
+	Uuid        string                 `json:"uuid,omitempty"`
+	State       *DeploymentState       `json:"state,omitempty"`
 	Environment *DeploymentEnvironment `json:"environment,omitempty"`
-	Release *DeploymentRelease `json:"release,omitempty"`
+	Release     *DeploymentRelease     `json:"release,omitempty"`
 }

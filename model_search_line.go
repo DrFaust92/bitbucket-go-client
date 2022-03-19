@@ -10,6 +10,6 @@
 package bitbucket
 
 type SearchLine struct {
-	Line int32 `json:"line,omitempty"`
+	Line     int32           `json:"line,omitempty"`
 	Segments []SearchSegment `json:"segments,omitempty"`
 }

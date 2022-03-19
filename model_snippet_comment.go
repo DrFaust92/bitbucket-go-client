@@ -10,7 +10,7 @@
 package bitbucket
 
 type SnippetComment struct {
-	Type_ string `json:"type"`
-	Links *GroupLinks `json:"links,omitempty"`
-	Snippet *Snippet `json:"snippet,omitempty"`
+	Type_   string      `json:"type"`
+	Links   *GroupLinks `json:"links,omitempty"`
+	Snippet *Snippet    `json:"snippet,omitempty"`
 }

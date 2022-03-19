@@ -11,8 +11,8 @@ package bitbucket
 
 // A user's permission for a given repository.
 type RepositoryPermission struct {
-	Type_ string `json:"type"`
-	Permission string `json:"permission,omitempty"`
-	User *User `json:"user,omitempty"`
+	Type_      string      `json:"type"`
+	Permission string      `json:"permission,omitempty"`
+	User       *User       `json:"user,omitempty"`
 	Repository *Repository `json:"repository,omitempty"`
 }

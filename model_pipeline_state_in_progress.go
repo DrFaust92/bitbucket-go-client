@@ -11,6 +11,6 @@ package bitbucket
 
 type PipelineStateInProgress struct {
 	// The name of pipeline state (IN_PROGRESS).
-	Name string `json:"name,omitempty"`
+	Name  string                        `json:"name,omitempty"`
 	Stage *PipelineStateInProgressStage `json:"stage,omitempty"`
 }

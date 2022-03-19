@@ -14,6 +14,6 @@ type PipelineKnownHost struct {
 	// The UUID identifying the known host.
 	Uuid string `json:"uuid,omitempty"`
 	// The hostname of the known host.
-	Hostname string `json:"hostname,omitempty"`
+	Hostname  string                `json:"hostname,omitempty"`
 	PublicKey *PipelineSshPublicKey `json:"public_key,omitempty"`
 }

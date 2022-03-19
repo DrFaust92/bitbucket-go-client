@@ -11,9 +11,9 @@ package bitbucket
 
 // Options for issue export.
 type ExportOptions struct {
-	Type_ string `json:"type"`
-	ProjectKey string `json:"project_key,omitempty"`
-	ProjectName string `json:"project_name,omitempty"`
-	SendEmail bool `json:"send_email,omitempty"`
-	IncludeAttachments bool `json:"include_attachments,omitempty"`
+	Type_              string `json:"type"`
+	ProjectKey         string `json:"project_key,omitempty"`
+	ProjectName        string `json:"project_name,omitempty"`
+	SendEmail          bool   `json:"send_email,omitempty"`
+	IncludeAttachments bool   `json:"include_attachments,omitempty"`
 }

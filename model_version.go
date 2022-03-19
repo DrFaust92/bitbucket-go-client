@@ -10,8 +10,8 @@
 package bitbucket
 
 type Version struct {
-	Type_ string `json:"type"`
+	Type_ string                       `json:"type"`
 	Links *BranchingModelSettingsLinks `json:"links,omitempty"`
-	Name string `json:"name,omitempty"`
-	Id int32 `json:"id,omitempty"`
+	Name  string                       `json:"name,omitempty"`
+	Id    int32                        `json:"id,omitempty"`
 }

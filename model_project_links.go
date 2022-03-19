@@ -10,6 +10,6 @@
 package bitbucket
 
 type ProjectLinks struct {
-	Html *Link `json:"html,omitempty"`
+	Html   *Link `json:"html,omitempty"`
 	Avatar *Link `json:"avatar,omitempty"`
 }

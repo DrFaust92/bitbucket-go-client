@@ -10,14 +10,14 @@
 package bitbucket
 
 type PullrequestLinks struct {
-	Self *Link `json:"self,omitempty"`
-	Html *Link `json:"html,omitempty"`
-	Commits *Link `json:"commits,omitempty"`
-	Approve *Link `json:"approve,omitempty"`
-	Diff *Link `json:"diff,omitempty"`
+	Self     *Link `json:"self,omitempty"`
+	Html     *Link `json:"html,omitempty"`
+	Commits  *Link `json:"commits,omitempty"`
+	Approve  *Link `json:"approve,omitempty"`
+	Diff     *Link `json:"diff,omitempty"`
 	Diffstat *Link `json:"diffstat,omitempty"`
 	Comments *Link `json:"comments,omitempty"`
 	Activity *Link `json:"activity,omitempty"`
-	Merge *Link `json:"merge,omitempty"`
-	Decline *Link `json:"decline,omitempty"`
+	Merge    *Link `json:"merge,omitempty"`
+	Decline  *Link `json:"decline,omitempty"`
 }

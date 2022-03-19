@@ -10,7 +10,7 @@
 package bitbucket
 
 type RefLinks struct {
-	Self *Link `json:"self,omitempty"`
+	Self    *Link `json:"self,omitempty"`
 	Commits *Link `json:"commits,omitempty"`
-	Html *Link `json:"html,omitempty"`
+	Html    *Link `json:"html,omitempty"`
 }

@@ -10,6 +10,6 @@
 package bitbucket
 
 type IssueChangeLinks struct {
-	Self *Link `json:"self,omitempty"`
+	Self  *Link `json:"self,omitempty"`
 	Issue *Link `json:"issue,omitempty"`
 }

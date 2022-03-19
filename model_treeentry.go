@@ -13,6 +13,6 @@ package bitbucket
 type Treeentry struct {
 	Type_ string `json:"type"`
 	// The path in the repository
-	Path string `json:"path,omitempty"`
+	Path   string  `json:"path,omitempty"`
 	Commit *Commit `json:"commit,omitempty"`
 }

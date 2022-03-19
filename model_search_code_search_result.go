@@ -10,9 +10,9 @@
 package bitbucket
 
 type SearchCodeSearchResult struct {
-	Type_ string `json:"type,omitempty"`
-	ContentMatchCount int64 `json:"content_match_count,omitempty"`
-	ContentMatches []SearchContentMatch `json:"content_matches,omitempty"`
-	PathMatches []SearchSegment `json:"path_matches,omitempty"`
-	File *CommitFile `json:"file,omitempty"`
+	Type_             string               `json:"type,omitempty"`
+	ContentMatchCount int64                `json:"content_match_count,omitempty"`
+	ContentMatches    []SearchContentMatch `json:"content_matches,omitempty"`
+	PathMatches       []SearchSegment      `json:"path_matches,omitempty"`
+	File              *CommitFile          `json:"file,omitempty"`
 }

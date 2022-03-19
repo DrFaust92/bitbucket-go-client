@@ -11,10 +11,10 @@ package bitbucket
 
 // A diffstat object that includes a summary of changes made to a file between two commits.
 type Diffstat struct {
-	Type_ string `json:"type"`
-	Status string `json:"status,omitempty"`
-	LinesAdded int32 `json:"lines_added,omitempty"`
-	LinesRemoved int32 `json:"lines_removed,omitempty"`
-	Old *CommitFile `json:"old,omitempty"`
-	New *CommitFile `json:"new,omitempty"`
+	Type_        string      `json:"type"`
+	Status       string      `json:"status,omitempty"`
+	LinesAdded   int32       `json:"lines_added,omitempty"`
+	LinesRemoved int32       `json:"lines_removed,omitempty"`
+	Old          *CommitFile `json:"old,omitempty"`
+	New          *CommitFile `json:"new,omitempty"`
 }

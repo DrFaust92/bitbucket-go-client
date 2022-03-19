@@ -11,6 +11,6 @@ package bitbucket
 
 type PipelineStepStateCompleted struct {
 	// The name of pipeline step state (COMPLETED).
-	Name string `json:"name,omitempty"`
+	Name   string                            `json:"name,omitempty"`
 	Result *PipelineStepStateCompletedResult `json:"result,omitempty"`
 }

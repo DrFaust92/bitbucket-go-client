@@ -10,12 +10,12 @@
 package bitbucket
 
 type WorkspaceLinks struct {
-	Avatar *Link `json:"avatar,omitempty"`
-	Html *Link `json:"html,omitempty"`
-	Members *Link `json:"members,omitempty"`
-	Owners *Link `json:"owners,omitempty"`
-	Projects *Link `json:"projects,omitempty"`
+	Avatar       *Link `json:"avatar,omitempty"`
+	Html         *Link `json:"html,omitempty"`
+	Members      *Link `json:"members,omitempty"`
+	Owners       *Link `json:"owners,omitempty"`
+	Projects     *Link `json:"projects,omitempty"`
 	Repositories *Link `json:"repositories,omitempty"`
-	Snippets *Link `json:"snippets,omitempty"`
-	Self *Link `json:"self,omitempty"`
+	Snippets     *Link `json:"snippets,omitempty"`
+	Self         *Link `json:"self,omitempty"`
 }

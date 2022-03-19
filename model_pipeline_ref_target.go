@@ -13,7 +13,7 @@ type PipelineRefTarget struct {
 	// The type of reference (branch/tag).
 	RefType string `json:"ref_type,omitempty"`
 	// The name of the reference.
-	RefName string `json:"ref_name,omitempty"`
-	Commit *Commit `json:"commit,omitempty"`
+	RefName  string            `json:"ref_name,omitempty"`
+	Commit   *Commit           `json:"commit,omitempty"`
 	Selector *PipelineSelector `json:"selector,omitempty"`
 }

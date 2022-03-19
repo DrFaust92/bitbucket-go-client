@@ -10,6 +10,6 @@
 package bitbucket
 
 type SearchSegment struct {
-	Text string `json:"text,omitempty"`
-	Match bool `json:"match,omitempty"`
+	Text  string `json:"text,omitempty"`
+	Match bool   `json:"match,omitempty"`
 }

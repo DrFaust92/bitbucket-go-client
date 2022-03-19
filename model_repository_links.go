@@ -10,14 +10,14 @@
 package bitbucket
 
 type RepositoryLinks struct {
-	Self *Link `json:"self,omitempty"`
-	Html *Link `json:"html,omitempty"`
-	Avatar *Link `json:"avatar,omitempty"`
-	Pullrequests *Link `json:"pullrequests,omitempty"`
-	Commits *Link `json:"commits,omitempty"`
-	Forks *Link `json:"forks,omitempty"`
-	Watchers *Link `json:"watchers,omitempty"`
-	Downloads *Link `json:"downloads,omitempty"`
-	Clone []Link `json:"clone,omitempty"`
-	Hooks *Link `json:"hooks,omitempty"`
+	Self         *Link  `json:"self,omitempty"`
+	Html         *Link  `json:"html,omitempty"`
+	Avatar       *Link  `json:"avatar,omitempty"`
+	Pullrequests *Link  `json:"pullrequests,omitempty"`
+	Commits      *Link  `json:"commits,omitempty"`
+	Forks        *Link  `json:"forks,omitempty"`
+	Watchers     *Link  `json:"watchers,omitempty"`
+	Downloads    *Link  `json:"downloads,omitempty"`
+	Clone        []Link `json:"clone,omitempty"`
+	Hooks        *Link  `json:"hooks,omitempty"`
 }

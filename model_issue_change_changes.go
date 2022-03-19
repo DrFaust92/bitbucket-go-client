@@ -10,13 +10,13 @@
 package bitbucket
 
 type IssueChangeChanges struct {
-	Assignee *IssueChangeChangesAssignee `json:"assignee,omitempty"`
-	State *IssueChangeChangesAssignee `json:"state,omitempty"`
-	Title *IssueChangeChangesAssignee `json:"title,omitempty"`
-	Kind *IssueChangeChangesAssignee `json:"kind,omitempty"`
+	Assignee  *IssueChangeChangesAssignee `json:"assignee,omitempty"`
+	State     *IssueChangeChangesAssignee `json:"state,omitempty"`
+	Title     *IssueChangeChangesAssignee `json:"title,omitempty"`
+	Kind      *IssueChangeChangesAssignee `json:"kind,omitempty"`
 	Milestone *IssueChangeChangesAssignee `json:"milestone,omitempty"`
 	Component *IssueChangeChangesAssignee `json:"component,omitempty"`
-	Priority *IssueChangeChangesAssignee `json:"priority,omitempty"`
-	Version *IssueChangeChangesAssignee `json:"version,omitempty"`
-	Content *IssueChangeChangesAssignee `json:"content,omitempty"`
+	Priority  *IssueChangeChangesAssignee `json:"priority,omitempty"`
+	Version   *IssueChangeChangesAssignee `json:"version,omitempty"`
+	Content   *IssueChangeChangesAssignee `json:"content,omitempty"`
 }

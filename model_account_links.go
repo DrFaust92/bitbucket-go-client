@@ -10,10 +10,10 @@
 package bitbucket
 
 type AccountLinks struct {
-	Self *Link `json:"self,omitempty"`
-	Html *Link `json:"html,omitempty"`
-	Avatar *Link `json:"avatar,omitempty"`
-	Followers *Link `json:"followers,omitempty"`
-	Following *Link `json:"following,omitempty"`
+	Self         *Link `json:"self,omitempty"`
+	Html         *Link `json:"html,omitempty"`
+	Avatar       *Link `json:"avatar,omitempty"`
+	Followers    *Link `json:"followers,omitempty"`
+	Following    *Link `json:"following,omitempty"`
 	Repositories *Link `json:"repositories,omitempty"`
 }
