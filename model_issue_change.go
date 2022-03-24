@@ -15,12 +15,12 @@ import (
 
 // An issue change.
 type IssueChange struct {
-	Type_     string                          `json:"type"`
-	Links     *IssueChangeLinks               `json:"links,omitempty"`
-	Name      string                          `json:"name,omitempty"`
-	CreatedOn time.Time                       `json:"created_on,omitempty"`
-	User      *User                           `json:"user,omitempty"`
-	Issue     *Issue                          `json:"issue,omitempty"`
-	Changes   *IssueChangeChanges             `json:"changes,omitempty"`
-	Message   *RenderedPullRequestMarkupTitle `json:"message,omitempty"`
+	Type_     string              `json:"type"`
+	Links     *IssueChangeLinks   `json:"links,omitempty"`
+	Name      string              `json:"name,omitempty"`
+	CreatedOn time.Time           `json:"created_on,omitempty"`
+	User      *User               `json:"user,omitempty"`
+	Issue     *Issue              `json:"issue,omitempty"`
+	Changes   *IssueChangeChanges `json:"changes,omitempty"`
+	Message   *IssueContent       `json:"message,omitempty"`
 }

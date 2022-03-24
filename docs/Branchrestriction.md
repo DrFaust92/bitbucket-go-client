@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Pattern** | **string** | Apply the restriction to branches that match this pattern. Active when &#x60;branch_match_kind&#x60; is &#x60;glob&#x60;. Will be empty when &#x60;branch_match_kind&#x60; is &#x60;branching_model&#x60;. | [default to null]
 **Users** | [**[]Account**](account.md) |  | [optional] [default to null]
 **Groups** | [**[]Group**](group.md) |  | [optional] [default to null]
-**Value** | **int32** | &lt;staticmethod object at 0x7fb158577810&gt; | [optional] [default to null]
+**Value** | **int32** | &lt;staticmethod object at 0x7ffbcd23ad50&gt; | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
