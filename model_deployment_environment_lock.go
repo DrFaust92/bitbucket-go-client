@@ -9,9 +9,8 @@
  */
 package bitbucket
 
-// User provided pull request text, interpreted in a markup language and rendered in HTML
-type RenderedPullRequestMarkup struct {
-	Title       *IssueContent `json:"title,omitempty"`
-	Description *IssueContent `json:"description,omitempty"`
-	Reason      *IssueContent `json:"reason,omitempty"`
+type DeploymentEnvironmentLock struct {
+	Type_ string `json:"type"`
+	// The UUID identifying the environment.
+	EnvironmentUuid string `json:"environmentUuid,omitempty"`
 }
