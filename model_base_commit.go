@@ -14,11 +14,11 @@ import (
 )
 
 type BaseCommit struct {
-	Type_   string                          `json:"type"`
-	Hash    string                          `json:"hash,omitempty"`
-	Date    time.Time                       `json:"date,omitempty"`
-	Author  *Author                         `json:"author,omitempty"`
-	Message string                          `json:"message,omitempty"`
-	Summary *RenderedPullRequestMarkupTitle `json:"summary,omitempty"`
-	Parents []BaseCommit                    `json:"parents,omitempty"`
+	Type_   string        `json:"type"`
+	Hash    string        `json:"hash,omitempty"`
+	Date    time.Time     `json:"date,omitempty"`
+	Author  *Author       `json:"author,omitempty"`
+	Message string        `json:"message,omitempty"`
+	Summary *IssueContent `json:"summary,omitempty"`
+	Parents []BaseCommit  `json:"parents,omitempty"`
 }

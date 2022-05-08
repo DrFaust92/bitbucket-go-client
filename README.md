@@ -348,6 +348,7 @@ Class | Method | HTTP request | Description
 
  - [Account](docs/Account.md)
  - [AccountLinks](docs/AccountLinks.md)
+ - [ApplicationProperty](docs/ApplicationProperty.md)
  - [Author](docs/Author.md)
  - [BaseCommit](docs/BaseCommit.md)
  - [Branch](docs/Branch.md)
@@ -403,6 +404,7 @@ Class | Method | HTTP request | Description
  - [IssueChangeChangesAssignee](docs/IssueChangeChangesAssignee.md)
  - [IssueChangeLinks](docs/IssueChangeLinks.md)
  - [IssueComment](docs/IssueComment.md)
+ - [IssueContent](docs/IssueContent.md)
  - [IssueJobStatus](docs/IssueJobStatus.md)
  - [IssueLinks](docs/IssueLinks.md)
  - [JiraProject](docs/JiraProject.md)
@@ -523,7 +525,6 @@ Class | Method | HTTP request | Description
  - [Ref](docs/Ref.md)
  - [RefLinks](docs/RefLinks.md)
  - [RenderedPullRequestMarkup](docs/RenderedPullRequestMarkup.md)
- - [RenderedPullRequestMarkupTitle](docs/RenderedPullRequestMarkupTitle.md)
  - [Report](docs/Report.md)
  - [ReportAnnotation](docs/ReportAnnotation.md)
  - [ReportData](docs/ReportData.md)

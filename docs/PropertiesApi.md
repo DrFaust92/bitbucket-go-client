@@ -143,7 +143,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCommitHostedPropertyValue**
-> GetCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
+> ApplicationProperty GetCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
 Get a commit application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -170,12 +170,12 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPullRequestHostedPropertyValue**
-> GetPullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
+> ApplicationProperty GetPullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
 Get a pull request application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -202,12 +202,12 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryHostedPropertyValue**
-> GetRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
+> ApplicationProperty GetRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
 Get a repository application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -233,12 +233,12 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RetrieveUserHostedPropertyValue**
-> RetrieveUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
+> ApplicationProperty RetrieveUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
 Get a user application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -263,12 +263,12 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateCommitHostedPropertyValue**
-> UpdateCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
+> UpdateCommitHostedPropertyValue(ctx, body, workspace, repoSlug, commit, appKey, propertyName)
 Update a commit application property
 
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
@@ -278,6 +278,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **workspace** | **string**| The repository container; either the workspace slug or the UUID in curly braces. | 
   **repoSlug** | **string**| The repository. | 
   **commit** | **string**| The commit. | 
@@ -294,13 +295,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdatePullRequestHostedPropertyValue**
-> UpdatePullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
+> UpdatePullRequestHostedPropertyValue(ctx, body, workspace, repoSlug, pullrequestId, appKey, propertyName)
 Update a pull request application property
 
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
@@ -310,6 +311,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **workspace** | **string**| The repository container; either the workspace slug or the UUID in curly braces. | 
   **repoSlug** | **string**| The repository. | 
   **pullrequestId** | **string**| The pull request ID. | 
@@ -326,13 +328,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateRepositoryHostedPropertyValue**
-> UpdateRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
+> UpdateRepositoryHostedPropertyValue(ctx, body, workspace, repoSlug, appKey, propertyName)
 Update a repository application property
 
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
@@ -342,6 +344,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **workspace** | **string**| The repository container; either the workspace slug or the UUID in curly braces. | 
   **repoSlug** | **string**| The repository. | 
   **appKey** | **string**| The key of the Connect app. | 
@@ -357,13 +360,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateUserHostedPropertyValue**
-> UpdateUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
+> UpdateUserHostedPropertyValue(ctx, body, selectedUser, appKey, propertyName)
 Update a user application property
 
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
@@ -373,6 +376,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **selectedUser** | **string**| Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID. | 
   **appKey** | **string**| The key of the Connect app. | 
   **propertyName** | **string**| The name of the property. | 
@@ -387,7 +391,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

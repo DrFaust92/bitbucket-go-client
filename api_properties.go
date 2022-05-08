@@ -328,14 +328,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
  * @param commit The commit.
  * @param appKey The key of the Connect app.
  * @param propertyName The name of the property.
-
+@return ApplicationProperty
 */
-func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue ApplicationProperty
 	)
 
 	// create path and map variables
@@ -360,7 +361,7 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -369,18 +370,26 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -388,10 +397,20 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		return localVarHttpResponse, newErr
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ApplicationProperty
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*
@@ -403,14 +422,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
  * @param pullrequestId The pull request ID.
  * @param appKey The key of the Connect app.
  * @param propertyName The name of the property.
-
+@return ApplicationProperty
 */
-func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue ApplicationProperty
 	)
 
 	// create path and map variables
@@ -435,7 +455,7 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -444,18 +464,26 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -463,10 +491,20 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		return localVarHttpResponse, newErr
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ApplicationProperty
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*
@@ -477,14 +515,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
  * @param repoSlug The repository.
  * @param appKey The key of the Connect app.
  * @param propertyName The name of the property.
-
+@return ApplicationProperty
 */
-func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue ApplicationProperty
 	)
 
 	// create path and map variables
@@ -508,7 +547,7 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -517,18 +556,26 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -536,10 +583,20 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		return localVarHttpResponse, newErr
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ApplicationProperty
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*
@@ -549,14 +606,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
  * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
  * @param appKey The key of the Connect app.
  * @param propertyName The name of the property.
-
+@return ApplicationProperty
 */
-func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue ApplicationProperty
 	)
 
 	// create path and map variables
@@ -579,7 +637,7 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -588,18 +646,26 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -607,16 +673,27 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		return localVarHttpResponse, newErr
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ApplicationProperty
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*
 PropertiesApiService Update a commit application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body The application property to create or update.
  * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
  * @param repoSlug The repository.
  * @param commit The commit.
@@ -624,7 +701,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
  * @param propertyName The name of the property.
 
 */
-func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -645,7 +722,7 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -661,6 +738,8 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err
@@ -692,6 +771,7 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 PropertiesApiService Update a pull request application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body The application property to create or update.
  * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
  * @param repoSlug The repository.
  * @param pullrequestId The pull request ID.
@@ -699,7 +779,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
  * @param propertyName The name of the property.
 
 */
-func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -720,7 +800,7 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -736,6 +816,8 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err
@@ -767,13 +849,14 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 PropertiesApiService Update a repository application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body The application property to create or update.
  * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
  * @param repoSlug The repository.
  * @param appKey The key of the Connect app.
  * @param propertyName The name of the property.
 
 */
-func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -793,7 +876,7 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -809,6 +892,8 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err
@@ -840,12 +925,13 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 PropertiesApiService Update a user application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body The application property to create or update.
  * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
  * @param appKey The key of the Connect app.
  * @param propertyName The name of the property.
 
 */
-func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context, body ApplicationProperty, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -864,7 +950,7 @@ func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -880,6 +966,8 @@ func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

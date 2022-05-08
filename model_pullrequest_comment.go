@@ -14,14 +14,14 @@ import (
 )
 
 type PullrequestComment struct {
-	Id          int32                           `json:"id,omitempty"`
-	CreatedOn   time.Time                       `json:"created_on,omitempty"`
-	UpdatedOn   time.Time                       `json:"updated_on,omitempty"`
-	Content     *RenderedPullRequestMarkupTitle `json:"content,omitempty"`
-	User        *User                           `json:"user,omitempty"`
-	Deleted     bool                            `json:"deleted,omitempty"`
-	Parent      *Comment                        `json:"parent,omitempty"`
-	Inline      *CommentInline                  `json:"inline,omitempty"`
-	Links       *CommentLinks                   `json:"links,omitempty"`
-	Pullrequest *Pullrequest                    `json:"pullrequest,omitempty"`
+	Id          int32          `json:"id,omitempty"`
+	CreatedOn   time.Time      `json:"created_on,omitempty"`
+	UpdatedOn   time.Time      `json:"updated_on,omitempty"`
+	Content     *IssueContent  `json:"content,omitempty"`
+	User        *User          `json:"user,omitempty"`
+	Deleted     bool           `json:"deleted,omitempty"`
+	Parent      *Comment       `json:"parent,omitempty"`
+	Inline      *CommentInline `json:"inline,omitempty"`
+	Links       *CommentLinks  `json:"links,omitempty"`
+	Pullrequest *Pullrequest   `json:"pullrequest,omitempty"`
 }
