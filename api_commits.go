@@ -1949,7 +1949,7 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitsRevisionPost(ctx
 
 /*
 CommitsApiService Compare two commits
-Produces a raw git-style diff.  #### Single commit spec  If the &#x60;spec&#x60; argument to this API is a single commit, the diff is produced against the first parent of the specified commit.  #### Two commit spec  Two commits separated by &#x60;..&#x60; may be provided as the &#x60;spec&#x60;, e.g., &#x60;3a8b42..9ff173&#x60;. When two commits are provided and the &#x60;merge&#x60; query parameter is true or absent, this API produces a 3-way diff, also referred to as a merge diff. This is equivalent to merging the left branch into the right branch and then computing the diff of the merge commit against its first parent (the right branch). These diffs have the same behavior as pull requests that show the 3-way diff, such as the [Bitbucket Cloud Pull Request](https://blog.developer.atlassian.com/a-better-pull-request/). For a simple git-style diff, add &#x60;merge&#x3D;false&#x60; to the query.  The two commits are interpreted as follows:  * First commit: the commit containing the changes we wish to preview * Second commit: the commit representing the state to which we want to   compare the first commit * **Note**: This is the opposite of the order used in &#x60;git diff&#x60;.  #### Comparison to patches  While similar to patches, diffs:  * Don&#x27;t have a commit header (username, commit message, etc) * Support the optional &#x60;path&#x3D;foo/bar.py&#x60; query param to filter   the diff to just that one file diff  #### Response  The raw diff is returned as-is, in whatever encoding the files in the repository use. It is not decoded into unicode. As such, the content-type is &#x60;text/plain&#x60;.
+Produces a raw git-style diff.  #### Single commit spec  If the &#x60;spec&#x60; argument to this API is a single commit, the diff is produced against the first parent of the specified commit.  #### Two commit spec  Two commits separated by &#x60;..&#x60; may be provided as the &#x60;spec&#x60;, e.g., &#x60;3a8b42..9ff173&#x60;. When two commits are provided and the &#x60;topic&#x60; query parameter is true or absent, this API produces a 2-way three dot diff. This is the diff between source commit and the merge base of the source commit and the destination commit. When the &#x60;topic&#x60; query param is false, a simple git-style diff is produced.  The two commits are interpreted as follows:  * First commit: the commit containing the changes we wish to preview * Second commit: the commit representing the state to which we want to   compare the first commit * **Note**: This is the opposite of the order used in &#x60;git diff&#x60;.  #### Comparison to patches  While similar to patches, diffs:  * Don&#x27;t have a commit header (username, commit message, etc) * Support the optional &#x60;path&#x3D;foo/bar.py&#x60; query param to filter   the diff to just that one file diff  #### Response  The raw diff is returned as-is, in whatever encoding the files in the repository use. It is not decoded into unicode. As such, the content-type is &#x60;text/plain&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param spec A commit SHA (e.g. &#x60;3a8b42&#x60;) or a commit range using double dot notation (e.g. &#x60;3a8b42..9ff173&#x60;).
@@ -1960,7 +1960,8 @@ Produces a raw git-style diff.  #### Single commit spec  If the &#x60;spec&#x60;
      * @param "IgnoreWhitespace" (optional.Bool) -  Generate diffs that ignore whitespace.
      * @param "Binary" (optional.Bool) -  Generate diffs that include binary files, true if omitted.
      * @param "Renames" (optional.Bool) -  Whether to perform rename detection, true if omitted.
-     * @param "Merge" (optional.Bool) -  If true, the source commit is merged into the destination commit, and then a diff from the destination to the merge result is returned. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned. True if omitted.
+     * @param "Merge" (optional.Bool) -  This parameter is deprecated and will be removed at the end of 2022. The &#x27;topic&#x27; parameter should be used instead. The &#x27;merge&#x27; and &#x27;topic&#x27; parameters cannot be both used at the same time.  If true, the source commit is merged into the destination commit, and then a diff from the destination to the merge result is returned. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned. True if omitted.
+     * @param "Topic" (optional.Bool) -  If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned.
 
 */
 
@@ -1971,6 +1972,7 @@ type CommitsApiRepositoriesWorkspaceRepoSlugDiffSpecGetOpts struct {
 	Binary           optional.Bool
 	Renames          optional.Bool
 	Merge            optional.Bool
+	Topic            optional.Bool
 }
 
 func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugDiffSpecGet(ctx context.Context, repoSlug string, spec string, workspace string, localVarOptionals *CommitsApiRepositoriesWorkspaceRepoSlugDiffSpecGetOpts) (*http.Response, error) {
@@ -2008,6 +2010,9 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugDiffSpecGet(ctx context
 	}
 	if localVarOptionals != nil && localVarOptionals.Merge.IsSet() {
 		localVarQueryParams.Add("merge", parameterToString(localVarOptionals.Merge.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Topic.IsSet() {
+		localVarQueryParams.Add("topic", parameterToString(localVarOptionals.Topic.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -2078,16 +2083,17 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugDiffSpecGet(ctx context
 
 /*
 CommitsApiService Compare two commit diff stats
-Produces a response in JSON format with a record for every path modified, including information on the type of the change and the number of lines added and removed.  #### Single commit spec  If the &#x60;spec&#x60; argument to this API is a single commit, the diff is produced against the first parent of the specified commit.  #### Two commit spec  Two commits separated by &#x60;..&#x60; may be provided as the &#x60;spec&#x60;, e.g., &#x60;3a8b42..9ff173&#x60;. When two commits are provided and the &#x60;merge&#x60; query parameter is true or absent, this API produces a 3-way diff, also referred to as a merge diff. This is equivalent to merging the left branch into the right branch and then computing the diff of the merge commit against its first parent (the right branch). These diffs have the same behavior as pull requests that show the 3-way diff, such as the [Bitbucket Cloud Pull Request](https://blog.developer.atlassian.com/a-better-pull-request/). For a simple git-style diff, add &#x60;merge&#x3D;false&#x60; to the query.  The two commits are interpreted as follows:  * First commit: the commit containing the changes we wish to preview * Second commit: the commit representing the state to which we want to   compare the first commit * **Note**: This is the opposite of the order used in &#x60;git diff&#x60;.  #### Sample output &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964 {     \&quot;pagelen\&quot;: 500,     \&quot;values\&quot;: [         {             \&quot;type\&quot;: \&quot;diffstat\&quot;,             \&quot;status\&quot;: \&quot;modified\&quot;,             \&quot;lines_removed\&quot;: 1,             \&quot;lines_added\&quot;: 2,             \&quot;old\&quot;: {                 \&quot;path\&quot;: \&quot;setup.py\&quot;,                 \&quot;escaped_path\&quot;: \&quot;setup.py\&quot;,                 \&quot;type\&quot;: \&quot;commit_file\&quot;,                 \&quot;links\&quot;: {                     \&quot;self\&quot;: {                         \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\&quot;                     }                 }             },             \&quot;new\&quot;: {                 \&quot;path\&quot;: \&quot;setup.py\&quot;,                 \&quot;escaped_path\&quot;: \&quot;setup.py\&quot;,                 \&quot;type\&quot;: \&quot;commit_file\&quot;,                 \&quot;links\&quot;: {                     \&quot;self\&quot;: {                         \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\&quot;                     }                 }             }         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 1 } &#x60;&#x60;&#x60;
+Produces a response in JSON format with a record for every path modified, including information on the type of the change and the number of lines added and removed.  #### Single commit spec  If the &#x60;spec&#x60; argument to this API is a single commit, the diff is produced against the first parent of the specified commit.  #### Two commit spec  Two commits separated by &#x60;..&#x60; may be provided as the &#x60;spec&#x60;, e.g., &#x60;3a8b42..9ff173&#x60;. When two commits are provided and the &#x60;topic&#x60; query parameter is true or absent, this API produces a 2-way three dot diff. This is the diff between source commit and the merge base of the source commit and the destination commit. When the &#x60;topic&#x60; query param is false, a simple git-style diff is produced.  The two commits are interpreted as follows:  * First commit: the commit containing the changes we wish to preview * Second commit: the commit representing the state to which we want to   compare the first commit * **Note**: This is the opposite of the order used in &#x60;git diff&#x60;.  #### Sample output &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964 {     \&quot;pagelen\&quot;: 500,     \&quot;values\&quot;: [         {             \&quot;type\&quot;: \&quot;diffstat\&quot;,             \&quot;status\&quot;: \&quot;modified\&quot;,             \&quot;lines_removed\&quot;: 1,             \&quot;lines_added\&quot;: 2,             \&quot;old\&quot;: {                 \&quot;path\&quot;: \&quot;setup.py\&quot;,                 \&quot;escaped_path\&quot;: \&quot;setup.py\&quot;,                 \&quot;type\&quot;: \&quot;commit_file\&quot;,                 \&quot;links\&quot;: {                     \&quot;self\&quot;: {                         \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\&quot;                     }                 }             },             \&quot;new\&quot;: {                 \&quot;path\&quot;: \&quot;setup.py\&quot;,                 \&quot;escaped_path\&quot;: \&quot;setup.py\&quot;,                 \&quot;type\&quot;: \&quot;commit_file\&quot;,                 \&quot;links\&quot;: {                     \&quot;self\&quot;: {                         \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\&quot;                     }                 }             }         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 1 } &#x60;&#x60;&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param spec A commit SHA (e.g. &#x60;3a8b42&#x60;) or a commit range using double dot notation (e.g. &#x60;3a8b42..9ff173&#x60;).
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *CommitsApiRepositoriesWorkspaceRepoSlugDiffstatSpecGetOpts - Optional Parameters:
      * @param "IgnoreWhitespace" (optional.Bool) -  Generate diffs that ignore whitespace
-     * @param "Merge" (optional.Bool) -  If true, the source commit is merged into the destination commit, and then a diffstat from the destination to the merge result is returned. If false, a simple &#x27;two dot&#x27; diffstat between the source and destination is returned. True if omitted.
+     * @param "Merge" (optional.Bool) -  This parameter is deprecated and will be removed at the end of 2022. The &#x27;topic&#x27; parameter should be used instead. The &#x27;merge&#x27; and &#x27;topic&#x27; parameters cannot be both used at the same time.  If true, the source commit is merged into the destination commit, and then a diffstat from the destination to the merge result is returned. If false, a simple &#x27;two dot&#x27; diffstat between the source and destination is returned. True if omitted.
      * @param "Path" (optional.String) -  Limit the diffstat to a particular file (this parameter can be repeated for multiple paths).
      * @param "Renames" (optional.Bool) -  Whether to perform rename detection, true if omitted.
+     * @param "Topic" (optional.Bool) -  If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned.
 @return PaginatedDiffstats
 */
 
@@ -2096,6 +2102,7 @@ type CommitsApiRepositoriesWorkspaceRepoSlugDiffstatSpecGetOpts struct {
 	Merge            optional.Bool
 	Path             optional.String
 	Renames          optional.Bool
+	Topic            optional.Bool
 }
 
 func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugDiffstatSpecGet(ctx context.Context, repoSlug string, spec string, workspace string, localVarOptionals *CommitsApiRepositoriesWorkspaceRepoSlugDiffstatSpecGetOpts) (PaginatedDiffstats, *http.Response, error) {
@@ -2128,6 +2135,9 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugDiffstatSpecGet(ctx con
 	}
 	if localVarOptionals != nil && localVarOptionals.Renames.IsSet() {
 		localVarQueryParams.Add("renames", parameterToString(localVarOptionals.Renames.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Topic.IsSet() {
+		localVarQueryParams.Add("topic", parameterToString(localVarOptionals.Topic.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

@@ -254,6 +254,14 @@ Class | Method | HTTP request | Description
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugHooksUidDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlughooksuiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Delete a webhook for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugHooksUidGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlughooksuidget) | **Get** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Get a webhook for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugHooksUidPut**](docs/RepositoriesApi.md#repositoriesworkspacereposlughooksuidput) | **Put** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Update a webhook for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsget) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups | List explicit group permissions for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsgroupslugdelete) | **Delete** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Delete an explicit group permission for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsgroupslugget) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Get an explicit group permission for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsgroupslugput) | **Put** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Update an explicit group permission for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfigusersget) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/users | List explicit user permissions for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfigusersselecteduseriddelete) | **Delete** /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id} | Delete an explicit user permission for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfigusersselecteduseridget) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id} | Get an explicit user permission for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfigusersselecteduseridput) | **Put** /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id} | Update an explicit user permission for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPost**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpost) | **Post** /repositories/{workspace}/{repo_slug} | Create a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPut**](docs/RepositoriesApi.md#repositoriesworkspacereposlugput) | **Put** /repositories/{workspace}/{repo_slug} | Update a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcCommitPathGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrccommitpathget) | **Get** /repositories/{workspace}/{repo_slug}/src/{commit}/{path} | Get file or directory contents
@@ -358,7 +366,6 @@ Class | Method | HTTP request | Description
  - [BranchingModelSettings](docs/BranchingModelSettings.md)
  - [BranchingModelSettingsBranchTypes](docs/BranchingModelSettingsBranchTypes.md)
  - [BranchingModelSettingsDevelopment](docs/BranchingModelSettingsDevelopment.md)
- - [BranchingModelSettingsLinks](docs/BranchingModelSettingsLinks.md)
  - [BranchingModelSettingsProduction](docs/BranchingModelSettingsProduction.md)
  - [Branchrestriction](docs/Branchrestriction.md)
  - [Comment](docs/Comment.md)
@@ -404,7 +411,6 @@ Class | Method | HTTP request | Description
  - [IssueChangeChangesAssignee](docs/IssueChangeChangesAssignee.md)
  - [IssueChangeLinks](docs/IssueChangeLinks.md)
  - [IssueComment](docs/IssueComment.md)
- - [IssueContent](docs/IssueContent.md)
  - [IssueJobStatus](docs/IssueJobStatus.md)
  - [IssueLinks](docs/IssueLinks.md)
  - [JiraProject](docs/JiraProject.md)
@@ -446,7 +452,9 @@ Class | Method | HTTP request | Description
  - [PaginatedRefs](docs/PaginatedRefs.md)
  - [PaginatedReports](docs/PaginatedReports.md)
  - [PaginatedRepositories](docs/PaginatedRepositories.md)
+ - [PaginatedRepositoryGroupPermissions](docs/PaginatedRepositoryGroupPermissions.md)
  - [PaginatedRepositoryPermissions](docs/PaginatedRepositoryPermissions.md)
+ - [PaginatedRepositoryUserPermissions](docs/PaginatedRepositoryUserPermissions.md)
  - [PaginatedSnippetComments](docs/PaginatedSnippetComments.md)
  - [PaginatedSnippetCommit](docs/PaginatedSnippetCommit.md)
  - [PaginatedSnippets](docs/PaginatedSnippets.md)
@@ -525,12 +533,16 @@ Class | Method | HTTP request | Description
  - [Ref](docs/Ref.md)
  - [RefLinks](docs/RefLinks.md)
  - [RenderedPullRequestMarkup](docs/RenderedPullRequestMarkup.md)
+ - [RenderedPullRequestMarkupTitle](docs/RenderedPullRequestMarkupTitle.md)
  - [Report](docs/Report.md)
  - [ReportAnnotation](docs/ReportAnnotation.md)
  - [ReportData](docs/ReportData.md)
  - [Repository](docs/Repository.md)
+ - [RepositoryGroupPermission](docs/RepositoryGroupPermission.md)
+ - [RepositoryGroupPermissionLinks](docs/RepositoryGroupPermissionLinks.md)
  - [RepositoryLinks](docs/RepositoryLinks.md)
  - [RepositoryPermission](docs/RepositoryPermission.md)
+ - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
  - [SearchCodeSearchResult](docs/SearchCodeSearchResult.md)
  - [SearchContentMatch](docs/SearchContentMatch.md)
  - [SearchLine](docs/SearchLine.md)

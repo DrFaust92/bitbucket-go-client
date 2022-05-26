@@ -255,7 +255,7 @@ func (a *SnippetsApiService) SnippetsPost(ctx context.Context, body Snippet) (Sn
 
 /*
 SnippetsApiService Delete a comment on a snippet
-Deletes a snippet comment.  Comments can only be removed by their author.
+Deletes a snippet comment.  Comments can only be removed by the comment author, snippet creator, or workspace admin.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param commentId The id of the comment.
  * @param encodedId The snippet id.

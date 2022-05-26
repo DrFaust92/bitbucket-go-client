@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***BranchingModelSettingsLinks**](branching_model_settings_links.md) |  | [optional] [default to null]
+**Links** | [***RepositoryGroupPermissionLinks**](repository_group_permission_links.md) |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 **Id** | **int32** |  | [optional] [default to null]
 

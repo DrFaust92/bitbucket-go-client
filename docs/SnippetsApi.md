@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 > SnippetsWorkspaceEncodedIdCommentsCommentIdDelete(ctx, commentId, encodedId, workspace)
 Delete a comment on a snippet
 
-Deletes a snippet comment.  Comments can only be removed by their author.
+Deletes a snippet comment.  Comments can only be removed by the comment author, snippet creator, or workspace admin.
 
 ### Required Parameters
 

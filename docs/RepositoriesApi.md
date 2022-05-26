@@ -16,6 +16,14 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugHooksUidDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugHooksUidDelete) | **Delete** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Delete a webhook for a repository
 [**RepositoriesWorkspaceRepoSlugHooksUidGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugHooksUidGet) | **Get** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Get a webhook for a repository
 [**RepositoriesWorkspaceRepoSlugHooksUidPut**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugHooksUidPut) | **Put** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Update a webhook for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups | List explicit group permissions for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete) | **Delete** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Delete an explicit group permission for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Get an explicit group permission for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut) | **Put** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Update an explicit group permission for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/users | List explicit user permissions for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdDelete) | **Delete** /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id} | Delete an explicit user permission for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id} | Get an explicit user permission for a repository
+[**RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut) | **Put** /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id} | Update an explicit user permission for a repository
 [**RepositoriesWorkspaceRepoSlugPost**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPost) | **Post** /repositories/{workspace}/{repo_slug} | Create a repository
 [**RepositoriesWorkspaceRepoSlugPut**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPut) | **Put** /repositories/{workspace}/{repo_slug} | Update a repository
 [**RepositoriesWorkspaceRepoSlugSrcCommitPathGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcCommitPathGet) | **Get** /repositories/{workspace}/{repo_slug}/src/{commit}/{path} | Get file or directory contents
@@ -436,6 +444,244 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**
+> PaginatedRepositoryGroupPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx, repoSlug, workspace)
+List explicit group permissions for a repository
+
+Returns a paginated list of explicit group permissions for the given repository. This endpoint does not support BBQL features.  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  {   \"pagelen\": 10,   \"values\": [     {       \"type\": \"repository_group_permission\",       \"group\": {         \"type\": \"group\",         \"name\": \"Administrators\",         \"slug\": \"administrators\"       },       \"permission\": \"admin\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/administrators\"         }       }     },     {       \"type\": \"repository_group_permission\",       \"group\": {         \"type\": \"group\",         \"name\": \"Developers\",         \"slug\": \"developers\"       },       \"permission\": \"read\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/developers\"         }       }     }   ],   \"page\": 1,   \"size\": 2 } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**PaginatedRepositoryGroupPermissions**](paginated_repository_group_permissions.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete**
+> RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete(ctx, groupSlug, repoSlug, workspace)
+Delete an explicit group permission for a repository
+
+Deletes the repository group permission between the requested repository and group, if one exists.  Only users with admin permission for the repository may access this resource.  Example:  $ curl -X DELETE https://api.bitbucket.org/2.0/repositories/atlassian_tutorial /geordi/permissions-config/groups/developers   HTTP/1.1 204
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **groupSlug** | **string**| Slug of the requested group. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**
+> RepositoryGroupPermission RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, repoSlug, workspace)
+Get an explicit group permission for a repository
+
+Returns the group permission for a given group slug and repository  Only users with admin permission for the repository may access this resource.  Permissions can be:  * `admin` * `write` * `read` * `none`  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  {     \"type\": \"repository_group_permission\",     \"group\": {         \"type\": \"group\",         \"name\": \"Developers\",         \"slug\": \"developers\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"read\",     \"links\": {       \"self\": {         \"href\":         \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers\"       }     } } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **groupSlug** | **string**| Slug of the requested group. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**RepositoryGroupPermission**](repository_group_permission.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut**
+> RepositoryGroupPermission RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx, groupSlug, repoSlug, workspace)
+Update an explicit group permission for a repository
+
+Updates the group permission if it exists.  Only users with admin permission for the repository may access this resource.  The only authentication method supported for this endpoint is via app passwords.  Permissions can be:  * `admin` * `write` * `read`  Example: ``` $ curl -X PUT -H \"Content-Type: application/json\" https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers -d '{     \"permission\": \"write\" }'  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  {     \"type\": \"repository_group_permission\",     \"group\": {         \"type\": \"group\",         \"name\": \"Developers\",         \"slug\": \"developers\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"write\",     \"links\": {       \"self\": {         \"href\":         \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers\"       }     } } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **groupSlug** | **string**| Slug of the requested group. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**RepositoryGroupPermission**](repository_group_permission.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet**
+> PaginatedRepositoryUserPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx, repoSlug, workspace)
+List explicit user permissions for a repository
+
+Returns a paginated list of explicit user permissions for the given repository.  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users  {   \"pagelen\": 10,   \"values\": [     {         \"type\": \"repository_user_permission\",         \"user\": {             \"type\": \"user\",             \"display_name\": \"Colin Cameron\",             \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",             \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         },         \"permission\": \"admin\",         \"links\": {           \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"           }         }     },     {       \"type\": \"repository_user_permission\",       \"user\": {         \"type\": \"user\",         \"display_name\": \"Sean Conaty\",         \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"       },       \"permission\": \"write\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/                    permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"         }       }     }   ],   \"page\": 1,   \"size\": 2 } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**PaginatedRepositoryUserPermissions**](paginated_repository_user_permissions.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdDelete**
+> RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdDelete(ctx, repoSlug, selectedUserId, workspace)
+Delete an explicit user permission for a repository
+
+Deletes the repository user permission between the requested repository and user, if one exists.  Only users with admin permission for the repository may access this resource.  The only authentication method for this endpoint is via app passwords.  ``` $ curl -X DELETE https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a   HTTP/1.1 204 ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **selectedUserId** | **string**| This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet**
+> RepositoryUserPermission RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx, repoSlug, selectedUserId, workspace)
+Get an explicit user permission for a repository
+
+Returns the explicit user permission for a given user and repository.  Only users with admin permission for the repository may access this resource.  Permissions can be:  * `admin` * `write` * `read` * `none`  Example:  ``` $ curl 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/         permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'  HTTP/1.1 200 Location: 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/            permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'  {     \"type\": \"repository_user_permission\",     \"user\": {         \"type\": \"user\",         \"display_name\": \"Colin Cameron\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"admin\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         }     } } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **selectedUserId** | **string**| This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**RepositoryUserPermission**](repository_user_permission.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut**
+> RepositoryUserPermission RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx, repoSlug, selectedUserId, workspace)
+Update an explicit user permission for a repository
+
+Updates the explicit user permission for a given user and repository. The selected user must be a member of the workspace, and cannot be the workspace owner. Only users with admin permission for the repository may access this resource.  The only authentication method for this endpoint is via app passwords.  Permissions can be:  * `admin` * `write` * `read`  Example:  ``` $ curl -X PUT -H \"Content-Type: application/json\" 'https://api.bitbucket.org/2.0/repositories/ atlassian_tutorial/geordi/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a' -d         '{     \"permission\": \"write\" }'  HTTP/1.1 200 Location: 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'   {     \"type\": \"repository_user_permission\",     \"user\": {         \"type\": \"user\",         \"display_name\": \"Colin Cameron\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"write\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         }     } } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **selectedUserId** | **string**| This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**RepositoryUserPermission**](repository_user_permission.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **RepositoriesWorkspaceRepoSlugPost**
 > Repository RepositoriesWorkspaceRepoSlugPost(ctx, repoSlug, workspace, optional)
 Create a repository
@@ -674,7 +920,7 @@ Name | Type | Description  | Notes
 > PaginatedRepositoryPermissions UserPermissionsRepositoriesGet(ctx, optional)
 List repository permissions for a user
 
-Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between direct and indirect privileges.  Permissions can be:  * `admin` * `write` * `read`  Example:  ``` $ curl https://api.bitbucket.org/2.0/user/permissions/repositories  {   \"pagelen\": 10,   \"values\": [     {       \"type\": \"repository_permission\",       \"user\": {         \"type\": \"user\",         \"nickname\": \"evzijst\",         \"display_name\": \"Erik van Zijst\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"       },       \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"bitbucket/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"       },       \"permission\": \"admin\"     }   ],   \"page\": 1,   \"size\": 1 } ```  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * `q=repository.name=\"geordi\"` or `q=permission>\"read\"` * `sort=repository.name`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
+Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * `admin` * `write` * `read`  Example:  ``` $ curl https://api.bitbucket.org/2.0/user/permissions/repositories  {   \"pagelen\": 10,   \"values\": [     {       \"type\": \"repository_permission\",       \"user\": {         \"type\": \"user\",         \"nickname\": \"evzijst\",         \"display_name\": \"Erik van Zijst\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"       },       \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"bitbucket/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"       },       \"permission\": \"admin\"     }   ],   \"page\": 1,   \"size\": 1 } ```  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * `q=repository.name=\"geordi\"` or `q=permission>\"read\"` * `sort=repository.name`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
 
 ### Required Parameters
 

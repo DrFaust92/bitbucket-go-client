@@ -5088,15 +5088,11 @@ paths:
         #### Two commit spec
 
         Two commits separated by `..` may be provided as the `spec`, e.g.,
-        `3a8b42..9ff173`. When two commits are provided and the `merge` query
-        parameter is true or absent, this API produces a 3-way diff, also
-        referred to as a merge diff. This is equivalent to merging the left
-        branch into the right branch and then computing the diff of the merge
-        commit against its first parent (the right branch). These diffs have
-        the same behavior as pull requests that show the 3-way diff, such as
-        the [Bitbucket Cloud Pull
-        Request](https://blog.developer.atlassian.com/a-better-pull-request/).
-        For a simple git-style diff, add `merge=false` to the query.
+        `3a8b42..9ff173`. When two commits are provided and the `topic` query
+        parameter is true or absent, this API produces a 2-way three dot diff.
+        This is the diff between source commit and the merge base of the source
+        commit and the destination commit. When the `topic` query param is false,
+        a simple git-style diff is produced.
 
         The two commits are interpreted as follows:
 
@@ -5195,11 +5191,29 @@ paths:
       - name: merge
         in: query
         description: |-
+          This parameter is deprecated and will be removed at the end
+          of 2022. The 'topic' parameter should be used instead. The
+          'merge' and 'topic' parameters cannot be both used at the same
+          time.
+
           If true, the source commit is merged into the
           destination commit, and then a diff from the
           destination to the merge result is returned. If false,
           a simple 'two dot' diff between the source and
           destination is returned. True if omitted.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: topic
+        in: query
+        description: |-
+          If true, returns 2-way 'three-dot' diff.
+          This is a diff between the source commit and the merge base
+          of the source commit and the destination commit.
+          If false, a simple 'two dot' diff between the source and
+          destination is returned.
         required: false
         style: form
         explode: true
@@ -5244,15 +5258,11 @@ paths:
         #### Two commit spec
 
         Two commits separated by `..` may be provided as the `spec`, e.g.,
-        `3a8b42..9ff173`. When two commits are provided and the `merge` query
-        parameter is true or absent, this API produces a 3-way diff, also
-        referred to as a merge diff. This is equivalent to merging the left
-        branch into the right branch and then computing the diff of the merge
-        commit against its first parent (the right branch). These diffs have
-        the same behavior as pull requests that show the 3-way diff, such as
-        the [Bitbucket Cloud Pull
-        Request](https://blog.developer.atlassian.com/a-better-pull-request/).
-        For a simple git-style diff, add `merge=false` to the query.
+        `3a8b42..9ff173`. When two commits are provided and the `topic` query
+        parameter is true or absent, this API produces a 2-way three dot diff.
+        This is the diff between source commit and the merge base of the source
+        commit and the destination commit. When the `topic` query param is false,
+        a simple git-style diff is produced.
 
         The two commits are interpreted as follows:
 
@@ -5310,6 +5320,11 @@ paths:
       - name: merge
         in: query
         description: |-
+          This parameter is deprecated and will be removed at the end
+          of 2022. The 'topic' parameter should be used instead. The
+          'merge' and 'topic' parameters cannot be both used at the same
+          time.
+
           If true, the source commit is merged into the
           destination commit, and then a diffstat from the
           destination to the merge result is returned. If false,
@@ -5358,6 +5373,19 @@ paths:
         explode: false
         schema:
           type: string
+      - name: topic
+        in: query
+        description: |-
+          If true, returns 2-way 'three-dot' diff.
+          This is a diff between the source commit and the merge base
+          of the source commit and the destination commit.
+          If false, a simple 'two dot' diff between the source and
+          destination is returned.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
       - name: workspace
         in: path
         description: |
@@ -8793,6 +8821,834 @@ paths:
       security:
       - oauth2:
         - repository
+      - basic: []
+      - api_key: []
+  /repositories/{workspace}/{repo_slug}/permissions-config/groups:
+    get:
+      tags:
+      - Repositories
+      summary: List explicit group permissions for a repository
+      description: |-
+        Returns a paginated list of explicit group permissions for the given repository.
+        This endpoint does not support BBQL features.
+
+        Example:
+
+        ```
+        $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups
+
+        HTTP/1.1 200
+        Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups
+
+        {
+          "pagelen": 10,
+          "values": [
+            {
+              "type": "repository_group_permission",
+              "group": {
+                "type": "group",
+                "name": "Administrators",
+                "slug": "administrators"
+              },
+              "permission": "admin",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/
+                           geordi/permissions-config/groups/administrators"
+                }
+              }
+            },
+            {
+              "type": "repository_group_permission",
+              "group": {
+                "type": "group",
+                "name": "Developers",
+                "slug": "developers"
+              },
+              "permission": "read",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/
+                           geordi/permissions-config/groups/developers"
+                }
+              }
+            }
+          ],
+          "page": 1,
+          "size": 2
+        }
+        ```
+      parameters:
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Paginated of explicit group permissions on the repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paginated_repository_group_permissions'
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: The requesting user isn't an admin of the repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: One or both of the workspace and repository doesn't exist for
+            the given identifiers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+  /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug}:
+    get:
+      tags:
+      - Repositories
+      summary: Get an explicit group permission for a repository
+      description: |-
+        Returns the group permission for a given group slug and repository
+
+        Only users with admin permission for the repository may access this resource.
+
+        Permissions can be:
+
+        * `admin`
+        * `write`
+        * `read`
+        * `none`
+
+        Example:
+
+        ```
+        $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers
+
+        HTTP/1.1 200
+        Location:
+        https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers
+
+        {
+            "type": "repository_group_permission",
+            "group": {
+                "type": "group",
+                "name": "Developers",
+                "slug": "developers"
+            },
+            "repository": {
+                "type": "repository",
+                "name": "geordi",
+                "full_name": "atlassian_tutorial/geordi",
+                "uuid": "{85d08b4e-571d-44e9-a507-fa476535aa98}"
+            },
+            "permission": "read",
+            "links": {
+              "self": {
+                "href":
+                "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers"
+              }
+            }
+        }
+        ```
+      parameters:
+      - name: group_slug
+        in: path
+        description: Slug of the requested group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Group permission for group slug and repository
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_group_permission'
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: The requesting user isn't an admin of the repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: "The given user, workspace, and/or repository could not be\
+            \ found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+    put:
+      tags:
+      - Repositories
+      summary: Update an explicit group permission for a repository
+      description: |-
+        Updates the group permission if it exists.
+
+        Only users with admin permission for the repository may access this resource.
+
+        The only authentication method supported for this endpoint is via app passwords.
+
+        Permissions can be:
+
+        * `admin`
+        * `write`
+        * `read`
+
+        Example:
+        ```
+        $ curl -X PUT -H "Content-Type: application/json"
+        https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers
+        -d
+        '{
+            "permission": "write"
+        }'
+
+        HTTP/1.1 200
+        Location:
+        https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers
+
+        {
+            "type": "repository_group_permission",
+            "group": {
+                "type": "group",
+                "name": "Developers",
+                "slug": "developers"
+            },
+            "repository": {
+                "type": "repository",
+                "name": "geordi",
+                "full_name": "atlassian_tutorial/geordi",
+                "uuid": "{85d08b4e-571d-44e9-a507-fa476535aa98}"
+            },
+            "permission": "write",
+            "links": {
+              "self": {
+                "href":
+                "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers"
+              }
+            }
+        }
+        ```
+      parameters:
+      - name: group_slug
+        in: path
+        description: Slug of the requested group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Group permission updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_group_permission'
+        "400":
+          description: "No permission value was provided or the value is invalid(not\
+            \ one of read, write, or admin)"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: "The requesting user isn't an admin of the repository, or the\
+            \ authentication method was not via app password."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: "The workspace does not exist, the repository does not exist,or\
+            \ the group does not exist."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+    delete:
+      tags:
+      - Repositories
+      summary: Delete an explicit group permission for a repository
+      description: |-
+        Deletes the repository group permission between the requested repository and group, if one exists.
+
+        Only users with admin permission for the repository may access this resource.
+
+        Example:
+
+        $ curl -X DELETE https://api.bitbucket.org/2.0/repositories/atlassian_tutorial
+        /geordi/permissions-config/groups/developers
+
+
+        HTTP/1.1 204
+      parameters:
+      - name: group_slug
+        in: path
+        description: Slug of the requested group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Group permission deleted
+          content: {}
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: "The requesting user isn't an admin of the repository, or the\
+            \ authentication method was not via app password."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: "The workspace does not exist, the repository does not exist,or\
+            \ the group does not exist."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+  /repositories/{workspace}/{repo_slug}/permissions-config/users:
+    get:
+      tags:
+      - Repositories
+      summary: List explicit user permissions for a repository
+      description: |-
+        Returns a paginated list of explicit user permissions for the given repository.
+
+        Example:
+
+        ```
+        $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users
+
+        {
+          "pagelen": 10,
+          "values": [
+            {
+                "type": "repository_user_permission",
+                "user": {
+                    "type": "user",
+                    "display_name": "Colin Cameron",
+                    "uuid": "{d301aafa-d676-4ee0-88be-962be7417567}",
+                    "account_id": "557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a"
+                },
+                "permission": "admin",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+                             permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a"
+                  }
+                }
+            },
+            {
+              "type": "repository_user_permission",
+              "user": {
+                "type": "user",
+                "display_name": "Sean Conaty",
+                "uuid": "{504c3b62-8120-4f0c-a7bc-87800b9d6f70}",
+                "account_id": "557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c"
+              },
+              "permission": "write",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/
+                           permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c"
+                }
+              }
+            }
+          ],
+          "page": 1,
+          "size": 2
+        }
+        ```
+      parameters:
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Paginated of explicit user permissions on the repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paginated_repository_user_permissions'
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: The requesting user isn't an admin of the repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: No repository exists for the given repo slug and workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+  /repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id}:
+    get:
+      tags:
+      - Repositories
+      summary: Get an explicit user permission for a repository
+      description: |-
+        Returns the explicit user permission for a given user and repository.
+
+        Only users with admin permission for the repository may access this resource.
+
+        Permissions can be:
+
+        * `admin`
+        * `write`
+        * `read`
+        * `none`
+
+        Example:
+
+        ```
+        $ curl 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+                permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'
+
+        HTTP/1.1 200
+        Location: 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+                   permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'
+
+        {
+            "type": "repository_user_permission",
+            "user": {
+                "type": "user",
+                "display_name": "Colin Cameron",
+                "uuid": "{d301aafa-d676-4ee0-88be-962be7417567}",
+                "account_id": "557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a"
+            },
+            "repository": {
+                "type": "repository",
+                "name": "geordi",
+                "full_name": "atlassian_tutorial/geordi",
+                "uuid": "{85d08b4e-571d-44e9-a507-fa476535aa98}"
+            },
+            "permission": "admin",
+            "links": {
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+                             permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a"
+                }
+            }
+        }
+        ```
+      parameters:
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: selected_user_id
+        in: path
+        description: |
+          This can either be the UUID of the account, surrounded by curly-braces, for
+          example: `{account UUID}`, OR an Atlassian Account ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Explicit user permission for user and repository
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_user_permission'
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: The requesting user isn't an admin of the repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: One or both of the workspace and repository doesn't exist for
+            the given identifiers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+    put:
+      tags:
+      - Repositories
+      summary: Update an explicit user permission for a repository
+      description: |-
+        Updates the explicit user permission for a given user and repository. The selected user must be a member of
+        the workspace, and cannot be the workspace owner.
+        Only users with admin permission for the repository may access this resource.
+
+        The only authentication method for this endpoint is via app passwords.
+
+        Permissions can be:
+
+        * `admin`
+        * `write`
+        * `read`
+
+        Example:
+
+        ```
+        $ curl -X PUT -H "Content-Type: application/json" 'https://api.bitbucket.org/2.0/repositories/
+        atlassian_tutorial/geordi/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'
+        -d         '{
+            "permission": "write"
+        }'
+
+        HTTP/1.1 200
+        Location: 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+        permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'
+
+
+        {
+            "type": "repository_user_permission",
+            "user": {
+                "type": "user",
+                "display_name": "Colin Cameron",
+                "uuid": "{d301aafa-d676-4ee0-88be-962be7417567}",
+                "account_id": "557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a"
+            },
+            "repository": {
+                "type": "repository",
+                "name": "geordi",
+                "full_name": "atlassian_tutorial/geordi",
+                "uuid": "{85d08b4e-571d-44e9-a507-fa476535aa98}"
+            },
+            "permission": "write",
+            "links": {
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+                             permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a"
+                }
+            }
+        }
+        ```
+      parameters:
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: selected_user_id
+        in: path
+        description: |
+          This can either be the UUID of the account, surrounded by curly-braces, for
+          example: `{account UUID}`, OR an Atlassian Account ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Explicit user permission updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_user_permission'
+        "400":
+          description: "No permission value was provided or the value is invalid (not\
+            \ one of read, write, or admin), or the selected user is not a valid user\
+            \ to update."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: "The requesting user isn't an admin of the repository, or the\
+            \ authentication method was not via app password."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: "One or more of the workspace, repo, and selected user doesn't\
+            \ exist for the given identifiers."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
+      - basic: []
+      - api_key: []
+    delete:
+      tags:
+      - Repositories
+      summary: Delete an explicit user permission for a repository
+      description: |-
+        Deletes the repository user permission between the requested repository and user, if one exists.
+
+        Only users with admin permission for the repository may access this resource.
+
+        The only authentication method for this endpoint is via app passwords.
+
+        ```
+        $ curl -X DELETE https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/
+        permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a
+
+
+        HTTP/1.1 204
+        ```
+      parameters:
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: selected_user_id
+        in: path
+        description: |
+          This can either be the UUID of the account, surrounded by curly-braces, for
+          example: `{account UUID}`, OR an Atlassian Account ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: The repository user permission was deleted and no content returned.
+          content: {}
+        "401":
+          description: The user couldn't be authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: "The requesting user isn't an admin of the repository, or the\
+            \ authentication method was not via app password."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: "One or more of the workspace, repository, and user doesn't\
+            \ exist for the given identifiers."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository:admin
       - basic: []
       - api_key: []
   /repositories/{workspace}/{repo_slug}/pipelines-config/caches/:
@@ -16099,7 +16955,7 @@ paths:
       description: |-
         Deletes a snippet comment.
 
-        Comments can only be removed by their author.
+        Comments can only be removed by the comment author, snippet creator, or workspace admin.
       parameters:
       - name: comment_id
         in: path
@@ -17408,7 +18264,7 @@ paths:
         Permissions returned are effective permissions — the highest level of
         permission the user has. This does not include public repositories that
         users are not granted any specific permission in, and does not
-        distinguish between direct and indirect privileges.
+        distinguish between explicit and implicit privileges.
 
         Only users with admin permission for the team may access this resource.
 
@@ -17544,7 +18400,7 @@ paths:
         Permissions returned are effective permissions — the highest level of
         permission the user has. This does not include public repositories that
         users are not granted any specific permission in, and does not
-        distinguish between direct and indirect privileges.
+        distinguish between explicit and implicit privileges.
 
         Only users with admin permission for the repository may access this resource.
 
@@ -18607,7 +19463,7 @@ paths:
         to and their effective permission — the highest level of permission the
         caller has. This does not return public repositories that the user was
         not granted any specific permission in, and does not distinguish between
-        direct and indirect privileges.
+        explicit and implicit privileges.
 
         Permissions can be:
 
@@ -22251,58 +23107,37 @@ components:
           pipeline:
             $ref: '#/components/schemas/pipeline'
         description: A Pipelines executed schedule execution.
-    paginated_deploy_keys:
-      title: Paginated Deploy Keys
+    repository_group_permission:
+      title: Repository Group Permission
+      required:
+      - type
       type: object
       properties:
-        size:
-          minimum: 0
-          type: integer
-          description: "Total number of objects in the response. This is an optional\
-            \ element that is not provided in all responses, as it can be expensive\
-            \ to compute."
-        page:
-          minimum: 1
-          type: integer
-          description: Page number of the current results. This is an optional element
-            that is not provided in all responses.
-        pagelen:
-          minimum: 1
-          type: integer
-          description: Current number of objects on the existing page. The default
-            value is 10 with 100 being the maximum allowed value. Individual APIs
-            may enforce different values.
-        next:
+        type:
           type: string
-          description: Link to the next page if it exists. The last page of a collection
-            does not have this value. Use this link to navigate the result set and
-            refrain from constructing your own URLs.
-          format: uri
-        previous:
+        links:
+          $ref: '#/components/schemas/repository_group_permission_links'
+        permission:
           type: string
-          description: Link to previous page if it exists. A collections first page
-            does not have this value. This is an optional element that is not provided
-            in all responses. Some result sets strictly support forward navigation
-            and never provide previous links. Clients must anticipate that backwards
-            navigation is not always available. Use this link to navigate the result
-            set and refrain from constructing your own URLs.
-          format: uri
-        values:
-          minItems: 0
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/deploy_key'
-      description: A paginated list of deploy keys.
+          enum:
+          - admin
+          - write
+          - read
+          - none
+        group:
+          $ref: '#/components/schemas/group'
+        repository:
+          $ref: '#/components/schemas/repository'
+      description: A group's permission for a given repository.
       example:
-        next: http://example.com/aeiou
-        size: 0
-        previous: http://example.com/aeiou
-        values:
-        - ""
-        - ""
-        page: 1
-        pagelen: 1
+        links:
+          self:
+            name: name
+            href: http://example.com/aeiou
+        permission: admin
+        type: type
+        repository: ""
+        group: ""
     pipeline_ssh_public_key:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -22701,70 +23536,32 @@ components:
           commit:
             $ref: '#/components/schemas/commit'
         description: A commit comment.
-    issue:
-      allOf:
-      - $ref: '#/components/schemas/object'
-      - title: Issue
-        type: object
-        properties:
-          links:
-            $ref: '#/components/schemas/issue_links'
-          id:
-            type: integer
-          repository:
-            $ref: '#/components/schemas/repository'
-          title:
-            type: string
-          reporter:
-            $ref: '#/components/schemas/user'
-          assignee:
-            $ref: '#/components/schemas/user'
-          created_on:
-            type: string
-            format: date-time
-          updated_on:
-            type: string
-            format: date-time
-          edited_on:
-            type: string
-            format: date-time
-          state:
-            type: string
-            enum:
-            - new
-            - open
-            - resolved
-            - on hold
-            - invalid
-            - duplicate
-            - wontfix
-            - closed
-          kind:
-            type: string
-            enum:
-            - bug
-            - enhancement
-            - proposal
-            - task
-          priority:
-            type: string
-            enum:
-            - trivial
-            - minor
-            - major
-            - critical
-            - blocker
-          milestone:
-            $ref: '#/components/schemas/milestone'
-          version:
-            $ref: '#/components/schemas/version'
-          component:
-            $ref: '#/components/schemas/component'
-          votes:
-            type: integer
-          content:
-            $ref: '#/components/schemas/issue_content'
-        description: An issue.
+    ref:
+      title: Ref
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        links:
+          $ref: '#/components/schemas/ref_links'
+        name:
+          type: string
+          description: The name of the ref.
+        target:
+          $ref: '#/components/schemas/commit'
+      description: "A ref object, representing a branch or tag in a repository."
+      example:
+        name: name
+        links:
+          self:
+            name: name
+            href: http://example.com/aeiou
+          commits: null
+          html: null
+        type: type
+        target: ""
     deployment_state_completed_status_failed:
       allOf:
       - $ref: '#/components/schemas/deployment_state_completed_status'
@@ -22794,7 +23591,7 @@ components:
           rendered:
             $ref: '#/components/schemas/Rendered Pull Request Markup'
           summary:
-            $ref: '#/components/schemas/issue_content'
+            $ref: '#/components/schemas/Rendered Pull Request Markup_title'
           state:
             type: string
             description: The pull request's current status.
@@ -23053,7 +23850,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           branch_types:
             maxItems: 4
             minItems: 0
@@ -23419,7 +24216,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           name:
             type: string
           id:
@@ -23529,46 +24326,70 @@ components:
         - ""
         page: 1
         pagelen: 1
-    deployments_ddev_paginated_environments:
-      title: Paginated Deployment Environments
-      type: object
-      properties:
-        page:
-          type: integer
-          description: Page number of the current results. This is an optional element
-            that is not provided in all responses.
-        values:
-          minItems: 0
-          type: array
-          description: The values of the current page.
-          items:
-            $ref: '#/components/schemas/deployments_ddev_deployment_environment'
-        size:
-          type: integer
-          description: "Total number of objects in the response. This is an optional\
-            \ element that is not provided in all responses, as it can be expensive\
-            \ to compute."
-        pagelen:
-          type: integer
-          description: Current number of objects on the existing page. The default
-            value is 10 with 100 being the maximum allowed value. Individual APIs
-            may enforce different values.
-        next:
-          type: string
-          description: Link to the next page if it exists. The last page of a collection
-            does not have this value. Use this link to navigate the result set and
-            refrain from constructing your own URLs.
-          format: uri
-        previous:
-          type: string
-          description: Link to previous page if it exists. A collections first page
-            does not have this value. This is an optional element that is not provided
-            in all responses. Some result sets strictly support forward navigation
-            and never provide previous links. Clients must anticipate that backwards
-            navigation is not always available. Use this link to navigate the result
-            set and refrain from constructing your own URLs.
-          format: uri
-      description: A paged list of environments
+    issue:
+      allOf:
+      - $ref: '#/components/schemas/object'
+      - title: Issue
+        type: object
+        properties:
+          links:
+            $ref: '#/components/schemas/issue_links'
+          id:
+            type: integer
+          repository:
+            $ref: '#/components/schemas/repository'
+          title:
+            type: string
+          reporter:
+            $ref: '#/components/schemas/user'
+          assignee:
+            $ref: '#/components/schemas/user'
+          created_on:
+            type: string
+            format: date-time
+          updated_on:
+            type: string
+            format: date-time
+          edited_on:
+            type: string
+            format: date-time
+          state:
+            type: string
+            enum:
+            - new
+            - open
+            - resolved
+            - on hold
+            - invalid
+            - duplicate
+            - wontfix
+            - closed
+          kind:
+            type: string
+            enum:
+            - bug
+            - enhancement
+            - proposal
+            - task
+          priority:
+            type: string
+            enum:
+            - trivial
+            - minor
+            - major
+            - critical
+            - blocker
+          milestone:
+            $ref: '#/components/schemas/milestone'
+          version:
+            $ref: '#/components/schemas/version'
+          component:
+            $ref: '#/components/schemas/component'
+          votes:
+            type: integer
+          content:
+            $ref: '#/components/schemas/Rendered Pull Request Markup_title'
+        description: An issue.
     webhook_subscription:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -23799,7 +24620,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           name:
             type: string
           id:
@@ -23822,7 +24643,7 @@ components:
           message:
             type: string
           summary:
-            $ref: '#/components/schemas/issue_content'
+            $ref: '#/components/schemas/Rendered Pull Request Markup_title'
           parents:
             minItems: 0
             type: array
@@ -24034,7 +24855,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           name:
             type: string
         description: An issue file attachment's meta data. Note this does not contain
@@ -24210,7 +25031,7 @@ components:
             type: string
             format: date-time
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           owner:
             $ref: '#/components/schemas/account'
         description: Represents deploy key for a repository.
@@ -24284,7 +25105,7 @@ components:
             type: string
             format: date-time
           content:
-            $ref: '#/components/schemas/issue_content'
+            $ref: '#/components/schemas/Rendered Pull Request Markup_title'
           user:
             $ref: '#/components/schemas/user'
           deleted:
@@ -24625,7 +25446,7 @@ components:
         changes:
           $ref: '#/components/schemas/issue_change_changes'
         message:
-          $ref: '#/components/schemas/issue_content'
+          $ref: '#/components/schemas/Rendered Pull Request Markup_title'
       description: An issue change.
       example:
         issue: ""
@@ -24654,6 +25475,26 @@ components:
           raw: raw
           html: html
         user: ""
+    application_property:
+      title: Application Property
+      type: object
+      properties:
+        _attributes:
+          type: array
+          items:
+            type: string
+            enum:
+            - public
+            - read_only
+      description: "An application property. It is a caller defined JSON object that\
+        \ Bitbucket will store and return. \nThe `_attributes` field at its top level\
+        \ can be used to control who is allowed to read and update the property. \n\
+        The keys of the JSON object must match an allowed pattern. For details, \n\
+        see [Application properties](/cloud/bitbucket/application-properties/).\n"
+      example:
+        _attributes:
+        - public
+        - public
     repository_permission:
       title: Repository Permission
       required:
@@ -24886,19 +25727,46 @@ components:
       - title: Pipeline State
         type: object
         description: The representation of the progress state of a pipeline.
-    author:
-      allOf:
-      - $ref: '#/components/schemas/object'
-      - title: Author
-        type: object
-        properties:
-          raw:
-            type: string
-            description: The raw author value from the repository. This may be the
-              only value available if the author does not match a user in Bitbucket.
-          user:
-            $ref: '#/components/schemas/account'
-        description: The author of a change in a repository
+    deployments_ddev_paginated_environments:
+      title: Paginated Deployment Environments
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        values:
+          minItems: 0
+          type: array
+          description: The values of the current page.
+          items:
+            $ref: '#/components/schemas/deployments_ddev_deployment_environment'
+        size:
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        pagelen:
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
+      description: A paged list of environments
     jira_project:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -24915,6 +25783,72 @@ components:
       - avatarUrls.*
       - site
       x-bb-url: "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?atlassian_account_id={user.account_id}"
+    paginated_repository_group_permissions:
+      title: Paginated Repository Group Permissions
+      type: object
+      properties:
+        size:
+          minimum: 0
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        page:
+          minimum: 1
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        pagelen:
+          minimum: 1
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
+        values:
+          minItems: 0
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/repository_group_permission'
+      description: A paginated list of repository group permissions.
+      example:
+        next: http://example.com/aeiou
+        size: 0
+        previous: http://example.com/aeiou
+        values:
+        - links:
+            self:
+              name: name
+              href: http://example.com/aeiou
+          permission: admin
+          type: type
+          repository: ""
+          group: ""
+        - links:
+            self:
+              name: name
+              href: http://example.com/aeiou
+          permission: admin
+          type: type
+          repository: ""
+          group: ""
+        page: 1
+        pagelen: 1
     paginated_pullrequests:
       title: Paginated Pull Requests
       type: object
@@ -25145,7 +26079,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           user:
             $ref: '#/components/schemas/account'
           workspace:
@@ -25717,7 +26651,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           id:
             type: integer
             description: The branch restriction status' id.
@@ -25777,7 +26711,7 @@ components:
               $ref: '#/components/schemas/group'
           value:
             type: integer
-            description: <staticmethod object at 0x7fe935308210>
+            description: <staticmethod object at 0x7f8da5b03a50>
         description: A branch restriction rule.
     pipeline_step_state_completed_result:
       allOf:
@@ -26177,32 +27111,37 @@ components:
         - ""
         page: 1
         pagelen: 1
-    ref:
-      title: Ref
+    repository_user_permission:
+      title: Repository User Permission
       required:
       - type
       type: object
       properties:
         type:
           type: string
-        links:
-          $ref: '#/components/schemas/ref_links'
-        name:
+        permission:
           type: string
-          description: The name of the ref.
-        target:
-          $ref: '#/components/schemas/commit'
-      description: "A ref object, representing a branch or tag in a repository."
+          enum:
+          - admin
+          - write
+          - read
+          - none
+        user:
+          $ref: '#/components/schemas/user'
+        repository:
+          $ref: '#/components/schemas/repository'
+        links:
+          $ref: '#/components/schemas/repository_group_permission_links'
+      description: A user's direct permission for a given repository.
       example:
-        name: name
+        permission: admin
         links:
           self:
             name: name
             href: http://example.com/aeiou
-          commits: null
-          html: null
         type: type
-        target: ""
+        repository: ""
+        user: ""
     paginated_users:
       title: Paginated Users
       type: object
@@ -26403,6 +27342,42 @@ components:
             description: The default merge strategy for pull requests targeting this
               branch.
         description: "A branch object, representing a branch in a repository."
+    page:
+      title: Page
+      type: object
+      properties:
+        size:
+          minimum: 0
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        page:
+          minimum: 1
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        pagelen:
+          minimum: 1
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
     deployment_state_undeployed:
       allOf:
       - $ref: '#/components/schemas/deployment_state'
@@ -26450,7 +27425,7 @@ components:
         type: object
         properties:
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
           name:
             type: string
           id:
@@ -26468,6 +27443,58 @@ components:
         Swagger's `discriminator`.
       discriminator:
         propertyName: type
+    paginated_deploy_keys:
+      title: Paginated Deploy Keys
+      type: object
+      properties:
+        size:
+          minimum: 0
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        page:
+          minimum: 1
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        pagelen:
+          minimum: 1
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
+        values:
+          minItems: 0
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/deploy_key'
+      description: A paginated list of deploy keys.
+      example:
+        next: http://example.com/aeiou
+        size: 0
+        previous: http://example.com/aeiou
+        values:
+        - ""
+        - ""
+        page: 1
+        pagelen: 1
     pipeline_step_state_in_progress:
       allOf:
       - $ref: '#/components/schemas/pipeline_step_state'
@@ -26504,7 +27531,7 @@ components:
             type: string
             format: date-time
           links:
-            $ref: '#/components/schemas/branching_model_settings_links'
+            $ref: '#/components/schemas/repository_group_permission_links'
         description: Base type for representing SSH public keys.
     paginated_components:
       title: Paginated Components
@@ -26570,26 +27597,72 @@ components:
             type: string
             description: The user's Atlassian account ID.
         description: A user object.
-    application_property:
-      title: Application Property
+    paginated_repository_user_permissions:
+      title: Paginated Repository User Permissions
       type: object
       properties:
-        _attributes:
+        size:
+          minimum: 0
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        page:
+          minimum: 1
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        pagelen:
+          minimum: 1
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
+        values:
+          minItems: 0
+          uniqueItems: true
           type: array
           items:
-            type: string
-            enum:
-            - public
-            - read_only
-      description: "An application property. It is a caller defined JSON object that\
-        \ Bitbucket will store and return. \nThe `_attributes` field at its top level\
-        \ can be used to control who is allowed to read and update the property. \n\
-        The keys of the JSON object must match an allowed pattern. For details, \n\
-        see [Application properties](/cloud/bitbucket/application-properties/).\n"
+            $ref: '#/components/schemas/repository_user_permission'
+      description: A paginated list of repository user permissions.
       example:
-        _attributes:
-        - public
-        - public
+        next: http://example.com/aeiou
+        size: 0
+        previous: http://example.com/aeiou
+        values:
+        - permission: admin
+          links:
+            self:
+              name: name
+              href: http://example.com/aeiou
+          type: type
+          repository: ""
+          user: ""
+        - permission: admin
+          links:
+            self:
+              name: name
+              href: http://example.com/aeiou
+          type: type
+          repository: ""
+          user: ""
+        page: 1
+        pagelen: 1
     paginated_webhook_subscriptions:
       title: Paginated Webhook Subscriptions
       type: object
@@ -26735,42 +27808,19 @@ components:
       - title: Pipeline Step State
         type: object
         description: The representation of the progress state of a pipeline step.
-    page:
-      title: Page
-      type: object
-      properties:
-        size:
-          minimum: 0
-          type: integer
-          description: "Total number of objects in the response. This is an optional\
-            \ element that is not provided in all responses, as it can be expensive\
-            \ to compute."
-        page:
-          minimum: 1
-          type: integer
-          description: Page number of the current results. This is an optional element
-            that is not provided in all responses.
-        pagelen:
-          minimum: 1
-          type: integer
-          description: Current number of objects on the existing page. The default
-            value is 10 with 100 being the maximum allowed value. Individual APIs
-            may enforce different values.
-        next:
-          type: string
-          description: Link to the next page if it exists. The last page of a collection
-            does not have this value. Use this link to navigate the result set and
-            refrain from constructing your own URLs.
-          format: uri
-        previous:
-          type: string
-          description: Link to previous page if it exists. A collections first page
-            does not have this value. This is an optional element that is not provided
-            in all responses. Some result sets strictly support forward navigation
-            and never provide previous links. Clients must anticipate that backwards
-            navigation is not always available. Use this link to navigate the result
-            set and refrain from constructing your own URLs.
-          format: uri
+    author:
+      allOf:
+      - $ref: '#/components/schemas/object'
+      - title: Author
+        type: object
+        properties:
+          raw:
+            type: string
+            description: The raw author value from the repository. This may be the
+              only value available if the author does not match a user in Bitbucket.
+          user:
+            $ref: '#/components/schemas/account'
+        description: The author of a change in a repository
     paginated_pipeline_known_hosts:
       title: Paginated Pipeline Known Hosts
       type: object
@@ -27124,43 +28174,30 @@ components:
         html:
           $ref: '#/components/schemas/Link'
       example: null
-    issue_links:
+    repository_group_permission_links:
       type: object
       properties:
         self:
           $ref: '#/components/schemas/Link'
-        html:
-          $ref: '#/components/schemas/Link'
-        comments:
-          $ref: '#/components/schemas/Link'
-        attachments:
-          $ref: '#/components/schemas/Link'
-        watch:
-          $ref: '#/components/schemas/Link'
-        vote:
-          $ref: '#/components/schemas/Link'
-      example: null
-    issue_content:
+      example:
+        self:
+          name: name
+          href: http://example.com/aeiou
+    ref_links:
       type: object
       properties:
-        raw:
-          type: string
-          description: The text as it was typed by a user.
-        markup:
-          type: string
-          description: The type of markup language the raw content is to be interpreted
-            in.
-          enum:
-          - markdown
-          - creole
-          - plaintext
+        self:
+          $ref: '#/components/schemas/Link'
+        commits:
+          $ref: '#/components/schemas/Link'
         html:
-          type: string
-          description: The user's content rendered as HTML.
+          $ref: '#/components/schemas/Link'
       example:
-        markup: markdown
-        raw: raw
-        html: html
+        self:
+          name: name
+          href: http://example.com/aeiou
+        commits: null
+        html: null
     pullrequest_links:
       type: object
       properties:
@@ -27185,16 +28222,37 @@ components:
         decline:
           $ref: '#/components/schemas/Link'
       example: null
+    Rendered Pull Request Markup_title:
+      type: object
+      properties:
+        raw:
+          type: string
+          description: The text as it was typed by a user.
+        markup:
+          type: string
+          description: The type of markup language the raw content is to be interpreted
+            in.
+          enum:
+          - markdown
+          - creole
+          - plaintext
+        html:
+          type: string
+          description: The user's content rendered as HTML.
+      example:
+        markup: markdown
+        raw: raw
+        html: html
     Rendered Pull Request Markup:
       title: Rendered Pull Request Markup
       type: object
       properties:
         title:
-          $ref: '#/components/schemas/issue_content'
+          $ref: '#/components/schemas/Rendered Pull Request Markup_title'
         description:
-          $ref: '#/components/schemas/issue_content'
+          $ref: '#/components/schemas/Rendered Pull Request Markup_title'
         reason:
-          $ref: '#/components/schemas/issue_content'
+          $ref: '#/components/schemas/Rendered Pull Request Markup_title'
       description: "User provided pull request text, interpreted in a markup language\
         \ and rendered in HTML"
       example: null
@@ -27205,12 +28263,6 @@ components:
         hash:
           pattern: "[0-9a-f]{7,}?"
           type: string
-      example: null
-    branching_model_settings_links:
-      type: object
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
       example: null
     branching_model_settings_branch_types:
       required:
@@ -27297,6 +28349,22 @@ components:
         enabled:
           type: boolean
           description: Indicates if branch is enabled or not.
+      example: null
+    issue_links:
+      type: object
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        html:
+          $ref: '#/components/schemas/Link'
+        comments:
+          $ref: '#/components/schemas/Link'
+        attachments:
+          $ref: '#/components/schemas/Link'
+        watch:
+          $ref: '#/components/schemas/Link'
+        vote:
+          $ref: '#/components/schemas/Link'
       example: null
     repository_links:
       type: object
@@ -27532,21 +28600,6 @@ components:
         data: {}
         detail: detail
         message: message
-    ref_links:
-      type: object
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        commits:
-          $ref: '#/components/schemas/Link'
-        html:
-          $ref: '#/components/schemas/Link'
-      example:
-        self:
-          name: name
-          href: http://example.com/aeiou
-        commits: null
-        html: null
     workspace_links:
       type: object
       properties:
@@ -27618,7 +28671,7 @@ components:
             team: Read your team membership information
             team:write: Read and modify your team membership information
             account:write: Read and modify your account information
-x-revision: ff7d88e8f5b5
+x-revision: b004a990e839
 x-atlassian-narrative:
   documents:
   - body: |2-

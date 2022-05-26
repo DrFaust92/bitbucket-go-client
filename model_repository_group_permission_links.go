@@ -9,9 +9,6 @@
  */
 package bitbucket
 
-type Version struct {
-	Type_ string                          `json:"type"`
-	Links *RepositoryGroupPermissionLinks `json:"links,omitempty"`
-	Name  string                          `json:"name,omitempty"`
-	Id    int32                           `json:"id,omitempty"`
+type RepositoryGroupPermissionLinks struct {
+	Self *Link `json:"self,omitempty"`
 }
