@@ -1562,18 +1562,23 @@ Returns the list of projects in this workspace.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 @return PaginatedProjects
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string) (PaginatedProjects, *http.Response, error) {
+func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string, nextPage string) (PaginatedProjects, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
+		localVarPath        string
 		localVarFileBytes   []byte
 		localVarReturnValue PaginatedProjects
 	)
 
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/projects"
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	if nextPage != "" {
+		localVarPath = nextPage
+	} else {
+		// create path and map variables
+		localVarPath = a.client.cfg.BasePath + "/workspaces/{workspace}/projects"
+		localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
