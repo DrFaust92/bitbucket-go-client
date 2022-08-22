@@ -10,10 +10,10 @@
 package bitbucket
 
 type CommentInline struct {
-	// The comment's anchor line in the new version of the file. If the 'from' line is also provided, this value will be removed.
-	To int32 `json:"to,omitempty"`
 	// The comment's anchor line in the old version of the file.
 	From int32 `json:"from,omitempty"`
+	// The comment's anchor line in the new version of the file. If the 'from' line is also provided, this value will be removed.
+	To int32 `json:"to,omitempty"`
 	// The path of the file this comment is anchored to.
 	Path string `json:"path"`
 }

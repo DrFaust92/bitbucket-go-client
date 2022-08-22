@@ -28,8 +28,7 @@ type AddonApiService service
 /*
 AddonApiService Delete an app
 Deletes the application for the user.  This endpoint is intended to be used by Bitbucket Connect apps and only supports JWT authentication -- that is how Bitbucket identifies the particular installation of the app. Developers with applications registered in the \&quot;Develop Apps\&quot; section of Bitbucket Marketplace need not use this endpoint as updates for those applications can be sent out via the UI of that section.  &#x60;&#x60;&#x60; $ curl -X DELETE https://api.bitbucket.org/2.0/addon \\   -H \&quot;Authorization: JWT &lt;JWT Token&gt;\&quot; &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 func (a *AddonApiService) AddonDelete(ctx context.Context) (*http.Response, error) {
 	var (
@@ -126,8 +125,7 @@ func (a *AddonApiService) AddonDelete(ctx context.Context) (*http.Response, erro
 /*
 AddonApiService List linkers for an app
 Gets a list of all [linkers](/cloud/bitbucket/modules/linker/) for the authenticated application.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 func (a *AddonApiService) AddonLinkersGet(ctx context.Context) (*http.Response, error) {
 	var (
@@ -214,9 +212,8 @@ func (a *AddonApiService) AddonLinkersGet(ctx context.Context) (*http.Response, 
 /*
 AddonApiService Get a linker for an app
 Gets a [linker](/cloud/bitbucket/modules/linker/) specified by &#x60;linker_key&#x60; for the authenticated application.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyGet(ctx context.Context, linkerKey string) (*http.Response, error) {
 	var (
@@ -314,9 +311,8 @@ func (a *AddonApiService) AddonLinkersLinkerKeyGet(ctx context.Context, linkerKe
 /*
 AddonApiService Delete all linker values
 Delete all [linker](/cloud/bitbucket/modules/linker/) values for the specified linker of the authenticated application.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyValuesDelete(ctx context.Context, linkerKey string) (*http.Response, error) {
 	var (
@@ -414,9 +410,8 @@ func (a *AddonApiService) AddonLinkersLinkerKeyValuesDelete(ctx context.Context,
 /*
 AddonApiService List linker values for a linker
 Gets a list of all [linker](/cloud/bitbucket/modules/linker/) values for the specified linker of the authenticated application.  A linker value lets applications supply values to modify its regular expression.  The base regular expression must use a Bitbucket-specific match group &#x60;(?K)&#x60; which will be translated to &#x60;([\\w\\-]+)&#x60;. A value must match this pattern.  [Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyValuesGet(ctx context.Context, linkerKey string) (*http.Response, error) {
 	var (
@@ -514,9 +509,8 @@ func (a *AddonApiService) AddonLinkersLinkerKeyValuesGet(ctx context.Context, li
 /*
 AddonApiService Create a linker value
 Creates a [linker](/cloud/bitbucket/modules/linker/) value for the specified linker of authenticated application.  A linker value lets applications supply values to modify its regular expression.  The base regular expression must use a Bitbucket-specific match group &#x60;(?K)&#x60; which will be translated to &#x60;([\\w\\-]+)&#x60;. A value must match this pattern.  [Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyValuesPost(ctx context.Context, linkerKey string) (*http.Response, error) {
 	var (
@@ -624,9 +618,8 @@ func (a *AddonApiService) AddonLinkersLinkerKeyValuesPost(ctx context.Context, l
 /*
 AddonApiService Update a linker value
 Bulk update [linker](/cloud/bitbucket/modules/linker/) values for the specified linker of the authenticated application.  A linker value lets applications supply values to modify its regular expression.  The base regular expression must use a Bitbucket-specific match group &#x60;(?K)&#x60; which will be translated to &#x60;([\\w\\-]+)&#x60;. A value must match this pattern.  [Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyValuesPut(ctx context.Context, linkerKey string) (*http.Response, error) {
 	var (
@@ -734,10 +727,9 @@ func (a *AddonApiService) AddonLinkersLinkerKeyValuesPut(ctx context.Context, li
 /*
 AddonApiService Delete a linker value
 Delete a single [linker](/cloud/bitbucket/modules/linker/) value of the authenticated application.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
- * @param valueId The numeric ID of the linker value.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
+  - @param valueId The numeric ID of the linker value.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyValuesValueIdDelete(ctx context.Context, linkerKey string, valueId int32) (*http.Response, error) {
 	var (
@@ -836,10 +828,9 @@ func (a *AddonApiService) AddonLinkersLinkerKeyValuesValueIdDelete(ctx context.C
 /*
 AddonApiService Get a linker value
 Get a single [linker](/cloud/bitbucket/modules/linker/) value of the authenticated application.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
- * @param valueId The numeric ID of the linker value.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param linkerKey The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor.
+  - @param valueId The numeric ID of the linker value.
 */
 func (a *AddonApiService) AddonLinkersLinkerKeyValuesValueIdGet(ctx context.Context, linkerKey string, valueId int32) (*http.Response, error) {
 	var (
@@ -938,8 +929,7 @@ func (a *AddonApiService) AddonLinkersLinkerKeyValuesValueIdGet(ctx context.Cont
 /*
 AddonApiService Update an installed app
 Updates the application installation for the user.  This endpoint is intended to be used by Bitbucket Connect apps and only supports JWT authentication -- that is how Bitbucket identifies the particular installation of the app. Developers with applications registered in the \&quot;Develop Apps\&quot; section of Bitbucket need not use this endpoint as updates for those applications can be sent out via the UI of that section.  Passing an empty body will update the installation using the existing descriptor URL.  &#x60;&#x60;&#x60; $ curl -X PUT https://api.bitbucket.org/2.0/addon \\   -H \&quot;Authorization: JWT &lt;JWT Token&gt;\&quot; \\   --header \&quot;Content-Type: application/json\&quot; \\   --data &#x27;{}&#x27; &#x60;&#x60;&#x60;  The new &#x60;descriptor&#x60; for the installation can be also provided in the body directly.  &#x60;&#x60;&#x60; $ curl -X PUT https://api.bitbucket.org/2.0/addon \\   -H \&quot;Authorization: JWT &lt;JWT Token&gt;\&quot; \\   --header \&quot;Content-Type: application/json\&quot; \\   --data &#x27;{\&quot;descriptor\&quot;: $NEW_DESCRIPTOR}&#x27; &#x60;&#x60;&#x60;  In both these modes the URL of the descriptor cannot be changed. To change the descriptor location and upgrade an installation the request must be made exclusively with a &#x60;descriptor_url&#x60;.   &#x60;&#x60;&#x60; $ curl -X PUT https://api.bitbucket.org/2.0/addon \\   -H \&quot;Authorization: JWT &lt;JWT Token&gt;\&quot; \\   --header \&quot;Content-Type: application/json\&quot; \\   --data &#x27;{\&quot;descriptor_url\&quot;: $NEW_URL}&#x27; &#x60;&#x60;&#x60;  The &#x60;descriptor_url&#x60; must exactly match the marketplace registration that Atlassian has for the application. Contact your Atlassian developer advocate to update this registration. Once the registration has been updated you may call this resource for each installation.  Note that the scopes of the application cannot be increased in the new descriptor nor reduced to none.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 func (a *AddonApiService) AddonPut(ctx context.Context) (*http.Response, error) {
 	var (

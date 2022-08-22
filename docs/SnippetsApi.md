@@ -153,23 +153,24 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdCommentsCommentIdPut**
-> SnippetsWorkspaceEncodedIdCommentsCommentIdPut(ctx, commentId, encodedId, workspace)
+> SnippetComment SnippetsWorkspaceEncodedIdCommentsCommentIdPut(ctx, body, commentId, encodedId, workspace)
 Update a comment on a snippet
 
-Updates a comment.  Comments can only be updated by their author.
+Updates a comment.  The only required field in the body is `content.raw`.  Comments can only be updated by their author.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**SnippetComment**](SnippetComment.md)| The contents to update the comment to. | 
   **commentId** | **int32**| The id of the comment. | 
   **encodedId** | **string**| The snippet id. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
 
- (empty response body)
+[**SnippetComment**](snippet_comment.md)
 
 ### Authorization
 
@@ -177,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -212,7 +213,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdCommentsPost**
-> Snippet SnippetsWorkspaceEncodedIdCommentsPost(ctx, body, encodedId, workspace)
+> SnippetComment SnippetsWorkspaceEncodedIdCommentsPost(ctx, body, encodedId, workspace)
 Create a comment on a snippet
 
 Creates a new comment.  The only required field in the body is `content.raw`.  To create a threaded reply to an existing comment, include `parent.id`.
@@ -222,13 +223,13 @@ Creates a new comment.  The only required field in the body is `content.raw`.  T
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**Snippet**](Snippet.md)| The contents of the new comment. | 
+  **body** | [**SnippetComment**](SnippetComment.md)| The contents of the new comment. | 
   **encodedId** | **string**| The snippet id. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
 
-[**Snippet**](snippet.md)
+[**SnippetComment**](snippet_comment.md)
 
 ### Authorization
 
@@ -609,7 +610,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdWatchDelete**
-> PaginatedUsers SnippetsWorkspaceEncodedIdWatchDelete(ctx, encodedId, workspace)
+> SnippetsWorkspaceEncodedIdWatchDelete(ctx, encodedId, workspace)
 Stop watching a snippet
 
 Used to stop watching a specific snippet. Returns 204 (No Content) to indicate success.
@@ -624,7 +625,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedUsers**](paginated_users.md)
+ (empty response body)
 
 ### Authorization
 
@@ -638,7 +639,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdWatchGet**
-> PaginatedUsers SnippetsWorkspaceEncodedIdWatchGet(ctx, encodedId, workspace)
+> SnippetsWorkspaceEncodedIdWatchGet(ctx, encodedId, workspace)
 Check if the current user is watching a snippet
 
 Used to check if the current user is watching a specific snippet.  Returns 204 (No Content) if the user is watching the snippet and 404 if not.  Hitting this endpoint anonymously always returns a 404.
@@ -653,7 +654,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedUsers**](paginated_users.md)
+ (empty response body)
 
 ### Authorization
 
@@ -667,7 +668,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdWatchPut**
-> PaginatedUsers SnippetsWorkspaceEncodedIdWatchPut(ctx, encodedId, workspace)
+> SnippetsWorkspaceEncodedIdWatchPut(ctx, encodedId, workspace)
 Watch a snippet
 
 Used to start watching a specific snippet. Returns 204 (No Content).
@@ -682,7 +683,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedUsers**](paginated_users.md)
+ (empty response body)
 
 ### Authorization
 
@@ -696,7 +697,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdWatchersGet**
-> PaginatedUsers SnippetsWorkspaceEncodedIdWatchersGet(ctx, encodedId, workspace)
+> PaginatedAccounts SnippetsWorkspaceEncodedIdWatchersGet(ctx, encodedId, workspace)
 List users watching a snippet
 
 Returns a paginated list of all users watching a specific snippet.
@@ -711,7 +712,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedUsers**](paginated_users.md)
+[**PaginatedAccounts**](paginated_accounts.md)
 
 ### Authorization
 

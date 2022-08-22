@@ -174,11 +174,6 @@ Class | Method | HTTP request | Description
 *PipelinesApi* | [**UpdateRepositoryPipelineKnownHost**](docs/PipelinesApi.md#updaterepositorypipelineknownhost) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Update a known host
 *PipelinesApi* | [**UpdateRepositoryPipelineSchedule**](docs/PipelinesApi.md#updaterepositorypipelineschedule) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Update a schedule
 *PipelinesApi* | [**UpdateRepositoryPipelineVariable**](docs/PipelinesApi.md#updaterepositorypipelinevariable) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Update a variable for a repository
-*ProjectsApi* | [**TeamsUsernameProjectsGet**](docs/ProjectsApi.md#teamsusernameprojectsget) | **Get** /teams/{username}/projects/ | List a projects for a team
-*ProjectsApi* | [**TeamsUsernameProjectsPost**](docs/ProjectsApi.md#teamsusernameprojectspost) | **Post** /teams/{username}/projects/ | Create a project for a team
-*ProjectsApi* | [**TeamsUsernameProjectsProjectKeyDelete**](docs/ProjectsApi.md#teamsusernameprojectsprojectkeydelete) | **Delete** /teams/{username}/projects/{project_key} | Delete a project
-*ProjectsApi* | [**TeamsUsernameProjectsProjectKeyGet**](docs/ProjectsApi.md#teamsusernameprojectsprojectkeyget) | **Get** /teams/{username}/projects/{project_key} | Get a project
-*ProjectsApi* | [**TeamsUsernameProjectsProjectKeyPut**](docs/ProjectsApi.md#teamsusernameprojectsprojectkeyput) | **Put** /teams/{username}/projects/{project_key} | Update a project
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsPost**](docs/ProjectsApi.md#workspacesworkspaceprojectspost) | **Post** /workspaces/{workspace}/projects | Create a project in a workspace
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDelete**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydelete) | **Delete** /workspaces/{workspace}/projects/{project_key} | Delete a project for a workspace
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeyget) | **Get** /workspaces/{workspace}/projects/{project_key} | Get a project for a workspace
@@ -306,24 +301,10 @@ Class | Method | HTTP request | Description
 *SshApi* | [**UsersSelectedUserSshKeysKeyIdGet**](docs/SshApi.md#usersselectedusersshkeyskeyidget) | **Get** /users/{selected_user}/ssh-keys/{key_id} | Get a SSH key
 *SshApi* | [**UsersSelectedUserSshKeysKeyIdPut**](docs/SshApi.md#usersselectedusersshkeyskeyidput) | **Put** /users/{selected_user}/ssh-keys/{key_id} | Update a SSH key
 *SshApi* | [**UsersSelectedUserSshKeysPost**](docs/SshApi.md#usersselectedusersshkeyspost) | **Post** /users/{selected_user}/ssh-keys | Add a new SSH key
-*TeamsApi* | [**TeamsGet**](docs/TeamsApi.md#teamsget) | **Get** /teams | List teams a user is part of
-*TeamsApi* | [**TeamsUsernameFollowersGet**](docs/TeamsApi.md#teamsusernamefollowersget) | **Get** /teams/{username}/followers | List team followers
-*TeamsApi* | [**TeamsUsernameFollowingGet**](docs/TeamsApi.md#teamsusernamefollowingget) | **Get** /teams/{username}/following | List accounts a team is following
-*TeamsApi* | [**TeamsUsernameGet**](docs/TeamsApi.md#teamsusernameget) | **Get** /teams/{username} | Get a team
-*TeamsApi* | [**TeamsUsernameMembersGet**](docs/TeamsApi.md#teamsusernamemembersget) | **Get** /teams/{username}/members | List team members
-*TeamsApi* | [**TeamsUsernamePermissionsGet**](docs/TeamsApi.md#teamsusernamepermissionsget) | **Get** /teams/{username}/permissions | List team permissions for a user 
-*TeamsApi* | [**TeamsUsernamePermissionsRepositoriesGet**](docs/TeamsApi.md#teamsusernamepermissionsrepositoriesget) | **Get** /teams/{username}/permissions/repositories | List repository permissions for a team
-*TeamsApi* | [**TeamsUsernamePermissionsRepositoriesRepoSlugGet**](docs/TeamsApi.md#teamsusernamepermissionsrepositoriesreposlugget) | **Get** /teams/{username}/permissions/repositories/{repo_slug} | List repository permissions for a team
-*TeamsApi* | [**TeamsWorkspaceRepositoriesGet**](docs/TeamsApi.md#teamsworkspacerepositoriesget) | **Get** /teams/{workspace}/repositories | List workspace repositories
-*TeamsApi* | [**UserPermissionsTeamsGet**](docs/TeamsApi.md#userpermissionsteamsget) | **Get** /user/permissions/teams | List team permissions for the user
-*TeamsApi* | [**UsersWorkspaceRepositoriesGet**](docs/TeamsApi.md#usersworkspacerepositoriesget) | **Get** /users/{workspace}/repositories | List workspace repositories
-*UsersApi* | [**TeamsWorkspaceRepositoriesGet**](docs/UsersApi.md#teamsworkspacerepositoriesget) | **Get** /teams/{workspace}/repositories | List workspace repositories
 *UsersApi* | [**UserEmailsEmailGet**](docs/UsersApi.md#useremailsemailget) | **Get** /user/emails/{email} | Get an email address for current user
 *UsersApi* | [**UserEmailsGet**](docs/UsersApi.md#useremailsget) | **Get** /user/emails | List email addresses for current user
 *UsersApi* | [**UserGet**](docs/UsersApi.md#userget) | **Get** /user | Get current user
 *UsersApi* | [**UsersSelectedUserGet**](docs/UsersApi.md#usersselecteduserget) | **Get** /users/{selected_user} | Get a user
-*UsersApi* | [**UsersUsernameMembersGet**](docs/UsersApi.md#usersusernamemembersget) | **Get** /users/{username}/members | List team users
-*UsersApi* | [**UsersWorkspaceRepositoriesGet**](docs/UsersApi.md#usersworkspacerepositoriesget) | **Get** /users/{workspace}/repositories | List workspace repositories
 *WebhooksApi* | [**HookEventsGet**](docs/WebhooksApi.md#hookeventsget) | **Get** /hook_events | Get a webhook resource
 *WebhooksApi* | [**HookEventsSubjectTypeGet**](docs/WebhooksApi.md#hookeventssubjecttypeget) | **Get** /hook_events/{subject_type} | List subscribable webhook types
 *WebhooksApi* | [**RepositoriesWorkspaceRepoSlugHooksGet**](docs/WebhooksApi.md#repositoriesworkspacereposlughooksget) | **Get** /repositories/{workspace}/{repo_slug}/hooks | List webhooks for a repository
@@ -356,6 +337,7 @@ Class | Method | HTTP request | Description
 
  - [Account](docs/Account.md)
  - [AccountLinks](docs/AccountLinks.md)
+ - [AppUser](docs/AppUser.md)
  - [ApplicationProperty](docs/ApplicationProperty.md)
  - [Author](docs/Author.md)
  - [BaseCommit](docs/BaseCommit.md)
@@ -368,7 +350,9 @@ Class | Method | HTTP request | Description
  - [BranchingModelSettingsDevelopment](docs/BranchingModelSettingsDevelopment.md)
  - [BranchingModelSettingsProduction](docs/BranchingModelSettingsProduction.md)
  - [Branchrestriction](docs/Branchrestriction.md)
+ - [BranchrestrictionLinks](docs/BranchrestrictionLinks.md)
  - [Comment](docs/Comment.md)
+ - [CommentContent](docs/CommentContent.md)
  - [CommentInline](docs/CommentInline.md)
  - [CommentLinks](docs/CommentLinks.md)
  - [Commit](docs/Commit.md)
@@ -420,6 +404,7 @@ Class | Method | HTTP request | Description
  - [ModelError](docs/ModelError.md)
  - [Object](docs/Object.md)
  - [Page](docs/Page.md)
+ - [PaginatedAccounts](docs/PaginatedAccounts.md)
  - [PaginatedAnnotations](docs/PaginatedAnnotations.md)
  - [PaginatedBranches](docs/PaginatedBranches.md)
  - [PaginatedBranchrestrictions](docs/PaginatedBranchrestrictions.md)
@@ -460,10 +445,7 @@ Class | Method | HTTP request | Description
  - [PaginatedSnippets](docs/PaginatedSnippets.md)
  - [PaginatedSshUserKeys](docs/PaginatedSshUserKeys.md)
  - [PaginatedTags](docs/PaginatedTags.md)
- - [PaginatedTeamPermissions](docs/PaginatedTeamPermissions.md)
- - [PaginatedTeams](docs/PaginatedTeams.md)
  - [PaginatedTreeentries](docs/PaginatedTreeentries.md)
- - [PaginatedUsers](docs/PaginatedUsers.md)
  - [PaginatedVersions](docs/PaginatedVersions.md)
  - [PaginatedWebhookSubscriptions](docs/PaginatedWebhookSubscriptions.md)
  - [PaginatedWorkspaceMemberships](docs/PaginatedWorkspaceMemberships.md)
@@ -533,13 +515,11 @@ Class | Method | HTTP request | Description
  - [Ref](docs/Ref.md)
  - [RefLinks](docs/RefLinks.md)
  - [RenderedPullRequestMarkup](docs/RenderedPullRequestMarkup.md)
- - [RenderedPullRequestMarkupTitle](docs/RenderedPullRequestMarkupTitle.md)
  - [Report](docs/Report.md)
  - [ReportAnnotation](docs/ReportAnnotation.md)
  - [ReportData](docs/ReportData.md)
  - [Repository](docs/Repository.md)
  - [RepositoryGroupPermission](docs/RepositoryGroupPermission.md)
- - [RepositoryGroupPermissionLinks](docs/RepositoryGroupPermissionLinks.md)
  - [RepositoryLinks](docs/RepositoryLinks.md)
  - [RepositoryPermission](docs/RepositoryPermission.md)
  - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
@@ -559,9 +539,10 @@ Class | Method | HTTP request | Description
  - [SubjectTypesRepository](docs/SubjectTypesRepository.md)
  - [Tag](docs/Tag.md)
  - [Team](docs/Team.md)
- - [TeamPermission](docs/TeamPermission.md)
+ - [TeamLinks](docs/TeamLinks.md)
  - [Treeentry](docs/Treeentry.md)
  - [User](docs/User.md)
+ - [UserLinks](docs/UserLinks.md)
  - [Version](docs/Version.md)
  - [WebhookSubscription](docs/WebhookSubscription.md)
  - [Workspace](docs/Workspace.md)
@@ -597,30 +578,30 @@ r, err := client.Service.Operation(auth, args)
 - **Flow**: accessCode
 - **Authorization URL**: https://bitbucket.org/site/oauth2/authorize
 - **Scopes**: 
- - **wiki**: Read and modify your repositories&#x27; wikis
- - **pullrequest:write**: Read and modify your repositories and their pull requests
- - **runner**: Access your workspaces/repositories&#x27; runners
- - **runner:write**: Access and edit your workspaces/repositories&#x27; runners
- - **pipeline:variable**: Access your repositories&#x27; build pipelines and configure their variables
- - **project:write**: Read and modify your workspace&#x27;s project settings, and read and transfer repositories within your workspace&#x27;s projects
- - **pipeline:write**: Access and rerun your repositories&#x27; build pipelines
- - **snippet**: Read your snippets
- - **repository:delete**: Delete your repositories
- - **repository:write**: Read and modify your repositories
- - **issue**: Read your repositories&#x27; issues
  - **email**: Read your account&#x27;s primary email address
- - **repository**: Read your repositories
- - **issue:write**: Read and modify your repositories&#x27; issues
- - **webhook**: Read and modify your repositories&#x27; webhooks
- - **pipeline**: Access your repositories&#x27; build pipelines
- - **snippet:write**: Read and modify your snippets
  - **account**: Read your account information
- - **repository:admin**: Administer your repositories
- - **pullrequest**: Read your repositories and their pull requests
- - **project**: Read your workspace&#x27;s project settings and read repositories contained within your workspace&#x27;s projects
+ - **account:write**: Read and modify your account information
  - **team**: Read your team membership information
  - **team:write**: Read and modify your team membership information
- - **account:write**: Read and modify your account information
+ - **repository**: Read your repositories
+ - **repository:write**: Read and modify your repositories
+ - **repository:admin**: Administer your repositories
+ - **repository:delete**: Delete your repositories
+ - **project**: Read your workspace&#x27;s project settings and read repositories contained within your workspace&#x27;s projects
+ - **project:admin**: Read and modify settings for projects in your workspace
+ - **pipeline**: Access your repositories&#x27; build pipelines
+ - **pipeline:write**: Access and rerun your repositories&#x27; build pipelines
+ - **pipeline:variable**: Access your repositories&#x27; build pipelines and configure their variables
+ - **runner**: Access your workspaces/repositories&#x27; runners
+ - **runner:write**: Access and edit your workspaces/repositories&#x27; runners
+ - **issue**: Read your repositories&#x27; issues
+ - **issue:write**: Read and modify your repositories&#x27; issues
+ - **pullrequest**: Read your repositories and their pull requests
+ - **pullrequest:write**: Read and modify your repositories and their pull requests
+ - **snippet**: Read your snippets
+ - **snippet:write**: Read and modify your snippets
+ - **webhook**: Read and modify your repositories&#x27; webhooks
+ - **wiki**: Read and modify your repositories&#x27; wikis
 
 Example
 ```golang

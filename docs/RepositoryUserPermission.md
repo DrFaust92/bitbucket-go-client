@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Permission** | **string** |  | [optional] [default to null]
 **User** | [***User**](user.md) |  | [optional] [default to null]
 **Repository** | [***Repository**](repository.md) |  | [optional] [default to null]
-**Links** | [***RepositoryGroupPermissionLinks**](repository_group_permission_links.md) |  | [optional] [default to null]
+**Links** | [***BranchrestrictionLinks**](branchrestriction_links.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

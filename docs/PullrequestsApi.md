@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugDefaultReviewersGet**
-> RepositoriesWorkspaceRepoSlugDefaultReviewersGet(ctx, repoSlug, workspace)
+> PaginatedAccounts RepositoriesWorkspaceRepoSlugDefaultReviewersGet(ctx, repoSlug, workspace)
 List default reviewers
 
 Returns the repository's default reviewers.  These are the users that are automatically added as reviewers on every new pull request that is created.
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**PaginatedAccounts**](paginated_accounts.md)
 
 ### Authorization
 
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet**
-> RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet(ctx, repoSlug, targetUsername, workspace)
+> Account RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet(ctx, repoSlug, targetUsername, workspace)
 Get a default reviewer
 
 Returns the specified reviewer.  This can be used to test whether a user is among the repository's default reviewers list. A 404 indicates that that specified user is not a default reviewer.
@@ -187,7 +187,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**Account**](account.md)
 
 ### Authorization
 
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePut**
-> RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePut(ctx, repoSlug, targetUsername, workspace)
+> Account RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePut(ctx, repoSlug, targetUsername, workspace)
 Add a user to the default reviewers
 
 Adds the specified user to the repository's list of default reviewers.  This method is idempotent. Adding a user a second time has no effect.
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**Account**](account.md)
 
 ### Authorization
 

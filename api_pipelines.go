@@ -29,11 +29,12 @@ type PipelinesApiService service
 /*
 PipelinesApiService Create a variable for an environment
 Create a deployment environment level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The variable to create
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param environmentUuid The environment.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The variable to create
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param environmentUuid The environment.
+
 @return DeploymentVariable
 */
 func (a *PipelinesApiService) CreateDeploymentVariable(ctx context.Context, body DeploymentVariable, workspace string, repoSlug string, environmentUuid string) (DeploymentVariable, *http.Response, error) {
@@ -142,10 +143,11 @@ func (a *PipelinesApiService) CreateDeploymentVariable(ctx context.Context, body
 /*
 PipelinesApiService Run a pipeline
 Endpoint to create and initiate a pipeline. There are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated. # Trigger a Pipeline for a branch One way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. The specified branch will be used to determine which pipeline definition from the &#x60;bitbucket-pipelines.yml&#x60; file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.  ### Example  &#x60;&#x60;&#x60; $ curl -X POST -is -u username:password \\   -H &#x27;Content-Type: application/json&#x27; \\  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\   -d &#x27;   {     \&quot;target\&quot;: {       \&quot;ref_type\&quot;: \&quot;branch\&quot;,       \&quot;type\&quot;: \&quot;pipeline_ref_target\&quot;,       \&quot;ref_name\&quot;: \&quot;master\&quot;     }   }&#x27; &#x60;&#x60;&#x60; # Trigger a Pipeline for a commit on a branch or tag You can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark). The specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.  The following reference types are supported:  * &#x60;branch&#x60; * &#x60;named_branch&#x60; * &#x60;bookmark&#x60;  * &#x60;tag&#x60;  ### Example  &#x60;&#x60;&#x60; $ curl -X POST -is -u username:password \\   -H &#x27;Content-Type: application/json&#x27; \\   https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\   -d &#x27;   {     \&quot;target\&quot;: {       \&quot;commit\&quot;: {         \&quot;type\&quot;: \&quot;commit\&quot;,         \&quot;hash\&quot;: \&quot;ce5b7431602f7cbba007062eeb55225c6e18e956\&quot;       },       \&quot;ref_type\&quot;: \&quot;branch\&quot;,       \&quot;type\&quot;: \&quot;pipeline_ref_target\&quot;,       \&quot;ref_name\&quot;: \&quot;master\&quot;     }   }&#x27; &#x60;&#x60;&#x60; # Trigger a specific pipeline definition for a commit You can trigger a specific pipeline that is defined in your &#x60;bitbucket-pipelines.yml&#x60; file for a specific commit. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.  ### Example  &#x60;&#x60;&#x60; $ curl -X POST -is -u username:password \\   -H &#x27;Content-Type: application/json&#x27; \\  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\  -d &#x27;   {      \&quot;target\&quot;: {       \&quot;commit\&quot;: {          \&quot;hash\&quot;:\&quot;a3c4e02c9a3755eccdc3764e6ea13facdf30f923\&quot;,          \&quot;type\&quot;:\&quot;commit\&quot;        },         \&quot;selector\&quot;: {            \&quot;type\&quot;:\&quot;custom\&quot;,               \&quot;pattern\&quot;:\&quot;Deploy to production\&quot;           },         \&quot;type\&quot;:\&quot;pipeline_commit_target\&quot;    }   }&#x27; &#x60;&#x60;&#x60; # Trigger a specific pipeline definition for a commit on a branch or tag You can trigger a specific pipeline that is defined in your &#x60;bitbucket-pipelines.yml&#x60; file for a specific commit in the context of a specified reference. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.  ### Example  &#x60;&#x60;&#x60; $ curl -X POST -is -u username:password \\   -H &#x27;Content-Type: application/json&#x27; \\  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\  -d &#x27;   {      \&quot;target\&quot;: {       \&quot;commit\&quot;: {          \&quot;hash\&quot;:\&quot;a3c4e02c9a3755eccdc3764e6ea13facdf30f923\&quot;,          \&quot;type\&quot;:\&quot;commit\&quot;        },        \&quot;selector\&quot;: {           \&quot;type\&quot;: \&quot;custom\&quot;,           \&quot;pattern\&quot;: \&quot;Deploy to production\&quot;        },        \&quot;type\&quot;: \&quot;pipeline_ref_target\&quot;,        \&quot;ref_name\&quot;: \&quot;master\&quot;,        \&quot;ref_type\&quot;: \&quot;branch\&quot;      }   }&#x27; &#x60;&#x60;&#x60;   # Trigger a custom pipeline with variables In addition to triggering a custom pipeline that is defined in your &#x60;bitbucket-pipelines.yml&#x60; file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).  ### Example  &#x60;&#x60;&#x60; $ curl -X POST -is -u username:password \\   -H &#x27;Content-Type: application/json&#x27; \\  https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\  -d &#x27;   {     \&quot;target\&quot;: {       \&quot;type\&quot;: \&quot;pipeline_ref_target\&quot;,       \&quot;ref_type\&quot;: \&quot;branch\&quot;,       \&quot;ref_name\&quot;: \&quot;master\&quot;,       \&quot;selector\&quot;: {         \&quot;type\&quot;: \&quot;custom\&quot;,         \&quot;pattern\&quot;: \&quot;Deploy to production\&quot;       }     },     \&quot;variables\&quot;: [       {         \&quot;key\&quot;: \&quot;var1key\&quot;,         \&quot;value\&quot;: \&quot;var1value\&quot;,         \&quot;secured\&quot;: true       },       {         \&quot;key\&quot;: \&quot;var2key\&quot;,         \&quot;value\&quot;: \&quot;var2value\&quot;       }     ]   }&#x27; &#x60;&#x60;&#x60;  # Trigger a pull request pipeline  You can also initiate a pipeline for a specific pull request.  ### Example  &#x60;&#x60;&#x60; $ curl -X POST -is -u username:password \\   -H &#x27;Content-Type: application/json&#x27; \\  https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\  -d &#x27;   {  \&quot;target\&quot;: {       \&quot;type\&quot;: \&quot;pipeline_pullrequest_target\&quot;,    \&quot;source\&quot;: \&quot;pull-request-branch\&quot;,       \&quot;destination\&quot;: \&quot;master\&quot;,       \&quot;destination_commit\&quot;: {         \&quot;hash\&quot; : \&quot;9f848b7\&quot;       },       \&quot;commit\&quot;: {        \&quot;hash\&quot; : \&quot;1a372fc\&quot;       },       \&quot;pullrequest\&quot; : {        \&quot;id\&quot; : \&quot;3\&quot;       },    \&quot;selector\&quot;: {         \&quot;type\&quot;: \&quot;pull-requests\&quot;,         \&quot;pattern\&quot;: \&quot;**\&quot;       }     }   }&#x27; &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The pipeline to initiate.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The pipeline to initiate.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return Pipeline
 */
 func (a *PipelinesApiService) CreatePipelineForRepository(ctx context.Context, body Pipeline, workspace string, repoSlug string) (Pipeline, *http.Response, error) {
@@ -224,7 +226,7 @@ func (a *PipelinesApiService) CreatePipelineForRepository(ctx context.Context, b
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 404 {
+		if localVarHttpResponse.StatusCode == 400 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -234,7 +236,7 @@ func (a *PipelinesApiService) CreatePipelineForRepository(ctx context.Context, b
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 400 {
+		if localVarHttpResponse.StatusCode == 404 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -610,10 +612,11 @@ func (a *PipelinesApiService) CreatePipelineVariableForWorkspace(ctx context.Con
 /*
 PipelinesApiService Create a known host
 Create a repository level known host.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The known host to create.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The known host to create.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelineKnownHost
 */
 func (a *PipelinesApiService) CreateRepositoryPipelineKnownHost(ctx context.Context, body PipelineKnownHost, workspace string, repoSlug string) (PipelineKnownHost, *http.Response, error) {
@@ -721,10 +724,11 @@ func (a *PipelinesApiService) CreateRepositoryPipelineKnownHost(ctx context.Cont
 /*
 PipelinesApiService Create a schedule
 Create a schedule for the given repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The schedule to create.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The schedule to create.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelineSchedule
 */
 func (a *PipelinesApiService) CreateRepositoryPipelineSchedule(ctx context.Context, body PipelineSchedule, workspace string, repoSlug string) (PipelineSchedule, *http.Response, error) {
@@ -803,7 +807,7 @@ func (a *PipelinesApiService) CreateRepositoryPipelineSchedule(ctx context.Conte
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 404 {
+		if localVarHttpResponse.StatusCode == 400 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -823,7 +827,7 @@ func (a *PipelinesApiService) CreateRepositoryPipelineSchedule(ctx context.Conte
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 400 {
+		if localVarHttpResponse.StatusCode == 404 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -842,10 +846,11 @@ func (a *PipelinesApiService) CreateRepositoryPipelineSchedule(ctx context.Conte
 /*
 PipelinesApiService Create a variable for a repository
 Create a repository level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The variable to create.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The variable to create.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) CreateRepositoryPipelineVariable(ctx context.Context, body PipelineVariable, workspace string, repoSlug string) (PipelineVariable, *http.Response, error) {
@@ -953,12 +958,11 @@ func (a *PipelinesApiService) CreateRepositoryPipelineVariable(ctx context.Conte
 /*
 PipelinesApiService Delete a variable for an environment
 Delete a deployment environment level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param environmentUuid The environment.
- * @param variableUuid The UUID of the variable to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param environmentUuid The environment.
+  - @param variableUuid The UUID of the variable to delete.
 */
 func (a *PipelinesApiService) DeleteDeploymentVariable(ctx context.Context, workspace string, repoSlug string, environmentUuid string, variableUuid string) (*http.Response, error) {
 	var (
@@ -1036,10 +1040,9 @@ func (a *PipelinesApiService) DeleteDeploymentVariable(ctx context.Context, work
 /*
 PipelinesApiService Delete a variable for a team
 Delete a team level variable. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username The account.
- * @param variableUuid The UUID of the variable to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username The account.
+  - @param variableUuid The UUID of the variable to delete.
 */
 func (a *PipelinesApiService) DeletePipelineVariableForTeam(ctx context.Context, username string, variableUuid string) (*http.Response, error) {
 	var (
@@ -1115,10 +1118,9 @@ func (a *PipelinesApiService) DeletePipelineVariableForTeam(ctx context.Context,
 /*
 PipelinesApiService Delete a variable for a user
 Delete an account level variable. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param variableUuid The UUID of the variable to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param variableUuid The UUID of the variable to delete.
 */
 func (a *PipelinesApiService) DeletePipelineVariableForUser(ctx context.Context, selectedUser string, variableUuid string) (*http.Response, error) {
 	var (
@@ -1194,10 +1196,9 @@ func (a *PipelinesApiService) DeletePipelineVariableForUser(ctx context.Context,
 /*
 PipelinesApiService Delete a variable for a workspace
 Delete a workspace level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param variableUuid The UUID of the variable to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param variableUuid The UUID of the variable to delete.
 */
 func (a *PipelinesApiService) DeletePipelineVariableForWorkspace(ctx context.Context, workspace string, variableUuid string) (*http.Response, error) {
 	var (
@@ -1273,11 +1274,10 @@ func (a *PipelinesApiService) DeletePipelineVariableForWorkspace(ctx context.Con
 /*
 PipelinesApiService Delete a cache
 Delete a repository cache.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The account.
- * @param repoSlug The repository.
- * @param cacheUuid The UUID of the cache to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The account.
+  - @param repoSlug The repository.
+  - @param cacheUuid The UUID of the cache to delete.
 */
 func (a *PipelinesApiService) DeleteRepositoryPipelineCache(ctx context.Context, workspace string, repoSlug string, cacheUuid string) (*http.Response, error) {
 	var (
@@ -1354,10 +1354,9 @@ func (a *PipelinesApiService) DeleteRepositoryPipelineCache(ctx context.Context,
 /*
 PipelinesApiService Delete SSH key pair
 Delete the repository SSH key pair.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
 */
 func (a *PipelinesApiService) DeleteRepositoryPipelineKeyPair(ctx context.Context, workspace string, repoSlug string) (*http.Response, error) {
 	var (
@@ -1433,11 +1432,10 @@ func (a *PipelinesApiService) DeleteRepositoryPipelineKeyPair(ctx context.Contex
 /*
 PipelinesApiService Delete a known host
 Delete a repository level known host.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param knownHostUuid The UUID of the known host to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param knownHostUuid The UUID of the known host to delete.
 */
 func (a *PipelinesApiService) DeleteRepositoryPipelineKnownHost(ctx context.Context, workspace string, repoSlug string, knownHostUuid string) (*http.Response, error) {
 	var (
@@ -1514,11 +1512,10 @@ func (a *PipelinesApiService) DeleteRepositoryPipelineKnownHost(ctx context.Cont
 /*
 PipelinesApiService Delete a schedule
 Delete a schedule.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param scheduleUuid The uuid of the schedule.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param scheduleUuid The uuid of the schedule.
 */
 func (a *PipelinesApiService) DeleteRepositoryPipelineSchedule(ctx context.Context, workspace string, repoSlug string, scheduleUuid string) (*http.Response, error) {
 	var (
@@ -1595,11 +1592,10 @@ func (a *PipelinesApiService) DeleteRepositoryPipelineSchedule(ctx context.Conte
 /*
 PipelinesApiService Delete a variable for a repository
 Delete a repository level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param variableUuid The UUID of the variable to delete.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param variableUuid The UUID of the variable to delete.
 */
 func (a *PipelinesApiService) DeleteRepositoryPipelineVariable(ctx context.Context, workspace string, repoSlug string, variableUuid string) (*http.Response, error) {
 	var (
@@ -1676,10 +1672,11 @@ func (a *PipelinesApiService) DeleteRepositoryPipelineVariable(ctx context.Conte
 /*
 PipelinesApiService List variables for an environment
 Find deployment environment level variables.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param environmentUuid The environment.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param environmentUuid The environment.
+
 @return PaginatedDeploymentVariable
 */
 func (a *PipelinesApiService) GetDeploymentVariables(ctx context.Context, workspace string, repoSlug string, environmentUuid string) (PaginatedDeploymentVariable, *http.Response, error) {
@@ -1766,9 +1763,8 @@ func (a *PipelinesApiService) GetDeploymentVariables(ctx context.Context, worksp
 /*
 PipelinesApiService Get OpenID configuration for OIDC in Pipelines
 This is part of OpenID Connect for Pipelines, see https://support.atlassian.com/bitbucket-cloud/docs/integrate-pipelines-with-resource-servers-using-oidc/
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
 */
 func (a *PipelinesApiService) GetOIDCConfiguration(ctx context.Context, workspace string) (*http.Response, error) {
 	var (
@@ -1843,9 +1839,8 @@ func (a *PipelinesApiService) GetOIDCConfiguration(ctx context.Context, workspac
 /*
 PipelinesApiService Get keys for OIDC in Pipelines
 This is part of OpenID Connect for Pipelines, see https://support.atlassian.com/bitbucket-cloud/docs/integrate-pipelines-with-resource-servers-using-oidc/
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
 */
 func (a *PipelinesApiService) GetOIDCKeys(ctx context.Context, workspace string) (*http.Response, error) {
 	var (
@@ -1920,13 +1915,12 @@ func (a *PipelinesApiService) GetOIDCKeys(ctx context.Context, workspace string)
 /*
 PipelinesApiService Get the logs for the build container or a service container for a given step of a pipeline.
 Retrieve the log file for a build container or service container.  This endpoint supports (and encourages!) the use of [HTTP Range requests](https://tools.ietf.org/html/rfc7233) to deal with potentially very large log files.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
- * @param stepUuid The UUID of the step.
- * @param logUuid For the main build container specify the step UUID; for a service container specify the service container UUID
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+  - @param stepUuid The UUID of the step.
+  - @param logUuid For the main build container specify the step UUID; for a service container specify the service container UUID
 */
 func (a *PipelinesApiService) GetPipelineContainerLog(ctx context.Context, workspace string, repoSlug string, pipelineUuid string, stepUuid string, logUuid string) (*http.Response, error) {
 	var (
@@ -2005,10 +1999,11 @@ func (a *PipelinesApiService) GetPipelineContainerLog(ctx context.Context, works
 /*
 PipelinesApiService Get a pipeline
 Retrieve a specified pipeline
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The pipeline UUID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The pipeline UUID.
+
 @return Pipeline
 */
 func (a *PipelinesApiService) GetPipelineForRepository(ctx context.Context, workspace string, repoSlug string, pipelineUuid string) (Pipeline, *http.Response, error) {
@@ -2105,11 +2100,12 @@ func (a *PipelinesApiService) GetPipelineForRepository(ctx context.Context, work
 /*
 PipelinesApiService Get a step of a pipeline
 Retrieve a given step of a pipeline.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
- * @param stepUuid The UUID of the step.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+  - @param stepUuid The UUID of the step.
+
 @return PipelineStep
 */
 func (a *PipelinesApiService) GetPipelineStepForRepository(ctx context.Context, workspace string, repoSlug string, pipelineUuid string, stepUuid string) (PipelineStep, *http.Response, error) {
@@ -2207,12 +2203,11 @@ func (a *PipelinesApiService) GetPipelineStepForRepository(ctx context.Context, 
 /*
 PipelinesApiService Get log file for a step
 Retrieve the log file for a given step of a pipeline.  This endpoint supports (and encourages!) the use of [HTTP Range requests](https://tools.ietf.org/html/rfc7233) to deal with potentially very large log files.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
- * @param stepUuid The UUID of the step.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+  - @param stepUuid The UUID of the step.
 */
 func (a *PipelinesApiService) GetPipelineStepLogForRepository(ctx context.Context, workspace string, repoSlug string, pipelineUuid string, stepUuid string) (*http.Response, error) {
 	var (
@@ -2271,7 +2266,7 @@ func (a *PipelinesApiService) GetPipelineStepLogForRepository(ctx context.Contex
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 416 {
+		if localVarHttpResponse.StatusCode == 304 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2291,7 +2286,7 @@ func (a *PipelinesApiService) GetPipelineStepLogForRepository(ctx context.Contex
 			newErr.model = v
 			return localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 304 {
+		if localVarHttpResponse.StatusCode == 416 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -2310,10 +2305,11 @@ func (a *PipelinesApiService) GetPipelineStepLogForRepository(ctx context.Contex
 /*
 PipelinesApiService List steps for a pipeline
 Find steps for the given pipeline.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+
 @return PaginatedPipelineSteps
 */
 func (a *PipelinesApiService) GetPipelineStepsForRepository(ctx context.Context, workspace string, repoSlug string, pipelineUuid string) (PaginatedPipelineSteps, *http.Response, error) {
@@ -2399,13 +2395,12 @@ func (a *PipelinesApiService) GetPipelineStepsForRepository(ctx context.Context,
 
 /*
 PipelinesApiService Get test case reasons (output) for a given test case in a step of a pipeline.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
- * @param stepUuid The UUID of the step.
- * @param testCaseUuid The UUID of the test case.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+  - @param stepUuid The UUID of the step.
+  - @param testCaseUuid The UUID of the test case.
 */
 func (a *PipelinesApiService) GetPipelineTestReportTestCaseReasons(ctx context.Context, workspace string, repoSlug string, pipelineUuid string, stepUuid string, testCaseUuid string) (*http.Response, error) {
 	var (
@@ -2483,12 +2478,11 @@ func (a *PipelinesApiService) GetPipelineTestReportTestCaseReasons(ctx context.C
 
 /*
 PipelinesApiService Get test cases for a given step of a pipeline.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
- * @param stepUuid The UUID of the step.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+  - @param stepUuid The UUID of the step.
 */
 func (a *PipelinesApiService) GetPipelineTestReportTestCases(ctx context.Context, workspace string, repoSlug string, pipelineUuid string, stepUuid string) (*http.Response, error) {
 	var (
@@ -2565,12 +2559,11 @@ func (a *PipelinesApiService) GetPipelineTestReportTestCases(ctx context.Context
 
 /*
 PipelinesApiService Get a summary of test reports for a given step of a pipeline.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
- * @param stepUuid The UUID of the step.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
+  - @param stepUuid The UUID of the step.
 */
 func (a *PipelinesApiService) GetPipelineTestReports(ctx context.Context, workspace string, repoSlug string, pipelineUuid string, stepUuid string) (*http.Response, error) {
 	var (
@@ -2648,9 +2641,10 @@ func (a *PipelinesApiService) GetPipelineTestReports(ctx context.Context, worksp
 /*
 PipelinesApiService Get a variable for a team
 Retrieve a team level variable. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username The account.
- * @param variableUuid The UUID of the variable to retrieve.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username The account.
+  - @param variableUuid The UUID of the variable to retrieve.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) GetPipelineVariableForTeam(ctx context.Context, username string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -2746,9 +2740,10 @@ func (a *PipelinesApiService) GetPipelineVariableForTeam(ctx context.Context, us
 /*
 PipelinesApiService Get a variable for a user
 Retrieve a user level variable. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param variableUuid The UUID of the variable to retrieve.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param variableUuid The UUID of the variable to retrieve.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) GetPipelineVariableForUser(ctx context.Context, selectedUser string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -2844,9 +2839,10 @@ func (a *PipelinesApiService) GetPipelineVariableForUser(ctx context.Context, se
 /*
 PipelinesApiService Get variable for a workspace
 Retrieve a workspace level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param variableUuid The UUID of the variable to retrieve.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param variableUuid The UUID of the variable to retrieve.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) GetPipelineVariableForWorkspace(ctx context.Context, workspace string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -2942,8 +2938,9 @@ func (a *PipelinesApiService) GetPipelineVariableForWorkspace(ctx context.Contex
 /*
 PipelinesApiService List variables for an account
 Find account level variables. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username The account.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username The account.
+
 @return PaginatedPipelineVariables
 */
 func (a *PipelinesApiService) GetPipelineVariablesForTeam(ctx context.Context, username string) (PaginatedPipelineVariables, *http.Response, error) {
@@ -3028,8 +3025,9 @@ func (a *PipelinesApiService) GetPipelineVariablesForTeam(ctx context.Context, u
 /*
 PipelinesApiService List variables for a user
 Find user level variables. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+
 @return PaginatedPipelineVariables
 */
 func (a *PipelinesApiService) GetPipelineVariablesForUser(ctx context.Context, selectedUser string) (PaginatedPipelineVariables, *http.Response, error) {
@@ -3114,8 +3112,9 @@ func (a *PipelinesApiService) GetPipelineVariablesForUser(ctx context.Context, s
 /*
 PipelinesApiService List variables for a workspace
 Find workspace level variables.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedPipelineVariables
 */
 func (a *PipelinesApiService) GetPipelineVariablesForWorkspace(ctx context.Context, workspace string) (PaginatedPipelineVariables, *http.Response, error) {
@@ -3200,9 +3199,10 @@ func (a *PipelinesApiService) GetPipelineVariablesForWorkspace(ctx context.Conte
 /*
 PipelinesApiService List pipelines
 Find pipelines
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PaginatedPipelines
 */
 func (a *PipelinesApiService) GetPipelinesForRepository(ctx context.Context, workspace string, repoSlug string) (PaginatedPipelines, *http.Response, error) {
@@ -3288,10 +3288,11 @@ func (a *PipelinesApiService) GetPipelinesForRepository(ctx context.Context, wor
 /*
 PipelinesApiService Get cache content URI
 Retrieve the URI of the content of the specified cache.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The account.
- * @param repoSlug The repository.
- * @param cacheUuid The UUID of the cache.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The account.
+  - @param repoSlug The repository.
+  - @param cacheUuid The UUID of the cache.
+
 @return PipelineCacheContentUri
 */
 func (a *PipelinesApiService) GetRepositoryPipelineCacheContentURI(ctx context.Context, workspace string, repoSlug string, cacheUuid string) (PipelineCacheContentUri, *http.Response, error) {
@@ -3388,9 +3389,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineCacheContentURI(ctx context.C
 /*
 PipelinesApiService List caches
 Retrieve the repository pipelines caches.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The account.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The account.
+  - @param repoSlug The repository.
+
 @return PaginatedPipelineCaches
 */
 func (a *PipelinesApiService) GetRepositoryPipelineCaches(ctx context.Context, workspace string, repoSlug string) (PaginatedPipelineCaches, *http.Response, error) {
@@ -3486,9 +3488,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineCaches(ctx context.Context, w
 /*
 PipelinesApiService Get configuration
 Retrieve the repository pipelines configuration.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The account.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The account.
+  - @param repoSlug The repository.
+
 @return PipelinesConfig
 */
 func (a *PipelinesApiService) GetRepositoryPipelineConfig(ctx context.Context, workspace string, repoSlug string) (PipelinesConfig, *http.Response, error) {
@@ -3574,10 +3577,11 @@ func (a *PipelinesApiService) GetRepositoryPipelineConfig(ctx context.Context, w
 /*
 PipelinesApiService Get a known host
 Retrieve a repository level known host.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param knownHostUuid The UUID of the known host to retrieve.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param knownHostUuid The UUID of the known host to retrieve.
+
 @return PipelineKnownHost
 */
 func (a *PipelinesApiService) GetRepositoryPipelineKnownHost(ctx context.Context, workspace string, repoSlug string, knownHostUuid string) (PipelineKnownHost, *http.Response, error) {
@@ -3674,9 +3678,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineKnownHost(ctx context.Context
 /*
 PipelinesApiService List known hosts
 Find repository level known hosts.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PaginatedPipelineKnownHosts
 */
 func (a *PipelinesApiService) GetRepositoryPipelineKnownHosts(ctx context.Context, workspace string, repoSlug string) (PaginatedPipelineKnownHosts, *http.Response, error) {
@@ -3762,10 +3767,11 @@ func (a *PipelinesApiService) GetRepositoryPipelineKnownHosts(ctx context.Contex
 /*
 PipelinesApiService Get a schedule
 Retrieve a schedule by its UUID.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param scheduleUuid The uuid of the schedule.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param scheduleUuid The uuid of the schedule.
+
 @return PipelineSchedule
 */
 func (a *PipelinesApiService) GetRepositoryPipelineSchedule(ctx context.Context, workspace string, repoSlug string, scheduleUuid string) (PipelineSchedule, *http.Response, error) {
@@ -3862,10 +3868,11 @@ func (a *PipelinesApiService) GetRepositoryPipelineSchedule(ctx context.Context,
 /*
 PipelinesApiService List executions of a schedule
 Retrieve the executions of a given schedule.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param scheduleUuid The uuid of the schedule.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param scheduleUuid The uuid of the schedule.
+
 @return PaginatedPipelineScheduleExecutions
 */
 func (a *PipelinesApiService) GetRepositoryPipelineScheduleExecutions(ctx context.Context, workspace string, repoSlug string, scheduleUuid string) (PaginatedPipelineScheduleExecutions, *http.Response, error) {
@@ -3962,9 +3969,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineScheduleExecutions(ctx contex
 /*
 PipelinesApiService List schedules
 Retrieve the configured schedules for the given repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PaginatedPipelineSchedules
 */
 func (a *PipelinesApiService) GetRepositoryPipelineSchedules(ctx context.Context, workspace string, repoSlug string) (PaginatedPipelineSchedules, *http.Response, error) {
@@ -4060,9 +4068,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineSchedules(ctx context.Context
 /*
 PipelinesApiService Get SSH key pair
 Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelineSshKeyPair
 */
 func (a *PipelinesApiService) GetRepositoryPipelineSshKeyPair(ctx context.Context, workspace string, repoSlug string) (PipelineSshKeyPair, *http.Response, error) {
@@ -4158,10 +4167,11 @@ func (a *PipelinesApiService) GetRepositoryPipelineSshKeyPair(ctx context.Contex
 /*
 PipelinesApiService Get a variable for a repository
 Retrieve a repository level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param variableUuid The UUID of the variable to retrieve.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param variableUuid The UUID of the variable to retrieve.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) GetRepositoryPipelineVariable(ctx context.Context, workspace string, repoSlug string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -4258,9 +4268,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineVariable(ctx context.Context,
 /*
 PipelinesApiService List variables for a repository
 Find repository level variables.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PaginatedPipelineVariables
 */
 func (a *PipelinesApiService) GetRepositoryPipelineVariables(ctx context.Context, workspace string, repoSlug string) (PaginatedPipelineVariables, *http.Response, error) {
@@ -4346,11 +4357,10 @@ func (a *PipelinesApiService) GetRepositoryPipelineVariables(ctx context.Context
 /*
 PipelinesApiService Stop a pipeline
 Signal the stop of a pipeline and all of its steps that not have completed yet.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param pipelineUuid The UUID of the pipeline.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param pipelineUuid The UUID of the pipeline.
 */
 func (a *PipelinesApiService) StopPipeline(ctx context.Context, workspace string, repoSlug string, pipelineUuid string) (*http.Response, error) {
 	var (
@@ -4437,12 +4447,13 @@ func (a *PipelinesApiService) StopPipeline(ctx context.Context, workspace string
 /*
 PipelinesApiService Update a variable for an environment
 Update a deployment environment level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated deployment variable.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param environmentUuid The environment.
- * @param variableUuid The UUID of the variable to update.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated deployment variable.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param environmentUuid The environment.
+  - @param variableUuid The UUID of the variable to update.
+
 @return DeploymentVariable
 */
 func (a *PipelinesApiService) UpdateDeploymentVariable(ctx context.Context, body DeploymentVariable, workspace string, repoSlug string, environmentUuid string, variableUuid string) (DeploymentVariable, *http.Response, error) {
@@ -4542,10 +4553,11 @@ func (a *PipelinesApiService) UpdateDeploymentVariable(ctx context.Context, body
 /*
 PipelinesApiService Update a variable for a team
 Update a team level variable. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated variable.
- * @param username The account.
- * @param variableUuid The UUID of the variable.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated variable.
+  - @param username The account.
+  - @param variableUuid The UUID of the variable.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) UpdatePipelineVariableForTeam(ctx context.Context, body PipelineVariable, username string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -4643,10 +4655,11 @@ func (a *PipelinesApiService) UpdatePipelineVariableForTeam(ctx context.Context,
 /*
 PipelinesApiService Update a variable for a user
 Update a user level variable. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated variable.
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param variableUuid The UUID of the variable.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated variable.
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param variableUuid The UUID of the variable.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) UpdatePipelineVariableForUser(ctx context.Context, body PipelineVariable, selectedUser string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -4744,10 +4757,11 @@ func (a *PipelinesApiService) UpdatePipelineVariableForUser(ctx context.Context,
 /*
 PipelinesApiService Update variable for a workspace
 Update a workspace level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated variable.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param variableUuid The UUID of the variable.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated variable.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param variableUuid The UUID of the variable.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) UpdatePipelineVariableForWorkspace(ctx context.Context, body PipelineVariable, workspace string, variableUuid string) (PipelineVariable, *http.Response, error) {
@@ -4845,10 +4859,11 @@ func (a *PipelinesApiService) UpdatePipelineVariableForWorkspace(ctx context.Con
 /*
 PipelinesApiService Update the next build number
 Update the next build number that should be assigned to a pipeline. The next build number that will be configured has to be strictly higher than the current latest build number for this repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The build number to update.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The build number to update.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelineBuildNumber
 */
 func (a *PipelinesApiService) UpdateRepositoryBuildNumber(ctx context.Context, body PipelineBuildNumber, workspace string, repoSlug string) (PipelineBuildNumber, *http.Response, error) {
@@ -4956,10 +4971,11 @@ func (a *PipelinesApiService) UpdateRepositoryBuildNumber(ctx context.Context, b
 /*
 PipelinesApiService Update configuration
 Update the pipelines configuration for a repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated repository pipelines configuration.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated repository pipelines configuration.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelinesConfig
 */
 func (a *PipelinesApiService) UpdateRepositoryPipelineConfig(ctx context.Context, body PipelinesConfig, workspace string, repoSlug string) (PipelinesConfig, *http.Response, error) {
@@ -5047,10 +5063,11 @@ func (a *PipelinesApiService) UpdateRepositoryPipelineConfig(ctx context.Context
 /*
 PipelinesApiService Update SSH key pair
 Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The created or updated SSH key pair.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The created or updated SSH key pair.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+
 @return PipelineSshKeyPair
 */
 func (a *PipelinesApiService) UpdateRepositoryPipelineKeyPair(ctx context.Context, body PipelineSshKeyPair, workspace string, repoSlug string) (PipelineSshKeyPair, *http.Response, error) {
@@ -5148,11 +5165,12 @@ func (a *PipelinesApiService) UpdateRepositoryPipelineKeyPair(ctx context.Contex
 /*
 PipelinesApiService Update a known host
 Update a repository level known host.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated known host.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param knownHostUuid The UUID of the known host to update.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated known host.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param knownHostUuid The UUID of the known host to update.
+
 @return PipelineKnownHost
 */
 func (a *PipelinesApiService) UpdateRepositoryPipelineKnownHost(ctx context.Context, body PipelineKnownHost, workspace string, repoSlug string, knownHostUuid string) (PipelineKnownHost, *http.Response, error) {
@@ -5251,11 +5269,12 @@ func (a *PipelinesApiService) UpdateRepositoryPipelineKnownHost(ctx context.Cont
 /*
 PipelinesApiService Update a schedule
 Update a schedule.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The schedule to update.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param scheduleUuid The uuid of the schedule.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The schedule to update.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param scheduleUuid The uuid of the schedule.
+
 @return PipelineSchedule
 */
 func (a *PipelinesApiService) UpdateRepositoryPipelineSchedule(ctx context.Context, body PipelineSchedule, workspace string, repoSlug string, scheduleUuid string) (PipelineSchedule, *http.Response, error) {
@@ -5354,11 +5373,12 @@ func (a *PipelinesApiService) UpdateRepositoryPipelineSchedule(ctx context.Conte
 /*
 PipelinesApiService Update a variable for a repository
 Update a repository level variable.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The updated variable
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
- * @param repoSlug The repository.
- * @param variableUuid The UUID of the variable to update.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated variable
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param repoSlug The repository.
+  - @param variableUuid The UUID of the variable to update.
+
 @return PipelineVariable
 */
 func (a *PipelinesApiService) UpdateRepositoryPipelineVariable(ctx context.Context, body PipelineVariable, workspace string, repoSlug string, variableUuid string) (PipelineVariable, *http.Response, error) {

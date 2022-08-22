@@ -10,8 +10,8 @@
 package bitbucket
 
 type Branchrestriction struct {
-	Type_ string                          `json:"type"`
-	Links *RepositoryGroupPermissionLinks `json:"links,omitempty"`
+	Type_ string                  `json:"type"`
+	Links *BranchrestrictionLinks `json:"links,omitempty"`
 	// The branch restriction status' id.
 	Id int32 `json:"id,omitempty"`
 	// The type of restriction that is being applied.
@@ -24,6 +24,6 @@ type Branchrestriction struct {
 	Pattern string    `json:"pattern"`
 	Users   []Account `json:"users,omitempty"`
 	Groups  []Group   `json:"groups,omitempty"`
-	// <staticmethod object at 0x7f8da5b03a50>
+	// <staticmethod object at 0x7fda69f5d690>
 	Value int32 `json:"value,omitempty"`
 }

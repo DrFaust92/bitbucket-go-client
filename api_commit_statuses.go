@@ -29,11 +29,12 @@ type CommitStatusesApiService service
 /*
 CommitStatusesApiService Get a build status for a commit
 Returns the specified build status for a commit.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param commit The commit&#x27;s SHA1.
- * @param key The build status&#x27; unique key
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param commit The commit&#x27;s SHA1.
+  - @param key The build status&#x27; unique key
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return Commitstatus
 */
 func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildKeyGet(ctx context.Context, commit string, key string, repoSlug string, workspace string) (Commitstatus, *http.Response, error) {

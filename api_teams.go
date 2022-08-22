@@ -146,8 +146,9 @@ func (a *TeamsApiService) TeamsGet(ctx context.Context, localVarOptionals *Teams
 /*
 TeamsApiService List team followers
 Returns the list of accounts that are following this team.  **This endpoint has been removed. There is no replacement endpoint. For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+
 @return PaginatedUsers
 */
 func (a *TeamsApiService) TeamsUsernameFollowersGet(ctx context.Context, username string) (PaginatedUsers, *http.Response, error) {
@@ -255,8 +256,9 @@ func (a *TeamsApiService) TeamsUsernameFollowersGet(ctx context.Context, usernam
 /*
 TeamsApiService List accounts a team is following
 Returns the list of accounts this team is following.  **This endpoint has been removed. There is no replacement endpoint. For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+
 @return PaginatedUsers
 */
 func (a *TeamsApiService) TeamsUsernameFollowingGet(ctx context.Context, username string) (PaginatedUsers, *http.Response, error) {
@@ -364,8 +366,9 @@ func (a *TeamsApiService) TeamsUsernameFollowingGet(ctx context.Context, usernam
 /*
 TeamsApiService Get a team
 Gets the public information associated with a team.  If the team&#x27;s profile is private, &#x60;location&#x60;, &#x60;website&#x60; and &#x60;created_on&#x60; elements are omitted.  **This endpoint has been removed. You should use the [workspace](/cloud/bitbucket/rest/api-group-workspaces/#api-workspaces-get) endpoint instead. For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+
 @return Team
 */
 func (a *TeamsApiService) TeamsUsernameGet(ctx context.Context, username string) (Team, *http.Response, error) {
@@ -473,8 +476,9 @@ func (a *TeamsApiService) TeamsUsernameGet(ctx context.Context, username string)
 /*
 TeamsApiService List team members
 Returns all members of the specified team. Any member of any of the team&#x27;s groups is considered a member of the team. This includes users in groups that may not actually have access to any of the team&#x27;s repositories.  **This operation has been removed due to privacy changes. See the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/) for details. You should use the [workspaces](/cloud/bitbucket/rest/api-group-workspaces/#api-workspaces-workspace-members-get) endpoint as a replacement.**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param username This can either be the username or the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;. An account is either a team or user.
+
 @return User
 */
 func (a *TeamsApiService) TeamsUsernameMembersGet(ctx context.Context, username string) (User, *http.Response, error) {
@@ -956,8 +960,9 @@ func (a *TeamsApiService) TeamsUsernamePermissionsRepositoriesRepoSlugGet(ctx co
 /*
 TeamsApiService List workspace repositories
 All repositories in the given workspace. This includes any private repositories the calling user has access to.  **This endpoint has been removed. You should use the [repository list](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get) endpoint instead. For more information, see the [deprecation announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return ModelError
 */
 func (a *TeamsApiService) TeamsWorkspaceRepositoriesGet(ctx context.Context, workspace string) (ModelError, *http.Response, error) {
@@ -1167,8 +1172,9 @@ func (a *TeamsApiService) UserPermissionsTeamsGet(ctx context.Context, localVarO
 /*
 TeamsApiService List workspace repositories
 All repositories in the given workspace. This includes any private repositories the calling user has access to.  **This endpoint has been removed. You should use the [repository list](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get) endpoint instead. For more information, see the [deprecation announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return ModelError
 */
 func (a *TeamsApiService) UsersWorkspaceRepositoriesGet(ctx context.Context, workspace string) (ModelError, *http.Response, error) {

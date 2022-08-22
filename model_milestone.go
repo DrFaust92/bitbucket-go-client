@@ -10,8 +10,8 @@
 package bitbucket
 
 type Milestone struct {
-	Type_ string                          `json:"type"`
-	Links *RepositoryGroupPermissionLinks `json:"links,omitempty"`
-	Name  string                          `json:"name,omitempty"`
-	Id    int32                           `json:"id,omitempty"`
+	Type_ string                  `json:"type"`
+	Links *BranchrestrictionLinks `json:"links,omitempty"`
+	Name  string                  `json:"name,omitempty"`
+	Id    int32                   `json:"id,omitempty"`
 }

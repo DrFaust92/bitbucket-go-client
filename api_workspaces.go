@@ -278,8 +278,9 @@ func (a *WorkspacesApiService) WorkspacesGet(ctx context.Context, localVarOption
 /*
 WorkspacesApiService Get a workspace
 Returns the requested workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return Workspace
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceGet(ctx context.Context, workspace string) (Workspace, *http.Response, error) {
@@ -387,8 +388,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceGet(ctx context.Context, works
 /*
 WorkspacesApiService List webhooks for a workspace
 Returns a paginated list of webhooks installed on this workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedWebhookSubscriptions
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, workspace string) (PaginatedWebhookSubscriptions, *http.Response, error) {
@@ -506,8 +508,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, 
 /*
 WorkspacesApiService Create a webhook for a workspace
 Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WebhookSubscription
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceHooksPost(ctx context.Context, workspace string) (WebhookSubscription, *http.Response, error) {
@@ -625,10 +628,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksPost(ctx context.Context,
 /*
 WorkspacesApiService Delete a webhook for a workspace
 Deletes the specified webhook subscription from the given workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param uid Installed webhook&#x27;s ID
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param uid Installed webhook&#x27;s ID
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Context, uid string, workspace string) (*http.Response, error) {
 	var (
@@ -727,9 +729,10 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Con
 /*
 WorkspacesApiService Get a webhook for a workspace
 Returns the webhook with the specified id installed on the given workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param uid Installed webhook&#x27;s ID
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param uid Installed webhook&#x27;s ID
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WebhookSubscription
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
@@ -838,9 +841,10 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Contex
 /*
 WorkspacesApiService Update a webhook for a workspace
 Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;active&#x60; * &#x60;events&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param uid Installed webhook&#x27;s ID
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param uid Installed webhook&#x27;s ID
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WebhookSubscription
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Context, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
@@ -959,8 +963,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Contex
 /*
 WorkspacesApiService List users in a workspace
 Returns all members of the requested workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedWorkspaceMemberships
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceMembersGet(ctx context.Context, workspace string) (PaginatedWorkspaceMemberships, *http.Response, error) {
@@ -1068,9 +1073,10 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceMembersGet(ctx context.Context
 /*
 WorkspacesApiService Get user membership for a workspace
 Returns the workspace membership, which includes a &#x60;User&#x60; object for the member and a &#x60;Workspace&#x60; object for the requested workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param member Member&#x27;s UUID or Atlassian ID.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param member Member&#x27;s UUID or Atlassian ID.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WorkspaceMembership
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceMembersMemberGet(ctx context.Context, member string, workspace string) (WorkspaceMembership, *http.Response, error) {
@@ -1558,8 +1564,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesRepoSlu
 /*
 WorkspacesApiService List projects in a workspace
 Returns the list of projects in this workspace.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedProjects
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string) (PaginatedProjects, *http.Response, error) {
@@ -1667,9 +1674,10 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Contex
 /*
 WorkspacesApiService Get a project for a workspace
 Returns the requested project.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return Project
 */
 func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsProjectKeyGet(ctx context.Context, projectKey string, workspace string) (Project, *http.Response, error) {

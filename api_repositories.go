@@ -772,9 +772,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugForksPost(ctx cont
 /*
 RepositoriesApiService Get a repository
 Returns the object describing this repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return Repository
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugGet(ctx context.Context, repoSlug string, workspace string) (Repository, *http.Response, error) {
@@ -893,9 +894,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugGet(ctx context.Co
 /*
 RepositoriesApiService List webhooks for a repository
 Returns a paginated list of webhooks installed on this repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedWebhookSubscriptions
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string) (PaginatedWebhookSubscriptions, *http.Response, error) {
@@ -1014,9 +1016,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx conte
 /*
 RepositoriesApiService Create a webhook for a repository
 Creates a new webhook on the specified repository.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  Note that this call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  Also note that the &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WebhookSubscription
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.Context, repoSlug string, workspace string) (WebhookSubscription, *http.Response, error) {
@@ -1135,11 +1138,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx cont
 /*
 RepositoriesApiService Delete a webhook for a repository
 Deletes the specified webhook subscription from the given repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param uid Installed webhook&#x27;s ID
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param uid Installed webhook&#x27;s ID
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx context.Context, repoSlug string, uid string, workspace string) (*http.Response, error) {
 	var (
@@ -1239,10 +1241,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx
 /*
 RepositoriesApiService Get a webhook for a repository
 Returns the webhook with the specified id installed on the specified repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param uid Installed webhook&#x27;s ID
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param uid Installed webhook&#x27;s ID
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WebhookSubscription
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx context.Context, repoSlug string, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
@@ -1352,10 +1355,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx co
 /*
 RepositoriesApiService Update a webhook for a repository
 Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;active&#x60; * &#x60;events&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param uid Installed webhook&#x27;s ID
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param uid Installed webhook&#x27;s ID
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return WebhookSubscription
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx context.Context, repoSlug string, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
@@ -1475,9 +1479,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx co
 /*
 RepositoriesApiService List explicit group permissions for a repository
 Returns a paginated list of explicit group permissions for the given repository. This endpoint does not support BBQL features.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;repository_group_permission\&quot;,       \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Administrators\&quot;,         \&quot;slug\&quot;: \&quot;administrators\&quot;       },       \&quot;permission\&quot;: \&quot;admin\&quot;,       \&quot;links\&quot;: {         \&quot;self\&quot;: {           \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/administrators\&quot;         }       }     },     {       \&quot;type\&quot;: \&quot;repository_group_permission\&quot;,       \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Developers\&quot;,         \&quot;slug\&quot;: \&quot;developers\&quot;       },       \&quot;permission\&quot;: \&quot;read\&quot;,       \&quot;links\&quot;: {         \&quot;self\&quot;: {           \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/developers\&quot;         }       }     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedRepositoryGroupPermissions
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx context.Context, repoSlug string, workspace string) (PaginatedRepositoryGroupPermissions, *http.Response, error) {
@@ -1606,11 +1611,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 /*
 RepositoriesApiService Delete an explicit group permission for a repository
 Deletes the repository group permission between the requested repository and group, if one exists.  Only users with admin permission for the repository may access this resource.  Example:  $ curl -X DELETE https://api.bitbucket.org/2.0/repositories/atlassian_tutorial /geordi/permissions-config/groups/developers   HTTP/1.1 204
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param groupSlug Slug of the requested group.
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param groupSlug Slug of the requested group.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete(ctx context.Context, groupSlug string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
@@ -1720,10 +1724,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 /*
 RepositoriesApiService Get an explicit group permission for a repository
 Returns the group permission for a given group slug and repository  Only users with admin permission for the repository may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60; * &#x60;none&#x60;  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  {     \&quot;type\&quot;: \&quot;repository_group_permission\&quot;,     \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Developers\&quot;,         \&quot;slug\&quot;: \&quot;developers\&quot;     },     \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;     },     \&quot;permission\&quot;: \&quot;read\&quot;,     \&quot;links\&quot;: {       \&quot;self\&quot;: {         \&quot;href\&quot;:         \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers\&quot;       }     } } &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param groupSlug Slug of the requested group.
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param groupSlug Slug of the requested group.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return RepositoryGroupPermission
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, repoSlug string, workspace string) (RepositoryGroupPermission, *http.Response, error) {
@@ -1853,10 +1858,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 /*
 RepositoriesApiService Update an explicit group permission for a repository
 Updates the group permission if it exists.  Only users with admin permission for the repository may access this resource.  The only authentication method supported for this endpoint is via app passwords.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example: &#x60;&#x60;&#x60; $ curl -X PUT -H \&quot;Content-Type: application/json\&quot; https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers -d &#x27;{     \&quot;permission\&quot;: \&quot;write\&quot; }&#x27;  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  {     \&quot;type\&quot;: \&quot;repository_group_permission\&quot;,     \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Developers\&quot;,         \&quot;slug\&quot;: \&quot;developers\&quot;     },     \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;     },     \&quot;permission\&quot;: \&quot;write\&quot;,     \&quot;links\&quot;: {       \&quot;self\&quot;: {         \&quot;href\&quot;:         \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers\&quot;       }     } } &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param groupSlug Slug of the requested group.
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param groupSlug Slug of the requested group.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return RepositoryGroupPermission
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx context.Context, groupSlug string, repoSlug string, workspace string) (RepositoryGroupPermission, *http.Response, error) {
@@ -1996,9 +2002,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 /*
 RepositoriesApiService List explicit user permissions for a repository
 Returns a paginated list of explicit user permissions for the given repository.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {         \&quot;type\&quot;: \&quot;repository_user_permission\&quot;,         \&quot;user\&quot;: {             \&quot;type\&quot;: \&quot;user\&quot;,             \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,             \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,             \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         },         \&quot;permission\&quot;: \&quot;admin\&quot;,         \&quot;links\&quot;: {           \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;           }         }     },     {       \&quot;type\&quot;: \&quot;repository_user_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Sean Conaty\&quot;,         \&quot;uuid\&quot;: \&quot;{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\&quot;,         \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;       },       \&quot;permission\&quot;: \&quot;write\&quot;,       \&quot;links\&quot;: {         \&quot;self\&quot;: {           \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/                    permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;         }       }     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return PaginatedRepositoryUserPermissions
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx context.Context, repoSlug string, workspace string) (PaginatedRepositoryUserPermissions, *http.Response, error) {
@@ -2127,11 +2134,10 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 /*
 RepositoriesApiService Delete an explicit user permission for a repository
 Deletes the repository user permission between the requested repository and user, if one exists.  Only users with admin permission for the repository may access this resource.  The only authentication method for this endpoint is via app passwords.  &#x60;&#x60;&#x60; $ curl -X DELETE https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a   HTTP/1.1 204 &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdDelete(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (*http.Response, error) {
 	var (
@@ -2241,10 +2247,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 /*
 RepositoriesApiService Get an explicit user permission for a repository
 Returns the explicit user permission for a given user and repository.  Only users with admin permission for the repository may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60; * &#x60;none&#x60;  Example:  &#x60;&#x60;&#x60; $ curl &#x27;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/         permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a&#x27;  HTTP/1.1 200 Location: &#x27;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/            permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a&#x27;  {     \&quot;type\&quot;: \&quot;repository_user_permission\&quot;,     \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,         \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;     },     \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;     },     \&quot;permission\&quot;: \&quot;admin\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         }     } } &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return RepositoryUserPermission
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (RepositoryUserPermission, *http.Response, error) {
@@ -2374,10 +2381,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 /*
 RepositoriesApiService Update an explicit user permission for a repository
 Updates the explicit user permission for a given user and repository. The selected user must be a member of the workspace, and cannot be the workspace owner. Only users with admin permission for the repository may access this resource.  The only authentication method for this endpoint is via app passwords.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example:  &#x60;&#x60;&#x60; $ curl -X PUT -H \&quot;Content-Type: application/json\&quot; &#x27;https://api.bitbucket.org/2.0/repositories/ atlassian_tutorial/geordi/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a&#x27; -d         &#x27;{     \&quot;permission\&quot;: \&quot;write\&quot; }&#x27;  HTTP/1.1 200 Location: &#x27;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a&#x27;   {     \&quot;type\&quot;: \&quot;repository_user_permission\&quot;,     \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,         \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;     },     \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;     },     \&quot;permission\&quot;: \&quot;write\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         }     } } &#x60;&#x60;&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
 @return RepositoryUserPermission
 */
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (RepositoryUserPermission, *http.Response, error) {
@@ -3202,17 +3210,19 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugSrcPost(ctx contex
 /*
 RepositoriesApiService List repositories watchers
 Returns a paginated list of all the watchers on the specified repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
+@return PaginatedAccounts
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx context.Context, repoSlug string, workspace string) (*http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx context.Context, repoSlug string, workspace string) (PaginatedAccounts, *http.Response, error) {
 	var (
-		localVarHttpMethod = strings.ToUpper("Get")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue PaginatedAccounts
 	)
 
 	// create path and map variables
@@ -3234,7 +3244,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -3256,18 +3266,26 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -3275,10 +3293,20 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		return localVarHttpResponse, newErr
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PaginatedAccounts
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*

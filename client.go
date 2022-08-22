@@ -83,8 +83,6 @@ type APIClient struct {
 
 	SshApi *SshApiService
 
-	TeamsApi *TeamsApiService
-
 	UsersApi *UsersApiService
 
 	WebhooksApi *WebhooksApiService
@@ -127,7 +125,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SnippetsApi = (*SnippetsApiService)(&c.common)
 	c.SourceApi = (*SourceApiService)(&c.common)
 	c.SshApi = (*SshApiService)(&c.common)
-	c.TeamsApi = (*TeamsApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
 	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 	c.WorkspacesApi = (*WorkspacesApiService)(&c.common)

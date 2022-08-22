@@ -28,11 +28,10 @@ type DownloadsApiService service
 /*
 DownloadsApiService Delete a download artifact
 Deletes the specified download artifact from the repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param filename Name of the file.
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param filename Name of the file.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsFilenameDelete(ctx context.Context, filename string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
@@ -132,11 +131,10 @@ func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsFilenameDele
 /*
 DownloadsApiService Get a download artifact link
 Return a redirect to the contents of a download artifact.  This endpoint returns the actual file contents and not the artifact&#x27;s metadata.      $ curl -s -L https://api.bitbucket.org/2.0/repositories/evzijst/git-tests/downloads/hello.txt     Hello World
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param filename Name of the file.
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param filename Name of the file.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsFilenameGet(ctx context.Context, filename string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
@@ -236,10 +234,9 @@ func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsFilenameGet(
 /*
 DownloadsApiService List download artifacts
 Returns a list of download links associated with the repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsGet(ctx context.Context, repoSlug string, workspace string) (*http.Response, error) {
 	var (
@@ -328,10 +325,9 @@ func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsGet(ctx cont
 /*
 DownloadsApiService Upload a download artifact
 Upload new download artifacts.  To upload files, perform a &#x60;multipart/form-data&#x60; POST containing one or more &#x60;files&#x60; fields:      $ echo Hello World &gt; hello.txt     $ curl -s -u evzijst -X POST https://api.bitbucket.org/2.0/repositories/evzijst/git-tests/downloads -F files&#x3D;@hello.txt  When a file is uploaded with the same name as an existing artifact, then the existing file will be replaced.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
 func (a *DownloadsApiService) RepositoriesWorkspaceRepoSlugDownloadsPost(ctx context.Context, repoSlug string, workspace string) (*http.Response, error) {
 	var (

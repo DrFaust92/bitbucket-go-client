@@ -16,8 +16,6 @@ type BranchingModelSettingsProduction struct {
 	Name string `json:"name,omitempty"`
 	// Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`). When `true` the `name` must be `null` or not provided. When `false` the `name` must contain a non-empty branch name.
 	UseMainbranch bool `json:"use_mainbranch,omitempty"`
-	// Optional and only returned for a repository's branching model. Indicates ifthe indicated branch exists on the repository (`false`)or not (`true`). This is useful for determining a fallback to the mainbranch when a repository is inheriting its project's branching model.
-	BranchDoesNotExist bool `json:"branch_does_not_exist,omitempty"`
 	// Indicates if branch is enabled or not.
 	Enabled bool `json:"enabled,omitempty"`
 }

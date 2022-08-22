@@ -14,11 +14,11 @@ import (
 )
 
 type Participant struct {
-	Type_    string `json:"type"`
-	User     *User  `json:"user,omitempty"`
-	Role     string `json:"role,omitempty"`
-	Approved bool   `json:"approved,omitempty"`
-	State    string `json:"state,omitempty"`
+	Type_    string   `json:"type"`
+	User     *Account `json:"user,omitempty"`
+	Role     string   `json:"role,omitempty"`
+	Approved bool     `json:"approved,omitempty"`
+	State    string   `json:"state,omitempty"`
 	// The ISO8601 timestamp of the participant's action. For approvers, this is the time of their approval. For commenters and pull request reviewers who are not approvers, this is the time they last commented, or null if they have not commented.
 	ParticipatedOn time.Time `json:"participated_on,omitempty"`
 }

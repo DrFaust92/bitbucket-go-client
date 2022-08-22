@@ -15,6 +15,4 @@ type BranchingModelDevelopment struct {
 	Name string `json:"name"`
 	// Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).
 	UseMainbranch bool `json:"use_mainbranch"`
-	// Indicates if the indicated branch exists on the repository (`false`)or not (`true`). This is useful for determining a fallback to the mainbranch when a repository is inheriting its project's branching model.
-	BranchDoesNotExist bool `json:"branch_does_not_exist,omitempty"`
 }

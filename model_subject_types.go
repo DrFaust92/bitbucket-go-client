@@ -12,6 +12,5 @@ package bitbucket
 // The mapping of resource/subject types pointing to their individual event types.
 type SubjectTypes struct {
 	Repository *SubjectTypesRepository `json:"repository,omitempty"`
-	User       *SubjectTypesRepository `json:"user,omitempty"`
-	Team       *SubjectTypesRepository `json:"team,omitempty"`
+	Workspace  *SubjectTypesRepository `json:"workspace,omitempty"`
 }

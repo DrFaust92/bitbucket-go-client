@@ -11,7 +11,7 @@ package bitbucket
 
 type BranchingModelSettings struct {
 	Type_       string                              `json:"type"`
-	Links       *RepositoryGroupPermissionLinks     `json:"links,omitempty"`
+	Links       *BranchrestrictionLinks             `json:"links,omitempty"`
 	BranchTypes []BranchingModelSettingsBranchTypes `json:"branch_types,omitempty"`
 	Development *BranchingModelSettingsDevelopment  `json:"development,omitempty"`
 	Production  *BranchingModelSettingsProduction   `json:"production,omitempty"`

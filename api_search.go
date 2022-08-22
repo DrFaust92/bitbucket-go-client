@@ -113,8 +113,8 @@ func (a *SearchApiService) SearchAccount(ctx context.Context, selectedUser strin
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 429 {
-			var v ModelError
+		if localVarHttpResponse.StatusCode == 200 {
+			var v SearchResultPage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -123,8 +123,8 @@ func (a *SearchApiService) SearchAccount(ctx context.Context, selectedUser strin
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v SearchResultPage
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -143,7 +143,7 @@ func (a *SearchApiService) SearchAccount(ctx context.Context, selectedUser strin
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 400 {
+		if localVarHttpResponse.StatusCode == 429 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -246,8 +246,8 @@ func (a *SearchApiService) SearchTeam(ctx context.Context, username string, sear
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 429 {
-			var v ModelError
+		if localVarHttpResponse.StatusCode == 200 {
+			var v SearchResultPage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -256,8 +256,8 @@ func (a *SearchApiService) SearchTeam(ctx context.Context, username string, sear
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v SearchResultPage
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -276,7 +276,7 @@ func (a *SearchApiService) SearchTeam(ctx context.Context, username string, sear
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 400 {
+		if localVarHttpResponse.StatusCode == 429 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -379,8 +379,8 @@ func (a *SearchApiService) SearchWorkspace(ctx context.Context, workspace string
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 429 {
-			var v ModelError
+		if localVarHttpResponse.StatusCode == 200 {
+			var v SearchResultPage
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -389,8 +389,8 @@ func (a *SearchApiService) SearchWorkspace(ctx context.Context, workspace string
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v SearchResultPage
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -409,7 +409,7 @@ func (a *SearchApiService) SearchWorkspace(ctx context.Context, workspace string
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 400 {
+		if localVarHttpResponse.StatusCode == 429 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {

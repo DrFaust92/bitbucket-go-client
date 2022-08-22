@@ -11,7 +11,7 @@ package bitbucket
 
 // User provided pull request text, interpreted in a markup language and rendered in HTML
 type RenderedPullRequestMarkup struct {
-	Title       *RenderedPullRequestMarkupTitle `json:"title,omitempty"`
-	Description *RenderedPullRequestMarkupTitle `json:"description,omitempty"`
-	Reason      *RenderedPullRequestMarkupTitle `json:"reason,omitempty"`
+	Title       *CommentContent `json:"title,omitempty"`
+	Description *CommentContent `json:"description,omitempty"`
+	Reason      *CommentContent `json:"reason,omitempty"`
 }

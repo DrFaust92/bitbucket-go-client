@@ -28,13 +28,12 @@ type PropertiesApiService service
 /*
 PropertiesApiService Delete a commit application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param commit The commit.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param commit The commit.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) DeleteCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -103,13 +102,12 @@ func (a *PropertiesApiService) DeleteCommitHostedPropertyValue(ctx context.Conte
 /*
 PropertiesApiService Delete a pull request application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param pullrequestId The pull request ID.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param pullrequestId The pull request ID.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) DeletePullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -178,12 +176,11 @@ func (a *PropertiesApiService) DeletePullRequestHostedPropertyValue(ctx context.
 /*
 PropertiesApiService Delete a repository application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) DeleteRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -251,11 +248,10 @@ func (a *PropertiesApiService) DeleteRepositoryHostedPropertyValue(ctx context.C
 /*
 PropertiesApiService Delete a user application property
 Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) DeleteUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -322,12 +318,13 @@ func (a *PropertiesApiService) DeleteUserHostedPropertyValue(ctx context.Context
 /*
 PropertiesApiService Get a commit application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param commit The commit.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param commit The commit.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
+
 @return ApplicationProperty
 */
 func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
@@ -416,12 +413,13 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 /*
 PropertiesApiService Get a pull request application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param pullrequestId The pull request ID.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param pullrequestId The pull request ID.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
+
 @return ApplicationProperty
 */
 func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
@@ -510,11 +508,12 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 /*
 PropertiesApiService Get a repository application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
+
 @return ApplicationProperty
 */
 func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
@@ -602,10 +601,11 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 /*
 PropertiesApiService Get a user application property
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
+
 @return ApplicationProperty
 */
 func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
@@ -692,14 +692,13 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 /*
 PropertiesApiService Update a commit application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The application property to create or update.
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param commit The commit.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The application property to create or update.
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param commit The commit.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -770,14 +769,13 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 /*
 PropertiesApiService Update a pull request application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The application property to create or update.
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param pullrequestId The pull request ID.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The application property to create or update.
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param pullrequestId The pull request ID.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -848,13 +846,12 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 /*
 PropertiesApiService Update a repository application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The application property to create or update.
- * @param workspace The repository container; either the workspace slug or the UUID in curly braces.
- * @param repoSlug The repository.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The application property to create or update.
+  - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
+  - @param repoSlug The repository.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
 	var (
@@ -924,12 +921,11 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 /*
 PropertiesApiService Update a user application property
 Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body The application property to create or update.
- * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
- * @param appKey The key of the Connect app.
- * @param propertyName The name of the property.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The application property to create or update.
+  - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
+  - @param appKey The key of the Connect app.
+  - @param propertyName The name of the property.
 */
 func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context, body ApplicationProperty, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
 	var (

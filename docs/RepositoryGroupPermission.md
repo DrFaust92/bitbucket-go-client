@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***RepositoryGroupPermissionLinks**](repository_group_permission_links.md) |  | [optional] [default to null]
+**Links** | [***BranchrestrictionLinks**](branchrestriction_links.md) |  | [optional] [default to null]
 **Permission** | **string** |  | [optional] [default to null]
 **Group** | [***Group**](group.md) |  | [optional] [default to null]
 **Repository** | [***Repository**](repository.md) |  | [optional] [default to null]

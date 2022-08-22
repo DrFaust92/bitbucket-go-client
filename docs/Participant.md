@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**User** | [***User**](user.md) |  | [optional] [default to null]
+**User** | [***Account**](account.md) |  | [optional] [default to null]
 **Role** | **string** |  | [optional] [default to null]
 **Approved** | **bool** |  | [optional] [default to null]
 **State** | **string** |  | [optional] [default to null]

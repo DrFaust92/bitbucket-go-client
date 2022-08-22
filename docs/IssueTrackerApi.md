@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdDelete**
-> RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdDelete(ctx, body, commentId, issueId, repoSlug, workspace)
+> RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdDelete(ctx, commentId, issueId, repoSlug, workspace)
 Delete a comment on an issue
 
 Deletes the specified comment.
@@ -489,7 +489,6 @@ Deletes the specified comment.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**IssueComment**](IssueComment.md)| The updated comment. | 
   **commentId** | **int32**| The id of the comment. | 
   **issueId** | **string**| The issue id | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
@@ -505,7 +504,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -708,7 +707,7 @@ Name | Type | Description  | Notes
 > Issue RepositoriesWorkspaceRepoSlugIssuesIssueIdPut(ctx, issueId, repoSlug, workspace)
 Update an issue
 
-Modifies the issue.  ``` $ curl https://api.bitbucket.org/2.0/repostories/evzijst/dogslow/issues/123 \\   -u evzijst -s -X PUT -H 'Content-Type: application/json' \\   -d '{   \"title\": \"Updated title\",   \"assignee\": {     \"username\": \"evzijst\"   },   \"priority\": \"minor\",   \"version\": {     \"name\": \"1.0\"   },   \"component\": null }' ```  This example changes the `title`, `assignee`, `priority` and the `version`. It also removes the value of the `component` from the issue by setting the field to `null`. Any field not present keeps its existing value.  Each time an issue is edited in the UI or through the API, an immutable change record is created under the `/issues/123/changes` endpoint. It also has a comment associated with the change.
+Modifies the issue.  ``` $ curl https://api.bitbucket.org/2.0/repostories/evzijst/dogslow/issues/123 \\   -u evzijst -s -X PUT -H 'Content-Type: application/json' \\   -d '{   \"title\": \"Updated title\",   \"assignee\": {     \"account_id\": \"5d5355e8c6b9320d9ea5b28d\"   },   \"priority\": \"minor\",   \"version\": {     \"name\": \"1.0\"   },   \"component\": null }' ```  This example changes the `title`, `assignee`, `priority` and the `version`. It also removes the value of the `component` from the issue by setting the field to `null`. Any field not present keeps its existing value.  Each time an issue is edited in the UI or through the API, an immutable change record is created under the `/issues/123/changes` endpoint. It also has a comment associated with the change.
 
 ### Required Parameters
 

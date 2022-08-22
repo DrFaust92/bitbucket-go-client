@@ -888,7 +888,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugWatchersGet**
-> RepositoriesWorkspaceRepoSlugWatchersGet(ctx, repoSlug, workspace)
+> PaginatedAccounts RepositoriesWorkspaceRepoSlugWatchersGet(ctx, repoSlug, workspace)
 List repositories watchers
 
 Returns a paginated list of all the watchers on the specified repository.
@@ -903,7 +903,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**PaginatedAccounts**](paginated_accounts.md)
 
 ### Authorization
 
@@ -912,7 +912,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
