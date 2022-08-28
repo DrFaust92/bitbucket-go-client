@@ -1696,6 +1696,7 @@ func (a *PipelinesApiService) GetDeploymentVariables(ctx context.Context, worksp
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+	localVarQueryParams.Set("pagelen", "100")
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
