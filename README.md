@@ -40,6 +40,10 @@ Class | Method | HTTP request | Description
 *BranchingModelApi* | [**RepositoriesWorkspaceRepoSlugBranchingModelGet**](docs/BranchingModelApi.md#repositoriesworkspacereposlugbranchingmodelget) | **Get** /repositories/{workspace}/{repo_slug}/branching-model | Get the branching model for a repository
 *BranchingModelApi* | [**RepositoriesWorkspaceRepoSlugBranchingModelSettingsGet**](docs/BranchingModelApi.md#repositoriesworkspacereposlugbranchingmodelsettingsget) | **Get** /repositories/{workspace}/{repo_slug}/branching-model/settings | Get the branching model config for a repository
 *BranchingModelApi* | [**RepositoriesWorkspaceRepoSlugBranchingModelSettingsPut**](docs/BranchingModelApi.md#repositoriesworkspacereposlugbranchingmodelsettingsput) | **Put** /repositories/{workspace}/{repo_slug}/branching-model/settings | Update the branching model config for a repository
+*BranchingModelApi* | [**RepositoriesWorkspaceRepoSlugEffectiveBranchingModelGet**](docs/BranchingModelApi.md#repositoriesworkspacereposlugeffectivebranchingmodelget) | **Get** /repositories/{workspace}/{repo_slug}/effective-branching-model | Get the effective, or currently applied, branching model for a repository
+*BranchingModelApi* | [**WorkspacesWorkspaceProjectsProjectKeyBranchingModelGet**](docs/BranchingModelApi.md#workspacesworkspaceprojectsprojectkeybranchingmodelget) | **Get** /workspaces/{workspace}/projects/{project_key}/branching-model | Get the branching model for a project
+*BranchingModelApi* | [**WorkspacesWorkspaceProjectsProjectKeyBranchingModelSettingsGet**](docs/BranchingModelApi.md#workspacesworkspaceprojectsprojectkeybranchingmodelsettingsget) | **Get** /workspaces/{workspace}/projects/{project_key}/branching-model/settings | Get the branching model config for a project
+*BranchingModelApi* | [**WorkspacesWorkspaceProjectsProjectKeyBranchingModelSettingsPut**](docs/BranchingModelApi.md#workspacesworkspaceprojectsprojectkeybranchingmodelsettingsput) | **Put** /workspaces/{workspace}/projects/{project_key}/branching-model/settings | Update the branching model config for a project
 *CommitStatusesApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildKeyGet**](docs/CommitStatusesApi.md#repositoriesworkspacereposlugcommitcommitstatusesbuildkeyget) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key} | Get a build status for a commit
 *CommitStatusesApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildKeyPut**](docs/CommitStatusesApi.md#repositoriesworkspacereposlugcommitcommitstatusesbuildkeyput) | **Put** /repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key} | Update a build status for a commit
 *CommitStatusesApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildPost**](docs/CommitStatusesApi.md#repositoriesworkspacereposlugcommitcommitstatusesbuildpost) | **Post** /repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build | Create a build status for a commit
@@ -74,12 +78,16 @@ Class | Method | HTTP request | Description
 *DeploymentsApi* | [**GetDeploymentsForRepository**](docs/DeploymentsApi.md#getdeploymentsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments/ | List deployments
 *DeploymentsApi* | [**GetEnvironmentForRepository**](docs/DeploymentsApi.md#getenvironmentforrepository) | **Get** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid} | Get an environment
 *DeploymentsApi* | [**GetEnvironmentsForRepository**](docs/DeploymentsApi.md#getenvironmentsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/environments/ | List environments
-*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysGet**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeysget) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys | List deploy keys
-*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdDelete**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Delete a deploy key
-*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdGet**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyidget) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Get a deploy key
-*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdPut**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyidput) | **Put** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Update a deploy key
-*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysPost**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyspost) | **Post** /repositories/{workspace}/{repo_slug}/deploy-keys | Add a deploy key
+*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysGet**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeysget) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys | List repository deploy keys
+*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdDelete**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Delete a repository deploy key
+*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdGet**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyidget) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Get a repository deploy key
+*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdPut**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyidput) | **Put** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Update a repository deploy key
+*DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysPost**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyspost) | **Post** /repositories/{workspace}/{repo_slug}/deploy-keys | Add a repository deploy key
 *DeploymentsApi* | [**UpdateEnvironmentForRepository**](docs/DeploymentsApi.md#updateenvironmentforrepository) | **Post** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/ | Update an environment
+*DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeysget) | **Get** /workspaces/{workspace}/projects/{project_key}/deploy-keys | List project deploy keys
+*DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdDelete**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeyskeyiddelete) | **Delete** /workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id} | Delete a deploy key from a project
+*DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdGet**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeyskeyidget) | **Get** /workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id} | Get a project deploy key
+*DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysPost**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeyspost) | **Post** /workspaces/{workspace}/projects/{project_key}/deploy-keys | Create a project deploy key
 *DownloadsApi* | [**RepositoriesWorkspaceRepoSlugDownloadsFilenameDelete**](docs/DownloadsApi.md#repositoriesworkspacereposlugdownloadsfilenamedelete) | **Delete** /repositories/{workspace}/{repo_slug}/downloads/{filename} | Delete a download artifact
 *DownloadsApi* | [**RepositoriesWorkspaceRepoSlugDownloadsFilenameGet**](docs/DownloadsApi.md#repositoriesworkspacereposlugdownloadsfilenameget) | **Get** /repositories/{workspace}/{repo_slug}/downloads/{filename} | Get a download artifact link
 *DownloadsApi* | [**RepositoriesWorkspaceRepoSlugDownloadsGet**](docs/DownloadsApi.md#repositoriesworkspacereposlugdownloadsget) | **Get** /repositories/{workspace}/{repo_slug}/downloads | List download artifacts
@@ -175,6 +183,10 @@ Class | Method | HTTP request | Description
 *PipelinesApi* | [**UpdateRepositoryPipelineSchedule**](docs/PipelinesApi.md#updaterepositorypipelineschedule) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Update a schedule
 *PipelinesApi* | [**UpdateRepositoryPipelineVariable**](docs/PipelinesApi.md#updaterepositorypipelinevariable) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Update a variable for a repository
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsPost**](docs/ProjectsApi.md#workspacesworkspaceprojectspost) | **Post** /workspaces/{workspace}/projects | Create a project in a workspace
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydefaultreviewersget) | **Get** /workspaces/{workspace}/projects/{project_key}/default-reviewers | List the default reviewers in a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserDelete**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydefaultreviewersselecteduserdelete) | **Delete** /workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user} | Remove the specific user from the project&#x27;s default reviewers
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydefaultreviewersselecteduserget) | **Get** /workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user} | Get a default reviewer
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserPut**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydefaultreviewersselecteduserput) | **Put** /workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user} | Add the specific user as a default reviewer for the project
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDelete**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydelete) | **Delete** /workspaces/{workspace}/projects/{project_key} | Delete a project for a workspace
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeyget) | **Get** /workspaces/{workspace}/projects/{project_key} | Get a project for a workspace
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPut**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeyput) | **Put** /workspaces/{workspace}/projects/{project_key} | Update a project for a workspace
@@ -196,6 +208,7 @@ Class | Method | HTTP request | Description
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameDelete**](docs/PullrequestsApi.md#repositoriesworkspacereposlugdefaultreviewerstargetusernamedelete) | **Delete** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Remove a user from the default reviewers
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugdefaultreviewerstargetusernameget) | **Get** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Get a default reviewer
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePut**](docs/PullrequestsApi.md#repositoriesworkspacereposlugdefaultreviewerstargetusernameput) | **Put** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Add a user to the default reviewers
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugeffectivedefaultreviewersget) | **Get** /repositories/{workspace}/{repo_slug}/effective-default-reviewers | List effective default reviewers
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsActivityGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestsactivityget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/activity | List a pull request activity log
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestsget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests | List pull requests
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPost**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests | Create a pull request
@@ -263,6 +276,8 @@ Class | Method | HTTP request | Description
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrcget) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcPost**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrcpost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugWatchersGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugwatchersget) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
+*RepositoriesApi* | [**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet**](docs/RepositoriesApi.md#repositoriesworkspaceslugreposlugoverridesettingsget) | **Get** /repositories/{workspace_slug}/{repo_slug}/override-settings | Retrieve the inheritance state for repository settings
+*RepositoriesApi* | [**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut**](docs/RepositoriesApi.md#repositoriesworkspaceslugreposlugoverridesettingsput) | **Put** /repositories/{workspace_slug}/{repo_slug}/override-settings | Set the inheritance state for repository settings                 
 *RepositoriesApi* | [**UserPermissionsRepositoriesGet**](docs/RepositoriesApi.md#userpermissionsrepositoriesget) | **Get** /user/permissions/repositories | List repository permissions for a user
 *SearchApi* | [**SearchAccount**](docs/SearchApi.md#searchaccount) | **Get** /users/{selected_user}/search/code | Search for code in a user&#x27;s repositories
 *SearchApi* | [**SearchTeam**](docs/SearchApi.md#searchteam) | **Get** /teams/{username}/search/code | Search for code in a team&#x27;s repositories
@@ -343,16 +358,12 @@ Class | Method | HTTP request | Description
  - [BaseCommit](docs/BaseCommit.md)
  - [Branch](docs/Branch.md)
  - [BranchingModel](docs/BranchingModel.md)
- - [BranchingModelBranchTypes](docs/BranchingModelBranchTypes.md)
- - [BranchingModelDevelopment](docs/BranchingModelDevelopment.md)
  - [BranchingModelSettings](docs/BranchingModelSettings.md)
  - [BranchingModelSettingsBranchTypes](docs/BranchingModelSettingsBranchTypes.md)
  - [BranchingModelSettingsDevelopment](docs/BranchingModelSettingsDevelopment.md)
  - [BranchingModelSettingsProduction](docs/BranchingModelSettingsProduction.md)
  - [Branchrestriction](docs/Branchrestriction.md)
- - [BranchrestrictionLinks](docs/BranchrestrictionLinks.md)
  - [Comment](docs/Comment.md)
- - [CommentContent](docs/CommentContent.md)
  - [CommentInline](docs/CommentInline.md)
  - [CommentLinks](docs/CommentLinks.md)
  - [Commit](docs/Commit.md)
@@ -362,6 +373,7 @@ Class | Method | HTTP request | Description
  - [CommitstatusLinks](docs/CommitstatusLinks.md)
  - [Component](docs/Component.md)
  - [DdevReport](docs/DdevReport.md)
+ - [DefaultReviewerAndType](docs/DefaultReviewerAndType.md)
  - [DeployKey](docs/DeployKey.md)
  - [Deployment](docs/Deployment.md)
  - [DeploymentEnvironment](docs/DeploymentEnvironment.md)
@@ -383,10 +395,11 @@ Class | Method | HTTP request | Description
  - [DeploymentsStgWestDeploymentEnvironmentLock](docs/DeploymentsStgWestDeploymentEnvironmentLock.md)
  - [DeploymentsStgWestPaginatedEnvironments](docs/DeploymentsStgWestPaginatedEnvironments.md)
  - [Diffstat](docs/Diffstat.md)
+ - [EffectiveRepoBranchingModel](docs/EffectiveRepoBranchingModel.md)
+ - [EffectiveRepoBranchingModelDevelopment](docs/EffectiveRepoBranchingModelDevelopment.md)
  - [ErrorError](docs/ErrorError.md)
  - [ExportOptions](docs/ExportOptions.md)
  - [Group](docs/Group.md)
- - [GroupLinks](docs/GroupLinks.md)
  - [HookEvent](docs/HookEvent.md)
  - [Issue](docs/Issue.md)
  - [IssueAttachment](docs/IssueAttachment.md)
@@ -412,6 +425,7 @@ Class | Method | HTTP request | Description
  - [PaginatedCommitComments](docs/PaginatedCommitComments.md)
  - [PaginatedCommitstatuses](docs/PaginatedCommitstatuses.md)
  - [PaginatedComponents](docs/PaginatedComponents.md)
+ - [PaginatedDefaultReviewerAndType](docs/PaginatedDefaultReviewerAndType.md)
  - [PaginatedDeployKeys](docs/PaginatedDeployKeys.md)
  - [PaginatedDeploymentVariable](docs/PaginatedDeploymentVariable.md)
  - [PaginatedDeployments](docs/PaginatedDeployments.md)
@@ -431,6 +445,7 @@ Class | Method | HTTP request | Description
  - [PaginatedPipelineSteps](docs/PaginatedPipelineSteps.md)
  - [PaginatedPipelineVariables](docs/PaginatedPipelineVariables.md)
  - [PaginatedPipelines](docs/PaginatedPipelines.md)
+ - [PaginatedProjectDeployKeys](docs/PaginatedProjectDeployKeys.md)
  - [PaginatedProjects](docs/PaginatedProjects.md)
  - [PaginatedPullrequestComments](docs/PaginatedPullrequestComments.md)
  - [PaginatedPullrequests](docs/PaginatedPullrequests.md)
@@ -504,6 +519,10 @@ Class | Method | HTTP request | Description
  - [PipelinesDdevPipelineStep](docs/PipelinesDdevPipelineStep.md)
  - [PipelinesStgWestPipelineStep](docs/PipelinesStgWestPipelineStep.md)
  - [Project](docs/Project.md)
+ - [ProjectBranchingModel](docs/ProjectBranchingModel.md)
+ - [ProjectBranchingModelBranchTypes](docs/ProjectBranchingModelBranchTypes.md)
+ - [ProjectBranchingModelDevelopment](docs/ProjectBranchingModelDevelopment.md)
+ - [ProjectDeployKey](docs/ProjectDeployKey.md)
  - [ProjectLinks](docs/ProjectLinks.md)
  - [PullRequestBranch](docs/PullRequestBranch.md)
  - [PullRequestCommit](docs/PullRequestCommit.md)
@@ -515,11 +534,13 @@ Class | Method | HTTP request | Description
  - [Ref](docs/Ref.md)
  - [RefLinks](docs/RefLinks.md)
  - [RenderedPullRequestMarkup](docs/RenderedPullRequestMarkup.md)
+ - [RenderedPullRequestMarkupTitle](docs/RenderedPullRequestMarkupTitle.md)
  - [Report](docs/Report.md)
  - [ReportAnnotation](docs/ReportAnnotation.md)
  - [ReportData](docs/ReportData.md)
  - [Repository](docs/Repository.md)
  - [RepositoryGroupPermission](docs/RepositoryGroupPermission.md)
+ - [RepositoryInheritanceState](docs/RepositoryInheritanceState.md)
  - [RepositoryLinks](docs/RepositoryLinks.md)
  - [RepositoryPermission](docs/RepositoryPermission.md)
  - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
@@ -530,10 +551,12 @@ Class | Method | HTTP request | Description
  - [SearchSegment](docs/SearchSegment.md)
  - [Snippet](docs/Snippet.md)
  - [SnippetComment](docs/SnippetComment.md)
+ - [SnippetCommentLinks](docs/SnippetCommentLinks.md)
  - [SnippetCommit](docs/SnippetCommit.md)
  - [SnippetCommitLinks](docs/SnippetCommitLinks.md)
  - [SshAccountKey](docs/SshAccountKey.md)
  - [SshKey](docs/SshKey.md)
+ - [SshKeyLinks](docs/SshKeyLinks.md)
  - [StgWestReport](docs/StgWestReport.md)
  - [SubjectTypes](docs/SubjectTypes.md)
  - [SubjectTypesRepository](docs/SubjectTypesRepository.md)
