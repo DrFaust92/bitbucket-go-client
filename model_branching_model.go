@@ -12,7 +12,7 @@ package bitbucket
 type BranchingModel struct {
 	Type_ string `json:"type"`
 	// The active branch types.
-	BranchTypes []ProjectBranchingModelBranchTypes      `json:"branch_types,omitempty"`
-	Development *EffectiveRepoBranchingModelDevelopment `json:"development,omitempty"`
-	Production  *EffectiveRepoBranchingModelDevelopment `json:"production,omitempty"`
+	BranchTypes []EffectiveRepoBranchingModelBranchTypes `json:"branch_types,omitempty"`
+	Development *EffectiveRepoBranchingModelDevelopment  `json:"development,omitempty"`
+	Production  *EffectiveRepoBranchingModelDevelopment  `json:"production,omitempty"`
 }
