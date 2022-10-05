@@ -30,6 +30,8 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugSrcGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcGet) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 [**RepositoriesWorkspaceRepoSlugSrcPost**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcPost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 [**RepositoriesWorkspaceRepoSlugWatchersGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugWatchersGet) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
+[**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet**](RepositoriesApi.md#RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet) | **Get** /repositories/{workspace_slug}/{repo_slug}/override-settings | Retrieve the inheritance state for repository settings
+[**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut**](RepositoriesApi.md#RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut) | **Put** /repositories/{workspace_slug}/{repo_slug}/override-settings | Set the inheritance state for repository settings                 
 [**UserPermissionsRepositoriesGet**](RepositoriesApi.md#UserPermissionsRepositoriesGet) | **Get** /user/permissions/repositories | List repository permissions for a user
 
 # **RepositoriesGet**
@@ -904,6 +906,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedAccounts**](paginated_accounts.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet**
+> RepositoryInheritanceState RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet(ctx, repoSlug, workspaceSlug)
+Retrieve the inheritance state for repository settings
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspaceSlug** | **string**|  | 
+
+### Return type
+
+[**RepositoryInheritanceState**](repository_inheritance_state.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut**
+> RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut(ctx, repoSlug, workspaceSlug)
+Set the inheritance state for repository settings                 
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspaceSlug** | **string**|  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

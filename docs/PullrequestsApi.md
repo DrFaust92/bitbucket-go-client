@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameDelete**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameDelete) | **Delete** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Remove a user from the default reviewers
 [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet) | **Get** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Get a default reviewer
 [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePut**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernamePut) | **Put** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Add a user to the default reviewers
+[**RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet) | **Get** /repositories/{workspace}/{repo_slug}/effective-default-reviewers | List effective default reviewers
 [**RepositoriesWorkspaceRepoSlugPullrequestsActivityGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsActivityGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/activity | List a pull request activity log
 [**RepositoriesWorkspaceRepoSlugPullrequestsGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests | List pull requests
 [**RepositoriesWorkspaceRepoSlugPullrequestsPost**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests | Create a pull request
@@ -115,7 +116,7 @@ Name | Type | Description  | Notes
 > PaginatedAccounts RepositoriesWorkspaceRepoSlugDefaultReviewersGet(ctx, repoSlug, workspace)
 List default reviewers
 
-Returns the repository's default reviewers.  These are the users that are automatically added as reviewers on every new pull request that is created.
+Returns the repository's default reviewers.  These are the users that are automatically added as reviewers on every new pull request that is created. To obtain the repository's default reviewers as well as the default reviewers inherited from the project, use the [effective-default-reveiwers](#api-repositories-workspace-repo-slug-effective-default-reviewers-get) endpoint.
 
 ### Required Parameters
 
@@ -218,6 +219,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Account**](account.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet**
+> PaginatedDefaultReviewerAndType RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet(ctx, repoSlug, workspace)
+List effective default reviewers
+
+Returns the repository's effective default reviewers. This includes both default reviewers defined at the repository level as well as those inherited from its project.  These are the users that are automatically added as reviewers on every new pull request that is created.  ``` $ curl https://bitbucket.org/!api/2.0/repositories/{workspace_slug}/{repo_slug}/effective-default-reviewers?page=1&pagelen=20 {     \"pagelen\": 20,     \"values\": [         {             \"user\": {                 \"display_name\": \"Patrick Wolf\",                 \"uuid\": \"{9565301a-a3cf-4b5d-88f4-dd6af8078d7e}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\",         },         {             \"user\": {                 \"display_name\": \"Davis Lee\",                 \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"             },             \"reviewer_type\": \"repository\",             \"type\": \"default_reviewer\",         }     ],     \"page\": 1,     \"size\": 2 } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**PaginatedDefaultReviewerAndType**](paginated_default_reviewer_and_type.md)
 
 ### Authorization
 
