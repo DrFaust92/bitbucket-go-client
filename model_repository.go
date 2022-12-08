@@ -25,6 +25,7 @@ type Repository struct {
 	Scm         string      `json:"scm,omitempty"`
 	Owner       *Account    `json:"owner,omitempty"`
 	Name        string      `json:"name,omitempty"`
+	Slug        string      `json:"slug,omitempty"`
 	Description string      `json:"description,omitempty"`
 	CreatedOn   time.Time   `json:"created_on,omitempty"`
 	UpdatedOn   time.Time   `json:"updated_on,omitempty"`
