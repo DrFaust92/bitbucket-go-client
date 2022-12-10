@@ -12,11 +12,12 @@ package bitbucket
 import (
 	"context"
 	"fmt"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1689,7 +1690,7 @@ func (a *PipelinesApiService) GetDeploymentVariables(ctx context.Context, worksp
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables?pagelen=50"
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_uuid"+"}", fmt.Sprintf("%v", environmentUuid), -1)
