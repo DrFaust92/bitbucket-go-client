@@ -150,9 +150,9 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsPost(ctx context.Context
 
 /*
 ProjectsApiService List the default reviewers in a project
-Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.  Example: &#x60;&#x60;&#x60; $ curl https://bitbucket.org/!api/2.0/.../projects/.../default-reviewers | jq . {     \&quot;pagelen\&quot;: 10,     \&quot;values\&quot;: [         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,                 \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;         },         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Jorge Rodriguez\&quot;,                 \&quot;uuid\&quot;: \&quot;{1aa43376-260d-4a0b-9660-f62672b9655d}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
+Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.  Example: &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/.../projects/.../default-reviewers | jq . {     \&quot;pagelen\&quot;: 10,     \&quot;values\&quot;: [         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,                 \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;         },         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Jorge Rodriguez\&quot;,                 \&quot;uuid\&quot;: \&quot;{1aa43376-260d-4a0b-9660-f62672b9655d}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param projectKey
+  - @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return PaginatedDefaultReviewerAndType
@@ -272,7 +272,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 
 /*
 ProjectsApiService Remove the specific user from the project&#x27;s default reviewers
-Removes a default reviewer from the project.  Example: &#x60;&#x60;&#x60; $ curl https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D  HTTP/1.1 204 &#x60;&#x60;&#x60;
+Removes a default reviewer from the project.  Example: &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D  HTTP/1.1 204 &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This can either be the actual &#x60;key&#x60; assigned to the project or the &#x60;UUID&#x60; (surrounded by curly-braces (&#x60;{}&#x60;)).
   - @param selectedUser This can either be the username or the UUID of the default reviewer, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
@@ -385,7 +385,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 
 /*
 ProjectsApiService Get a default reviewer
-Returns the specified default reviewer.  Example: &#x60;&#x60;&#x60; $ curl https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D {     \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,     \&quot;type\&quot;: \&quot;user\&quot;,     \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot; } &#x60;&#x60;&#x60;
+Returns the specified default reviewer.  Example: &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D {     \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,     \&quot;type\&quot;: \&quot;user\&quot;,     \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot; } &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This can either be the actual &#x60;key&#x60; assigned to the project or the &#x60;UUID&#x60; (surrounded by curly-braces (&#x60;{}&#x60;)).
   - @param selectedUser This can either be the username or the UUID of the default reviewer, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
@@ -519,7 +519,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 
 /*
 ProjectsApiService Add the specific user as a default reviewer for the project
-Adds the specified user to the project&#x27;s list of default reviewers. The method is idempotent. Accepts an optional body containing the &#x60;uuid&#x60; of the user to be added.  Example: &#x60;&#x60;&#x60; $ curl -XPUT https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D -d { &#x27;uuid&#x27;: &#x27;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}&#x27; }  HTTP/1.1 204 &#x60;&#x60;&#x60;
+Adds the specified user to the project&#x27;s list of default reviewers. The method is idempotent. Accepts an optional body containing the &#x60;uuid&#x60; of the user to be added.  Example: &#x60;&#x60;&#x60; $ curl -XPUT https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D -d { &#x27;uuid&#x27;: &#x27;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}&#x27; }  HTTP/1.1 204 &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This can either be the actual &#x60;key&#x60; assigned to the project or the &#x60;UUID&#x60; (surrounded by curly-braces (&#x60;{}&#x60;)).
   - @param selectedUser This can either be the username or the UUID of the default reviewer, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.

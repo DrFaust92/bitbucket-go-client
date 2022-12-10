@@ -10,7 +10,7 @@
 package bitbucket
 
 type IssueAttachment struct {
-	Type_ string                  `json:"type"`
-	Links *BranchrestrictionLinks `json:"links,omitempty"`
-	Name  string                  `json:"name,omitempty"`
+	Type_ string        `json:"type"`
+	Links *VersionLinks `json:"links,omitempty"`
+	Name  string        `json:"name,omitempty"`
 }

@@ -137,7 +137,7 @@ Return the branching model set at the project level. This view is read-only. The
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **projectKey** | **string**|  | 
+  **projectKey** | **string**| The project in question. This is the actual &#x60;key&#x60; assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
@@ -166,7 +166,7 @@ Return the branching model configuration for a project. The returned object:  1.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **projectKey** | **string**|  | 
+  **projectKey** | **string**| The project in question. This is the actual &#x60;key&#x60; assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
@@ -195,7 +195,7 @@ Update the branching model configuration for a project.  The `development` branc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **projectKey** | **string**|  | 
+  **projectKey** | **string**| The project in question. This is the actual &#x60;key&#x60; assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type

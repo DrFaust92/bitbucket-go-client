@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugHooksUidDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugHooksUidDelete) | **Delete** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Delete a webhook for a repository
 [**RepositoriesWorkspaceRepoSlugHooksUidGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugHooksUidGet) | **Get** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Get a webhook for a repository
 [**RepositoriesWorkspaceRepoSlugHooksUidPut**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugHooksUidPut) | **Put** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Update a webhook for a repository
+[**RepositoriesWorkspaceRepoSlugOverrideSettingsGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugOverrideSettingsGet) | **Get** /repositories/{workspace}/{repo_slug}/override-settings | Retrieve the inheritance state for repository settings
+[**RepositoriesWorkspaceRepoSlugOverrideSettingsPut**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugOverrideSettingsPut) | **Put** /repositories/{workspace}/{repo_slug}/override-settings | Set the inheritance state for repository settings                 
 [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups | List explicit group permissions for a repository
 [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete) | **Delete** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Delete an explicit group permission for a repository
 [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Get an explicit group permission for a repository
@@ -30,8 +32,6 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugSrcGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcGet) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 [**RepositoriesWorkspaceRepoSlugSrcPost**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcPost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 [**RepositoriesWorkspaceRepoSlugWatchersGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugWatchersGet) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
-[**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet**](RepositoriesApi.md#RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet) | **Get** /repositories/{workspace_slug}/{repo_slug}/override-settings | Retrieve the inheritance state for repository settings
-[**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut**](RepositoriesApi.md#RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut) | **Put** /repositories/{workspace_slug}/{repo_slug}/override-settings | Set the inheritance state for repository settings                 
 [**UserPermissionsRepositoriesGet**](RepositoriesApi.md#UserPermissionsRepositoriesGet) | **Get** /user/permissions/repositories | List repository permissions for a user
 
 # **RepositoriesGet**
@@ -446,6 +446,60 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **RepositoriesWorkspaceRepoSlugOverrideSettingsGet**
+> RepositoryInheritanceState RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx, repoSlug, workspace)
+Retrieve the inheritance state for repository settings
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**RepositoryInheritanceState**](repository_inheritance_state.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugOverrideSettingsPut**
+> RepositoriesWorkspaceRepoSlugOverrideSettingsPut(ctx, repoSlug, workspace)
+Set the inheritance state for repository settings                 
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**
 > PaginatedRepositoryGroupPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx, repoSlug, workspace)
 List explicit group permissions for a repository
@@ -569,7 +623,7 @@ Name | Type | Description  | Notes
 > PaginatedRepositoryUserPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx, repoSlug, workspace)
 List explicit user permissions for a repository
 
-Returns a paginated list of explicit user permissions for the given repository.  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users  {   \"pagelen\": 10,   \"values\": [     {         \"type\": \"repository_user_permission\",         \"user\": {             \"type\": \"user\",             \"display_name\": \"Colin Cameron\",             \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",             \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         },         \"permission\": \"admin\",         \"links\": {           \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"           }         }     },     {       \"type\": \"repository_user_permission\",       \"user\": {         \"type\": \"user\",         \"display_name\": \"Sean Conaty\",         \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"       },       \"permission\": \"write\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/                    permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"         }       }     }   ],   \"page\": 1,   \"size\": 2 } ```
+Returns a paginated list of explicit user permissions for the given repository. This endpoint does not support BBQL features.  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users  {   \"pagelen\": 10,   \"values\": [     {         \"type\": \"repository_user_permission\",         \"user\": {             \"type\": \"user\",             \"display_name\": \"Colin Cameron\",             \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",             \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         },         \"permission\": \"admin\",         \"links\": {           \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"           }         }     },     {       \"type\": \"repository_user_permission\",       \"user\": {         \"type\": \"user\",         \"display_name\": \"Sean Conaty\",         \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"       },       \"permission\": \"write\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/                    permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"         }       }     }   ],   \"page\": 1,   \"size\": 2 } ```
 
 ### Required Parameters
 
@@ -906,60 +960,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedAccounts**](paginated_accounts.md)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet**
-> RepositoryInheritanceState RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet(ctx, repoSlug, workspaceSlug)
-Retrieve the inheritance state for repository settings
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **workspaceSlug** | **string**|  | 
-
-### Return type
-
-[**RepositoryInheritanceState**](repository_inheritance_state.md)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut**
-> RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut(ctx, repoSlug, workspaceSlug)
-Set the inheritance state for repository settings                 
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **workspaceSlug** | **string**|  | 
-
-### Return type
-
- (empty response body)
 
 ### Authorization
 

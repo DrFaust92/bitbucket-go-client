@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***SshKeyLinks**](ssh_key_links.md) |  | [optional] [default to null]
+**Links** | [***VersionLinks**](version_links.md) |  | [optional] [default to null]
 **Permission** | **string** |  | [optional] [default to null]
 **Group** | [***Group**](group.md) |  | [optional] [default to null]
 **Repository** | [***Repository**](repository.md) |  | [optional] [default to null]

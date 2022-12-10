@@ -19,9 +19,9 @@ type Pullrequest struct {
 	// The pull request's unique ID. Note that pull request IDs are only unique within their associated repository.
 	Id int32 `json:"id,omitempty"`
 	// Title of the pull request.
-	Title    string                     `json:"title,omitempty"`
-	Rendered *RenderedPullRequestMarkup `json:"rendered,omitempty"`
-	Summary  *CommentContent            `json:"summary,omitempty"`
+	Title    string                          `json:"title,omitempty"`
+	Rendered *RenderedPullRequestMarkup      `json:"rendered,omitempty"`
+	Summary  *RenderedPullRequestMarkupTitle `json:"summary,omitempty"`
 	// The pull request's current status.
 	State       string               `json:"state,omitempty"`
 	Author      *Account             `json:"author,omitempty"`

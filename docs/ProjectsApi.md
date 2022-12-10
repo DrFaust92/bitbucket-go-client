@@ -46,14 +46,14 @@ Name | Type | Description  | Notes
 > PaginatedDefaultReviewerAndType WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet(ctx, projectKey, workspace)
 List the default reviewers in a project
 
-Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.  Example: ``` $ curl https://bitbucket.org/!api/2.0/.../projects/.../default-reviewers | jq . {     \"pagelen\": 10,     \"values\": [         {             \"user\": {                 \"display_name\": \"Davis Lee\",                 \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\"         },         {             \"user\": {                 \"display_name\": \"Jorge Rodriguez\",                 \"uuid\": \"{1aa43376-260d-4a0b-9660-f62672b9655d}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\"         }     ],     \"page\": 1,     \"size\": 2 } ```
+Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.  Example: ``` $ curl https://api.bitbucket.org/2.0/.../projects/.../default-reviewers | jq . {     \"pagelen\": 10,     \"values\": [         {             \"user\": {                 \"display_name\": \"Davis Lee\",                 \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\"         },         {             \"user\": {                 \"display_name\": \"Jorge Rodriguez\",                 \"uuid\": \"{1aa43376-260d-4a0b-9660-f62672b9655d}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\"         }     ],     \"page\": 1,     \"size\": 2 } ```
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **projectKey** | **string**|  | 
+  **projectKey** | **string**| The project in question. This is the actual &#x60;key&#x60; assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 > WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserDelete(ctx, projectKey, selectedUser, workspace)
 Remove the specific user from the project's default reviewers
 
-Removes a default reviewer from the project.  Example: ``` $ curl https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D  HTTP/1.1 204 ```
+Removes a default reviewer from the project.  Example: ``` $ curl https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D  HTTP/1.1 204 ```
 
 ### Required Parameters
 
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 > User WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserGet(ctx, projectKey, selectedUser, workspace)
 Get a default reviewer
 
-Returns the specified default reviewer.  Example: ``` $ curl https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D {     \"display_name\": \"Davis Lee\",     \"type\": \"user\",     \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\" } ```
+Returns the specified default reviewer.  Example: ``` $ curl https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D {     \"display_name\": \"Davis Lee\",     \"type\": \"user\",     \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\" } ```
 
 ### Required Parameters
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 > User WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserPut(ctx, projectKey, selectedUser, workspace)
 Add the specific user as a default reviewer for the project
 
-Adds the specified user to the project's list of default reviewers. The method is idempotent. Accepts an optional body containing the `uuid` of the user to be added.  Example: ``` $ curl -XPUT https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D -d { 'uuid': '{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}' }  HTTP/1.1 204 ```
+Adds the specified user to the project's list of default reviewers. The method is idempotent. Accepts an optional body containing the `uuid` of the user to be added.  Example: ``` $ curl -XPUT https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D -d { 'uuid': '{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}' }  HTTP/1.1 204 ```
 
 ### Required Parameters
 

@@ -262,6 +262,8 @@ Class | Method | HTTP request | Description
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugHooksUidDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlughooksuiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Delete a webhook for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugHooksUidGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlughooksuidget) | **Get** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Get a webhook for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugHooksUidPut**](docs/RepositoriesApi.md#repositoriesworkspacereposlughooksuidput) | **Put** /repositories/{workspace}/{repo_slug}/hooks/{uid} | Update a webhook for a repository
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugOverrideSettingsGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugoverridesettingsget) | **Get** /repositories/{workspace}/{repo_slug}/override-settings | Retrieve the inheritance state for repository settings
+*RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugOverrideSettingsPut**](docs/RepositoriesApi.md#repositoriesworkspacereposlugoverridesettingsput) | **Put** /repositories/{workspace}/{repo_slug}/override-settings | Set the inheritance state for repository settings                 
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsget) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups | List explicit group permissions for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsgroupslugdelete) | **Delete** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Delete an explicit group permission for a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugpermissionsconfiggroupsgroupslugget) | **Get** /repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug} | Get an explicit group permission for a repository
@@ -276,8 +278,6 @@ Class | Method | HTTP request | Description
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrcget) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcPost**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrcpost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugWatchersGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugwatchersget) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
-*RepositoriesApi* | [**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsGet**](docs/RepositoriesApi.md#repositoriesworkspaceslugreposlugoverridesettingsget) | **Get** /repositories/{workspace_slug}/{repo_slug}/override-settings | Retrieve the inheritance state for repository settings
-*RepositoriesApi* | [**RepositoriesWorkspaceSlugRepoSlugOverrideSettingsPut**](docs/RepositoriesApi.md#repositoriesworkspaceslugreposlugoverridesettingsput) | **Put** /repositories/{workspace_slug}/{repo_slug}/override-settings | Set the inheritance state for repository settings                 
 *RepositoriesApi* | [**UserPermissionsRepositoriesGet**](docs/RepositoriesApi.md#userpermissionsrepositoriesget) | **Get** /user/permissions/repositories | List repository permissions for a user
 *SearchApi* | [**SearchAccount**](docs/SearchApi.md#searchaccount) | **Get** /users/{selected_user}/search/code | Search for code in a user&#x27;s repositories
 *SearchApi* | [**SearchTeam**](docs/SearchApi.md#searchteam) | **Get** /teams/{username}/search/code | Search for code in a team&#x27;s repositories
@@ -358,6 +358,8 @@ Class | Method | HTTP request | Description
  - [BaseCommit](docs/BaseCommit.md)
  - [Branch](docs/Branch.md)
  - [BranchingModel](docs/BranchingModel.md)
+ - [BranchingModelBranchTypes](docs/BranchingModelBranchTypes.md)
+ - [BranchingModelDevelopment](docs/BranchingModelDevelopment.md)
  - [BranchingModelSettings](docs/BranchingModelSettings.md)
  - [BranchingModelSettingsBranchTypes](docs/BranchingModelSettingsBranchTypes.md)
  - [BranchingModelSettingsDevelopment](docs/BranchingModelSettingsDevelopment.md)
@@ -396,10 +398,10 @@ Class | Method | HTTP request | Description
  - [DeploymentsStgWestPaginatedEnvironments](docs/DeploymentsStgWestPaginatedEnvironments.md)
  - [Diffstat](docs/Diffstat.md)
  - [EffectiveRepoBranchingModel](docs/EffectiveRepoBranchingModel.md)
- - [EffectiveRepoBranchingModelDevelopment](docs/EffectiveRepoBranchingModelDevelopment.md)
  - [ErrorError](docs/ErrorError.md)
  - [ExportOptions](docs/ExportOptions.md)
  - [Group](docs/Group.md)
+ - [GroupLinks](docs/GroupLinks.md)
  - [HookEvent](docs/HookEvent.md)
  - [Issue](docs/Issue.md)
  - [IssueAttachment](docs/IssueAttachment.md)
@@ -520,7 +522,6 @@ Class | Method | HTTP request | Description
  - [PipelinesStgWestPipelineStep](docs/PipelinesStgWestPipelineStep.md)
  - [Project](docs/Project.md)
  - [ProjectBranchingModel](docs/ProjectBranchingModel.md)
- - [ProjectBranchingModelBranchTypes](docs/ProjectBranchingModelBranchTypes.md)
  - [ProjectBranchingModelDevelopment](docs/ProjectBranchingModelDevelopment.md)
  - [ProjectDeployKey](docs/ProjectDeployKey.md)
  - [ProjectLinks](docs/ProjectLinks.md)
@@ -551,12 +552,10 @@ Class | Method | HTTP request | Description
  - [SearchSegment](docs/SearchSegment.md)
  - [Snippet](docs/Snippet.md)
  - [SnippetComment](docs/SnippetComment.md)
- - [SnippetCommentLinks](docs/SnippetCommentLinks.md)
  - [SnippetCommit](docs/SnippetCommit.md)
  - [SnippetCommitLinks](docs/SnippetCommitLinks.md)
  - [SshAccountKey](docs/SshAccountKey.md)
  - [SshKey](docs/SshKey.md)
- - [SshKeyLinks](docs/SshKeyLinks.md)
  - [StgWestReport](docs/StgWestReport.md)
  - [SubjectTypes](docs/SubjectTypes.md)
  - [SubjectTypesRepository](docs/SubjectTypesRepository.md)
@@ -567,6 +566,7 @@ Class | Method | HTTP request | Description
  - [User](docs/User.md)
  - [UserLinks](docs/UserLinks.md)
  - [Version](docs/Version.md)
+ - [VersionLinks](docs/VersionLinks.md)
  - [WebhookSubscription](docs/WebhookSubscription.md)
  - [Workspace](docs/Workspace.md)
  - [WorkspaceLinks](docs/WorkspaceLinks.md)
