@@ -1569,18 +1569,23 @@ Returns the list of projects in this workspace.
 
 @return PaginatedProjects
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string) (PaginatedProjects, *http.Response, error) {
+func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string, nextPage string) (PaginatedProjects, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
+		localVarPath        string
 		localVarFileBytes   []byte
 		localVarReturnValue PaginatedProjects
 	)
 
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/projects"
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	if nextPage != "" {
+		localVarPath = nextPage
+	} else {
+		// create path and map variables
+		localVarPath = a.client.cfg.BasePath + "/workspaces/{workspace}/projects"
+		localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

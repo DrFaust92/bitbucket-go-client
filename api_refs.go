@@ -398,7 +398,7 @@ Creates a new branch in the specified repository.  The payload of the POST shoul
 
 @return Branch
 */
-func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsBranchesPost(ctx context.Context, repoSlug string, workspace string) (Branch, *http.Response, error) {
+func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsBranchesPost(ctx context.Context, repoSlug string, workspace string, body Branch) (Branch, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}
@@ -433,6 +433,10 @@ func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsBranchesPost(ctx conte
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+
+	// set POST body
+	localVarPostBody = &body
+
 	if ctx != nil {
 		// API Key Authentication
 		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
