@@ -7,4 +7,4 @@ build:
 	go build
 
 generate:
-	swagger-codegen generate -i  https://api.bitbucket.org/swagger.json -l go -c swagger.conf
+	swagger-codegen generate -i https://api.bitbucket.org/swagger.json -l go -c swagger.conf --additional-properties packageName=bitbucket
