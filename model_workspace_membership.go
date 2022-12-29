@@ -10,8 +10,8 @@
 package bitbucket
 
 type WorkspaceMembership struct {
-	Type_     string        `json:"type"`
-	Links     *VersionLinks `json:"links,omitempty"`
-	User      *Account      `json:"user,omitempty"`
-	Workspace *Workspace    `json:"workspace,omitempty"`
+	Type_     string                         `json:"type"`
+	Links     *RepositoryUserPermissionLinks `json:"links,omitempty"`
+	User      *Account                       `json:"user,omitempty"`
+	Workspace *Workspace                     `json:"workspace,omitempty"`
 }

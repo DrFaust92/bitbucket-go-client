@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**DeletePipelineVariableForUser**](PipelinesApi.md#DeletePipelineVariableForUser) | **Delete** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Delete a variable for a user
 [**DeletePipelineVariableForWorkspace**](PipelinesApi.md#DeletePipelineVariableForWorkspace) | **Delete** /workspaces/{workspace}/pipelines-config/variables/{variable_uuid} | Delete a variable for a workspace
 [**DeleteRepositoryPipelineCache**](PipelinesApi.md#DeleteRepositoryPipelineCache) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid} | Delete a cache
+[**DeleteRepositoryPipelineCaches**](PipelinesApi.md#DeleteRepositoryPipelineCaches) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches | Delete caches
 [**DeleteRepositoryPipelineKeyPair**](PipelinesApi.md#DeleteRepositoryPipelineKeyPair) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Delete SSH key pair
 [**DeleteRepositoryPipelineKnownHost**](PipelinesApi.md#DeleteRepositoryPipelineKnownHost) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Delete a known host
 [**DeleteRepositoryPipelineSchedule**](PipelinesApi.md#DeleteRepositoryPipelineSchedule) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Delete a schedule
@@ -453,6 +454,36 @@ Name | Type | Description  | Notes
   **workspace** | **string**| The account. | 
   **repoSlug** | **string**| The repository. | 
   **cacheUuid** | **string**| The UUID of the cache to delete. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DeleteRepositoryPipelineCaches**
+> DeleteRepositoryPipelineCaches(ctx, workspace, repoSlug, name)
+Delete caches
+
+Delete repository cache versions by name.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| The account. | 
+  **repoSlug** | **string**| The repository. | 
+  **name** | **string**| The cache name. | 
 
 ### Return type
 

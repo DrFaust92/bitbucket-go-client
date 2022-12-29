@@ -18,8 +18,9 @@ type PipelineSchedule struct {
 	// The UUID identifying the schedule.
 	Uuid string `json:"uuid"`
 	// Whether the schedule is enabled.
-	Enabled bool               `json:"enabled"`
-	Target  *PipelineRefTarget `json:"target,omitempty"`
+	Enabled  bool              `json:"enabled"`
+	Target   *PipelineTarget   `json:"target,omitempty"`
+	Selector *PipelineSelector `json:"selector"`
 	// The cron expression that the schedule applies.
 	CronPattern string `json:"cron_pattern,omitempty"`
 	// The timestamp when the schedule was created.

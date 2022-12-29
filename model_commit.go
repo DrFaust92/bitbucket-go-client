@@ -14,12 +14,12 @@ import (
 )
 
 type Commit struct {
-	Hash         string                          `json:"hash,omitempty"`
-	Date         time.Time                       `json:"date,omitempty"`
-	Author       *Author                         `json:"author,omitempty"`
-	Message      string                          `json:"message,omitempty"`
-	Summary      *RenderedPullRequestMarkupTitle `json:"summary,omitempty"`
-	Parents      []BaseCommit                    `json:"parents,omitempty"`
-	Repository   *Repository                     `json:"repository,omitempty"`
-	Participants []Participant                   `json:"participants,omitempty"`
+	Hash         string             `json:"hash,omitempty"`
+	Date         time.Time          `json:"date,omitempty"`
+	Author       *Author            `json:"author,omitempty"`
+	Message      string             `json:"message,omitempty"`
+	Summary      *BaseCommitSummary `json:"summary,omitempty"`
+	Parents      []BaseCommit       `json:"parents,omitempty"`
+	Repository   *Repository        `json:"repository,omitempty"`
+	Participants []Participant      `json:"participants,omitempty"`
 }

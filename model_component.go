@@ -10,8 +10,8 @@
 package bitbucket
 
 type Component struct {
-	Type_ string        `json:"type"`
-	Links *VersionLinks `json:"links,omitempty"`
-	Name  string        `json:"name,omitempty"`
-	Id    int32         `json:"id,omitempty"`
+	Type_ string                         `json:"type"`
+	Links *RepositoryUserPermissionLinks `json:"links,omitempty"`
+	Name  string                         `json:"name,omitempty"`
+	Id    int32                          `json:"id,omitempty"`
 }

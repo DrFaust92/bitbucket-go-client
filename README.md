@@ -138,6 +138,7 @@ Class | Method | HTTP request | Description
 *PipelinesApi* | [**DeletePipelineVariableForUser**](docs/PipelinesApi.md#deletepipelinevariableforuser) | **Delete** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Delete a variable for a user
 *PipelinesApi* | [**DeletePipelineVariableForWorkspace**](docs/PipelinesApi.md#deletepipelinevariableforworkspace) | **Delete** /workspaces/{workspace}/pipelines-config/variables/{variable_uuid} | Delete a variable for a workspace
 *PipelinesApi* | [**DeleteRepositoryPipelineCache**](docs/PipelinesApi.md#deleterepositorypipelinecache) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid} | Delete a cache
+*PipelinesApi* | [**DeleteRepositoryPipelineCaches**](docs/PipelinesApi.md#deleterepositorypipelinecaches) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches | Delete caches
 *PipelinesApi* | [**DeleteRepositoryPipelineKeyPair**](docs/PipelinesApi.md#deleterepositorypipelinekeypair) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Delete SSH key pair
 *PipelinesApi* | [**DeleteRepositoryPipelineKnownHost**](docs/PipelinesApi.md#deleterepositorypipelineknownhost) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Delete a known host
 *PipelinesApi* | [**DeleteRepositoryPipelineSchedule**](docs/PipelinesApi.md#deleterepositorypipelineschedule) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Delete a schedule
@@ -356,6 +357,7 @@ Class | Method | HTTP request | Description
  - [ApplicationProperty](docs/ApplicationProperty.md)
  - [Author](docs/Author.md)
  - [BaseCommit](docs/BaseCommit.md)
+ - [BaseCommitSummary](docs/BaseCommitSummary.md)
  - [Branch](docs/Branch.md)
  - [BranchingModel](docs/BranchingModel.md)
  - [BranchingModelBranchTypes](docs/BranchingModelBranchTypes.md)
@@ -535,7 +537,6 @@ Class | Method | HTTP request | Description
  - [Ref](docs/Ref.md)
  - [RefLinks](docs/RefLinks.md)
  - [RenderedPullRequestMarkup](docs/RenderedPullRequestMarkup.md)
- - [RenderedPullRequestMarkupTitle](docs/RenderedPullRequestMarkupTitle.md)
  - [Report](docs/Report.md)
  - [ReportAnnotation](docs/ReportAnnotation.md)
  - [ReportData](docs/ReportData.md)
@@ -545,6 +546,7 @@ Class | Method | HTTP request | Description
  - [RepositoryLinks](docs/RepositoryLinks.md)
  - [RepositoryPermission](docs/RepositoryPermission.md)
  - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
+ - [RepositoryUserPermissionLinks](docs/RepositoryUserPermissionLinks.md)
  - [SearchCodeSearchResult](docs/SearchCodeSearchResult.md)
  - [SearchContentMatch](docs/SearchContentMatch.md)
  - [SearchLine](docs/SearchLine.md)
@@ -566,7 +568,6 @@ Class | Method | HTTP request | Description
  - [User](docs/User.md)
  - [UserLinks](docs/UserLinks.md)
  - [Version](docs/Version.md)
- - [VersionLinks](docs/VersionLinks.md)
  - [WebhookSubscription](docs/WebhookSubscription.md)
  - [Workspace](docs/Workspace.md)
  - [WorkspaceLinks](docs/WorkspaceLinks.md)

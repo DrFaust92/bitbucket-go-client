@@ -21,9 +21,9 @@ type SshAccountKey struct {
 	// The comment parsed from the SSH key (if present)
 	Comment string `json:"comment,omitempty"`
 	// The user-defined label for the SSH key
-	Label     string        `json:"label,omitempty"`
-	CreatedOn time.Time     `json:"created_on,omitempty"`
-	LastUsed  time.Time     `json:"last_used,omitempty"`
-	Links     *VersionLinks `json:"links,omitempty"`
-	Owner     *Account      `json:"owner,omitempty"`
+	Label     string                         `json:"label,omitempty"`
+	CreatedOn time.Time                      `json:"created_on,omitempty"`
+	LastUsed  time.Time                      `json:"last_used,omitempty"`
+	Links     *RepositoryUserPermissionLinks `json:"links,omitempty"`
+	Owner     *Account                       `json:"owner,omitempty"`
 }

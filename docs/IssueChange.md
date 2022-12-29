@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **User** | [***Account**](account.md) |  | [optional] [default to null]
 **Issue** | [***Issue**](issue.md) |  | [optional] [default to null]
 **Changes** | [***IssueChangeChanges**](issue_change_changes.md) |  | [optional] [default to null]
-**Message** | [***RenderedPullRequestMarkupTitle**](Rendered Pull Request Markup_title.md) |  | [optional] [default to null]
+**Message** | [***BaseCommitSummary**](base_commit_summary.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
