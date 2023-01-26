@@ -1,0 +1,10 @@
+[
+  {
+    "op": "add",
+    "path": "/definitions/repository/allOf/1/properties/slug",
+    "value": {
+      "type": "string",
+      "description": "Slugified name, the same string that is used in Bitbucket URLs."
+    }
+  }
+]
