@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***RefLinks**](ref_links.md) |  | [optional] [default to null]
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Name** | **string** | The name of the ref. | [optional] [default to null]
 **Target** | [***Commit**](commit.md) |  | [optional] [default to null]
 **MergeStrategies** | **[]string** | Available merge strategies for pull requests targeting this branch. | [optional] [default to null]

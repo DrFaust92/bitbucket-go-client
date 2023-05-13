@@ -15,7 +15,9 @@ Method | HTTP request | Description
 [**GetReportsForCommit**](CommitsApi.md#GetReportsForCommit) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports | List reports
 [**RepositoriesWorkspaceRepoSlugCommitCommitApproveDelete**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitApproveDelete) | **Delete** /repositories/{workspace}/{repo_slug}/commit/{commit}/approve | Unapprove a commit
 [**RepositoriesWorkspaceRepoSlugCommitCommitApprovePost**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitApprovePost) | **Post** /repositories/{workspace}/{repo_slug}/commit/{commit}/approve | Approve a commit
+[**RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete) | **Delete** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id} | Delete a commit comment
 [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id} | Get a commit comment
+[**RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut) | **Put** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id} | Update a commit comment
 [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitCommentsGet) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments | List a commit&#x27;s comments
 [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsPost**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitCommentsPost) | **Post** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments | Create comment for a commit
 [**RepositoriesWorkspaceRepoSlugCommitCommitGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitCommitGet) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit} | Get a commit
@@ -372,6 +374,37 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete**
+> RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete(ctx, commentId, commit, repoSlug, workspace)
+Delete a commit comment
+
+Deletes the specified commit comment.  Note that deleting comments that have visible replies that point to them will not really delete the resource. This is to retain the integrity of the original comment tree. Instead, the `deleted` element is set to `true` and the content is blanked out. The comment will continue to be returned by the collections and self endpoints.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **commentId** | **int32**| The id of the comment. | 
+  **commit** | **string**| The commit&#x27;s SHA1. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet**
 > CommitComment RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet(ctx, commentId, commit, repoSlug, workspace)
 Get a commit comment
@@ -400,6 +433,38 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut**
+> RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut(ctx, body, commentId, commit, repoSlug, workspace)
+Update a commit comment
+
+Used to update the contents of a comment. Only the content of the comment can be updated.  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian/prlinks/commit/7f71b5/comments/5728901 \\   -X PUT -u evzijst \\   -H 'Content-Type: application/json' \\   -d '{\"content\": {\"raw\": \"One more thing!\"}' ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**CommitComment**](CommitComment.md)| The updated comment. | 
+  **commentId** | **int32**| The id of the comment. | 
+  **commit** | **string**| The commit&#x27;s SHA1. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -567,7 +632,7 @@ Name | Type | Description  | Notes
 > PaginatedChangeset RepositoriesWorkspaceRepoSlugCommitsRevisionGet(ctx, repoSlug, revision, workspace)
 List commits for revision
 
-These are the repository's commits. They are paginated and returned in reverse chronological order, similar to the output of `git log`. Like these tools, the DAG can be filtered.  #### GET /repositories/{workspace}/{repo_slug}/commits/master  Returns all commits on rev `master` (similar to `git log master`).  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?include=foo&exclude=master  Returns all commits on ref `dev` or `foo`, except those that are reachable on `master` (similar to `git log dev foo ^master`).  An optional `path` parameter can be specified that will limit the results to commits that affect that path. `path` can either be a file or a directory. If a directory is specified, commits are returned that have modified any file in the directory tree rooted by `path`. It is important to note that if the `path` parameter is specified, the commits returned by this endpoint may no longer be a DAG, parent commits that do not modify the path will be omitted from the response.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path=README.md&include=foo&include=bar&exclude=master  Returns all commits that are on refs `dev` or `foo` or `bar`, but not on `master` that changed the file README.md.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path=src/&include=foo&exclude=master  Returns all commits that are on refs `dev` or `foo`, but not on `master` that changed to a file in any file in the directory src or its children.  Because the response could include a very large number of commits, it is paginated. Follow the 'next' link in the response to navigate to the next page of commits. As with other paginated resources, do not construct your own links.  When the include and exclude parameters are more than can fit in a query string, clients can use a `x-www-form-urlencoded` POST instead.
+These are the repository's commits. They are paginated and returned in reverse chronological order, similar to the output of `git log`. Like these tools, the DAG can be filtered.  #### GET /repositories/{workspace}/{repo_slug}/commits/master  Returns all commits on ref `master` (similar to `git log master`).  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?include=foo&exclude=master  Returns all commits on ref `dev` or `foo`, except those that are reachable on `master` (similar to `git log dev foo ^master`).  An optional `path` parameter can be specified that will limit the results to commits that affect that path. `path` can either be a file or a directory. If a directory is specified, commits are returned that have modified any file in the directory tree rooted by `path`. It is important to note that if the `path` parameter is specified, the commits returned by this endpoint may no longer be a DAG, parent commits that do not modify the path will be omitted from the response.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path=README.md&include=foo&include=bar&exclude=master  Returns all commits that are on refs `dev` or `foo` or `bar`, but not on `master` that changed the file README.md.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path=src/&include=foo&exclude=master  Returns all commits that are on refs `dev` or `foo`, but not on `master` that changed to a file in any file in the directory src or its children.  Because the response could include a very large number of commits, it is paginated. Follow the 'next' link in the response to navigate to the next page of commits. As with other paginated resources, do not construct your own links.  When the include and exclude parameters are more than can fit in a query string, clients can use a `x-www-form-urlencoded` POST instead.
 
 ### Required Parameters
 
@@ -575,7 +640,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **revision** | **string**| The commit&#x27;s SHA1. | 
+  **revision** | **string**| A commit SHA1 or ref name. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
@@ -605,7 +670,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **revision** | **string**| The commit&#x27;s SHA1. | 
+  **revision** | **string**| A commit SHA1 or ref name. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type

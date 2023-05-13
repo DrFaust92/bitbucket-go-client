@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***AccountLinks**](account_links.md) |  | [optional] [default to null]
+**Links** | [***ModelError**](map.md) |  | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **DisplayName** | **string** |  | [optional] [default to null]
 **Username** | **string** |  | [optional] [default to null]

@@ -14,20 +14,21 @@ import (
 )
 
 type Pullrequest struct {
-	Type_ string            `json:"type"`
-	Links *PullrequestLinks `json:"links,omitempty"`
+	Type_ string       `json:"type"`
+	Links *interface{} `json:"links,omitempty"`
 	// The pull request's unique ID. Note that pull request IDs are only unique within their associated repository.
 	Id int32 `json:"id,omitempty"`
 	// Title of the pull request.
-	Title    string                          `json:"title,omitempty"`
-	Rendered *RenderedPullRequestMarkup      `json:"rendered,omitempty"`
-	Summary  *RenderedPullRequestMarkupTitle `json:"summary,omitempty"`
+	Title string `json:"title,omitempty"`
+	// User provided pull request text, interpreted in a markup language and rendered in HTML
+	Rendered *interface{} `json:"rendered,omitempty"`
+	Summary  *interface{} `json:"summary,omitempty"`
 	// The pull request's current status.
 	State       string               `json:"state,omitempty"`
 	Author      *Account             `json:"author,omitempty"`
 	Source      *PullrequestEndpoint `json:"source,omitempty"`
 	Destination *PullrequestEndpoint `json:"destination,omitempty"`
-	MergeCommit *PullRequestCommit   `json:"merge_commit,omitempty"`
+	MergeCommit *interface{}         `json:"merge_commit,omitempty"`
 	// The number of comments for a specific pull request.
 	CommentCount int32 `json:"comment_count,omitempty"`
 	// The number of open tasks for a specific pull request.

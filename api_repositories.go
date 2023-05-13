@@ -12,11 +12,12 @@ package bitbucket
 import (
 	"context"
 	"fmt"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1482,15 +1483,15 @@ RepositoriesApiService Retrieve the inheritance state for repository settings
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return RepositoryInheritanceState
+@return ModelError
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx context.Context, repoSlug string, workspace string) (RepositoryInheritanceState, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx context.Context, repoSlug string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue RepositoryInheritanceState
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -1562,7 +1563,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsGe
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v RepositoryInheritanceState
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1930,15 +1931,15 @@ Returns the group permission for a given group slug and repository  Only users w
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return RepositoryGroupPermission
+@return ModelError
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, repoSlug string, workspace string) (RepositoryGroupPermission, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, repoSlug string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue RepositoryGroupPermission
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -2011,7 +2012,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v RepositoryGroupPermission
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2064,15 +2065,15 @@ Updates the group permission if it exists.  Only users with admin permission for
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return RepositoryGroupPermission
+@return ModelError
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx context.Context, groupSlug string, repoSlug string, workspace string) (RepositoryGroupPermission, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx context.Context, groupSlug string, repoSlug string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue RepositoryGroupPermission
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -2145,7 +2146,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v RepositoryGroupPermission
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2463,15 +2464,15 @@ Returns the explicit user permission for a given user and repository.  Only user
   - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return RepositoryUserPermission
+@return ModelError
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (RepositoryUserPermission, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue RepositoryUserPermission
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -2544,7 +2545,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v RepositoryUserPermission
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2597,15 +2598,15 @@ Updates the explicit user permission for a given user and repository. The select
   - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return RepositoryUserPermission
+@return ModelError
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (RepositoryUserPermission, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue RepositoryUserPermission
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -2678,7 +2679,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v RepositoryUserPermission
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

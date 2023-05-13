@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***IssueLinks**](issue_links.md) |  | [optional] [default to null]
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Id** | **int32** |  | [optional] [default to null]
 **Repository** | [***Repository**](repository.md) |  | [optional] [default to null]
 **Title** | **string** |  | [optional] [default to null]
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Version** | [***Version**](version.md) |  | [optional] [default to null]
 **Component** | [***Component**](component.md) |  | [optional] [default to null]
 **Votes** | **int32** |  | [optional] [default to null]
-**Content** | [***RenderedPullRequestMarkupTitle**](Rendered Pull Request Markup_title.md) |  | [optional] [default to null]
+**Content** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

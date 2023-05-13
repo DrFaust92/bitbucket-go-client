@@ -45,7 +45,7 @@ func (a *DeploymentsApiService) CreateEnvironment(ctx context.Context, body Depl
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/environments/"
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/environments"
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
@@ -337,7 +337,7 @@ func (a *DeploymentsApiService) GetDeploymentsForRepository(ctx context.Context,
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/deployments/"
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/deployments"
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
@@ -527,7 +527,7 @@ func (a *DeploymentsApiService) GetEnvironmentsForRepository(ctx context.Context
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/environments/"
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/environments"
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
@@ -1169,7 +1169,7 @@ func (a *DeploymentsApiService) UpdateEnvironmentForRepository(ctx context.Conte
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/"
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes"
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_uuid"+"}", fmt.Sprintf("%v", environmentUuid), -1)

@@ -325,15 +325,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 
-@return ApplicationProperty
+@return ModelError
 */
-func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
+func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, commit string, appKey string, propertyName string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ApplicationProperty
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -395,7 +395,7 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ApplicationProperty
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -420,15 +420,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 
-@return ApplicationProperty
+@return ModelError
 */
-func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
+func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ApplicationProperty
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -490,7 +490,7 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ApplicationProperty
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -514,15 +514,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 
-@return ApplicationProperty
+@return ModelError
 */
-func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
+func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Context, workspace string, repoSlug string, appKey string, propertyName string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ApplicationProperty
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -583,7 +583,7 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ApplicationProperty
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -606,15 +606,15 @@ Retrieve an [application property](/cloud/bitbucket/application-properties/) val
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 
-@return ApplicationProperty
+@return ModelError
 */
-func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (ApplicationProperty, *http.Response, error) {
+func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Context, selectedUser string, appKey string, propertyName string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ApplicationProperty
+		localVarReturnValue ModelError
 	)
 
 	// create path and map variables
@@ -674,7 +674,7 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ApplicationProperty
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -700,7 +700,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 */
-func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Context, body ModelError, workspace string, repoSlug string, commit string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -777,7 +777,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 */
-func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.Context, body ModelError, workspace string, repoSlug string, pullrequestId string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -853,7 +853,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 */
-func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.Context, body ApplicationProperty, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.Context, body ModelError, workspace string, repoSlug string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -927,7 +927,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
   - @param appKey The key of the Connect app.
   - @param propertyName The name of the property.
 */
-func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context, body ApplicationProperty, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
+func (a *PropertiesApiService) UpdateUserHostedPropertyValue(ctx context.Context, body ModelError, selectedUser string, appKey string, propertyName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}

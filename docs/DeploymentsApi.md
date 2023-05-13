@@ -4,18 +4,18 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateEnvironment**](DeploymentsApi.md#CreateEnvironment) | **Post** /repositories/{workspace}/{repo_slug}/environments/ | Create an environment
+[**CreateEnvironment**](DeploymentsApi.md#CreateEnvironment) | **Post** /repositories/{workspace}/{repo_slug}/environments | Create an environment
 [**DeleteEnvironmentForRepository**](DeploymentsApi.md#DeleteEnvironmentForRepository) | **Delete** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid} | Delete an environment
 [**GetDeploymentForRepository**](DeploymentsApi.md#GetDeploymentForRepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid} | Get a deployment
-[**GetDeploymentsForRepository**](DeploymentsApi.md#GetDeploymentsForRepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments/ | List deployments
+[**GetDeploymentsForRepository**](DeploymentsApi.md#GetDeploymentsForRepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments | List deployments
 [**GetEnvironmentForRepository**](DeploymentsApi.md#GetEnvironmentForRepository) | **Get** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid} | Get an environment
-[**GetEnvironmentsForRepository**](DeploymentsApi.md#GetEnvironmentsForRepository) | **Get** /repositories/{workspace}/{repo_slug}/environments/ | List environments
+[**GetEnvironmentsForRepository**](DeploymentsApi.md#GetEnvironmentsForRepository) | **Get** /repositories/{workspace}/{repo_slug}/environments | List environments
 [**RepositoriesWorkspaceRepoSlugDeployKeysGet**](DeploymentsApi.md#RepositoriesWorkspaceRepoSlugDeployKeysGet) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys | List repository deploy keys
 [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdDelete**](DeploymentsApi.md#RepositoriesWorkspaceRepoSlugDeployKeysKeyIdDelete) | **Delete** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Delete a repository deploy key
 [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdGet**](DeploymentsApi.md#RepositoriesWorkspaceRepoSlugDeployKeysKeyIdGet) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Get a repository deploy key
 [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdPut**](DeploymentsApi.md#RepositoriesWorkspaceRepoSlugDeployKeysKeyIdPut) | **Put** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Update a repository deploy key
 [**RepositoriesWorkspaceRepoSlugDeployKeysPost**](DeploymentsApi.md#RepositoriesWorkspaceRepoSlugDeployKeysPost) | **Post** /repositories/{workspace}/{repo_slug}/deploy-keys | Add a repository deploy key
-[**UpdateEnvironmentForRepository**](DeploymentsApi.md#UpdateEnvironmentForRepository) | **Post** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/ | Update an environment
+[**UpdateEnvironmentForRepository**](DeploymentsApi.md#UpdateEnvironmentForRepository) | **Post** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes | Update an environment
 [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet**](DeploymentsApi.md#WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet) | **Get** /workspaces/{workspace}/projects/{project_key}/deploy-keys | List project deploy keys
 [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdDelete**](DeploymentsApi.md#WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdDelete) | **Delete** /workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id} | Delete a deploy key from a project
 [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdGet**](DeploymentsApi.md#WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdGet) | **Get** /workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id} | Get a project deploy key

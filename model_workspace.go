@@ -14,8 +14,8 @@ import (
 )
 
 type Workspace struct {
-	Type_ string          `json:"type"`
-	Links *WorkspaceLinks `json:"links,omitempty"`
+	Type_ string       `json:"type"`
+	Links *interface{} `json:"links,omitempty"`
 	// The workspace's immutable id.
 	Uuid string `json:"uuid,omitempty"`
 	// The name of the workspace.

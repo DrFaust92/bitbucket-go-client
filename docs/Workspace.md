@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***WorkspaceLinks**](workspace_links.md) |  | [optional] [default to null]
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Uuid** | **string** | The workspace&#x27;s immutable id. | [optional] [default to null]
 **Name** | **string** | The name of the workspace. | [optional] [default to null]
 **Slug** | **string** | The short label that identifies this workspace. | [optional] [default to null]

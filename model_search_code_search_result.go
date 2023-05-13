@@ -14,5 +14,5 @@ type SearchCodeSearchResult struct {
 	ContentMatchCount int64                `json:"content_match_count,omitempty"`
 	ContentMatches    []SearchContentMatch `json:"content_matches,omitempty"`
 	PathMatches       []SearchSegment      `json:"path_matches,omitempty"`
-	File              *CommitFile          `json:"file,omitempty"`
+	File              *ModelError          `json:"file,omitempty"`
 }

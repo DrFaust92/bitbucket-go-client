@@ -21,9 +21,9 @@ type DeployKey struct {
 	// The comment parsed from the deploy key (if present)
 	Comment string `json:"comment,omitempty"`
 	// The user-defined label for the deploy key
-	Label    string        `json:"label,omitempty"`
-	AddedOn  time.Time     `json:"added_on,omitempty"`
-	LastUsed time.Time     `json:"last_used,omitempty"`
-	Links    *VersionLinks `json:"links,omitempty"`
-	Owner    *Account      `json:"owner,omitempty"`
+	Label    string       `json:"label,omitempty"`
+	AddedOn  time.Time    `json:"added_on,omitempty"`
+	LastUsed time.Time    `json:"last_used,omitempty"`
+	Links    *interface{} `json:"links,omitempty"`
+	Owner    *Account     `json:"owner,omitempty"`
 }

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***ProjectLinks**](project_links.md) |  | [optional] [default to null]
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Uuid** | **string** | The project&#x27;s immutable id. | [optional] [default to null]
 **Key** | **string** | The project&#x27;s key. | [optional] [default to null]
 **Owner** | [***Team**](team.md) |  | [optional] [default to null]

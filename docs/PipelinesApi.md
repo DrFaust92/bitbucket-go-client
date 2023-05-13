@@ -5,18 +5,19 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDeploymentVariable**](PipelinesApi.md#CreateDeploymentVariable) | **Post** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables | Create a variable for an environment
-[**CreatePipelineForRepository**](PipelinesApi.md#CreatePipelineForRepository) | **Post** /repositories/{workspace}/{repo_slug}/pipelines/ | Run a pipeline
-[**CreatePipelineVariableForTeam**](PipelinesApi.md#CreatePipelineVariableForTeam) | **Post** /teams/{username}/pipelines_config/variables/ | Create a variable for a user
-[**CreatePipelineVariableForUser**](PipelinesApi.md#CreatePipelineVariableForUser) | **Post** /users/{selected_user}/pipelines_config/variables/ | Create a variable for a user
+[**CreatePipelineForRepository**](PipelinesApi.md#CreatePipelineForRepository) | **Post** /repositories/{workspace}/{repo_slug}/pipelines | Run a pipeline
+[**CreatePipelineVariableForTeam**](PipelinesApi.md#CreatePipelineVariableForTeam) | **Post** /teams/{username}/pipelines_config/variables | Create a variable for a user
+[**CreatePipelineVariableForUser**](PipelinesApi.md#CreatePipelineVariableForUser) | **Post** /users/{selected_user}/pipelines_config/variables | Create a variable for a user
 [**CreatePipelineVariableForWorkspace**](PipelinesApi.md#CreatePipelineVariableForWorkspace) | **Post** /workspaces/{workspace}/pipelines-config/variables | Create a variable for a workspace
-[**CreateRepositoryPipelineKnownHost**](PipelinesApi.md#CreateRepositoryPipelineKnownHost) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/ | Create a known host
-[**CreateRepositoryPipelineSchedule**](PipelinesApi.md#CreateRepositoryPipelineSchedule) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/ | Create a schedule
-[**CreateRepositoryPipelineVariable**](PipelinesApi.md#CreateRepositoryPipelineVariable) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/ | Create a variable for a repository
+[**CreateRepositoryPipelineKnownHost**](PipelinesApi.md#CreateRepositoryPipelineKnownHost) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts | Create a known host
+[**CreateRepositoryPipelineSchedule**](PipelinesApi.md#CreateRepositoryPipelineSchedule) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules | Create a schedule
+[**CreateRepositoryPipelineVariable**](PipelinesApi.md#CreateRepositoryPipelineVariable) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/variables | Create a variable for a repository
 [**DeleteDeploymentVariable**](PipelinesApi.md#DeleteDeploymentVariable) | **Delete** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid} | Delete a variable for an environment
 [**DeletePipelineVariableForTeam**](PipelinesApi.md#DeletePipelineVariableForTeam) | **Delete** /teams/{username}/pipelines_config/variables/{variable_uuid} | Delete a variable for a team
 [**DeletePipelineVariableForUser**](PipelinesApi.md#DeletePipelineVariableForUser) | **Delete** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Delete a variable for a user
 [**DeletePipelineVariableForWorkspace**](PipelinesApi.md#DeletePipelineVariableForWorkspace) | **Delete** /workspaces/{workspace}/pipelines-config/variables/{variable_uuid} | Delete a variable for a workspace
 [**DeleteRepositoryPipelineCache**](PipelinesApi.md#DeleteRepositoryPipelineCache) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid} | Delete a cache
+[**DeleteRepositoryPipelineCaches**](PipelinesApi.md#DeleteRepositoryPipelineCaches) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches | Delete caches
 [**DeleteRepositoryPipelineKeyPair**](PipelinesApi.md#DeleteRepositoryPipelineKeyPair) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Delete SSH key pair
 [**DeleteRepositoryPipelineKnownHost**](PipelinesApi.md#DeleteRepositoryPipelineKnownHost) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Delete a known host
 [**DeleteRepositoryPipelineSchedule**](PipelinesApi.md#DeleteRepositoryPipelineSchedule) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Delete a schedule
@@ -28,28 +29,28 @@ Method | HTTP request | Description
 [**GetPipelineForRepository**](PipelinesApi.md#GetPipelineForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid} | Get a pipeline
 [**GetPipelineStepForRepository**](PipelinesApi.md#GetPipelineStepForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid} | Get a step of a pipeline
 [**GetPipelineStepLogForRepository**](PipelinesApi.md#GetPipelineStepLogForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log | Get log file for a step
-[**GetPipelineStepsForRepository**](PipelinesApi.md#GetPipelineStepsForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/ | List steps for a pipeline
+[**GetPipelineStepsForRepository**](PipelinesApi.md#GetPipelineStepsForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps | List steps for a pipeline
 [**GetPipelineTestReportTestCaseReasons**](PipelinesApi.md#GetPipelineTestReportTestCaseReasons) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons | Get test case reasons (output) for a given test case in a step of a pipeline.
 [**GetPipelineTestReportTestCases**](PipelinesApi.md#GetPipelineTestReportTestCases) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases | Get test cases for a given step of a pipeline.
 [**GetPipelineTestReports**](PipelinesApi.md#GetPipelineTestReports) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports | Get a summary of test reports for a given step of a pipeline.
 [**GetPipelineVariableForTeam**](PipelinesApi.md#GetPipelineVariableForTeam) | **Get** /teams/{username}/pipelines_config/variables/{variable_uuid} | Get a variable for a team
 [**GetPipelineVariableForUser**](PipelinesApi.md#GetPipelineVariableForUser) | **Get** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Get a variable for a user
 [**GetPipelineVariableForWorkspace**](PipelinesApi.md#GetPipelineVariableForWorkspace) | **Get** /workspaces/{workspace}/pipelines-config/variables/{variable_uuid} | Get variable for a workspace
-[**GetPipelineVariablesForTeam**](PipelinesApi.md#GetPipelineVariablesForTeam) | **Get** /teams/{username}/pipelines_config/variables/ | List variables for an account
-[**GetPipelineVariablesForUser**](PipelinesApi.md#GetPipelineVariablesForUser) | **Get** /users/{selected_user}/pipelines_config/variables/ | List variables for a user
+[**GetPipelineVariablesForTeam**](PipelinesApi.md#GetPipelineVariablesForTeam) | **Get** /teams/{username}/pipelines_config/variables | List variables for an account
+[**GetPipelineVariablesForUser**](PipelinesApi.md#GetPipelineVariablesForUser) | **Get** /users/{selected_user}/pipelines_config/variables | List variables for a user
 [**GetPipelineVariablesForWorkspace**](PipelinesApi.md#GetPipelineVariablesForWorkspace) | **Get** /workspaces/{workspace}/pipelines-config/variables | List variables for a workspace
-[**GetPipelinesForRepository**](PipelinesApi.md#GetPipelinesForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/ | List pipelines
+[**GetPipelinesForRepository**](PipelinesApi.md#GetPipelinesForRepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines | List pipelines
 [**GetRepositoryPipelineCacheContentURI**](PipelinesApi.md#GetRepositoryPipelineCacheContentURI) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri | Get cache content URI
-[**GetRepositoryPipelineCaches**](PipelinesApi.md#GetRepositoryPipelineCaches) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/ | List caches
+[**GetRepositoryPipelineCaches**](PipelinesApi.md#GetRepositoryPipelineCaches) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/caches | List caches
 [**GetRepositoryPipelineConfig**](PipelinesApi.md#GetRepositoryPipelineConfig) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config | Get configuration
 [**GetRepositoryPipelineKnownHost**](PipelinesApi.md#GetRepositoryPipelineKnownHost) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Get a known host
-[**GetRepositoryPipelineKnownHosts**](PipelinesApi.md#GetRepositoryPipelineKnownHosts) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/ | List known hosts
+[**GetRepositoryPipelineKnownHosts**](PipelinesApi.md#GetRepositoryPipelineKnownHosts) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts | List known hosts
 [**GetRepositoryPipelineSchedule**](PipelinesApi.md#GetRepositoryPipelineSchedule) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Get a schedule
-[**GetRepositoryPipelineScheduleExecutions**](PipelinesApi.md#GetRepositoryPipelineScheduleExecutions) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/ | List executions of a schedule
-[**GetRepositoryPipelineSchedules**](PipelinesApi.md#GetRepositoryPipelineSchedules) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/ | List schedules
+[**GetRepositoryPipelineScheduleExecutions**](PipelinesApi.md#GetRepositoryPipelineScheduleExecutions) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions | List executions of a schedule
+[**GetRepositoryPipelineSchedules**](PipelinesApi.md#GetRepositoryPipelineSchedules) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules | List schedules
 [**GetRepositoryPipelineSshKeyPair**](PipelinesApi.md#GetRepositoryPipelineSshKeyPair) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Get SSH key pair
 [**GetRepositoryPipelineVariable**](PipelinesApi.md#GetRepositoryPipelineVariable) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Get a variable for a repository
-[**GetRepositoryPipelineVariables**](PipelinesApi.md#GetRepositoryPipelineVariables) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/ | List variables for a repository
+[**GetRepositoryPipelineVariables**](PipelinesApi.md#GetRepositoryPipelineVariables) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables | List variables for a repository
 [**StopPipeline**](PipelinesApi.md#StopPipeline) | **Post** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline | Stop a pipeline
 [**UpdateDeploymentVariable**](PipelinesApi.md#UpdateDeploymentVariable) | **Put** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid} | Update a variable for an environment
 [**UpdatePipelineVariableForTeam**](PipelinesApi.md#UpdatePipelineVariableForTeam) | **Put** /teams/{username}/pipelines_config/variables/{variable_uuid} | Update a variable for a team
@@ -272,7 +273,7 @@ Create a schedule for the given repository.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**PipelineSchedule**](PipelineSchedule.md)| The schedule to create. | 
+  **body** | [**PipelineSchedulePostRequestBody**](PipelineSchedulePostRequestBody.md)| The schedule to create. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
 
@@ -453,6 +454,36 @@ Name | Type | Description  | Notes
   **workspace** | **string**| The account. | 
   **repoSlug** | **string**| The repository. | 
   **cacheUuid** | **string**| The UUID of the cache to delete. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DeleteRepositoryPipelineCaches**
+> DeleteRepositoryPipelineCaches(ctx, workspace, repoSlug, name)
+Delete caches
+
+Delete repository cache versions by name.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| The account. | 
+  **repoSlug** | **string**| The repository. | 
+  **name** | **string**| The cache name. | 
 
 ### Return type
 
@@ -1724,7 +1755,7 @@ Update a schedule.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**PipelineSchedule**](PipelineSchedule.md)| The schedule to update. | 
+  **body** | [**PipelineSchedulePutRequestBody**](PipelineSchedulePutRequestBody.md)| The schedule to update. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **scheduleUuid** | **string**| The uuid of the schedule. | 

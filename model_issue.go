@@ -14,22 +14,22 @@ import (
 )
 
 type Issue struct {
-	Type_      string                          `json:"type"`
-	Links      *IssueLinks                     `json:"links,omitempty"`
-	Id         int32                           `json:"id,omitempty"`
-	Repository *Repository                     `json:"repository,omitempty"`
-	Title      string                          `json:"title,omitempty"`
-	Reporter   *Account                        `json:"reporter,omitempty"`
-	Assignee   *Account                        `json:"assignee,omitempty"`
-	CreatedOn  time.Time                       `json:"created_on,omitempty"`
-	UpdatedOn  time.Time                       `json:"updated_on,omitempty"`
-	EditedOn   time.Time                       `json:"edited_on,omitempty"`
-	State      string                          `json:"state,omitempty"`
-	Kind       string                          `json:"kind,omitempty"`
-	Priority   string                          `json:"priority,omitempty"`
-	Milestone  *Milestone                      `json:"milestone,omitempty"`
-	Version    *Version                        `json:"version,omitempty"`
-	Component  *Component                      `json:"component,omitempty"`
-	Votes      int32                           `json:"votes,omitempty"`
-	Content    *RenderedPullRequestMarkupTitle `json:"content,omitempty"`
+	Type_      string       `json:"type"`
+	Links      *interface{} `json:"links,omitempty"`
+	Id         int32        `json:"id,omitempty"`
+	Repository *Repository  `json:"repository,omitempty"`
+	Title      string       `json:"title,omitempty"`
+	Reporter   *Account     `json:"reporter,omitempty"`
+	Assignee   *Account     `json:"assignee,omitempty"`
+	CreatedOn  time.Time    `json:"created_on,omitempty"`
+	UpdatedOn  time.Time    `json:"updated_on,omitempty"`
+	EditedOn   time.Time    `json:"edited_on,omitempty"`
+	State      string       `json:"state,omitempty"`
+	Kind       string       `json:"kind,omitempty"`
+	Priority   string       `json:"priority,omitempty"`
+	Milestone  *Milestone   `json:"milestone,omitempty"`
+	Version    *Version     `json:"version,omitempty"`
+	Component  *Component   `json:"component,omitempty"`
+	Votes      int32        `json:"votes,omitempty"`
+	Content    *interface{} `json:"content,omitempty"`
 }

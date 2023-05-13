@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugOverrideSettingsGet**
-> RepositoryInheritanceState RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx, repoSlug, workspace)
+> ModelError RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx, repoSlug, workspace)
 Retrieve the inheritance state for repository settings
 
 ### Required Parameters
@@ -460,7 +460,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryInheritanceState**](repository_inheritance_state.md)
+[**ModelError**](map.md)
 
 ### Authorization
 
@@ -560,7 +560,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**
-> RepositoryGroupPermission RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, repoSlug, workspace)
+> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, repoSlug, workspace)
 Get an explicit group permission for a repository
 
 Returns the group permission for a given group slug and repository  Only users with admin permission for the repository may access this resource.  Permissions can be:  * `admin` * `write` * `read` * `none`  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  {     \"type\": \"repository_group_permission\",     \"group\": {         \"type\": \"group\",         \"name\": \"Developers\",         \"slug\": \"developers\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"read\",     \"links\": {       \"self\": {         \"href\":         \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers\"       }     } } ```
@@ -576,7 +576,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryGroupPermission**](repository_group_permission.md)
+[**ModelError**](map.md)
 
 ### Authorization
 
@@ -590,7 +590,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut**
-> RepositoryGroupPermission RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx, groupSlug, repoSlug, workspace)
+> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx, groupSlug, repoSlug, workspace)
 Update an explicit group permission for a repository
 
 Updates the group permission if it exists.  Only users with admin permission for the repository may access this resource.  The only authentication method supported for this endpoint is via app passwords.  Permissions can be:  * `admin` * `write` * `read`  Example: ``` $ curl -X PUT -H \"Content-Type: application/json\" https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers -d '{     \"permission\": \"write\" }'  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers  {     \"type\": \"repository_group_permission\",     \"group\": {         \"type\": \"group\",         \"name\": \"Developers\",         \"slug\": \"developers\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"write\",     \"links\": {       \"self\": {         \"href\":         \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups/developers\"       }     } } ```
@@ -606,7 +606,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryGroupPermission**](repository_group_permission.md)
+[**ModelError**](map.md)
 
 ### Authorization
 
@@ -679,7 +679,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet**
-> RepositoryUserPermission RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx, repoSlug, selectedUserId, workspace)
+> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx, repoSlug, selectedUserId, workspace)
 Get an explicit user permission for a repository
 
 Returns the explicit user permission for a given user and repository.  Only users with admin permission for the repository may access this resource.  Permissions can be:  * `admin` * `write` * `read` * `none`  Example:  ``` $ curl 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/         permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'  HTTP/1.1 200 Location: 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/            permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'  {     \"type\": \"repository_user_permission\",     \"user\": {         \"type\": \"user\",         \"display_name\": \"Colin Cameron\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"admin\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         }     } } ```
@@ -695,7 +695,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryUserPermission**](repository_user_permission.md)
+[**ModelError**](map.md)
 
 ### Authorization
 
@@ -709,7 +709,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut**
-> RepositoryUserPermission RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx, repoSlug, selectedUserId, workspace)
+> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx, repoSlug, selectedUserId, workspace)
 Update an explicit user permission for a repository
 
 Updates the explicit user permission for a given user and repository. The selected user must be a member of the workspace, and cannot be the workspace owner. Only users with admin permission for the repository may access this resource.  The only authentication method for this endpoint is via app passwords.  Permissions can be:  * `admin` * `write` * `read`  Example:  ``` $ curl -X PUT -H \"Content-Type: application/json\" 'https://api.bitbucket.org/2.0/repositories/ atlassian_tutorial/geordi/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a' -d         '{     \"permission\": \"write\" }'  HTTP/1.1 200 Location: 'https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'   {     \"type\": \"repository_user_permission\",     \"user\": {         \"type\": \"user\",         \"display_name\": \"Colin Cameron\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"     },     \"repository\": {         \"type\": \"repository\",         \"name\": \"geordi\",         \"full_name\": \"atlassian_tutorial/geordi\",         \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"     },     \"permission\": \"write\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         }     } } ```
@@ -725,7 +725,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryUserPermission**](repository_user_permission.md)
+[**ModelError**](map.md)
 
 ### Authorization
 

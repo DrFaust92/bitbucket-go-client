@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***GroupLinks**](group_links.md) |  | [optional] [default to null]
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Owner** | [***Account**](account.md) |  | [optional] [default to null]
 **Workspace** | [***Workspace**](workspace.md) |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]

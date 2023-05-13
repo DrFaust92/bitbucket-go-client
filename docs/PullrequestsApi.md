@@ -20,6 +20,8 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdDelete**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdDelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id} | Delete a comment on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id} | Get a comment on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdPut**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdPut) | **Put** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id} | Update a comment on a pull request
+[**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolveDelete**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolveDelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve | Reopen a comment thread
+[**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve | Resolve a comment thread
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments | List comments on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsPost**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsPost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments | Create a comment on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommitsGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommitsGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits | List commits on a pull request
@@ -553,6 +555,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolveDelete**
+> RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolveDelete(ctx, commentId, pullRequestId, repoSlug, workspace)
+Reopen a comment thread
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **commentId** | **int32**| The id of the comment. | 
+  **pullRequestId** | **int32**| The id of the pull request. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost**
+> ModelError RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost(ctx, commentId, pullRequestId, repoSlug, workspace)
+Resolve a comment thread
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **commentId** | **int32**| The id of the comment. | 
+  **pullRequestId** | **int32**| The id of the pull request. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**ModelError**](map.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet**
 > PaginatedPullrequestComments RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet(ctx, pullRequestId, repoSlug, workspace)
 List comments on a pull request
@@ -787,7 +847,7 @@ Name | Type | Description  | Notes
 
 
 
- **body** | [**optional.Interface of PullrequestMergeParameters**](PullrequestMergeParameters.md)|  | 
+ **body** | [**optional.Interface of ModelError**](map.md)|  | 
  **async** | **optional.**| Default value is false.   When set to true, runs merge asynchronously and immediately returns a 202 with polling link to the task-status API in the Location header.   When set to false, runs merge and waits for it to complete, returning 200 when it succeeds. If the duration of the merge exceeds a timeout threshold, the API returns a 202 with polling link to the task-status API in the Location header. | 
 
 ### Return type

@@ -14,8 +14,8 @@ import (
 )
 
 type Commitstatus struct {
-	Type_ string             `json:"type"`
-	Links *CommitstatusLinks `json:"links,omitempty"`
+	Type_ string       `json:"type"`
+	Links *interface{} `json:"links,omitempty"`
 	// The commit status' id.
 	Uuid string `json:"uuid,omitempty"`
 	// An identifier for the status that's unique to         its type (current \"build\" is the only supported type) and the vendor,         e.g. BB-DEPLOY

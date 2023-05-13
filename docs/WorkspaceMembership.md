@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Links** | [***VersionLinks**](version_links.md) |  | [optional] [default to null]
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **User** | [***Account**](account.md) |  | [optional] [default to null]
 **Workspace** | [***Workspace**](workspace.md) |  | [optional] [default to null]
 

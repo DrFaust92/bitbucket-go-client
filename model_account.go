@@ -14,10 +14,10 @@ import (
 )
 
 type Account struct {
-	Type_       string        `json:"type"`
-	Links       *AccountLinks `json:"links,omitempty"`
-	CreatedOn   time.Time     `json:"created_on,omitempty"`
-	DisplayName string        `json:"display_name,omitempty"`
-	Username    string        `json:"username,omitempty"`
-	Uuid        string        `json:"uuid,omitempty"`
+	Type_       string      `json:"type"`
+	Links       *ModelError `json:"links,omitempty"`
+	CreatedOn   time.Time   `json:"created_on,omitempty"`
+	DisplayName string      `json:"display_name,omitempty"`
+	Username    string      `json:"username,omitempty"`
+	Uuid        string      `json:"uuid,omitempty"`
 }

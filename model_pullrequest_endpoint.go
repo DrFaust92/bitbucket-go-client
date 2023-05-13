@@ -10,7 +10,7 @@
 package bitbucket
 
 type PullrequestEndpoint struct {
-	Repository *Repository        `json:"repository,omitempty"`
-	Branch     *PullRequestBranch `json:"branch,omitempty"`
-	Commit     *PullRequestCommit `json:"commit,omitempty"`
+	Repository *Repository  `json:"repository,omitempty"`
+	Branch     *interface{} `json:"branch,omitempty"`
+	Commit     *interface{} `json:"commit,omitempty"`
 }

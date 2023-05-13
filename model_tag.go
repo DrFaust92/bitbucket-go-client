@@ -14,8 +14,8 @@ import (
 )
 
 type Tag struct {
-	Type_ string    `json:"type"`
-	Links *RefLinks `json:"links,omitempty"`
+	Type_ string       `json:"type"`
+	Links *interface{} `json:"links,omitempty"`
 	// The name of the ref.
 	Name   string  `json:"name,omitempty"`
 	Target *Commit `json:"target,omitempty"`

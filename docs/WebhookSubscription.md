@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Url** | **string** | The URL events get delivered to. | [optional] [default to null]
 **Description** | **string** | A user-defined description of the webhook. | [optional] [default to null]
 **SubjectType** | **string** | The type of entity. Set to either &#x60;repository&#x60; or &#x60;workspace&#x60; based on where the subscription is defined. | [optional] [default to null]
-**Subject** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
+**Subject** | [***ModelError**](map.md) |  | [optional] [default to null]
 **Active** | **bool** |  | [optional] [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Events** | **[]string** | The events this webhook is subscribed to. | [optional] [default to null]

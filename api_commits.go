@@ -12,11 +12,12 @@ package bitbucket
 import (
 	"context"
 	"fmt"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1082,6 +1083,91 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitApprovePost
 }
 
 /*
+CommitsApiService Delete a commit comment
+Deletes the specified commit comment.  Note that deleting comments that have visible replies that point to them will not really delete the resource. This is to retain the integrity of the original comment tree. Instead, the &#x60;deleted&#x60; element is set to &#x60;true&#x60; and the content is blanked out. The comment will continue to be returned by the collections and self endpoints.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param commentId The id of the comment.
+  - @param commit The commit&#x27;s SHA1.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+*/
+func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete(ctx context.Context, commentId int32, commit string, repoSlug string, workspace string) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Delete")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"comment_id"+"}", fmt.Sprintf("%v", commentId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commit"+"}", fmt.Sprintf("%v", commit), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Authorization"] = key
+
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
 CommitsApiService Get a commit comment
 Returns the specified commit comment.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1185,6 +1271,94 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCom
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+CommitsApiService Update a commit comment
+Used to update the contents of a comment. Only the content of the comment can be updated.  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/atlassian/prlinks/commit/7f71b5/comments/5728901 \\   -X PUT -u evzijst \\   -H &#x27;Content-Type: application/json&#x27; \\   -d &#x27;{\&quot;content\&quot;: {\&quot;raw\&quot;: \&quot;One more thing!\&quot;}&#x27; &#x60;&#x60;&#x60;
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The updated comment.
+  - @param commentId The id of the comment.
+  - @param commit The commit&#x27;s SHA1.
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+*/
+func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut(ctx context.Context, body CommitComment, commentId int32, commit string, repoSlug string, workspace string) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Put")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"comment_id"+"}", fmt.Sprintf("%v", commentId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commit"+"}", fmt.Sprintf("%v", commit), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Authorization"] = key
+
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
 }
 
 /*
@@ -1731,10 +1905,10 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitsPost(ctx context
 
 /*
 CommitsApiService List commits for revision
-These are the repository&#x27;s commits. They are paginated and returned in reverse chronological order, similar to the output of &#x60;git log&#x60;. Like these tools, the DAG can be filtered.  #### GET /repositories/{workspace}/{repo_slug}/commits/master  Returns all commits on rev &#x60;master&#x60; (similar to &#x60;git log master&#x60;).  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?include&#x3D;foo&amp;exclude&#x3D;master  Returns all commits on ref &#x60;dev&#x60; or &#x60;foo&#x60;, except those that are reachable on &#x60;master&#x60; (similar to &#x60;git log dev foo ^master&#x60;).  An optional &#x60;path&#x60; parameter can be specified that will limit the results to commits that affect that path. &#x60;path&#x60; can either be a file or a directory. If a directory is specified, commits are returned that have modified any file in the directory tree rooted by &#x60;path&#x60;. It is important to note that if the &#x60;path&#x60; parameter is specified, the commits returned by this endpoint may no longer be a DAG, parent commits that do not modify the path will be omitted from the response.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path&#x3D;README.md&amp;include&#x3D;foo&amp;include&#x3D;bar&amp;exclude&#x3D;master  Returns all commits that are on refs &#x60;dev&#x60; or &#x60;foo&#x60; or &#x60;bar&#x60;, but not on &#x60;master&#x60; that changed the file README.md.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path&#x3D;src/&amp;include&#x3D;foo&amp;exclude&#x3D;master  Returns all commits that are on refs &#x60;dev&#x60; or &#x60;foo&#x60;, but not on &#x60;master&#x60; that changed to a file in any file in the directory src or its children.  Because the response could include a very large number of commits, it is paginated. Follow the &#x27;next&#x27; link in the response to navigate to the next page of commits. As with other paginated resources, do not construct your own links.  When the include and exclude parameters are more than can fit in a query string, clients can use a &#x60;x-www-form-urlencoded&#x60; POST instead.
+These are the repository&#x27;s commits. They are paginated and returned in reverse chronological order, similar to the output of &#x60;git log&#x60;. Like these tools, the DAG can be filtered.  #### GET /repositories/{workspace}/{repo_slug}/commits/master  Returns all commits on ref &#x60;master&#x60; (similar to &#x60;git log master&#x60;).  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?include&#x3D;foo&amp;exclude&#x3D;master  Returns all commits on ref &#x60;dev&#x60; or &#x60;foo&#x60;, except those that are reachable on &#x60;master&#x60; (similar to &#x60;git log dev foo ^master&#x60;).  An optional &#x60;path&#x60; parameter can be specified that will limit the results to commits that affect that path. &#x60;path&#x60; can either be a file or a directory. If a directory is specified, commits are returned that have modified any file in the directory tree rooted by &#x60;path&#x60;. It is important to note that if the &#x60;path&#x60; parameter is specified, the commits returned by this endpoint may no longer be a DAG, parent commits that do not modify the path will be omitted from the response.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path&#x3D;README.md&amp;include&#x3D;foo&amp;include&#x3D;bar&amp;exclude&#x3D;master  Returns all commits that are on refs &#x60;dev&#x60; or &#x60;foo&#x60; or &#x60;bar&#x60;, but not on &#x60;master&#x60; that changed the file README.md.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path&#x3D;src/&amp;include&#x3D;foo&amp;exclude&#x3D;master  Returns all commits that are on refs &#x60;dev&#x60; or &#x60;foo&#x60;, but not on &#x60;master&#x60; that changed to a file in any file in the directory src or its children.  Because the response could include a very large number of commits, it is paginated. Follow the &#x27;next&#x27; link in the response to navigate to the next page of commits. As with other paginated resources, do not construct your own links.  When the include and exclude parameters are more than can fit in a query string, clients can use a &#x60;x-www-form-urlencoded&#x60; POST instead.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param revision The commit&#x27;s SHA1.
+  - @param revision A commit SHA1 or ref name.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return PaginatedChangeset
@@ -1848,7 +2022,7 @@ CommitsApiService List commits for revision using include/exclude
 Identical to &#x60;GET /repositories/{workspace}/{repo_slug}/commits/{revision}&#x60;, except that POST allows clients to place the include and exclude parameters in the request body to avoid URL length issues.  **Note that this resource does NOT support new commit creation.**
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param revision The commit&#x27;s SHA1.
+  - @param revision A commit SHA1 or ref name.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return PaginatedChangeset

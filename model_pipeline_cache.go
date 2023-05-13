@@ -23,6 +23,8 @@ type PipelineCache struct {
 	StepUuid string `json:"step_uuid,omitempty"`
 	// The name of the cache.
 	Name string `json:"name,omitempty"`
+	// The key hash of the cache version.
+	KeyHash string `json:"key_hash,omitempty"`
 	// The path where the cache contents were retrieved from.
 	Path string `json:"path,omitempty"`
 	// The size of the file containing the archive of the cache.

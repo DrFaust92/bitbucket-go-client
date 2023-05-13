@@ -60,7 +60,9 @@ Class | Method | HTTP request | Description
 *CommitsApi* | [**GetReportsForCommit**](docs/CommitsApi.md#getreportsforcommit) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports | List reports
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitApproveDelete**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitapprovedelete) | **Delete** /repositories/{workspace}/{repo_slug}/commit/{commit}/approve | Unapprove a commit
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitApprovePost**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitapprovepost) | **Post** /repositories/{workspace}/{repo_slug}/commit/{commit}/approve | Approve a commit
+*CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitcommentscommentiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id} | Delete a commit comment
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitcommentscommentidget) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id} | Get a commit comment
+*CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitcommentscommentidput) | **Put** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id} | Update a commit comment
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsGet**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitcommentsget) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments | List a commit&#x27;s comments
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitCommentsPost**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitcommentspost) | **Post** /repositories/{workspace}/{repo_slug}/commit/{commit}/comments | Create comment for a commit
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugCommitCommitGet**](docs/CommitsApi.md#repositoriesworkspacereposlugcommitcommitget) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit} | Get a commit
@@ -72,18 +74,18 @@ Class | Method | HTTP request | Description
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugDiffstatSpecGet**](docs/CommitsApi.md#repositoriesworkspacereposlugdiffstatspecget) | **Get** /repositories/{workspace}/{repo_slug}/diffstat/{spec} | Compare two commit diff stats
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugMergeBaseRevspecGet**](docs/CommitsApi.md#repositoriesworkspacereposlugmergebaserevspecget) | **Get** /repositories/{workspace}/{repo_slug}/merge-base/{revspec} | Get the common ancestor between two commits
 *CommitsApi* | [**RepositoriesWorkspaceRepoSlugPatchSpecGet**](docs/CommitsApi.md#repositoriesworkspacereposlugpatchspecget) | **Get** /repositories/{workspace}/{repo_slug}/patch/{spec} | Get a patch for two commits
-*DeploymentsApi* | [**CreateEnvironment**](docs/DeploymentsApi.md#createenvironment) | **Post** /repositories/{workspace}/{repo_slug}/environments/ | Create an environment
+*DeploymentsApi* | [**CreateEnvironment**](docs/DeploymentsApi.md#createenvironment) | **Post** /repositories/{workspace}/{repo_slug}/environments | Create an environment
 *DeploymentsApi* | [**DeleteEnvironmentForRepository**](docs/DeploymentsApi.md#deleteenvironmentforrepository) | **Delete** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid} | Delete an environment
 *DeploymentsApi* | [**GetDeploymentForRepository**](docs/DeploymentsApi.md#getdeploymentforrepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid} | Get a deployment
-*DeploymentsApi* | [**GetDeploymentsForRepository**](docs/DeploymentsApi.md#getdeploymentsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments/ | List deployments
+*DeploymentsApi* | [**GetDeploymentsForRepository**](docs/DeploymentsApi.md#getdeploymentsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/deployments | List deployments
 *DeploymentsApi* | [**GetEnvironmentForRepository**](docs/DeploymentsApi.md#getenvironmentforrepository) | **Get** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid} | Get an environment
-*DeploymentsApi* | [**GetEnvironmentsForRepository**](docs/DeploymentsApi.md#getenvironmentsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/environments/ | List environments
+*DeploymentsApi* | [**GetEnvironmentsForRepository**](docs/DeploymentsApi.md#getenvironmentsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/environments | List environments
 *DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysGet**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeysget) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys | List repository deploy keys
 *DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdDelete**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Delete a repository deploy key
 *DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdGet**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyidget) | **Get** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Get a repository deploy key
 *DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysKeyIdPut**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyskeyidput) | **Put** /repositories/{workspace}/{repo_slug}/deploy-keys/{key_id} | Update a repository deploy key
 *DeploymentsApi* | [**RepositoriesWorkspaceRepoSlugDeployKeysPost**](docs/DeploymentsApi.md#repositoriesworkspacereposlugdeploykeyspost) | **Post** /repositories/{workspace}/{repo_slug}/deploy-keys | Add a repository deploy key
-*DeploymentsApi* | [**UpdateEnvironmentForRepository**](docs/DeploymentsApi.md#updateenvironmentforrepository) | **Post** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/ | Update an environment
+*DeploymentsApi* | [**UpdateEnvironmentForRepository**](docs/DeploymentsApi.md#updateenvironmentforrepository) | **Post** /repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes | Update an environment
 *DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeysget) | **Get** /workspaces/{workspace}/projects/{project_key}/deploy-keys | List project deploy keys
 *DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdDelete**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeyskeyiddelete) | **Delete** /workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id} | Delete a deploy key from a project
 *DeploymentsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDeployKeysKeyIdGet**](docs/DeploymentsApi.md#workspacesworkspaceprojectsprojectkeydeploykeyskeyidget) | **Get** /workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id} | Get a project deploy key
@@ -126,18 +128,19 @@ Class | Method | HTTP request | Description
 *IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugVersionsGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugversionsget) | **Get** /repositories/{workspace}/{repo_slug}/versions | List defined versions for issues
 *IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugVersionsVersionIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugversionsversionidget) | **Get** /repositories/{workspace}/{repo_slug}/versions/{version_id} | Get a defined version for issues
 *PipelinesApi* | [**CreateDeploymentVariable**](docs/PipelinesApi.md#createdeploymentvariable) | **Post** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables | Create a variable for an environment
-*PipelinesApi* | [**CreatePipelineForRepository**](docs/PipelinesApi.md#createpipelineforrepository) | **Post** /repositories/{workspace}/{repo_slug}/pipelines/ | Run a pipeline
-*PipelinesApi* | [**CreatePipelineVariableForTeam**](docs/PipelinesApi.md#createpipelinevariableforteam) | **Post** /teams/{username}/pipelines_config/variables/ | Create a variable for a user
-*PipelinesApi* | [**CreatePipelineVariableForUser**](docs/PipelinesApi.md#createpipelinevariableforuser) | **Post** /users/{selected_user}/pipelines_config/variables/ | Create a variable for a user
+*PipelinesApi* | [**CreatePipelineForRepository**](docs/PipelinesApi.md#createpipelineforrepository) | **Post** /repositories/{workspace}/{repo_slug}/pipelines | Run a pipeline
+*PipelinesApi* | [**CreatePipelineVariableForTeam**](docs/PipelinesApi.md#createpipelinevariableforteam) | **Post** /teams/{username}/pipelines_config/variables | Create a variable for a user
+*PipelinesApi* | [**CreatePipelineVariableForUser**](docs/PipelinesApi.md#createpipelinevariableforuser) | **Post** /users/{selected_user}/pipelines_config/variables | Create a variable for a user
 *PipelinesApi* | [**CreatePipelineVariableForWorkspace**](docs/PipelinesApi.md#createpipelinevariableforworkspace) | **Post** /workspaces/{workspace}/pipelines-config/variables | Create a variable for a workspace
-*PipelinesApi* | [**CreateRepositoryPipelineKnownHost**](docs/PipelinesApi.md#createrepositorypipelineknownhost) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/ | Create a known host
-*PipelinesApi* | [**CreateRepositoryPipelineSchedule**](docs/PipelinesApi.md#createrepositorypipelineschedule) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/ | Create a schedule
-*PipelinesApi* | [**CreateRepositoryPipelineVariable**](docs/PipelinesApi.md#createrepositorypipelinevariable) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/ | Create a variable for a repository
+*PipelinesApi* | [**CreateRepositoryPipelineKnownHost**](docs/PipelinesApi.md#createrepositorypipelineknownhost) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts | Create a known host
+*PipelinesApi* | [**CreateRepositoryPipelineSchedule**](docs/PipelinesApi.md#createrepositorypipelineschedule) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules | Create a schedule
+*PipelinesApi* | [**CreateRepositoryPipelineVariable**](docs/PipelinesApi.md#createrepositorypipelinevariable) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/variables | Create a variable for a repository
 *PipelinesApi* | [**DeleteDeploymentVariable**](docs/PipelinesApi.md#deletedeploymentvariable) | **Delete** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid} | Delete a variable for an environment
 *PipelinesApi* | [**DeletePipelineVariableForTeam**](docs/PipelinesApi.md#deletepipelinevariableforteam) | **Delete** /teams/{username}/pipelines_config/variables/{variable_uuid} | Delete a variable for a team
 *PipelinesApi* | [**DeletePipelineVariableForUser**](docs/PipelinesApi.md#deletepipelinevariableforuser) | **Delete** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Delete a variable for a user
 *PipelinesApi* | [**DeletePipelineVariableForWorkspace**](docs/PipelinesApi.md#deletepipelinevariableforworkspace) | **Delete** /workspaces/{workspace}/pipelines-config/variables/{variable_uuid} | Delete a variable for a workspace
 *PipelinesApi* | [**DeleteRepositoryPipelineCache**](docs/PipelinesApi.md#deleterepositorypipelinecache) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid} | Delete a cache
+*PipelinesApi* | [**DeleteRepositoryPipelineCaches**](docs/PipelinesApi.md#deleterepositorypipelinecaches) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/caches | Delete caches
 *PipelinesApi* | [**DeleteRepositoryPipelineKeyPair**](docs/PipelinesApi.md#deleterepositorypipelinekeypair) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Delete SSH key pair
 *PipelinesApi* | [**DeleteRepositoryPipelineKnownHost**](docs/PipelinesApi.md#deleterepositorypipelineknownhost) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Delete a known host
 *PipelinesApi* | [**DeleteRepositoryPipelineSchedule**](docs/PipelinesApi.md#deleterepositorypipelineschedule) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Delete a schedule
@@ -149,28 +152,28 @@ Class | Method | HTTP request | Description
 *PipelinesApi* | [**GetPipelineForRepository**](docs/PipelinesApi.md#getpipelineforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid} | Get a pipeline
 *PipelinesApi* | [**GetPipelineStepForRepository**](docs/PipelinesApi.md#getpipelinestepforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid} | Get a step of a pipeline
 *PipelinesApi* | [**GetPipelineStepLogForRepository**](docs/PipelinesApi.md#getpipelinesteplogforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log | Get log file for a step
-*PipelinesApi* | [**GetPipelineStepsForRepository**](docs/PipelinesApi.md#getpipelinestepsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/ | List steps for a pipeline
+*PipelinesApi* | [**GetPipelineStepsForRepository**](docs/PipelinesApi.md#getpipelinestepsforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps | List steps for a pipeline
 *PipelinesApi* | [**GetPipelineTestReportTestCaseReasons**](docs/PipelinesApi.md#getpipelinetestreporttestcasereasons) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons | Get test case reasons (output) for a given test case in a step of a pipeline.
 *PipelinesApi* | [**GetPipelineTestReportTestCases**](docs/PipelinesApi.md#getpipelinetestreporttestcases) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases | Get test cases for a given step of a pipeline.
 *PipelinesApi* | [**GetPipelineTestReports**](docs/PipelinesApi.md#getpipelinetestreports) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports | Get a summary of test reports for a given step of a pipeline.
 *PipelinesApi* | [**GetPipelineVariableForTeam**](docs/PipelinesApi.md#getpipelinevariableforteam) | **Get** /teams/{username}/pipelines_config/variables/{variable_uuid} | Get a variable for a team
 *PipelinesApi* | [**GetPipelineVariableForUser**](docs/PipelinesApi.md#getpipelinevariableforuser) | **Get** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Get a variable for a user
 *PipelinesApi* | [**GetPipelineVariableForWorkspace**](docs/PipelinesApi.md#getpipelinevariableforworkspace) | **Get** /workspaces/{workspace}/pipelines-config/variables/{variable_uuid} | Get variable for a workspace
-*PipelinesApi* | [**GetPipelineVariablesForTeam**](docs/PipelinesApi.md#getpipelinevariablesforteam) | **Get** /teams/{username}/pipelines_config/variables/ | List variables for an account
-*PipelinesApi* | [**GetPipelineVariablesForUser**](docs/PipelinesApi.md#getpipelinevariablesforuser) | **Get** /users/{selected_user}/pipelines_config/variables/ | List variables for a user
+*PipelinesApi* | [**GetPipelineVariablesForTeam**](docs/PipelinesApi.md#getpipelinevariablesforteam) | **Get** /teams/{username}/pipelines_config/variables | List variables for an account
+*PipelinesApi* | [**GetPipelineVariablesForUser**](docs/PipelinesApi.md#getpipelinevariablesforuser) | **Get** /users/{selected_user}/pipelines_config/variables | List variables for a user
 *PipelinesApi* | [**GetPipelineVariablesForWorkspace**](docs/PipelinesApi.md#getpipelinevariablesforworkspace) | **Get** /workspaces/{workspace}/pipelines-config/variables | List variables for a workspace
-*PipelinesApi* | [**GetPipelinesForRepository**](docs/PipelinesApi.md#getpipelinesforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines/ | List pipelines
+*PipelinesApi* | [**GetPipelinesForRepository**](docs/PipelinesApi.md#getpipelinesforrepository) | **Get** /repositories/{workspace}/{repo_slug}/pipelines | List pipelines
 *PipelinesApi* | [**GetRepositoryPipelineCacheContentURI**](docs/PipelinesApi.md#getrepositorypipelinecachecontenturi) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri | Get cache content URI
-*PipelinesApi* | [**GetRepositoryPipelineCaches**](docs/PipelinesApi.md#getrepositorypipelinecaches) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/caches/ | List caches
+*PipelinesApi* | [**GetRepositoryPipelineCaches**](docs/PipelinesApi.md#getrepositorypipelinecaches) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/caches | List caches
 *PipelinesApi* | [**GetRepositoryPipelineConfig**](docs/PipelinesApi.md#getrepositorypipelineconfig) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config | Get configuration
 *PipelinesApi* | [**GetRepositoryPipelineKnownHost**](docs/PipelinesApi.md#getrepositorypipelineknownhost) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Get a known host
-*PipelinesApi* | [**GetRepositoryPipelineKnownHosts**](docs/PipelinesApi.md#getrepositorypipelineknownhosts) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/ | List known hosts
+*PipelinesApi* | [**GetRepositoryPipelineKnownHosts**](docs/PipelinesApi.md#getrepositorypipelineknownhosts) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts | List known hosts
 *PipelinesApi* | [**GetRepositoryPipelineSchedule**](docs/PipelinesApi.md#getrepositorypipelineschedule) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Get a schedule
-*PipelinesApi* | [**GetRepositoryPipelineScheduleExecutions**](docs/PipelinesApi.md#getrepositorypipelinescheduleexecutions) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/ | List executions of a schedule
-*PipelinesApi* | [**GetRepositoryPipelineSchedules**](docs/PipelinesApi.md#getrepositorypipelineschedules) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/ | List schedules
+*PipelinesApi* | [**GetRepositoryPipelineScheduleExecutions**](docs/PipelinesApi.md#getrepositorypipelinescheduleexecutions) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions | List executions of a schedule
+*PipelinesApi* | [**GetRepositoryPipelineSchedules**](docs/PipelinesApi.md#getrepositorypipelineschedules) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules | List schedules
 *PipelinesApi* | [**GetRepositoryPipelineSshKeyPair**](docs/PipelinesApi.md#getrepositorypipelinesshkeypair) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Get SSH key pair
 *PipelinesApi* | [**GetRepositoryPipelineVariable**](docs/PipelinesApi.md#getrepositorypipelinevariable) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Get a variable for a repository
-*PipelinesApi* | [**GetRepositoryPipelineVariables**](docs/PipelinesApi.md#getrepositorypipelinevariables) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/ | List variables for a repository
+*PipelinesApi* | [**GetRepositoryPipelineVariables**](docs/PipelinesApi.md#getrepositorypipelinevariables) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables | List variables for a repository
 *PipelinesApi* | [**StopPipeline**](docs/PipelinesApi.md#stoppipeline) | **Post** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline | Stop a pipeline
 *PipelinesApi* | [**UpdateDeploymentVariable**](docs/PipelinesApi.md#updatedeploymentvariable) | **Put** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid} | Update a variable for an environment
 *PipelinesApi* | [**UpdatePipelineVariableForTeam**](docs/PipelinesApi.md#updatepipelinevariableforteam) | **Put** /teams/{username}/pipelines_config/variables/{variable_uuid} | Update a variable for a team
@@ -189,6 +192,14 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserPut**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydefaultreviewersselecteduserput) | **Put** /workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user} | Add the specific user as a default reviewer for the project
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyDelete**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeydelete) | **Delete** /workspaces/{workspace}/projects/{project_key} | Delete a project for a workspace
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeyget) | **Get** /workspaces/{workspace}/projects/{project_key} | Get a project for a workspace
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfiggroupsget) | **Get** /workspaces/{workspace}/projects/{project_key}/permissions-config/groups | List explicit group permissions for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugDelete**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfiggroupsgroupslugdelete) | **Delete** /workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug} | Delete an explicit group permission for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfiggroupsgroupslugget) | **Get** /workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug} | Get an explicit group permission for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfiggroupsgroupslugput) | **Put** /workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug} | Update an explicit group permission for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfigusersget) | **Get** /workspaces/{workspace}/projects/{project_key}/permissions-config/users | List explicit user permissions for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdDelete**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfigusersselecteduseriddelete) | **Delete** /workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id} | Delete an explicit user permission for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfigusersselecteduseridget) | **Get** /workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id} | Get an explicit user permission for a project
+*ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeypermissionsconfigusersselecteduseridput) | **Put** /workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id} | Update an explicit user permission for a project
 *ProjectsApi* | [**WorkspacesWorkspaceProjectsProjectKeyPut**](docs/ProjectsApi.md#workspacesworkspaceprojectsprojectkeyput) | **Put** /workspaces/{workspace}/projects/{project_key} | Update a project for a workspace
 *PropertiesApi* | [**DeleteCommitHostedPropertyValue**](docs/PropertiesApi.md#deletecommithostedpropertyvalue) | **Delete** /repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name} | Delete a commit application property
 *PropertiesApi* | [**DeletePullRequestHostedPropertyValue**](docs/PropertiesApi.md#deletepullrequesthostedpropertyvalue) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name} | Delete a pull request application property
@@ -218,6 +229,8 @@ Class | Method | HTTP request | Description
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdDelete**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentscommentiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id} | Delete a comment on a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentscommentidget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id} | Get a comment on a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdPut**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentscommentidput) | **Put** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id} | Update a comment on a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolveDelete**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentscommentidresolvedelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve | Reopen a comment thread
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentscommentidresolvepost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve | Resolve a comment thread
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentsget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments | List comments on a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsPost**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommentspost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments | Create a comment on a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommitsGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidcommitsget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits | List commits on a pull request
@@ -351,31 +364,19 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Account](docs/Account.md)
- - [AccountLinks](docs/AccountLinks.md)
  - [AppUser](docs/AppUser.md)
- - [ApplicationProperty](docs/ApplicationProperty.md)
  - [Author](docs/Author.md)
  - [BaseCommit](docs/BaseCommit.md)
  - [Branch](docs/Branch.md)
  - [BranchingModel](docs/BranchingModel.md)
- - [BranchingModelBranchTypes](docs/BranchingModelBranchTypes.md)
- - [BranchingModelDevelopment](docs/BranchingModelDevelopment.md)
  - [BranchingModelSettings](docs/BranchingModelSettings.md)
- - [BranchingModelSettingsBranchTypes](docs/BranchingModelSettingsBranchTypes.md)
- - [BranchingModelSettingsDevelopment](docs/BranchingModelSettingsDevelopment.md)
- - [BranchingModelSettingsProduction](docs/BranchingModelSettingsProduction.md)
  - [Branchrestriction](docs/Branchrestriction.md)
  - [Comment](docs/Comment.md)
- - [CommentInline](docs/CommentInline.md)
- - [CommentLinks](docs/CommentLinks.md)
  - [Commit](docs/Commit.md)
  - [CommitComment](docs/CommitComment.md)
- - [CommitFile](docs/CommitFile.md)
  - [Commitstatus](docs/Commitstatus.md)
- - [CommitstatusLinks](docs/CommitstatusLinks.md)
  - [Component](docs/Component.md)
  - [DdevReport](docs/DdevReport.md)
- - [DefaultReviewerAndType](docs/DefaultReviewerAndType.md)
  - [DeployKey](docs/DeployKey.md)
  - [Deployment](docs/Deployment.md)
  - [DeploymentEnvironment](docs/DeploymentEnvironment.md)
@@ -396,28 +397,17 @@ Class | Method | HTTP request | Description
  - [DeploymentsStgWestDeploymentEnvironment](docs/DeploymentsStgWestDeploymentEnvironment.md)
  - [DeploymentsStgWestDeploymentEnvironmentLock](docs/DeploymentsStgWestDeploymentEnvironmentLock.md)
  - [DeploymentsStgWestPaginatedEnvironments](docs/DeploymentsStgWestPaginatedEnvironments.md)
- - [Diffstat](docs/Diffstat.md)
  - [EffectiveRepoBranchingModel](docs/EffectiveRepoBranchingModel.md)
- - [ErrorError](docs/ErrorError.md)
- - [ExportOptions](docs/ExportOptions.md)
  - [Group](docs/Group.md)
- - [GroupLinks](docs/GroupLinks.md)
  - [HookEvent](docs/HookEvent.md)
  - [Issue](docs/Issue.md)
  - [IssueAttachment](docs/IssueAttachment.md)
- - [IssueChange](docs/IssueChange.md)
- - [IssueChangeChanges](docs/IssueChangeChanges.md)
- - [IssueChangeChangesAssignee](docs/IssueChangeChangesAssignee.md)
- - [IssueChangeLinks](docs/IssueChangeLinks.md)
  - [IssueComment](docs/IssueComment.md)
  - [IssueJobStatus](docs/IssueJobStatus.md)
- - [IssueLinks](docs/IssueLinks.md)
  - [JiraProject](docs/JiraProject.md)
  - [JiraSite](docs/JiraSite.md)
  - [Link](docs/Link.md)
  - [Milestone](docs/Milestone.md)
- - [ModelError](docs/ModelError.md)
- - [Object](docs/Object.md)
  - [Page](docs/Page.md)
  - [PaginatedAccounts](docs/PaginatedAccounts.md)
  - [PaginatedAnnotations](docs/PaginatedAnnotations.md)
@@ -448,6 +438,8 @@ Class | Method | HTTP request | Description
  - [PaginatedPipelineVariables](docs/PaginatedPipelineVariables.md)
  - [PaginatedPipelines](docs/PaginatedPipelines.md)
  - [PaginatedProjectDeployKeys](docs/PaginatedProjectDeployKeys.md)
+ - [PaginatedProjectGroupPermissions](docs/PaginatedProjectGroupPermissions.md)
+ - [PaginatedProjectUserPermissions](docs/PaginatedProjectUserPermissions.md)
  - [PaginatedProjects](docs/PaginatedProjects.md)
  - [PaginatedPullrequestComments](docs/PaginatedPullrequestComments.md)
  - [PaginatedPullrequests](docs/PaginatedPullrequests.md)
@@ -482,6 +474,9 @@ Class | Method | HTTP request | Description
  - [PipelineScheduleExecution](docs/PipelineScheduleExecution.md)
  - [PipelineScheduleExecutionErrored](docs/PipelineScheduleExecutionErrored.md)
  - [PipelineScheduleExecutionExecuted](docs/PipelineScheduleExecutionExecuted.md)
+ - [PipelineSchedulePostRequestBody](docs/PipelineSchedulePostRequestBody.md)
+ - [PipelineSchedulePostRequestBodyTarget](docs/PipelineSchedulePostRequestBodyTarget.md)
+ - [PipelineSchedulePutRequestBody](docs/PipelineSchedulePutRequestBody.md)
  - [PipelineSelector](docs/PipelineSelector.md)
  - [PipelineSshKeyPair](docs/PipelineSshKeyPair.md)
  - [PipelineSshPublicKey](docs/PipelineSshPublicKey.md)
@@ -522,29 +517,14 @@ Class | Method | HTTP request | Description
  - [PipelinesStgWestPipelineStep](docs/PipelinesStgWestPipelineStep.md)
  - [Project](docs/Project.md)
  - [ProjectBranchingModel](docs/ProjectBranchingModel.md)
- - [ProjectBranchingModelDevelopment](docs/ProjectBranchingModelDevelopment.md)
  - [ProjectDeployKey](docs/ProjectDeployKey.md)
- - [ProjectLinks](docs/ProjectLinks.md)
- - [PullRequestBranch](docs/PullRequestBranch.md)
- - [PullRequestCommit](docs/PullRequestCommit.md)
  - [Pullrequest](docs/Pullrequest.md)
  - [PullrequestComment](docs/PullrequestComment.md)
  - [PullrequestEndpoint](docs/PullrequestEndpoint.md)
- - [PullrequestLinks](docs/PullrequestLinks.md)
- - [PullrequestMergeParameters](docs/PullrequestMergeParameters.md)
- - [Ref](docs/Ref.md)
- - [RefLinks](docs/RefLinks.md)
- - [RenderedPullRequestMarkup](docs/RenderedPullRequestMarkup.md)
- - [RenderedPullRequestMarkupTitle](docs/RenderedPullRequestMarkupTitle.md)
  - [Report](docs/Report.md)
  - [ReportAnnotation](docs/ReportAnnotation.md)
  - [ReportData](docs/ReportData.md)
  - [Repository](docs/Repository.md)
- - [RepositoryGroupPermission](docs/RepositoryGroupPermission.md)
- - [RepositoryInheritanceState](docs/RepositoryInheritanceState.md)
- - [RepositoryLinks](docs/RepositoryLinks.md)
- - [RepositoryPermission](docs/RepositoryPermission.md)
- - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
  - [SearchCodeSearchResult](docs/SearchCodeSearchResult.md)
  - [SearchContentMatch](docs/SearchContentMatch.md)
  - [SearchLine](docs/SearchLine.md)
@@ -553,23 +533,18 @@ Class | Method | HTTP request | Description
  - [Snippet](docs/Snippet.md)
  - [SnippetComment](docs/SnippetComment.md)
  - [SnippetCommit](docs/SnippetCommit.md)
- - [SnippetCommitLinks](docs/SnippetCommitLinks.md)
  - [SshAccountKey](docs/SshAccountKey.md)
  - [SshKey](docs/SshKey.md)
  - [StgWestReport](docs/StgWestReport.md)
  - [SubjectTypes](docs/SubjectTypes.md)
- - [SubjectTypesRepository](docs/SubjectTypesRepository.md)
  - [Tag](docs/Tag.md)
  - [Team](docs/Team.md)
  - [TeamLinks](docs/TeamLinks.md)
- - [Treeentry](docs/Treeentry.md)
  - [User](docs/User.md)
  - [UserLinks](docs/UserLinks.md)
  - [Version](docs/Version.md)
- - [VersionLinks](docs/VersionLinks.md)
  - [WebhookSubscription](docs/WebhookSubscription.md)
  - [Workspace](docs/Workspace.md)
- - [WorkspaceLinks](docs/WorkspaceLinks.md)
  - [WorkspaceMembership](docs/WorkspaceMembership.md)
 
 ## Documentation For Authorization
