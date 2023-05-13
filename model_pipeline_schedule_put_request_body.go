@@ -12,5 +12,5 @@ package bitbucket
 type PipelineSchedulePutRequestBody struct {
 	Type_ string `json:"type"`
 	// Whether the schedule is enabled.
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled"`
 }
