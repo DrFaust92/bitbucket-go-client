@@ -148,6 +148,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**| Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
  **sort** | **optional.String**| Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). Defaults to &#x60;created_on&#x60;.  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -189,6 +190,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**| Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
  **sort** | **optional.String**| Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). Defaults to &#x60;created_on&#x60;.  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

@@ -144,13 +144,19 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugComponentsComponen
 /*
 IssueTrackerApiService List components
 Returns the components that have been defined in the issue tracker.  This resource is only available on repositories that have the issue tracker enabled.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugComponentsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedComponents
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugComponentsGet(ctx context.Context, repoSlug string, workspace string) (PaginatedComponents, *http.Response, error) {
+
+type IssueTrackerApiRepositoriesWorkspaceRepoSlugComponentsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugComponentsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugComponentsGetOpts) (PaginatedComponents, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -168,6 +174,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugComponentsGet(ctx 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -517,13 +526,19 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesExportRepoNa
 /*
 IssueTrackerApiService List issues
 Returns the issues in the issue tracker.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedIssues
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesGet(ctx context.Context, repoSlug string, workspace string) (PaginatedIssues, *http.Response, error) {
+
+type IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesGetOpts) (PaginatedIssues, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -541,6 +556,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesGet(ctx cont
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -913,14 +931,20 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesImportPost(c
 /*
 IssueTrackerApiService List attachments for an issue
 Returns all attachments for this issue.  This returns the files&#x27; meta data. This does not return the files&#x27; actual contents.  The files are always ordered by their upload date.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param issueId The issue id
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param issueId The issue id
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedIssueAttachments
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsGet(ctx context.Context, issueId string, repoSlug string, workspace string) (PaginatedIssueAttachments, *http.Response, error) {
+
+type IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsGet(ctx context.Context, issueId string, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsGetOpts) (PaginatedIssueAttachments, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -939,6 +963,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdAttac
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1433,12 +1460,14 @@ Returns the list of all changes that have been made to the specified issue. Chan
  * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdChangesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details.
      * @param "Sort" (optional.String) -   Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedLogEntries
 */
 
 type IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdChangesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesGet(ctx context.Context, issueId string, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdChangesGetOpts) (PaginatedLogEntries, *http.Response, error) {
@@ -1465,6 +1494,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChang
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -2007,11 +2039,13 @@ Returns a paginated list of all comments that were made on the specified issue. 
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedIssueComments
 */
 
 type IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsGetOpts struct {
-	Q optional.String
+	Q    optional.String
+	Page optional.Int32
 }
 
 func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsGet(ctx context.Context, issueId string, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsGetOpts) (PaginatedIssueComments, *http.Response, error) {
@@ -2035,6 +2069,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdComme
 
 	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
 		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -3451,13 +3488,19 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesPost(ctx con
 /*
 IssueTrackerApiService List milestones
 Returns the milestones that have been defined in the issue tracker.  This resource is only available on repositories that have the issue tracker enabled.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugMilestonesGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedMilestones
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugMilestonesGet(ctx context.Context, repoSlug string, workspace string) (PaginatedMilestones, *http.Response, error) {
+
+type IssueTrackerApiRepositoriesWorkspaceRepoSlugMilestonesGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugMilestonesGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugMilestonesGetOpts) (PaginatedMilestones, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -3475,6 +3518,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugMilestonesGet(ctx 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -3677,13 +3723,19 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugMilestonesMileston
 /*
 IssueTrackerApiService List defined versions for issues
 Returns the versions that have been defined in the issue tracker.  This resource is only available on repositories that have the issue tracker enabled.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugVersionsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedVersions
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugVersionsGet(ctx context.Context, repoSlug string, workspace string) (PaginatedVersions, *http.Response, error) {
+
+type IssueTrackerApiRepositoriesWorkspaceRepoSlugVersionsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugVersionsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *IssueTrackerApiRepositoriesWorkspaceRepoSlugVersionsGetOpts) (PaginatedVersions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -3701,6 +3753,9 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugVersionsGet(ctx co
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

@@ -407,12 +407,14 @@ Returns all statuses (e.g. build results) for a specific commit.
  * @param optional nil or *CommitStatusesApiRepositoriesWorkspaceRepoSlugCommitCommitStatusesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). Defaults to &#x60;created_on&#x60;.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedCommitstatuses
 */
 
 type CommitStatusesApiRepositoriesWorkspaceRepoSlugCommitCommitStatusesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugCommitCommitStatusesGet(ctx context.Context, commit string, repoSlug string, workspace string, localVarOptionals *CommitStatusesApiRepositoriesWorkspaceRepoSlugCommitCommitStatusesGetOpts) (PaginatedCommitstatuses, *http.Response, error) {
@@ -439,6 +441,9 @@ func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugCommitCommitStat
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -535,12 +540,14 @@ Returns all statuses (e.g. build results) for the given pull request.
  * @param optional nil or *CommitStatusesApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). Defaults to &#x60;created_on&#x60;.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedCommitstatuses
 */
 
 type CommitStatusesApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGet(ctx context.Context, pullRequestId int32, repoSlug string, workspace string, localVarOptionals *CommitStatusesApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGetOpts) (PaginatedCommitstatuses, *http.Response, error) {
@@ -567,6 +574,9 @@ func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugPullrequestsPull
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

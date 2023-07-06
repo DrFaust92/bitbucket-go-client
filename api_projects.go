@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -150,14 +152,20 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsPost(ctx context.Context
 
 /*
 ProjectsApiService List the default reviewers in a project
-Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.  Example: &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/.../projects/.../default-reviewers | jq . {     \&quot;pagelen\&quot;: 10,     \&quot;values\&quot;: [         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,                 \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;         },         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Jorge Rodriguez\&quot;,                 \&quot;uuid\&quot;: \&quot;{1aa43376-260d-4a0b-9660-f62672b9655d}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *ProjectsApiWorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedDefaultReviewerAndType
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet(ctx context.Context, projectKey string, workspace string) (PaginatedDefaultReviewerAndType, *http.Response, error) {
+
+type ProjectsApiWorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet(ctx context.Context, projectKey string, workspace string, localVarOptionals *ProjectsApiWorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGetOpts) (PaginatedDefaultReviewerAndType, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -175,6 +183,9 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -886,14 +897,20 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyGet(ctx contex
 
 /*
 ProjectsApiService List explicit group permissions for a project
-Returns a paginated list of explicit group permissions for the given project. This endpoint does not support BBQL features.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/groups  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/groups  { \&quot;pagelen\&quot;: 10, \&quot;values\&quot;: [     {         \&quot;type\&quot;: \&quot;project_group_permission\&quot;,         \&quot;group\&quot;: {             \&quot;type\&quot;: \&quot;group\&quot;,             \&quot;name\&quot;: \&quot;Administrators\&quot;,             \&quot;slug\&quot;: \&quot;administrators\&quot;         },         \&quot;permission\&quot;: \&quot;admin\&quot;,         \&quot;links\&quot;: {             \&quot;self\&quot;: {                 \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/groups/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;             }         }     },     {         \&quot;type\&quot;: \&quot;project_group_permission\&quot;,         \&quot;group\&quot;: {             \&quot;type\&quot;: \&quot;group\&quot;,             \&quot;name\&quot;: \&quot;Developers\&quot;,             \&quot;slug\&quot;: \&quot;developers\&quot;         },         \&quot;permission\&quot;: \&quot;write\&quot;,         \&quot;links\&quot;: {             \&quot;self\&quot;: {                 \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/groups/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;             }         }     } ], \&quot;page\&quot;: 1, \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param projectKey The project in question. This is the actual key assigned to the project.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+Returns a paginated list of explicit group permissions for the given project. This endpoint does not support BBQL features.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param projectKey The project in question. This is the actual key assigned to the project.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedProjectGroupPermissions
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGet(ctx context.Context, projectKey string, workspace string) (PaginatedProjectGroupPermissions, *http.Response, error) {
+
+type ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGet(ctx context.Context, projectKey string, workspace string, localVarOptionals *ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGetOpts) (PaginatedProjectGroupPermissions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -911,6 +928,9 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1419,14 +1439,20 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService List explicit user permissions for a project
-Returns a paginated list of explicit user permissions for the given project. This endpoint does not support BBQL features.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/users  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/users  { \&quot;pagelen\&quot;: 10, \&quot;values\&quot;: [     {         \&quot;type\&quot;: \&quot;project_user_permission\&quot;,         \&quot;user\&quot;: {             \&quot;type\&quot;: \&quot;user\&quot;,             \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,             \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,             \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         },         \&quot;permission\&quot;: \&quot;admin\&quot;,         \&quot;links\&quot;: {             \&quot;self\&quot;: {                 \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;             }         }     },     {         \&quot;type\&quot;: \&quot;project_user_permission\&quot;,         \&quot;user\&quot;: {             \&quot;type\&quot;: \&quot;user\&quot;,             \&quot;display_name\&quot;: \&quot;Sean Conaty\&quot;,             \&quot;uuid\&quot;: \&quot;{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\&quot;,             \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;         },         \&quot;permission\&quot;: \&quot;write\&quot;,         \&quot;links\&quot;: {             \&quot;self\&quot;: {                 \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;             }         }     } ], \&quot;page\&quot;: 1, \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param projectKey The project in question. This is the actual key assigned to the project.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+Returns a paginated list of explicit user permissions for the given project. This endpoint does not support BBQL features.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param projectKey The project in question. This is the actual key assigned to the project.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedProjectUserPermissions
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGet(ctx context.Context, projectKey string, workspace string) (PaginatedProjectUserPermissions, *http.Response, error) {
+
+type ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGet(ctx context.Context, projectKey string, workspace string, localVarOptionals *ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGetOpts) (PaginatedProjectUserPermissions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1444,6 +1470,9 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

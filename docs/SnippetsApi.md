@@ -48,6 +48,7 @@ Optional parameters are passed through a pointer to a SnippetsApiSnippetsGetOpts
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **role** | **optional.String**| Filter down the result based on the authenticated user&#x27;s role (&#x60;owner&#x60;, &#x60;contributor&#x60;, or &#x60;member&#x60;). | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -184,7 +185,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdCommentsGet**
-> PaginatedSnippetComments SnippetsWorkspaceEncodedIdCommentsGet(ctx, encodedId, workspace)
+> PaginatedSnippetComments SnippetsWorkspaceEncodedIdCommentsGet(ctx, encodedId, workspace, optional)
 List comments on a snippet
 
 Used to retrieve a paginated list of all comments for a specific snippet.  This resource works identical to commit and pull request comments.  The default sorting is oldest to newest and can be overridden with the `sort` query parameter.
@@ -196,6 +197,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **encodedId** | **string**| The snippet id. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***SnippetsApiSnippetsWorkspaceEncodedIdCommentsGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SnippetsApiSnippetsWorkspaceEncodedIdCommentsGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -243,7 +253,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdCommitsGet**
-> PaginatedSnippetCommit SnippetsWorkspaceEncodedIdCommitsGet(ctx, encodedId, workspace)
+> PaginatedSnippetCommit SnippetsWorkspaceEncodedIdCommitsGet(ctx, encodedId, workspace, optional)
 List snippet changes
 
 Returns the changes (commits) made on this snippet.
@@ -255,6 +265,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **encodedId** | **string**| The snippet id. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***SnippetsApiSnippetsWorkspaceEncodedIdCommitsGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SnippetsApiSnippetsWorkspaceEncodedIdCommitsGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -697,7 +716,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsWorkspaceEncodedIdWatchersGet**
-> PaginatedAccounts SnippetsWorkspaceEncodedIdWatchersGet(ctx, encodedId, workspace)
+> PaginatedAccounts SnippetsWorkspaceEncodedIdWatchersGet(ctx, encodedId, workspace, optional)
 List users watching a snippet
 
 Returns a paginated list of all users watching a specific snippet.
@@ -709,6 +728,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **encodedId** | **string**| The snippet id. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***SnippetsApiSnippetsWorkspaceEncodedIdWatchersGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SnippetsApiSnippetsWorkspaceEncodedIdWatchersGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -745,6 +773,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **role** | **optional.String**| Filter down the result based on the authenticated user&#x27;s role (&#x60;owner&#x60;, &#x60;contributor&#x60;, or &#x60;member&#x60;). | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

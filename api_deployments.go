@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -321,13 +323,19 @@ func (a *DeploymentsApiService) GetDeploymentForRepository(ctx context.Context, 
 /*
 DeploymentsApiService List deployments
 Find deployments
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
-  - @param repoSlug The repository.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+ * @param repoSlug The repository.
+ * @param optional nil or *DeploymentsApiGetDeploymentsForRepositoryOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedDeployments
 */
-func (a *DeploymentsApiService) GetDeploymentsForRepository(ctx context.Context, workspace string, repoSlug string) (PaginatedDeployments, *http.Response, error) {
+
+type DeploymentsApiGetDeploymentsForRepositoryOpts struct {
+	Page optional.Int32
+}
+
+func (a *DeploymentsApiService) GetDeploymentsForRepository(ctx context.Context, workspace string, repoSlug string, localVarOptionals *DeploymentsApiGetDeploymentsForRepositoryOpts) (PaginatedDeployments, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -345,6 +353,9 @@ func (a *DeploymentsApiService) GetDeploymentsForRepository(ctx context.Context,
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -511,13 +522,19 @@ func (a *DeploymentsApiService) GetEnvironmentForRepository(ctx context.Context,
 /*
 DeploymentsApiService List environments
 Find environments
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
-  - @param repoSlug The repository.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+ * @param repoSlug The repository.
+ * @param optional nil or *DeploymentsApiGetEnvironmentsForRepositoryOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedEnvironments
 */
-func (a *DeploymentsApiService) GetEnvironmentsForRepository(ctx context.Context, workspace string, repoSlug string) (PaginatedEnvironments, *http.Response, error) {
+
+type DeploymentsApiGetEnvironmentsForRepositoryOpts struct {
+	Page optional.Int32
+}
+
+func (a *DeploymentsApiService) GetEnvironmentsForRepository(ctx context.Context, workspace string, repoSlug string, localVarOptionals *DeploymentsApiGetEnvironmentsForRepositoryOpts) (PaginatedEnvironments, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -535,6 +552,9 @@ func (a *DeploymentsApiService) GetEnvironmentsForRepository(ctx context.Context
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -600,13 +620,19 @@ func (a *DeploymentsApiService) GetEnvironmentsForRepository(ctx context.Context
 /*
 DeploymentsApiService List repository deploy keys
 Returns all deploy-keys belonging to a repository.  Example: &#x60;&#x60;&#x60; $ curl -H \&quot;Authorization &lt;auth header&gt;\&quot; \\ https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys  Output: {     \&quot;pagelen\&quot;: 10,     \&quot;values\&quot;: [         {             \&quot;id\&quot;: 123,             \&quot;key\&quot;: \&quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\&quot;,             \&quot;label\&quot;: \&quot;mykey\&quot;,             \&quot;type\&quot;: \&quot;deploy_key\&quot;,             \&quot;created_on\&quot;: \&quot;2018-08-15T23:50:59.993890+00:00\&quot;,             \&quot;repository\&quot;: {                 \&quot;full_name\&quot;: \&quot;mleu/test\&quot;,                 \&quot;name\&quot;: \&quot;test\&quot;,                 \&quot;type\&quot;: \&quot;repository\&quot;,                 \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;             },             \&quot;links\&quot;:{                 \&quot;self\&quot;:{                     \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\&quot;                 }             }             \&quot;last_used\&quot;: null,             \&quot;comment\&quot;: \&quot;mleu@C02W454JHTD8\&quot;         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 1 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *DeploymentsApiRepositoriesWorkspaceRepoSlugDeployKeysGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedDeployKeys
 */
-func (a *DeploymentsApiService) RepositoriesWorkspaceRepoSlugDeployKeysGet(ctx context.Context, repoSlug string, workspace string) (PaginatedDeployKeys, *http.Response, error) {
+
+type DeploymentsApiRepositoriesWorkspaceRepoSlugDeployKeysGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *DeploymentsApiService) RepositoriesWorkspaceRepoSlugDeployKeysGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *DeploymentsApiRepositoriesWorkspaceRepoSlugDeployKeysGetOpts) (PaginatedDeployKeys, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -624,6 +650,9 @@ func (a *DeploymentsApiService) RepositoriesWorkspaceRepoSlugDeployKeysGet(ctx c
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1235,13 +1264,19 @@ func (a *DeploymentsApiService) UpdateEnvironmentForRepository(ctx context.Conte
 /*
 DeploymentsApiService List project deploy keys
 Returns all deploy keys belonging to a project.  Example: &#x60;&#x60;&#x60; $ curl -H \&quot;Authorization &lt;auth header&gt;\&quot; \\ https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys  Output: {     \&quot;pagelen\&quot;:10,     \&quot;values\&quot;:[         {             \&quot;comment\&quot;:\&quot;thakseth@C02W454JHTD8\&quot;,             \&quot;last_used\&quot;:null,             \&quot;links\&quot;:{                 \&quot;self\&quot;:{                     \&quot;href\&quot;:\&quot;https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys/1234\&quot;                 }             },             \&quot;label\&quot;:\&quot;test\&quot;,             \&quot;project\&quot;:{                 \&quot;links\&quot;:{                     \&quot;self\&quot;:{                         \&quot;href\&quot;:\&quot;https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT\&quot;                     }                 },                 \&quot;type\&quot;:\&quot;project\&quot;,                 \&quot;name\&quot;:\&quot;cooperative standard\&quot;,                 \&quot;key\&quot;:\&quot;TEST_PROJECT\&quot;,                 \&quot;uuid\&quot;:\&quot;{3b3e510b-7f2b-414d-a2b7-76c4e405c1c0}\&quot;             },             \&quot;created_on\&quot;:\&quot;2021-07-28T21:20:19.491721+00:00\&quot;,             \&quot;key\&quot;:\&quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDX5yfMOEw6HG9jKTYTisbmDTJ4MCUTSVGr5e4OWvY3UuI2A6F8SdzQqa2f5BABA/4g5Sk5awJrYHlNu3EzV1V2I44tR3A4fnZAG71ZKyDPi1wvdO7UYmFgxV/Vd18H9QZFFjICGDM7W0PT2mI0kON/jN3qNWi+GiB/xgaeQKSqynysdysDp8lnnI/8Sh3ikURP9UP83ShRCpAXszOUNaa+UUlcYQYBDLIGowsg51c4PCkC3DNhAMxppkNRKoSOWwyl+oRVXHSDylkiJSBHW3HH4Q6WHieD54kGrjbhWBKdnnxKX7QAAZBDseY+t01N36m6/ljvXSUEcBWtHxBYye0r\&quot;,             \&quot;type\&quot;:\&quot;project_deploy_key\&quot;,             \&quot;id\&quot;:1234         }     ],     \&quot;page\&quot;:1,     \&quot;size\&quot;:1 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *DeploymentsApiWorkspacesWorkspaceProjectsProjectKeyDeployKeysGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedProjectDeployKeys
 */
-func (a *DeploymentsApiService) WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet(ctx context.Context, projectKey string, workspace string) (PaginatedProjectDeployKeys, *http.Response, error) {
+
+type DeploymentsApiWorkspacesWorkspaceProjectsProjectKeyDeployKeysGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *DeploymentsApiService) WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet(ctx context.Context, projectKey string, workspace string, localVarOptionals *DeploymentsApiWorkspacesWorkspaceProjectsProjectKeyDeployKeysGetOpts) (PaginatedProjectDeployKeys, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1259,6 +1294,9 @@ func (a *DeploymentsApiService) WorkspacesWorkspaceProjectsProjectKeyDeployKeysG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

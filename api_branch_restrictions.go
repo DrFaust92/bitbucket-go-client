@@ -36,12 +36,14 @@ Returns a paginated list of all branch restrictions on the repository.
  * @param optional nil or *BranchRestrictionsApiRepositoriesWorkspaceRepoSlugBranchRestrictionsGetOpts - Optional Parameters:
      * @param "Kind" (optional.String) -  Branch restrictions of this type
      * @param "Pattern" (optional.String) -  Branch restrictions applied to branches of this pattern
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedBranchrestrictions
 */
 
 type BranchRestrictionsApiRepositoriesWorkspaceRepoSlugBranchRestrictionsGetOpts struct {
 	Kind    optional.String
 	Pattern optional.String
+	Page    optional.Int32
 }
 
 func (a *BranchRestrictionsApiService) RepositoriesWorkspaceRepoSlugBranchRestrictionsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *BranchRestrictionsApiRepositoriesWorkspaceRepoSlugBranchRestrictionsGetOpts) (PaginatedBranchrestrictions, *http.Response, error) {
@@ -67,6 +69,9 @@ func (a *BranchRestrictionsApiService) RepositoriesWorkspaceRepoSlugBranchRestri
 	}
 	if localVarOptionals != nil && localVarOptionals.Pattern.IsSet() {
 		localVarQueryParams.Add("pattern", parameterToString(localVarOptionals.Pattern.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

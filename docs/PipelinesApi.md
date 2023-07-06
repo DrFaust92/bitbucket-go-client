@@ -620,7 +620,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetDeploymentVariables**
-> PaginatedDeploymentVariable GetDeploymentVariables(ctx, workspace, repoSlug, environmentUuid)
+> PaginatedDeploymentVariable GetDeploymentVariables(ctx, workspace, repoSlug, environmentUuid, optional)
 List variables for an environment
 
 Find deployment environment level variables.
@@ -633,6 +633,16 @@ Name | Type | Description  | Notes
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **environmentUuid** | **string**| The environment. | 
+ **optional** | ***PipelinesApiGetDeploymentVariablesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetDeploymentVariablesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -830,7 +840,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPipelineStepsForRepository**
-> PaginatedPipelineSteps GetPipelineStepsForRepository(ctx, workspace, repoSlug, pipelineUuid)
+> PaginatedPipelineSteps GetPipelineStepsForRepository(ctx, workspace, repoSlug, pipelineUuid, optional)
 List steps for a pipeline
 
 Find steps for the given pipeline.
@@ -843,6 +853,16 @@ Name | Type | Description  | Notes
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **pipelineUuid** | **string**| The UUID of the pipeline. | 
+ **optional** | ***PipelinesApiGetPipelineStepsForRepositoryOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetPipelineStepsForRepositoryOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1035,7 +1055,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPipelineVariablesForTeam**
-> PaginatedPipelineVariables GetPipelineVariablesForTeam(ctx, username)
+> PaginatedPipelineVariables GetPipelineVariablesForTeam(ctx, username, optional)
 List variables for an account
 
 Find account level variables. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
@@ -1046,6 +1066,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **username** | **string**| The account. | 
+ **optional** | ***PipelinesApiGetPipelineVariablesForTeamOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetPipelineVariablesForTeamOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1063,7 +1091,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPipelineVariablesForUser**
-> PaginatedPipelineVariables GetPipelineVariablesForUser(ctx, selectedUser)
+> PaginatedPipelineVariables GetPipelineVariablesForUser(ctx, selectedUser, optional)
 List variables for a user
 
 Find user level variables. This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
@@ -1074,6 +1102,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **selectedUser** | **string**| Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID. | 
+ **optional** | ***PipelinesApiGetPipelineVariablesForUserOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetPipelineVariablesForUserOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1091,7 +1127,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPipelineVariablesForWorkspace**
-> PaginatedPipelineVariables GetPipelineVariablesForWorkspace(ctx, workspace)
+> PaginatedPipelineVariables GetPipelineVariablesForWorkspace(ctx, workspace, optional)
 List variables for a workspace
 
 Find workspace level variables.
@@ -1102,6 +1138,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+ **optional** | ***PipelinesApiGetPipelineVariablesForWorkspaceOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetPipelineVariablesForWorkspaceOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1119,7 +1163,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPipelinesForRepository**
-> PaginatedPipelines GetPipelinesForRepository(ctx, workspace, repoSlug)
+> PaginatedPipelines GetPipelinesForRepository(ctx, workspace, repoSlug, optional)
 List pipelines
 
 Find pipelines
@@ -1131,6 +1175,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***PipelinesApiGetPipelinesForRepositoryOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetPipelinesForRepositoryOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1178,7 +1231,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryPipelineCaches**
-> PaginatedPipelineCaches GetRepositoryPipelineCaches(ctx, workspace, repoSlug)
+> PaginatedPipelineCaches GetRepositoryPipelineCaches(ctx, workspace, repoSlug, optional)
 List caches
 
 Retrieve the repository pipelines caches.
@@ -1190,6 +1243,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| The account. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***PipelinesApiGetRepositoryPipelineCachesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetRepositoryPipelineCachesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1266,7 +1328,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryPipelineKnownHosts**
-> PaginatedPipelineKnownHosts GetRepositoryPipelineKnownHosts(ctx, workspace, repoSlug)
+> PaginatedPipelineKnownHosts GetRepositoryPipelineKnownHosts(ctx, workspace, repoSlug, optional)
 List known hosts
 
 Find repository level known hosts.
@@ -1278,6 +1340,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***PipelinesApiGetRepositoryPipelineKnownHostsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetRepositoryPipelineKnownHostsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1325,7 +1396,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryPipelineScheduleExecutions**
-> PaginatedPipelineScheduleExecutions GetRepositoryPipelineScheduleExecutions(ctx, workspace, repoSlug, scheduleUuid)
+> PaginatedPipelineScheduleExecutions GetRepositoryPipelineScheduleExecutions(ctx, workspace, repoSlug, scheduleUuid, optional)
 List executions of a schedule
 
 Retrieve the executions of a given schedule.
@@ -1338,6 +1409,16 @@ Name | Type | Description  | Notes
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **scheduleUuid** | **string**| The uuid of the schedule. | 
+ **optional** | ***PipelinesApiGetRepositoryPipelineScheduleExecutionsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetRepositoryPipelineScheduleExecutionsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1355,7 +1436,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryPipelineSchedules**
-> PaginatedPipelineSchedules GetRepositoryPipelineSchedules(ctx, workspace, repoSlug)
+> PaginatedPipelineSchedules GetRepositoryPipelineSchedules(ctx, workspace, repoSlug, optional)
 List schedules
 
 Retrieve the configured schedules for the given repository.
@@ -1367,6 +1448,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***PipelinesApiGetRepositoryPipelineSchedulesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetRepositoryPipelineSchedulesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -1443,7 +1533,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryPipelineVariables**
-> PaginatedPipelineVariables GetRepositoryPipelineVariables(ctx, workspace, repoSlug)
+> PaginatedPipelineVariables GetRepositoryPipelineVariables(ctx, workspace, repoSlug, optional)
 List variables for a repository
 
 Find repository level variables.
@@ -1455,6 +1545,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***PipelinesApiGetRepositoryPipelineVariablesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PipelinesApiGetRepositoryPipelineVariablesOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

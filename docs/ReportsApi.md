@@ -207,7 +207,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAnnotationsForReport**
-> PaginatedAnnotations GetAnnotationsForReport(ctx, workspace, repoSlug, commit, reportId)
+> PaginatedAnnotations GetAnnotationsForReport(ctx, workspace, repoSlug, commit, reportId, optional)
 List annotations
 
 Returns a paginated list of Annotations for a specified report.
@@ -221,6 +221,17 @@ Name | Type | Description  | Notes
   **repoSlug** | **string**| The repository. | 
   **commit** | **string**| The commit for which to retrieve reports. | 
   **reportId** | **string**| Uuid or external-if of the report for which to get annotations for. | 
+ **optional** | ***ReportsApiGetAnnotationsForReportOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ReportsApiGetAnnotationsForReportOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -269,7 +280,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetReportsForCommit**
-> PaginatedReports GetReportsForCommit(ctx, workspace, repoSlug, commit)
+> PaginatedReports GetReportsForCommit(ctx, workspace, repoSlug, commit, optional)
 List reports
 
 Returns a paginated list of Reports linked to this commit.
@@ -282,6 +293,16 @@ Name | Type | Description  | Notes
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **commit** | **string**| The commit for which to retrieve reports. | 
+ **optional** | ***ReportsApiGetReportsForCommitOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ReportsApiGetReportsForCommitOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

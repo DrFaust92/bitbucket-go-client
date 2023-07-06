@@ -36,12 +36,14 @@ Returns a list of all open branches within the specified repository.         Res
  * @param optional nil or *RefsApiRepositoriesWorkspaceRepoSlugRefsBranchesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). The &#x60;name&#x60; field is handled specially for branches in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return [&#x27;branch1&#x27;, &#x27;branch2&#x27;, &#x27;branch10&#x27;] instead of [&#x27;branch1&#x27;, &#x27;branch10&#x27;, &#x27;branch2&#x27;].
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedBranches
 */
 
 type RefsApiRepositoriesWorkspaceRepoSlugRefsBranchesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsBranchesGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RefsApiRepositoriesWorkspaceRepoSlugRefsBranchesGetOpts) (PaginatedBranches, *http.Response, error) {
@@ -67,6 +69,9 @@ func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsBranchesGet(ctx contex
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -521,12 +526,14 @@ Returns the branches and tags in the repository.  By default, results will be in
  * @param optional nil or *RefsApiRepositoriesWorkspaceRepoSlugRefsGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). The &#x60;name&#x60; field is handled specially for refs in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return [&#x27;1.1&#x27;, &#x27;1.2&#x27;, &#x27;1.10&#x27;] instead of [&#x27;1.1&#x27;, &#x27;1.10&#x27;, &#x27;1.2&#x27;].
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRefs
 */
 
 type RefsApiRepositoriesWorkspaceRepoSlugRefsGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RefsApiRepositoriesWorkspaceRepoSlugRefsGetOpts) (PaginatedRefs, *http.Response, error) {
@@ -552,6 +559,9 @@ func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsGet(ctx context.Contex
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -657,12 +667,14 @@ Returns the tags in the repository.  By default, results will be in the order th
  * @param optional nil or *RefsApiRepositoriesWorkspaceRepoSlugRefsTagsGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). The &#x60;name&#x60; field is handled specially for tags in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return [&#x27;1.1&#x27;, &#x27;1.2&#x27;, &#x27;1.10&#x27;] instead of [&#x27;1.1&#x27;, &#x27;1.10&#x27;, &#x27;1.2&#x27;].
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedTags
 */
 
 type RefsApiRepositoriesWorkspaceRepoSlugRefsTagsGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsTagsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RefsApiRepositoriesWorkspaceRepoSlugRefsTagsGetOpts) (PaginatedTags, *http.Response, error) {
@@ -688,6 +700,9 @@ func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsTagsGet(ctx context.Co
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

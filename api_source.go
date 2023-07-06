@@ -39,6 +39,7 @@ Returns a paginated list of commits that modified the specified file.  Commits a
      * @param "Renames" (optional.String) -   When &#x60;true&#x60;, Bitbucket will follow the history of the file across renames (this is the default behavior). This can be turned off by specifying &#x60;false&#x60;.
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedFiles
 */
 
@@ -46,6 +47,7 @@ type SourceApiRepositoriesWorkspaceRepoSlugFilehistoryCommitPathGetOpts struct {
 	Renames optional.String
 	Q       optional.String
 	Sort    optional.String
+	Page    optional.Int32
 }
 
 func (a *SourceApiService) RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet(ctx context.Context, commit string, path string, repoSlug string, workspace string, localVarOptionals *SourceApiRepositoriesWorkspaceRepoSlugFilehistoryCommitPathGetOpts) (PaginatedFiles, *http.Response, error) {
@@ -76,6 +78,9 @@ func (a *SourceApiService) RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -171,10 +176,11 @@ This endpoints is used to retrieve the contents of a single file, or the content
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *SourceApiRepositoriesWorkspaceRepoSlugSrcCommitPathGetOpts - Optional Parameters:
-     * @param "Format" (optional.String) -  If &#x27;meta&#x27; is provided, returns the (json) meta data for the contents of the file.  If &#x27;rendered&#x27; is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git does not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file&#x27;s actual contents.
+     * @param "Format" (optional.String) -  If &#x27;meta&#x27; is provided, returns the (json) meta data for the contents of the file.  If &#x27;rendered&#x27; is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. The &#x27;rendered&#x27; option only supports these filetypes: &#x60;.md&#x60;, &#x60;.markdown&#x60;, &#x60;.mkd&#x60;, &#x60;.mkdn&#x60;, &#x60;.mdown&#x60;, &#x60;.text&#x60;, &#x60;.rst&#x60;, and &#x60;.textile&#x60;. Since Git does not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file&#x27;s actual contents.
      * @param "Q" (optional.String) -  Optional filter expression as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Optional sorting parameter as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).
      * @param "MaxDepth" (optional.Int32) -  If provided, returns the contents of the repository and its subdirectories recursively until the specified max_depth of nested directories. When omitted, this defaults to 1.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedTreeentries
 */
 
@@ -183,6 +189,7 @@ type SourceApiRepositoriesWorkspaceRepoSlugSrcCommitPathGetOpts struct {
 	Q        optional.String
 	Sort     optional.String
 	MaxDepth optional.Int32
+	Page     optional.Int32
 }
 
 func (a *SourceApiService) RepositoriesWorkspaceRepoSlugSrcCommitPathGet(ctx context.Context, commit string, path string, repoSlug string, workspace string, localVarOptionals *SourceApiRepositoriesWorkspaceRepoSlugSrcCommitPathGetOpts) (PaginatedTreeentries, *http.Response, error) {
@@ -216,6 +223,9 @@ func (a *SourceApiService) RepositoriesWorkspaceRepoSlugSrcCommitPathGet(ctx con
 	}
 	if localVarOptionals != nil && localVarOptionals.MaxDepth.IsSet() {
 		localVarQueryParams.Add("max_depth", parameterToString(localVarOptionals.MaxDepth.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -320,11 +330,13 @@ This endpoint redirects the client to the directory listing of the root director
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *SourceApiRepositoriesWorkspaceRepoSlugSrcGetOpts - Optional Parameters:
      * @param "Format" (optional.String) -  Instead of returning the file&#x27;s contents, return the (json) meta data for it.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedTreeentries
 */
 
 type SourceApiRepositoriesWorkspaceRepoSlugSrcGetOpts struct {
 	Format optional.String
+	Page   optional.Int32
 }
 
 func (a *SourceApiService) RepositoriesWorkspaceRepoSlugSrcGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *SourceApiRepositoriesWorkspaceRepoSlugSrcGetOpts) (PaginatedTreeentries, *http.Response, error) {
@@ -347,6 +359,9 @@ func (a *SourceApiService) RepositoriesWorkspaceRepoSlugSrcGet(ctx context.Conte
 
 	if localVarOptionals != nil && localVarOptionals.Format.IsSet() {
 		localVarQueryParams.Add("format", parameterToString(localVarOptionals.Format.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

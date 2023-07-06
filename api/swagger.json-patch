@@ -16,6 +16,28 @@
       "type": "integer",
       "in": "query"
     },
+    "path": "/paths/~1hook_events~1{subject_type}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1pullrequests~1{selected_user}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
     "path": "/paths/~1repositories/get/parameters/-"
   },
   {
@@ -28,5 +50,709 @@
       "in": "query"
     },
     "path": "/paths/~1repositories~1{workspace}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1branch-restrictions/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commit~1{commit}~1comments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commit~1{commit}~1reports/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commit~1{commit}~1reports~1{reportId}~1annotations/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commit~1{commit}~1statuses/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commits/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commits~1{revision}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1components/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1default-reviewers/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1deploy-keys/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1deployments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1deployments_config~1environments~1{environment_uuid}~1variables/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1diffstat~1{spec}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1effective-default-reviewers/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1environments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1filehistory~1{commit}~1{path}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1forks/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues~1{issue_id}~1attachments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues~1{issue_id}~1changes/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues~1{issue_id}~1comments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1milestones/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1permissions-config~1groups/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1permissions-config~1users/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines-config~1caches/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines~1{pipeline_uuid}~1steps/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines_config~1schedules/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines_config~1schedules~1{schedule_uuid}~1executions/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines_config~1ssh~1known_hosts/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines_config~1variables/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pullrequests/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pullrequests~1{pull_request_id}~1comments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pullrequests~1{pull_request_id}~1statuses/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1refs/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1refs~1branches/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1refs~1tags/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1src/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1src~1{commit}~1{path}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1versions/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1watchers/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1snippets/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1snippets~1{workspace}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1snippets~1{workspace}~1{encoded_id}~1comments/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1snippets~1{workspace}~1{encoded_id}~1commits/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1snippets~1{workspace}~1{encoded_id}~1watchers/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1teams~1{username}~1pipelines_config~1variables/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1user~1permissions~1repositories/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1user~1permissions~1workspaces/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1users~1{selected_user}~1pipelines_config~1variables/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1users~1{selected_user}~1ssh-keys/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1hooks/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1members/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1permissions/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1permissions~1repositories/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1permissions~1repositories~1{repo_slug}/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1pipelines-config~1variables/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1projects/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1projects~1{project_key}~1default-reviewers/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1projects~1{project_key}~1deploy-keys/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1projects~1{project_key}~1permissions-config~1groups/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1workspaces~1{workspace}~1projects~1{project_key}~1permissions-config~1users/get/parameters/-"
   }
 ]

@@ -159,11 +159,13 @@ Returns all pull requests authored by the specified user.  By default only open 
  * @param selectedUser This can either be the username of the pull request author, the author&#x27;s UUID surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, or the author&#x27;s Atlassian ID.
  * @param optional nil or *PullrequestsApiPullrequestsSelectedUserGetOpts - Optional Parameters:
      * @param "State" (optional.String) -  Only return pull requests that are in this state. This parameter can be repeated.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedPullrequests
 */
 
 type PullrequestsApiPullrequestsSelectedUserGetOpts struct {
 	State optional.String
+	Page  optional.Int32
 }
 
 func (a *PullrequestsApiService) PullrequestsSelectedUserGet(ctx context.Context, selectedUser string, localVarOptionals *PullrequestsApiPullrequestsSelectedUserGetOpts) (PaginatedPullrequests, *http.Response, error) {
@@ -185,6 +187,9 @@ func (a *PullrequestsApiService) PullrequestsSelectedUserGet(ctx context.Context
 
 	if localVarOptionals != nil && localVarOptionals.State.IsSet() {
 		localVarQueryParams.Add("state", parameterToString(localVarOptionals.State.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -274,13 +279,19 @@ func (a *PullrequestsApiService) PullrequestsSelectedUserGet(ctx context.Context
 /*
 PullrequestsApiService List default reviewers
 Returns the repository&#x27;s default reviewers.  These are the users that are automatically added as reviewers on every new pull request that is created. To obtain the repository&#x27;s default reviewers as well as the default reviewers inherited from the project, use the [effective-default-reveiwers](#api-repositories-workspace-repo-slug-effective-default-reviewers-get) endpoint.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugDefaultReviewersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedAccounts
 */
-func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugDefaultReviewersGet(ctx context.Context, repoSlug string, workspace string) (PaginatedAccounts, *http.Response, error) {
+
+type PullrequestsApiRepositoriesWorkspaceRepoSlugDefaultReviewersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugDefaultReviewersGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *PullrequestsApiRepositoriesWorkspaceRepoSlugDefaultReviewersGetOpts) (PaginatedAccounts, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -298,6 +309,9 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugDefaultReviewersGe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -747,13 +761,19 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugDefaultReviewersTa
 /*
 PullrequestsApiService List effective default reviewers
 Returns the repository&#x27;s effective default reviewers. This includes both default reviewers defined at the repository level as well as those inherited from its project.  These are the users that are automatically added as reviewers on every new pull request that is created.  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/{workspace_slug}/{repo_slug}/effective-default-reviewers?page&#x3D;1&amp;pagelen&#x3D;20 {     \&quot;pagelen\&quot;: 20,     \&quot;values\&quot;: [         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Patrick Wolf\&quot;,                 \&quot;uuid\&quot;: \&quot;{9565301a-a3cf-4b5d-88f4-dd6af8078d7e}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;project\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;,         },         {             \&quot;user\&quot;: {                 \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,                 \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot;             },             \&quot;reviewer_type\&quot;: \&quot;repository\&quot;,             \&quot;type\&quot;: \&quot;default_reviewer\&quot;,         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedDefaultReviewerAndType
 */
-func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet(ctx context.Context, repoSlug string, workspace string) (PaginatedDefaultReviewerAndType, *http.Response, error) {
+
+type PullrequestsApiRepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *PullrequestsApiRepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGetOpts) (PaginatedDefaultReviewerAndType, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -771,6 +791,9 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugEffectiveDefaultRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -955,11 +978,13 @@ Returns all pull requests on the specified repository.  By default only open pul
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsGetOpts - Optional Parameters:
      * @param "State" (optional.String) -  Only return pull requests that are in this state. This parameter can be repeated.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedPullrequests
 */
 
 type PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsGetOpts struct {
 	State optional.String
+	Page  optional.Int32
 }
 
 func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsGetOpts) (PaginatedPullrequests, *http.Response, error) {
@@ -982,6 +1007,9 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsGet(ct
 
 	if localVarOptionals != nil && localVarOptionals.State.IsSet() {
 		localVarQueryParams.Add("state", parameterToString(localVarOptionals.State.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -2138,14 +2166,20 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 /*
 PullrequestsApiService List comments on a pull request
 Returns a paginated list of the pull request&#x27;s comments.  This includes both global, inline comments and replies.  The default sorting is oldest to newest and can be overridden with the &#x60;sort&#x60; query parameter.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param pullRequestId The id of the pull request.
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param pullRequestId The id of the pull request.
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedPullrequestComments
 */
-func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet(ctx context.Context, pullRequestId int32, repoSlug string, workspace string) (PaginatedPullrequestComments, *http.Response, error) {
+
+type PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet(ctx context.Context, pullRequestId int32, repoSlug string, workspace string, localVarOptionals *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGetOpts) (PaginatedPullrequestComments, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -2164,6 +2198,9 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -3583,12 +3620,14 @@ Returns all statuses (e.g. build results) for the given pull request.
  * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). Defaults to &#x60;created_on&#x60;.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedCommitstatuses
 */
 
 type PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGet(ctx context.Context, pullRequestId int32, repoSlug string, workspace string, localVarOptionals *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGetOpts) (PaginatedCommitstatuses, *http.Response, error) {
@@ -3615,6 +3654,9 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
