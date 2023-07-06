@@ -6,5 +6,27 @@
       "type": "string",
       "description": "Slugified name, the same string that is used in Bitbucket URLs."
     }
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories/get/parameters/-"
+  },
+  {
+    "op": "add",
+    "value": {
+      "name": "page",
+      "description": "page",
+      "required": false,
+      "type": "integer",
+      "in": "query"
+    },
+    "path": "/paths/~1repositories~1{workspace}/get/parameters/-"
   }
 ]

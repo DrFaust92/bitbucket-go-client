@@ -36,6 +36,7 @@ Returns a paginated list of all public repositories.  This endpoint also support
      * @param "Role" (optional.String) -  Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). &#x60;role&#x60; parameter must also be specified.
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositories
 */
 
@@ -44,6 +45,7 @@ type RepositoriesApiRepositoriesGetOpts struct {
 	Role  optional.String
 	Q     optional.String
 	Sort  optional.String
+	Page  optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOptionals *RepositoriesApiRepositoriesGetOpts) (PaginatedRepositories, *http.Response, error) {
@@ -73,6 +75,9 @@ func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOp
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -148,7 +153,6 @@ func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOp
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
-
 /*
 RepositoriesApiService List repositories in a workspace
 Returns a paginated list of all repositories owned by the specified workspace.  The result can be narrowed down based on the authenticated user&#x27;s role.  E.g. with &#x60;?role&#x3D;contributor&#x60;, only those repositories that the authenticated user has write access to are returned (this includes any repo the user is an admin on, as that implies write access).  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
@@ -158,6 +162,7 @@ Returns a paginated list of all repositories owned by the specified workspace.  
      * @param "Role" (optional.String) -   Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositories
 */
 
@@ -165,6 +170,7 @@ type RepositoriesApiRepositoriesWorkspaceGetOpts struct {
 	Role optional.String
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesWorkspaceGet(ctx context.Context, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceGetOpts) (PaginatedRepositories, *http.Response, error) {
@@ -192,6 +198,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceGet(ctx context.Context, w
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
