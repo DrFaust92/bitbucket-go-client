@@ -223,7 +223,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAnnotationsForReport**
-> PaginatedAnnotations GetAnnotationsForReport(ctx, workspace, repoSlug, commit, reportId)
+> PaginatedAnnotations GetAnnotationsForReport(ctx, workspace, repoSlug, commit, reportId, optional)
 List annotations
 
 Returns a paginated list of Annotations for a specified report.
@@ -237,6 +237,17 @@ Name | Type | Description  | Notes
   **repoSlug** | **string**| The repository. | 
   **commit** | **string**| The commit for which to retrieve reports. | 
   **reportId** | **string**| Uuid or external-if of the report for which to get annotations for. | 
+ **optional** | ***CommitsApiGetAnnotationsForReportOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CommitsApiGetAnnotationsForReportOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -285,7 +296,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetReportsForCommit**
-> PaginatedReports GetReportsForCommit(ctx, workspace, repoSlug, commit)
+> PaginatedReports GetReportsForCommit(ctx, workspace, repoSlug, commit, optional)
 List reports
 
 Returns a paginated list of Reports linked to this commit.
@@ -298,6 +309,16 @@ Name | Type | Description  | Notes
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **commit** | **string**| The commit for which to retrieve reports. | 
+ **optional** | ***CommitsApiGetReportsForCommitOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CommitsApiGetReportsForCommitOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -493,6 +514,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**| Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
  **sort** | **optional.String**| Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -571,7 +593,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugCommitsGet**
-> PaginatedChangeset RepositoriesWorkspaceRepoSlugCommitsGet(ctx, repoSlug, workspace)
+> PaginatedChangeset RepositoriesWorkspaceRepoSlugCommitsGet(ctx, repoSlug, workspace, optional)
 List commits
 
 These are the repository's commits. They are paginated and returned in reverse chronological order, similar to the output of `git log`. Like these tools, the DAG can be filtered.  #### GET /repositories/{workspace}/{repo_slug}/commits/  Returns all commits in the repo in topological order (newest commit first). All branches and tags are included (similar to `git log --all`).  #### GET /repositories/{workspace}/{repo_slug}/commits/?exclude=master  Returns all commits in the repo that are not on master (similar to `git log --all ^master`).  #### GET /repositories/{workspace}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar  Returns all commits that are on refs `foo` or `bar`, but not on `fu` or `fubar` (similar to `git log foo bar ^fu ^fubar`).  An optional `path` parameter can be specified that will limit the results to commits that affect that path. `path` can either be a file or a directory. If a directory is specified, commits are returned that have modified any file in the directory tree rooted by `path`. It is important to note that if the `path` parameter is specified, the commits returned by this endpoint may no longer be a DAG, parent commits that do not modify the path will be omitted from the response.  #### GET /repositories/{workspace}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master  Returns all commits that are on refs `foo` or `bar`, but not on `master` that changed the file README.md.  #### GET /repositories/{workspace}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master  Returns all commits that are on refs `foo` or `bar`, but not on `master` that changed to a file in any file in the directory src or its children.  Because the response could include a very large number of commits, it is paginated. Follow the 'next' link in the response to navigate to the next page of commits. As with other paginated resources, do not construct your own links.  When the include and exclude parameters are more than can fit in a query string, clients can use a `x-www-form-urlencoded` POST instead.
@@ -629,7 +651,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugCommitsRevisionGet**
-> PaginatedChangeset RepositoriesWorkspaceRepoSlugCommitsRevisionGet(ctx, repoSlug, revision, workspace)
+> PaginatedChangeset RepositoriesWorkspaceRepoSlugCommitsRevisionGet(ctx, repoSlug, revision, workspace, optional)
 List commits for revision
 
 These are the repository's commits. They are paginated and returned in reverse chronological order, similar to the output of `git log`. Like these tools, the DAG can be filtered.  #### GET /repositories/{workspace}/{repo_slug}/commits/master  Returns all commits on ref `master` (similar to `git log master`).  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?include=foo&exclude=master  Returns all commits on ref `dev` or `foo`, except those that are reachable on `master` (similar to `git log dev foo ^master`).  An optional `path` parameter can be specified that will limit the results to commits that affect that path. `path` can either be a file or a directory. If a directory is specified, commits are returned that have modified any file in the directory tree rooted by `path`. It is important to note that if the `path` parameter is specified, the commits returned by this endpoint may no longer be a DAG, parent commits that do not modify the path will be omitted from the response.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path=README.md&include=foo&include=bar&exclude=master  Returns all commits that are on refs `dev` or `foo` or `bar`, but not on `master` that changed the file README.md.  #### GET /repositories/{workspace}/{repo_slug}/commits/dev?path=src/&include=foo&exclude=master  Returns all commits that are on refs `dev` or `foo`, but not on `master` that changed to a file in any file in the directory src or its children.  Because the response could include a very large number of commits, it is paginated. Follow the 'next' link in the response to navigate to the next page of commits. As with other paginated resources, do not construct your own links.  When the include and exclude parameters are more than can fit in a query string, clients can use a `x-www-form-urlencoded` POST instead.
@@ -642,6 +664,16 @@ Name | Type | Description  | Notes
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **revision** | **string**| A commit SHA1 or ref name. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***CommitsApiRepositoriesWorkspaceRepoSlugCommitsRevisionGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CommitsApiRepositoriesWorkspaceRepoSlugCommitsRevisionGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -762,6 +794,7 @@ Name | Type | Description  | Notes
  **path** | **optional.String**| Limit the diffstat to a particular file (this parameter can be repeated for multiple paths). | 
  **renames** | **optional.Bool**| Whether to perform rename detection, true if omitted. | 
  **topic** | **optional.Bool**| If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

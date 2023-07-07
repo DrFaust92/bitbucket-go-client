@@ -36,6 +36,7 @@ Returns a paginated list of all public repositories.  This endpoint also support
      * @param "Role" (optional.String) -  Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). &#x60;role&#x60; parameter must also be specified.
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositories
 */
 
@@ -44,6 +45,7 @@ type RepositoriesApiRepositoriesGetOpts struct {
 	Role  optional.String
 	Q     optional.String
 	Sort  optional.String
+	Page  optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOptionals *RepositoriesApiRepositoriesGetOpts) (PaginatedRepositories, *http.Response, error) {
@@ -73,6 +75,9 @@ func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOp
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -158,6 +163,7 @@ Returns a paginated list of all repositories owned by the specified workspace.  
      * @param "Role" (optional.String) -   Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositories
 */
 
@@ -165,6 +171,7 @@ type RepositoriesApiRepositoriesWorkspaceGetOpts struct {
 	Role optional.String
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesWorkspaceGet(ctx context.Context, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceGetOpts) (PaginatedRepositories, *http.Response, error) {
@@ -192,6 +199,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceGet(ctx context.Context, w
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -412,6 +422,7 @@ Returns a paginated list of commits that modified the specified file.  Commits a
      * @param "Renames" (optional.String) -   When &#x60;true&#x60;, Bitbucket will follow the history of the file across renames (this is the default behavior). This can be turned off by specifying &#x60;false&#x60;.
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedFiles
 */
 
@@ -419,6 +430,7 @@ type RepositoriesApiRepositoriesWorkspaceRepoSlugFilehistoryCommitPathGetOpts st
 	Renames optional.String
 	Q       optional.String
 	Sort    optional.String
+	Page    optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet(ctx context.Context, commit string, path string, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugFilehistoryCommitPathGetOpts) (PaginatedFiles, *http.Response, error) {
@@ -449,6 +461,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugFilehistoryCommitP
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -545,6 +560,7 @@ Returns a paginated list of all the forks of the specified repository.
      * @param "Role" (optional.String) -  Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositories
 */
 
@@ -552,6 +568,7 @@ type RepositoriesApiRepositoriesWorkspaceRepoSlugForksGetOpts struct {
 	Role optional.String
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugForksGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugForksGetOpts) (PaginatedRepositories, *http.Response, error) {
@@ -580,6 +597,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugForksGet(ctx conte
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -895,13 +915,19 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugGet(ctx context.Co
 /*
 RepositoriesApiService List webhooks for a repository
 Returns a paginated list of webhooks installed on this repository.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string) (PaginatedWebhookSubscriptions, *http.Response, error) {
+
+type RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -919,6 +945,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx conte
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1680,14 +1709,20 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsPu
 
 /*
 RepositoriesApiService List explicit group permissions for a repository
-Returns a paginated list of explicit group permissions for the given repository. This endpoint does not support BBQL features.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;repository_group_permission\&quot;,       \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Administrators\&quot;,         \&quot;slug\&quot;: \&quot;administrators\&quot;       },       \&quot;permission\&quot;: \&quot;admin\&quot;,       \&quot;links\&quot;: {         \&quot;self\&quot;: {           \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/administrators\&quot;         }       }     },     {       \&quot;type\&quot;: \&quot;repository_group_permission\&quot;,       \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Developers\&quot;,         \&quot;slug\&quot;: \&quot;developers\&quot;       },       \&quot;permission\&quot;: \&quot;read\&quot;,       \&quot;links\&quot;: {         \&quot;self\&quot;: {           \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/developers\&quot;         }       }     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+Returns a paginated list of explicit group permissions for the given repository. This endpoint does not support BBQL features.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositoryGroupPermissions
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx context.Context, repoSlug string, workspace string) (PaginatedRepositoryGroupPermissions, *http.Response, error) {
+
+type RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGetOpts) (PaginatedRepositoryGroupPermissions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1705,6 +1740,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -2213,14 +2251,20 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 
 /*
 RepositoriesApiService List explicit user permissions for a repository
-Returns a paginated list of explicit user permissions for the given repository. This endpoint does not support BBQL features.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {         \&quot;type\&quot;: \&quot;repository_user_permission\&quot;,         \&quot;user\&quot;: {             \&quot;type\&quot;: \&quot;user\&quot;,             \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,             \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,             \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         },         \&quot;permission\&quot;: \&quot;admin\&quot;,         \&quot;links\&quot;: {           \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;           }         }     },     {       \&quot;type\&quot;: \&quot;repository_user_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Sean Conaty\&quot;,         \&quot;uuid\&quot;: \&quot;{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\&quot;,         \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;       },       \&quot;permission\&quot;: \&quot;write\&quot;,       \&quot;links\&quot;: {         \&quot;self\&quot;: {           \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/                    permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\&quot;         }       }     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+Returns a paginated list of explicit user permissions for the given repository. This endpoint does not support BBQL features.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigUsersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositoryUserPermissions
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx context.Context, repoSlug string, workspace string) (PaginatedRepositoryUserPermissions, *http.Response, error) {
+
+type RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigUsersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigUsersGetOpts) (PaginatedRepositoryUserPermissions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -2238,6 +2282,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -3035,10 +3082,11 @@ This endpoints is used to retrieve the contents of a single file, or the content
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugSrcCommitPathGetOpts - Optional Parameters:
-     * @param "Format" (optional.String) -  If &#x27;meta&#x27; is provided, returns the (json) meta data for the contents of the file.  If &#x27;rendered&#x27; is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git does not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file&#x27;s actual contents.
+     * @param "Format" (optional.String) -  If &#x27;meta&#x27; is provided, returns the (json) meta data for the contents of the file.  If &#x27;rendered&#x27; is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. The &#x27;rendered&#x27; option only supports these filetypes: &#x60;.md&#x60;, &#x60;.markdown&#x60;, &#x60;.mkd&#x60;, &#x60;.mkdn&#x60;, &#x60;.mdown&#x60;, &#x60;.text&#x60;, &#x60;.rst&#x60;, and &#x60;.textile&#x60;. Since Git does not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file&#x27;s actual contents.
      * @param "Q" (optional.String) -  Optional filter expression as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Optional sorting parameter as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).
      * @param "MaxDepth" (optional.Int32) -  If provided, returns the contents of the repository and its subdirectories recursively until the specified max_depth of nested directories. When omitted, this defaults to 1.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedTreeentries
 */
 
@@ -3047,6 +3095,7 @@ type RepositoriesApiRepositoriesWorkspaceRepoSlugSrcCommitPathGetOpts struct {
 	Q        optional.String
 	Sort     optional.String
 	MaxDepth optional.Int32
+	Page     optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugSrcCommitPathGet(ctx context.Context, commit string, path string, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugSrcCommitPathGetOpts) (PaginatedTreeentries, *http.Response, error) {
@@ -3080,6 +3129,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugSrcCommitPathGet(c
 	}
 	if localVarOptionals != nil && localVarOptionals.MaxDepth.IsSet() {
 		localVarQueryParams.Add("max_depth", parameterToString(localVarOptionals.MaxDepth.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -3184,11 +3236,13 @@ This endpoint redirects the client to the directory listing of the root director
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugSrcGetOpts - Optional Parameters:
      * @param "Format" (optional.String) -  Instead of returning the file&#x27;s contents, return the (json) meta data for it.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedTreeentries
 */
 
 type RepositoriesApiRepositoriesWorkspaceRepoSlugSrcGetOpts struct {
 	Format optional.String
+	Page   optional.Int32
 }
 
 func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugSrcGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugSrcGetOpts) (PaginatedTreeentries, *http.Response, error) {
@@ -3211,6 +3265,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugSrcGet(ctx context
 
 	if localVarOptionals != nil && localVarOptionals.Format.IsSet() {
 		localVarQueryParams.Add("format", parameterToString(localVarOptionals.Format.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -3432,13 +3489,19 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugSrcPost(ctx contex
 /*
 RepositoriesApiService List repositories watchers
 Returns a paginated list of all the watchers on the specified repository.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugWatchersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedAccounts
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx context.Context, repoSlug string, workspace string) (PaginatedAccounts, *http.Response, error) {
+
+type RepositoriesApiRepositoriesWorkspaceRepoSlugWatchersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugWatchersGetOpts) (PaginatedAccounts, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -3456,6 +3519,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -3533,17 +3599,19 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 
 /*
 RepositoriesApiService List repository permissions for a user
-Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/user/permissions/repositories  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;repository_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;nickname\&quot;: \&quot;evzijst\&quot;,         \&quot;display_name\&quot;: \&quot;Erik van Zijst\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;       },       \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;bitbucket/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;       },       \&quot;permission\&quot;: \&quot;admin\&quot;     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 1 } &#x60;&#x60;&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;repository.name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
+Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;repository.name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *RepositoriesApiUserPermissionsRepositoriesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositoryPermissions
 */
 
 type RepositoriesApiUserPermissionsRepositoriesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *RepositoriesApiService) UserPermissionsRepositoriesGet(ctx context.Context, localVarOptionals *RepositoriesApiUserPermissionsRepositoriesGetOpts) (PaginatedRepositoryPermissions, *http.Response, error) {
@@ -3567,6 +3635,9 @@ func (a *RepositoriesApiService) UserPermissionsRepositoriesGet(ctx context.Cont
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

@@ -51,10 +51,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet**
-> PaginatedDefaultReviewerAndType WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet(ctx, projectKey, workspace)
+> PaginatedDefaultReviewerAndType WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGet(ctx, projectKey, workspace, optional)
 List the default reviewers in a project
 
-Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.  Example: ``` $ curl https://api.bitbucket.org/2.0/.../projects/.../default-reviewers | jq . {     \"pagelen\": 10,     \"values\": [         {             \"user\": {                 \"display_name\": \"Davis Lee\",                 \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\"         },         {             \"user\": {                 \"display_name\": \"Jorge Rodriguez\",                 \"uuid\": \"{1aa43376-260d-4a0b-9660-f62672b9655d}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\"         }     ],     \"page\": 1,     \"size\": 2 } ```
+Return a list of all default reviewers for a project. This is a list of users that will be added as default reviewers to pull requests for any repository within the project.
 
 ### Required Parameters
 
@@ -63,6 +63,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **projectKey** | **string**| The project in question. This is the actual &#x60;key&#x60; assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***ProjectsApiWorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ProjectsApiWorkspacesWorkspaceProjectsProjectKeyDefaultReviewersGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -240,6 +249,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **projectKey** | **string**| The project in question. This is the actual key assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -347,10 +365,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGet**
-> PaginatedProjectUserPermissions WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGet(ctx, projectKey, workspace)
+> PaginatedProjectUserPermissions WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGet(ctx, projectKey, workspace, optional)
 List explicit user permissions for a project
 
-Returns a paginated list of explicit user permissions for the given project. This endpoint does not support BBQL features.  Example:  ``` $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/users  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/users  { \"pagelen\": 10, \"values\": [     {         \"type\": \"project_user_permission\",         \"user\": {             \"type\": \"user\",             \"display_name\": \"Colin Cameron\",             \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",             \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         },         \"permission\": \"admin\",         \"links\": {             \"self\": {                 \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"             }         }     },     {         \"type\": \"project_user_permission\",         \"user\": {             \"type\": \"user\",             \"display_name\": \"Sean Conaty\",             \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",             \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"         },         \"permission\": \"write\",         \"links\": {             \"self\": {                 \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"             }         }     } ], \"page\": 1, \"size\": 2 } ```
+Returns a paginated list of explicit user permissions for the given project. This endpoint does not support BBQL features.
 
 ### Required Parameters
 
@@ -359,6 +377,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **projectKey** | **string**| The project in question. This is the actual key assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ProjectsApiWorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

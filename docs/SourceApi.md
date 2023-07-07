@@ -37,6 +37,7 @@ Name | Type | Description  | Notes
  **renames** | **optional.String**|  When &#x60;true&#x60;, Bitbucket will follow the history of the file across renames (this is the default behavior). This can be turned off by specifying &#x60;false&#x60;. | 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -82,6 +83,7 @@ Name | Type | Description  | Notes
  **q** | **optional.String**| Optional filter expression as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**| Optional sorting parameter as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results). | 
  **maxDepth** | **optional.Int32**| If provided, returns the contents of the repository and its subdirectories recursively until the specified max_depth of nested directories. When omitted, this defaults to 1. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -120,6 +122,7 @@ Name | Type | Description  | Notes
 
 
  **format** | **optional.String**| Instead of returning the file&#x27;s contents, return the (json) meta data for it. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

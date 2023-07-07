@@ -29,17 +29,19 @@ type WorkspacesApiService service
 
 /*
 WorkspacesApiService List workspaces for the current user
-Returns an object for each workspace the caller is a member of, and their effective role - the highest level of privilege the caller has. If a user is a member of multiple groups with distinct roles, only the highest level is returned.  Permissions can be:  * &#x60;owner&#x60; * &#x60;collaborator&#x60; * &#x60;member&#x60;  **The &#x60;collaborator&#x60; role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/user/permissions/workspaces  {   \&quot;pagelen\&quot;: 10,   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 1,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;workspace_membership\&quot;,       \&quot;permission\&quot;: \&quot;owner\&quot;,       \&quot;last_accessed\&quot;: \&quot;2019-03-07T12:35:02.900024+00:00\&quot;,       \&quot;added_on\&quot;: \&quot;2018-10-11T17:42:02.961424+00:00\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;uuid\&quot;: \&quot;{470c176d-3574-44ea-bb41-89e8638bcca4}\&quot;,         \&quot;nickname\&quot;: \&quot;evzijst\&quot;,         \&quot;display_name\&quot;: \&quot;Erik van Zijst\&quot;,       },       \&quot;workspace\&quot;: {         \&quot;type\&quot;: \&quot;workspace\&quot;,         \&quot;uuid\&quot;: \&quot;{a15fb181-db1f-48f7-b41f-e1eff06929d6}\&quot;,         \&quot;slug\&quot;: \&quot;bbworkspace1\&quot;,         \&quot;name\&quot;: \&quot;Atlassian Bitbucket\&quot;,       }     }   ] } &#x60;&#x60;&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * &#x60;q&#x3D;workspace.slug&#x3D;\&quot;bbworkspace1\&quot;&#x60; or &#x60;q&#x3D;permission&#x3D;\&quot;owner\&quot;&#x60; * &#x60;sort&#x3D;workspace.slug&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
+Returns an object for each workspace the caller is a member of, and their effective role - the highest level of privilege the caller has. If a user is a member of multiple groups with distinct roles, only the highest level is returned.  Permissions can be:  * &#x60;owner&#x60; * &#x60;collaborator&#x60; * &#x60;member&#x60;  **The &#x60;collaborator&#x60; role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  **When you move your administration from Bitbucket Cloud to admin.atlassian.com, the following fields on &#x60;workspace_membership&#x60; will no longer be present: &#x60;last_accessed&#x60; and &#x60;added_on&#x60;. See the [deprecation announcement](/cloud/bitbucket/announcement-breaking-change-workspace-membership/).**  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/user/permissions/workspaces  {   \&quot;pagelen\&quot;: 10,   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 1,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;workspace_membership\&quot;,       \&quot;permission\&quot;: \&quot;owner\&quot;,       \&quot;last_accessed\&quot;: \&quot;2019-03-07T12:35:02.900024+00:00\&quot;,       \&quot;added_on\&quot;: \&quot;2018-10-11T17:42:02.961424+00:00\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;uuid\&quot;: \&quot;{470c176d-3574-44ea-bb41-89e8638bcca4}\&quot;,         \&quot;nickname\&quot;: \&quot;evzijst\&quot;,         \&quot;display_name\&quot;: \&quot;Erik van Zijst\&quot;,       },       \&quot;workspace\&quot;: {         \&quot;type\&quot;: \&quot;workspace\&quot;,         \&quot;uuid\&quot;: \&quot;{a15fb181-db1f-48f7-b41f-e1eff06929d6}\&quot;,         \&quot;slug\&quot;: \&quot;bbworkspace1\&quot;,         \&quot;name\&quot;: \&quot;Atlassian Bitbucket\&quot;,       }     }   ] } &#x60;&#x60;&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * &#x60;q&#x3D;workspace.slug&#x3D;\&quot;bbworkspace1\&quot;&#x60; or &#x60;q&#x3D;permission&#x3D;\&quot;owner\&quot;&#x60; * &#x60;sort&#x3D;workspace.slug&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *WorkspacesApiUserPermissionsWorkspacesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details.
      * @param "Sort" (optional.String) -   Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWorkspaceMemberships
 */
 
 type WorkspacesApiUserPermissionsWorkspacesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *WorkspacesApiService) UserPermissionsWorkspacesGet(ctx context.Context, localVarOptionals *WorkspacesApiUserPermissionsWorkspacesGetOpts) (PaginatedWorkspaceMemberships, *http.Response, error) {
@@ -63,6 +65,9 @@ func (a *WorkspacesApiService) UserPermissionsWorkspacesGet(ctx context.Context,
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -157,6 +162,7 @@ Returns a list of workspaces accessible by the authenticated user.  Example:  &#
      * @param "Role" (optional.String) -               Filters the workspaces based on the authenticated user&#x27;s role on each workspace.              * **member**: returns a list of all the workspaces which the caller is a member of                 at least one workspace group or repository             * **collaborator**: returns a list of workspaces which the caller has write access                 to at least one repository in the workspace             * **owner**: returns a list of workspaces which the caller has administrator access
      * @param "Q" (optional.String) -   Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details.
      * @param "Sort" (optional.String) -   Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWorkspaces
 */
 
@@ -164,6 +170,7 @@ type WorkspacesApiWorkspacesGetOpts struct {
 	Role optional.String
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *WorkspacesApiService) WorkspacesGet(ctx context.Context, localVarOptionals *WorkspacesApiWorkspacesGetOpts) (PaginatedWorkspaces, *http.Response, error) {
@@ -190,6 +197,9 @@ func (a *WorkspacesApiService) WorkspacesGet(ctx context.Context, localVarOption
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -389,12 +399,18 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceGet(ctx context.Context, works
 /*
 WorkspacesApiService List webhooks for a workspace
 Returns a paginated list of webhooks installed on this workspace.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *WorkspacesApiWorkspacesWorkspaceHooksGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, workspace string) (PaginatedWebhookSubscriptions, *http.Response, error) {
+
+type WorkspacesApiWorkspacesWorkspaceHooksGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *WorkspacesApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, workspace string, localVarOptionals *WorkspacesApiWorkspacesWorkspaceHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -411,6 +427,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -964,12 +983,18 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Contex
 /*
 WorkspacesApiService List users in a workspace
 Returns all members of the requested workspace.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *WorkspacesApiWorkspacesWorkspaceMembersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWorkspaceMemberships
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceMembersGet(ctx context.Context, workspace string) (PaginatedWorkspaceMemberships, *http.Response, error) {
+
+type WorkspacesApiWorkspacesWorkspaceMembersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *WorkspacesApiService) WorkspacesWorkspaceMembersGet(ctx context.Context, workspace string, localVarOptionals *WorkspacesApiWorkspacesWorkspaceMembersGetOpts) (PaginatedWorkspaceMemberships, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -986,6 +1011,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceMembersGet(ctx context.Context
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1195,16 +1223,18 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceMembersMemberGet(ctx context.C
 
 /*
 WorkspacesApiService List user permissions in a workspace
-Returns the list of members in a workspace and their permission levels. Permission can be: * &#x60;owner&#x60; * &#x60;collaborator&#x60; * &#x60;member&#x60;  **The &#x60;collaborator&#x60; role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  Example:  &#x60;&#x60;&#x60; $ curl -X https://api.bitbucket.org/2.0/workspaces/bbworkspace1/permissions  {     \&quot;pagelen\&quot;: 10,     \&quot;values\&quot;: [         {             \&quot;permission\&quot;: \&quot;owner\&quot;,             \&quot;type\&quot;: \&quot;workspace_membership\&quot;,             \&quot;user\&quot;: {                 \&quot;type\&quot;: \&quot;user\&quot;,                 \&quot;uuid\&quot;: \&quot;{470c176d-3574-44ea-bb41-89e8638bcca4}\&quot;,                 \&quot;display_name\&quot;: \&quot;Erik van Zijst\&quot;,             },             \&quot;workspace\&quot;: {                 \&quot;type\&quot;: \&quot;workspace\&quot;,                 \&quot;uuid\&quot;: \&quot;{a15fb181-db1f-48f7-b41f-e1eff06929d6}\&quot;,                 \&quot;slug\&quot;: \&quot;bbworkspace1\&quot;,                 \&quot;name\&quot;: \&quot;Atlassian Bitbucket\&quot;,             }         },         {             \&quot;permission\&quot;: \&quot;member\&quot;,             \&quot;type\&quot;: \&quot;workspace_membership\&quot;,             \&quot;user\&quot;: {                 \&quot;type\&quot;: \&quot;user\&quot;,                 \&quot;nickname\&quot;: \&quot;seanaty\&quot;,                 \&quot;display_name\&quot;: \&quot;Sean Conaty\&quot;,                 \&quot;uuid\&quot;: \&quot;{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\&quot;             },             \&quot;workspace\&quot;: {                 \&quot;type\&quot;: \&quot;workspace\&quot;,                 \&quot;uuid\&quot;: \&quot;{a15fb181-db1f-48f7-b41f-e1eff06929d6}\&quot;,                 \&quot;slug\&quot;: \&quot;bbworkspace1\&quot;,                 \&quot;name\&quot;: \&quot;Atlassian Bitbucket\&quot;,             }         }     ],     \&quot;page\&quot;: 1,     \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;  Results may be further [filtered](/cloud/bitbucket/rest/intro/#filtering) by permission by adding the following query string parameters:  * &#x60;q&#x3D;permission&#x3D;\&quot;owner\&quot;&#x60;
+Returns the list of members in a workspace and their permission levels. Permission can be: * &#x60;owner&#x60; * &#x60;collaborator&#x60; * &#x60;member&#x60;  **The &#x60;collaborator&#x60; role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  **When you move your administration from Bitbucket Cloud to admin.atlassian.com, the following fields on &#x60;workspace_membership&#x60; will no longer be present: &#x60;last_accessed&#x60; and &#x60;added_on&#x60;. See the [deprecation announcement](/cloud/bitbucket/announcement-breaking-change-workspace-membership/).**  Results may be further [filtered](/cloud/bitbucket/rest/intro/#filtering) by permission by adding the following query string parameters:  * &#x60;q&#x3D;permission&#x3D;\&quot;owner\&quot;&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *WorkspacesApiWorkspacesWorkspacePermissionsGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWorkspaceMemberships
 */
 
 type WorkspacesApiWorkspacesWorkspacePermissionsGetOpts struct {
-	Q optional.String
+	Q    optional.String
+	Page optional.Int32
 }
 
 func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsGet(ctx context.Context, workspace string, localVarOptionals *WorkspacesApiWorkspacesWorkspacePermissionsGetOpts) (PaginatedWorkspaceMemberships, *http.Response, error) {
@@ -1226,6 +1256,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsGet(ctx context.Con
 
 	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
 		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -1314,18 +1347,20 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsGet(ctx context.Con
 
 /*
 WorkspacesApiService List all repository permissions for a workspace
-Returns an object for each repository permission for all of a workspace&#x27;s repositories.  Permissions returned are effective permissions: the highest level of permission the user has. This does not distinguish between direct and indirect (group) privileges.  Only users with admin permission for the team may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/permissions/repositories  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;repository_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Erik van Zijst\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;       },       \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;       },       \&quot;permission\&quot;: \&quot;admin\&quot;     },     {       \&quot;type\&quot;: \&quot;repository_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Sean Conaty\&quot;,         \&quot;uuid\&quot;: \&quot;{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\&quot;       },       \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;       },       \&quot;permission\&quot;: \&quot;write\&quot;     },     {       \&quot;type\&quot;: \&quot;repository_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Jeff Zeng\&quot;,         \&quot;uuid\&quot;: \&quot;{47f92a9a-c3a3-4d0b-bc4e-782a969c5c72}\&quot;       },       \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;whee\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/whee\&quot;,         \&quot;uuid\&quot;: \&quot;{30ba25e9-51ff-4555-8dd0-fc7ee2fa0895}\&quot;       },       \&quot;permission\&quot;: \&quot;admin\&quot;     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 3 } &#x60;&#x60;&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository, user, or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;user.display_name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
+Returns an object for each repository permission for all of a workspace&#x27;s repositories.  Permissions returned are effective permissions: the highest level of permission the user has. This does not distinguish between direct and indirect (group) privileges.  Only users with admin permission for the team may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository, user, or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;user.display_name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *WorkspacesApiWorkspacesWorkspacePermissionsRepositoriesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositoryPermissions
 */
 
 type WorkspacesApiWorkspacesWorkspacePermissionsRepositoriesGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesGet(ctx context.Context, workspace string, localVarOptionals *WorkspacesApiWorkspacesWorkspacePermissionsRepositoriesGetOpts) (PaginatedRepositoryPermissions, *http.Response, error) {
@@ -1350,6 +1385,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesGet(ctx
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -1438,19 +1476,21 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesGet(ctx
 
 /*
 WorkspacesApiService List a repository permissions for a workspace
-Returns an object for the repository permission of each user in the requested repository.  Permissions returned are effective permissions: the highest level of permission the user has. This does not distinguish between direct and indirect (group) privileges.  Only users with admin permission for the repository may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/permissions/repositories/geordi  {   \&quot;pagelen\&quot;: 10,   \&quot;values\&quot;: [     {       \&quot;type\&quot;: \&quot;repository_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Erik van Zijst\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;       },       \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;       },       \&quot;permission\&quot;: \&quot;admin\&quot;     },     {       \&quot;type\&quot;: \&quot;repository_permission\&quot;,       \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Sean Conaty\&quot;,         \&quot;uuid\&quot;: \&quot;{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\&quot;       },       \&quot;repository\&quot;: {         \&quot;type\&quot;: \&quot;repository\&quot;,         \&quot;name\&quot;: \&quot;geordi\&quot;,         \&quot;full_name\&quot;: \&quot;atlassian_tutorial/geordi\&quot;,         \&quot;uuid\&quot;: \&quot;{85d08b4e-571d-44e9-a507-fa476535aa98}\&quot;       },       \&quot;permission\&quot;: \&quot;write\&quot;     }   ],   \&quot;page\&quot;: 1,   \&quot;size\&quot;: 2 } &#x60;&#x60;&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by user, or permission by adding the following query string parameters:  * &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;user.display_name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
+Returns an object for the repository permission of each user in the requested repository.  Permissions returned are effective permissions: the highest level of permission the user has. This does not distinguish between direct and indirect (group) privileges.  Only users with admin permission for the repository may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by user, or permission by adding the following query string parameters:  * &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;user.display_name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *WorkspacesApiWorkspacesWorkspacePermissionsRepositoriesRepoSlugGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedRepositoryPermissions
 */
 
 type WorkspacesApiWorkspacesWorkspacePermissionsRepositoriesRepoSlugGetOpts struct {
 	Q    optional.String
 	Sort optional.String
+	Page optional.Int32
 }
 
 func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesRepoSlugGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *WorkspacesApiWorkspacesWorkspacePermissionsRepositoriesRepoSlugGetOpts) (PaginatedRepositoryPermissions, *http.Response, error) {
@@ -1476,6 +1516,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesRepoSlu
 	}
 	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
 		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -1565,12 +1608,18 @@ func (a *WorkspacesApiService) WorkspacesWorkspacePermissionsRepositoriesRepoSlu
 /*
 WorkspacesApiService List projects in a workspace
 Returns the list of projects in this workspace.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *WorkspacesApiWorkspacesWorkspaceProjectsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedProjects
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string) (PaginatedProjects, *http.Response, error) {
+
+type WorkspacesApiWorkspacesWorkspaceProjectsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Context, workspace string, localVarOptionals *WorkspacesApiWorkspacesWorkspaceProjectsGetOpts) (PaginatedProjects, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1587,6 +1636,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceProjectsGet(ctx context.Contex
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -589,15 +591,21 @@ func (a *ReportsApiService) GetAnnotation(ctx context.Context, workspace string,
 /*
 ReportsApiService List annotations
 Returns a paginated list of Annotations for a specified report.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
-  - @param repoSlug The repository.
-  - @param commit The commit for which to retrieve reports.
-  - @param reportId Uuid or external-if of the report for which to get annotations for.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+ * @param repoSlug The repository.
+ * @param commit The commit for which to retrieve reports.
+ * @param reportId Uuid or external-if of the report for which to get annotations for.
+ * @param optional nil or *ReportsApiGetAnnotationsForReportOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedAnnotations
 */
-func (a *ReportsApiService) GetAnnotationsForReport(ctx context.Context, workspace string, repoSlug string, commit string, reportId string) (PaginatedAnnotations, *http.Response, error) {
+
+type ReportsApiGetAnnotationsForReportOpts struct {
+	Page optional.Int32
+}
+
+func (a *ReportsApiService) GetAnnotationsForReport(ctx context.Context, workspace string, repoSlug string, commit string, reportId string, localVarOptionals *ReportsApiGetAnnotationsForReportOpts) (PaginatedAnnotations, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -617,6 +625,9 @@ func (a *ReportsApiService) GetAnnotationsForReport(ctx context.Context, workspa
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -785,14 +796,20 @@ func (a *ReportsApiService) GetReport(ctx context.Context, workspace string, rep
 /*
 ReportsApiService List reports
 Returns a paginated list of Reports linked to this commit.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
-  - @param repoSlug The repository.
-  - @param commit The commit for which to retrieve reports.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+ * @param repoSlug The repository.
+ * @param commit The commit for which to retrieve reports.
+ * @param optional nil or *ReportsApiGetReportsForCommitOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedReports
 */
-func (a *ReportsApiService) GetReportsForCommit(ctx context.Context, workspace string, repoSlug string, commit string) (PaginatedReports, *http.Response, error) {
+
+type ReportsApiGetReportsForCommitOpts struct {
+	Page optional.Int32
+}
+
+func (a *ReportsApiService) GetReportsForCommit(ctx context.Context, workspace string, repoSlug string, commit string, localVarOptionals *ReportsApiGetReportsForCommitOpts) (PaginatedReports, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -811,6 +828,9 @@ func (a *ReportsApiService) GetReportsForCommit(ctx context.Context, workspace s
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

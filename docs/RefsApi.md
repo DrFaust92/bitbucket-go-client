@@ -37,6 +37,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). The &#x60;name&#x60; field is handled specially for branches in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return [&#x27;branch1&#x27;, &#x27;branch2&#x27;, &#x27;branch10&#x27;] instead of [&#x27;branch1&#x27;, &#x27;branch10&#x27;, &#x27;branch2&#x27;]. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -165,6 +166,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). The &#x60;name&#x60; field is handled specially for refs in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return [&#x27;1.1&#x27;, &#x27;1.2&#x27;, &#x27;1.10&#x27;] instead of [&#x27;1.1&#x27;, &#x27;1.10&#x27;, &#x27;1.2&#x27;]. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -204,6 +206,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). The &#x60;name&#x60; field is handled specially for tags in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return [&#x27;1.1&#x27;, &#x27;1.2&#x27;, &#x27;1.10&#x27;] instead of [&#x27;1.1&#x27;, &#x27;1.10&#x27;, &#x27;1.2&#x27;]. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

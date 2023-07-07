@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -27,7 +29,7 @@ type WebhooksApiService service
 
 /*
 WebhooksApiService Get a webhook resource
-Returns the webhook resource or subject types on which webhooks can be registered.  Each resource/subject type contains an &#x60;events&#x60; link that returns the paginated list of specific events each individual subject type can emit.  This endpoint is publicly accessible and does not require authentication or scopes.  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/hook_events  {     \&quot;repository\&quot;: {         \&quot;links\&quot;: {             \&quot;events\&quot;: {                 \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/hook_events/repository\&quot;             }         }     },     \&quot;workspace\&quot;: {         \&quot;links\&quot;: {             \&quot;events\&quot;: {                 \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/hook_events/workspace\&quot;             }         }     } } &#x60;&#x60;&#x60;
+Returns the webhook resource or subject types on which webhooks can be registered.  Each resource/subject type contains an &#x60;events&#x60; link that returns the paginated list of specific events each individual subject type can emit.  This endpoint is publicly accessible and does not require authentication or scopes.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return SubjectTypes
@@ -125,13 +127,19 @@ func (a *WebhooksApiService) HookEventsGet(ctx context.Context) (SubjectTypes, *
 
 /*
 WebhooksApiService List subscribable webhook types
-Returns a paginated list of all valid webhook events for the specified entity. **The team and user webhooks are deprecated, and you should use workspace instead. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**  This is public data that does not require any scopes or authentication.  Example:  NOTE: The following example is a truncated response object for the &#x60;workspace&#x60; &#x60;subject_type&#x60;. We return the same structure for the other &#x60;subject_type&#x60; objects.  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/hook_events/workspace {     \&quot;page\&quot;: 1,     \&quot;pagelen\&quot;: 30,     \&quot;size\&quot;: 21,     \&quot;values\&quot;: [         {             \&quot;category\&quot;: \&quot;Repository\&quot;,             \&quot;description\&quot;: \&quot;Whenever a repository push occurs\&quot;,             \&quot;event\&quot;: \&quot;repo:push\&quot;,             \&quot;label\&quot;: \&quot;Push\&quot;         },         {             \&quot;category\&quot;: \&quot;Repository\&quot;,             \&quot;description\&quot;: \&quot;Whenever a repository fork occurs\&quot;,             \&quot;event\&quot;: \&quot;repo:fork\&quot;,             \&quot;label\&quot;: \&quot;Fork\&quot;         },         {             \&quot;category\&quot;: \&quot;Repository\&quot;,             \&quot;description\&quot;: \&quot;Whenever a repository import occurs\&quot;,             \&quot;event\&quot;: \&quot;repo:imported\&quot;,             \&quot;label\&quot;: \&quot;Import\&quot;         },         ...         {             \&quot;category\&quot;:\&quot;Pull Request\&quot;,             \&quot;label\&quot;:\&quot;Approved\&quot;,             \&quot;description\&quot;:\&quot;When someone has approved a pull request\&quot;,             \&quot;event\&quot;:\&quot;pullrequest:approved\&quot;         },     ] } &#x60;&#x60;&#x60;
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param subjectType A resource or subject type.
-
+Returns a paginated list of all valid webhook events for the specified entity. **The team and user webhooks are deprecated, and you should use workspace instead. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**  This is public data that does not require any scopes or authentication.  NOTE: The example response is a truncated response object for the &#x60;workspace&#x60; &#x60;subject_type&#x60;. We return the same structure for the other &#x60;subject_type&#x60; objects.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param subjectType A resource or subject type.
+ * @param optional nil or *WebhooksApiHookEventsSubjectTypeGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedHookEvents
 */
-func (a *WebhooksApiService) HookEventsSubjectTypeGet(ctx context.Context, subjectType string) (PaginatedHookEvents, *http.Response, error) {
+
+type WebhooksApiHookEventsSubjectTypeGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *WebhooksApiService) HookEventsSubjectTypeGet(ctx context.Context, subjectType string, localVarOptionals *WebhooksApiHookEventsSubjectTypeGetOpts) (PaginatedHookEvents, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -148,6 +156,9 @@ func (a *WebhooksApiService) HookEventsSubjectTypeGet(ctx context.Context, subje
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -236,13 +247,19 @@ func (a *WebhooksApiService) HookEventsSubjectTypeGet(ctx context.Context, subje
 /*
 WebhooksApiService List webhooks for a repository
 Returns a paginated list of webhooks installed on this repository.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
 */
-func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string) (PaginatedWebhookSubscriptions, *http.Response, error) {
+
+type WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -260,6 +277,9 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.C
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -821,12 +841,18 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx contex
 /*
 WebhooksApiService List webhooks for a workspace
 Returns a paginated list of webhooks installed on this workspace.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *WebhooksApiWorkspacesWorkspaceHooksGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
 */
-func (a *WebhooksApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, workspace string) (PaginatedWebhookSubscriptions, *http.Response, error) {
+
+type WebhooksApiWorkspacesWorkspaceHooksGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *WebhooksApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, workspace string, localVarOptionals *WebhooksApiWorkspacesWorkspaceHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -843,6 +869,9 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, wo
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

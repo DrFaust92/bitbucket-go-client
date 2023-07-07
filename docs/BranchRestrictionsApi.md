@@ -33,6 +33,7 @@ Name | Type | Description  | Notes
 
  **kind** | **optional.String**| Branch restrictions of this type | 
  **pattern** | **optional.String**| Branch restrictions applied to branches of this pattern | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

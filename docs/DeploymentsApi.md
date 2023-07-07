@@ -112,7 +112,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetDeploymentsForRepository**
-> PaginatedDeployments GetDeploymentsForRepository(ctx, workspace, repoSlug)
+> PaginatedDeployments GetDeploymentsForRepository(ctx, workspace, repoSlug, optional)
 List deployments
 
 Find deployments
@@ -124,6 +124,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***DeploymentsApiGetDeploymentsForRepositoryOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DeploymentsApiGetDeploymentsForRepositoryOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -171,7 +180,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetEnvironmentsForRepository**
-> PaginatedEnvironments GetEnvironmentsForRepository(ctx, workspace, repoSlug)
+> PaginatedEnvironments GetEnvironmentsForRepository(ctx, workspace, repoSlug, optional)
 List environments
 
 Find environments
@@ -183,6 +192,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
+ **optional** | ***DeploymentsApiGetEnvironmentsForRepositoryOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DeploymentsApiGetEnvironmentsForRepositoryOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -200,7 +218,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugDeployKeysGet**
-> PaginatedDeployKeys RepositoriesWorkspaceRepoSlugDeployKeysGet(ctx, repoSlug, workspace)
+> PaginatedDeployKeys RepositoriesWorkspaceRepoSlugDeployKeysGet(ctx, repoSlug, workspace, optional)
 List repository deploy keys
 
 Returns all deploy-keys belonging to a repository.  Example: ``` $ curl -H \"Authorization <auth header>\" \\ https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys  Output: {     \"pagelen\": 10,     \"values\": [         {             \"id\": 123,             \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",             \"label\": \"mykey\",             \"type\": \"deploy_key\",             \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",             \"repository\": {                 \"full_name\": \"mleu/test\",                 \"name\": \"test\",                 \"type\": \"repository\",                 \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"             },             \"links\":{                 \"self\":{                     \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"                 }             }             \"last_used\": null,             \"comment\": \"mleu@C02W454JHTD8\"         }     ],     \"page\": 1,     \"size\": 1 } ```
@@ -212,6 +230,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***DeploymentsApiRepositoriesWorkspaceRepoSlugDeployKeysGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DeploymentsApiRepositoriesWorkspaceRepoSlugDeployKeysGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -378,7 +405,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet**
-> PaginatedProjectDeployKeys WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet(ctx, projectKey, workspace)
+> PaginatedProjectDeployKeys WorkspacesWorkspaceProjectsProjectKeyDeployKeysGet(ctx, projectKey, workspace, optional)
 List project deploy keys
 
 Returns all deploy keys belonging to a project.  Example: ``` $ curl -H \"Authorization <auth header>\" \\ https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys  Output: {     \"pagelen\":10,     \"values\":[         {             \"comment\":\"thakseth@C02W454JHTD8\",             \"last_used\":null,             \"links\":{                 \"self\":{                     \"href\":\"https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys/1234\"                 }             },             \"label\":\"test\",             \"project\":{                 \"links\":{                     \"self\":{                         \"href\":\"https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT\"                     }                 },                 \"type\":\"project\",                 \"name\":\"cooperative standard\",                 \"key\":\"TEST_PROJECT\",                 \"uuid\":\"{3b3e510b-7f2b-414d-a2b7-76c4e405c1c0}\"             },             \"created_on\":\"2021-07-28T21:20:19.491721+00:00\",             \"key\":\"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDX5yfMOEw6HG9jKTYTisbmDTJ4MCUTSVGr5e4OWvY3UuI2A6F8SdzQqa2f5BABA/4g5Sk5awJrYHlNu3EzV1V2I44tR3A4fnZAG71ZKyDPi1wvdO7UYmFgxV/Vd18H9QZFFjICGDM7W0PT2mI0kON/jN3qNWi+GiB/xgaeQKSqynysdysDp8lnnI/8Sh3ikURP9UP83ShRCpAXszOUNaa+UUlcYQYBDLIGowsg51c4PCkC3DNhAMxppkNRKoSOWwyl+oRVXHSDylkiJSBHW3HH4Q6WHieD54kGrjbhWBKdnnxKX7QAAZBDseY+t01N36m6/ljvXSUEcBWtHxBYye0r\",             \"type\":\"project_deploy_key\",             \"id\":1234         }     ],     \"page\":1,     \"size\":1 } ```
@@ -390,6 +417,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **projectKey** | **string**| The project in question. This is the actual &#x60;key&#x60; assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***DeploymentsApiWorkspacesWorkspaceProjectsProjectKeyDeployKeysGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a DeploymentsApiWorkspacesWorkspaceProjectsProjectKeyDeployKeysGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

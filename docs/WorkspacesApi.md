@@ -39,6 +39,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **q** | **optional.String**|  Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details. | 
  **sort** | **optional.String**|  Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -75,6 +76,7 @@ Name | Type | Description  | Notes
  **role** | **optional.String**|              Filters the workspaces based on the authenticated user&#x27;s role on each workspace.              * **member**: returns a list of all the workspaces which the caller is a member of                 at least one workspace group or repository             * **collaborator**: returns a list of workspaces which the caller has write access                 to at least one repository in the workspace             * **owner**: returns a list of workspaces which the caller has administrator access              | 
  **q** | **optional.String**|  Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details. | 
  **sort** | **optional.String**|  Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -131,6 +133,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***WorkspacesApiWorkspacesWorkspaceHooksGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WorkspacesApiWorkspacesWorkspaceHooksGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -263,7 +273,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceMembersGet**
-> PaginatedWorkspaceMemberships WorkspacesWorkspaceMembersGet(ctx, workspace)
+> PaginatedWorkspaceMemberships WorkspacesWorkspaceMembersGet(ctx, workspace, optional)
 List users in a workspace
 
 Returns all members of the requested workspace.
@@ -274,6 +284,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***WorkspacesApiWorkspacesWorkspaceMembersGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WorkspacesApiWorkspacesWorkspaceMembersGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -339,6 +357,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -376,6 +395,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -415,6 +435,7 @@ Name | Type | Description  | Notes
 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -432,7 +453,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsGet**
-> PaginatedProjects WorkspacesWorkspaceProjectsGet(ctx, workspace)
+> PaginatedProjects WorkspacesWorkspaceProjectsGet(ctx, workspace, optional)
 List projects in a workspace
 
 Returns the list of projects in this workspace.
@@ -443,6 +464,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***WorkspacesApiWorkspacesWorkspaceProjectsGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WorkspacesApiWorkspacesWorkspaceProjectsGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

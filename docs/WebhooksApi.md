@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **HookEventsSubjectTypeGet**
-> PaginatedHookEvents HookEventsSubjectTypeGet(ctx, subjectType)
+> PaginatedHookEvents HookEventsSubjectTypeGet(ctx, subjectType, optional)
 List subscribable webhook types
 
 Returns a paginated list of all valid webhook events for the specified entity. **The team and user webhooks are deprecated, and you should use workspace instead. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**  This is public data that does not require any scopes or authentication.  Example:  NOTE: The following example is a truncated response object for the `workspace` `subject_type`. We return the same structure for the other `subject_type` objects.  ``` $ curl https://api.bitbucket.org/2.0/hook_events/workspace {     \"page\": 1,     \"pagelen\": 30,     \"size\": 21,     \"values\": [         {             \"category\": \"Repository\",             \"description\": \"Whenever a repository push occurs\",             \"event\": \"repo:push\",             \"label\": \"Push\"         },         {             \"category\": \"Repository\",             \"description\": \"Whenever a repository fork occurs\",             \"event\": \"repo:fork\",             \"label\": \"Fork\"         },         {             \"category\": \"Repository\",             \"description\": \"Whenever a repository import occurs\",             \"event\": \"repo:imported\",             \"label\": \"Import\"         },         ...         {             \"category\":\"Pull Request\",             \"label\":\"Approved\",             \"description\":\"When someone has approved a pull request\",             \"event\":\"pullrequest:approved\"         },     ] } ```
@@ -53,6 +53,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **subjectType** | **string**| A resource or subject type. | 
+ **optional** | ***WebhooksApiHookEventsSubjectTypeGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WebhooksApiHookEventsSubjectTypeGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -82,6 +90,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -218,7 +235,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceHooksGet**
-> PaginatedWebhookSubscriptions WorkspacesWorkspaceHooksGet(ctx, workspace)
+> PaginatedWebhookSubscriptions WorkspacesWorkspaceHooksGet(ctx, workspace, optional)
 List webhooks for a workspace
 
 Returns a paginated list of webhooks installed on this workspace.
@@ -229,6 +246,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***WebhooksApiWorkspacesWorkspaceHooksGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WebhooksApiWorkspacesWorkspaceHooksGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

@@ -33,11 +33,13 @@ Returns all snippets. Like pull requests, repositories and workspaces, the full 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *SnippetsApiSnippetsGetOpts - Optional Parameters:
      * @param "Role" (optional.String) -  Filter down the result based on the authenticated user&#x27;s role (&#x60;owner&#x60;, &#x60;contributor&#x60;, or &#x60;member&#x60;).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedSnippets
 */
 
 type SnippetsApiSnippetsGetOpts struct {
 	Role optional.String
+	Page optional.Int32
 }
 
 func (a *SnippetsApiService) SnippetsGet(ctx context.Context, localVarOptionals *SnippetsApiSnippetsGetOpts) (PaginatedSnippets, *http.Response, error) {
@@ -58,6 +60,9 @@ func (a *SnippetsApiService) SnippetsGet(ctx context.Context, localVarOptionals 
 
 	if localVarOptionals != nil && localVarOptionals.Role.IsSet() {
 		localVarQueryParams.Add("role", parameterToString(localVarOptionals.Role.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -612,13 +617,19 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdPut(ctx 
 /*
 SnippetsApiService List comments on a snippet
 Used to retrieve a paginated list of all comments for a specific snippet.  This resource works identical to commit and pull request comments.  The default sorting is oldest to newest and can be overridden with the &#x60;sort&#x60; query parameter.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param encodedId The snippet id.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param encodedId The snippet id.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *SnippetsApiSnippetsWorkspaceEncodedIdCommentsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedSnippetComments
 */
-func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsGet(ctx context.Context, encodedId string, workspace string) (PaginatedSnippetComments, *http.Response, error) {
+
+type SnippetsApiSnippetsWorkspaceEncodedIdCommentsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsGet(ctx context.Context, encodedId string, workspace string, localVarOptionals *SnippetsApiSnippetsWorkspaceEncodedIdCommentsGetOpts) (PaginatedSnippetComments, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -636,6 +647,9 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsGet(ctx context.C
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -859,13 +873,19 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsPost(ctx context.
 /*
 SnippetsApiService List snippet changes
 Returns the changes (commits) made on this snippet.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param encodedId The snippet id.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param encodedId The snippet id.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *SnippetsApiSnippetsWorkspaceEncodedIdCommitsGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedSnippetCommit
 */
-func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommitsGet(ctx context.Context, encodedId string, workspace string) (PaginatedSnippetCommit, *http.Response, error) {
+
+type SnippetsApiSnippetsWorkspaceEncodedIdCommitsGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommitsGet(ctx context.Context, encodedId string, workspace string, localVarOptionals *SnippetsApiSnippetsWorkspaceEncodedIdCommitsGetOpts) (PaginatedSnippetCommit, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -883,6 +903,9 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommitsGet(ctx context.Co
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -2609,13 +2632,19 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdWatchPut(ctx context.Cont
 /*
 SnippetsApiService List users watching a snippet
 Returns a paginated list of all users watching a specific snippet.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param encodedId The snippet id.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param encodedId The snippet id.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *SnippetsApiSnippetsWorkspaceEncodedIdWatchersGetOpts - Optional Parameters:
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedAccounts
 */
-func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdWatchersGet(ctx context.Context, encodedId string, workspace string) (PaginatedAccounts, *http.Response, error) {
+
+type SnippetsApiSnippetsWorkspaceEncodedIdWatchersGetOpts struct {
+	Page optional.Int32
+}
+
+func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdWatchersGet(ctx context.Context, encodedId string, workspace string, localVarOptionals *SnippetsApiSnippetsWorkspaceEncodedIdWatchersGetOpts) (PaginatedAccounts, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -2633,6 +2662,9 @@ func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdWatchersGet(ctx context.C
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -2725,11 +2757,13 @@ Identical to [&#x60;/snippets&#x60;](/cloud/bitbucket/rest/api-group-snippets/#a
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *SnippetsApiSnippetsWorkspaceGetOpts - Optional Parameters:
      * @param "Role" (optional.String) -  Filter down the result based on the authenticated user&#x27;s role (&#x60;owner&#x60;, &#x60;contributor&#x60;, or &#x60;member&#x60;).
+     * @param "Page" (optional.Int32) -  page
 @return PaginatedSnippets
 */
 
 type SnippetsApiSnippetsWorkspaceGetOpts struct {
 	Role optional.String
+	Page optional.Int32
 }
 
 func (a *SnippetsApiService) SnippetsWorkspaceGet(ctx context.Context, workspace string, localVarOptionals *SnippetsApiSnippetsWorkspaceGetOpts) (PaginatedSnippets, *http.Response, error) {
@@ -2751,6 +2785,9 @@ func (a *SnippetsApiService) SnippetsWorkspaceGet(ctx context.Context, workspace
 
 	if localVarOptionals != nil && localVarOptionals.Role.IsSet() {
 		localVarQueryParams.Add("role", parameterToString(localVarOptionals.Role.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

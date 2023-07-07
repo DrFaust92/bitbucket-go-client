@@ -55,6 +55,7 @@ Name | Type | Description  | Notes
  **role** | **optional.String**| Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user  | 
  **q** | **optional.String**| Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). &#x60;role&#x60; parameter must also be specified.  | 
  **sort** | **optional.String**| Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -93,6 +94,7 @@ Name | Type | Description  | Notes
  **role** | **optional.String**|  Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user  | 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
  **sort** | **optional.String**|  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).          | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -175,6 +177,7 @@ Name | Type | Description  | Notes
  **renames** | **optional.String**|  When &#x60;true&#x60;, Bitbucket will follow the history of the file across renames (this is the default behavior). This can be turned off by specifying &#x60;false&#x60;. | 
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results).  | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -311,6 +314,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -501,10 +513,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet**
-> PaginatedRepositoryGroupPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx, repoSlug, workspace)
+> PaginatedRepositoryGroupPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGet(ctx, repoSlug, workspace, optional)
 List explicit group permissions for a repository
 
-Returns a paginated list of explicit group permissions for the given repository. This endpoint does not support BBQL features.  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/groups  {   \"pagelen\": 10,   \"values\": [     {       \"type\": \"repository_group_permission\",       \"group\": {         \"type\": \"group\",         \"name\": \"Administrators\",         \"slug\": \"administrators\"       },       \"permission\": \"admin\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/administrators\"         }       }     },     {       \"type\": \"repository_group_permission\",       \"group\": {         \"type\": \"group\",         \"name\": \"Developers\",         \"slug\": \"developers\"       },       \"permission\": \"read\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/                    geordi/permissions-config/groups/developers\"         }       }     }   ],   \"page\": 1,   \"size\": 2 } ```
+Returns a paginated list of explicit group permissions for the given repository. This endpoint does not support BBQL features.
 
 ### Required Parameters
 
@@ -513,6 +525,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -620,10 +641,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet**
-> PaginatedRepositoryUserPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx, repoSlug, workspace)
+> PaginatedRepositoryUserPermissions RepositoriesWorkspaceRepoSlugPermissionsConfigUsersGet(ctx, repoSlug, workspace, optional)
 List explicit user permissions for a repository
 
-Returns a paginated list of explicit user permissions for the given repository. This endpoint does not support BBQL features.  Example:  ``` $ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users  {   \"pagelen\": 10,   \"values\": [     {         \"type\": \"repository_user_permission\",         \"user\": {             \"type\": \"user\",             \"display_name\": \"Colin Cameron\",             \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",             \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         },         \"permission\": \"admin\",         \"links\": {           \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/                      permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"           }         }     },     {       \"type\": \"repository_user_permission\",       \"user\": {         \"type\": \"user\",         \"display_name\": \"Sean Conaty\",         \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"       },       \"permission\": \"write\",       \"links\": {         \"self\": {           \"href\": \"https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/                    permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"         }       }     }   ],   \"page\": 1,   \"size\": 2 } ```
+Returns a paginated list of explicit user permissions for the given repository. This endpoint does not support BBQL features.
 
 ### Required Parameters
 
@@ -632,6 +653,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigUsersGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a RepositoriesApiRepositoriesWorkspaceRepoSlugPermissionsConfigUsersGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -847,6 +877,7 @@ Name | Type | Description  | Notes
  **q** | **optional.String**| Optional filter expression as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**| Optional sorting parameter as per [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results). | 
  **maxDepth** | **optional.Int32**| If provided, returns the contents of the repository and its subdirectories recursively until the specified max_depth of nested directories. When omitted, this defaults to 1. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -885,6 +916,7 @@ Name | Type | Description  | Notes
 
 
  **format** | **optional.String**| Instead of returning the file&#x27;s contents, return the (json) meta data for it. | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -944,7 +976,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugWatchersGet**
-> PaginatedAccounts RepositoriesWorkspaceRepoSlugWatchersGet(ctx, repoSlug, workspace)
+> PaginatedAccounts RepositoriesWorkspaceRepoSlugWatchersGet(ctx, repoSlug, workspace, optional)
 List repositories watchers
 
 Returns a paginated list of all the watchers on the specified repository.
@@ -956,6 +988,15 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***RepositoriesApiRepositoriesWorkspaceRepoSlugWatchersGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a RepositoriesApiRepositoriesWorkspaceRepoSlugWatchersGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -991,6 +1032,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
+ **page** | **optional.Int32**| page | 
 
 ### Return type
 

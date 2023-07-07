@@ -742,6 +742,14 @@ paths:
           enum:
           - repository
           - workspace
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of webhook types available to subscribe on.
@@ -799,6 +807,14 @@ paths:
           - MERGED
           - DECLINED
           - SUPERSEDED
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: All pull requests authored by the specified user.
@@ -877,6 +893,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: All public repositories.
@@ -956,6 +980,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The repositories owned by the specified account.
@@ -1334,6 +1366,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of branch restrictions
@@ -2403,6 +2443,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of commit comments.
@@ -2966,6 +3014,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: OK
@@ -3213,6 +3269,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: OK
@@ -3589,6 +3653,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of all commit statuses for this commit.
@@ -3918,6 +3990,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of commits
@@ -4058,6 +4138,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of commits
@@ -4164,6 +4252,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The components that have been defined in the issue tracker.
@@ -4270,6 +4366,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The paginated list of default reviewers
@@ -4549,6 +4653,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Deploy keys matching the repository
@@ -4938,6 +5050,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The matching deployments.
@@ -5025,6 +5145,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The retrieved deployment variables.
@@ -5537,6 +5665,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The diff stats
@@ -5895,6 +6031,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The paginated list of effective default reviewers
@@ -5939,6 +6083,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The matching environments.
@@ -6264,6 +6416,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of commits that modified the specified file
@@ -6348,6 +6508,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: All forks.
@@ -6498,6 +6666,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The paginated list of installed webhooks.
@@ -6818,6 +6994,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of the issues matching any filter criteria
@@ -7533,6 +7717,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of all attachments for this issue.
@@ -7947,6 +8139,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Returns all the issue changes that were made on the specified
@@ -8207,6 +8407,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of issue comments.
@@ -8943,6 +9151,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The milestones that have been defined in the issue tracker.
@@ -9253,6 +9469,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Paginated of explicit group permissions on the repository.
@@ -9668,6 +9892,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Paginated of explicit user permissions on the repository.
@@ -10045,6 +10277,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The matching pipelines.
@@ -10210,6 +10450,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of caches for the given repository.
@@ -10433,6 +10681,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The steps.
@@ -10992,6 +11248,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of schedules.
@@ -11236,6 +11500,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of executions of a schedule.
@@ -11394,6 +11666,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The retrieved known hosts.
@@ -11628,6 +11908,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The retrieved variables.
@@ -12034,6 +12322,14 @@ paths:
           - MERGED
           - DECLINED
           - SUPERSEDED
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: All pull requests on the specified repository.
@@ -13164,6 +13460,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: "A paginated list of comments made on the given pull request,\
@@ -14257,6 +14561,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of all commit statuses for this pull request.
@@ -14513,6 +14825,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of refs matching any filter criteria that
@@ -14728,6 +15048,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of branches matching any filter criteria that
@@ -15140,6 +15468,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of tags matching any filter criteria that
@@ -15532,6 +15868,14 @@ paths:
           type: string
           enum:
           - meta
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: |
@@ -16142,6 +16486,14 @@ paths:
         explode: true
         schema:
           type: integer
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: |
@@ -16207,6 +16559,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The versions that have been defined in the issue tracker.
@@ -16309,6 +16669,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of all the watchers on the specified repository.
@@ -16363,6 +16731,14 @@ paths:
           - owner
           - contributor
           - member
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of snippets.
@@ -16600,6 +16976,14 @@ paths:
           - owner
           - contributor
           - member
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A paginated list of snippets.
@@ -17315,6 +17699,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: "A paginated list of snippet comments, ordered by creation\
@@ -17615,6 +18007,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The paginated list of snippet commits.
@@ -17924,6 +18324,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The paginated list of users watching this snippet
@@ -18485,6 +18893,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The found account level variables.
@@ -19058,6 +19474,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Repository permissions for the repositories a caller has explicit
@@ -19156,6 +19580,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: All of the workspace memberships for the authenticated user.
@@ -19235,6 +19667,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The found user level variables.
@@ -19842,6 +20282,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: A list of the SSH keys associated with the account.
@@ -20308,6 +20756,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of workspaces accessible by the authenticated user.
@@ -20378,6 +20834,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The paginated list of installed webhooks.
@@ -20650,6 +21114,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of users that are part of a workspace.
@@ -20808,6 +21280,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: "The list of users that are part of a workspace, along with\
@@ -20949,6 +21429,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: List of workspace's repository permissions.
@@ -21083,6 +21571,14 @@ paths:
         explode: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The repository permission for all users in this repository.
@@ -21172,6 +21668,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The found workspace level variables.
@@ -21364,6 +21868,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of projects in this workspace.
@@ -22125,6 +22637,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: The list of project default reviewers
@@ -22448,6 +22968,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Deploy keys matching the project
@@ -22805,6 +23333,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Paginated list of project group permissions
@@ -23213,6 +23749,14 @@ paths:
         explode: false
         schema:
           type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         "200":
           description: Paginated list of explicit user permissions.
