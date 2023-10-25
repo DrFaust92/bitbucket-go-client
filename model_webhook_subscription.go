@@ -28,4 +28,8 @@ type WebhookSubscription struct {
 	CreatedAt   time.Time    `json:"created_at,omitempty"`
 	// The events this webhook is subscribed to.
 	Events []string `json:"events,omitempty"`
+	// Indicates whether or not the hook has an associated secret. It is not possible to see the hook's secret. This field is ignored during updates.
+	SecretSet bool `json:"secret_set,omitempty"`
+	// The secret to associate with the hook. The secret is never returned via the API. As such, this field is only used during updates. The secret can be set to `null` or \"\" to remove the secret (or create a hook with no secret). Leaving out the secret field during updates will leave the secret unchanged. Leaving out the secret during creation will create a hook with no secret.
+	Secret string `json:"secret,omitempty"`
 }

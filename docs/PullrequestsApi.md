@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -247,7 +247,7 @@ Name | Type | Description  | Notes
 > PaginatedDefaultReviewerAndType RepositoriesWorkspaceRepoSlugEffectiveDefaultReviewersGet(ctx, repoSlug, workspace, optional)
 List effective default reviewers
 
-Returns the repository's effective default reviewers. This includes both default reviewers defined at the repository level as well as those inherited from its project.  These are the users that are automatically added as reviewers on every new pull request that is created.  ``` $ curl https://api.bitbucket.org/2.0/repositories/{workspace_slug}/{repo_slug}/effective-default-reviewers?page=1&pagelen=20 {     \"pagelen\": 20,     \"values\": [         {             \"user\": {                 \"display_name\": \"Patrick Wolf\",                 \"uuid\": \"{9565301a-a3cf-4b5d-88f4-dd6af8078d7e}\"             },             \"reviewer_type\": \"project\",             \"type\": \"default_reviewer\",         },         {             \"user\": {                 \"display_name\": \"Davis Lee\",                 \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"             },             \"reviewer_type\": \"repository\",             \"type\": \"default_reviewer\",         }     ],     \"page\": 1,     \"size\": 2 } ```
+Returns the repository's effective default reviewers. This includes both default reviewers defined at the repository level as well as those inherited from its project.  These are the users that are automatically added as reviewers on every new pull request that is created.
 
 ### Required Parameters
 

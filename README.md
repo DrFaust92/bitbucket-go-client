@@ -367,6 +367,8 @@ Class | Method | HTTP request | Description
  - [AppUser](docs/AppUser.md)
  - [Author](docs/Author.md)
  - [BaseCommit](docs/BaseCommit.md)
+ - [BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema](docs/BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema.md)
+ - [BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema](docs/BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema.md)
  - [Branch](docs/Branch.md)
  - [BranchingModel](docs/BranchingModel.md)
  - [BranchingModelSettings](docs/BranchingModelSettings.md)
@@ -592,13 +594,13 @@ r, err := client.Service.Operation(auth, args)
  - **pipeline:variable**: Access your repositories&#x27; build pipelines and configure their variables
  - **runner**: Access your workspaces/repositories&#x27; runners
  - **runner:write**: Access and edit your workspaces/repositories&#x27; runners
- - **issue**: Read your repositories&#x27; issues
- - **issue:write**: Read and modify your repositories&#x27; issues
  - **pullrequest**: Read your repositories and their pull requests
  - **pullrequest:write**: Read and modify your repositories and their pull requests
+ - **webhook**: Read and modify your repositories&#x27; webhooks
+ - **issue**: Read your repositories&#x27; issues
+ - **issue:write**: Read and modify your repositories&#x27; issues
  - **snippet**: Read your snippets
  - **snippet:write**: Read and modify your snippets
- - **webhook**: Read and modify your repositories&#x27; webhooks
  - **wiki**: Read and modify your repositories&#x27; wikis
 
 Example

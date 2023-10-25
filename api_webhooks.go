@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -377,7 +376,7 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.C
 
 /*
 WebhooksApiService Create a webhook for a repository
-Creates a new webhook on the specified repository.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  Note that this call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  Also note that the &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
+Creates a new webhook on the specified repository.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  Note that this call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  Also note that the &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
@@ -716,7 +715,7 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx contex
 
 /*
 WebhooksApiService Update a webhook for a repository
-Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;active&#x60; * &#x60;events&#x60;
+Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the &#x60;secret&#x60; field. Passing a &#x60;null&#x60; value in the &#x60;secret&#x60; field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the &#x60;secret&#x60; field in the request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param uid Installed webhook&#x27;s ID
@@ -969,7 +968,7 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, wo
 
 /*
 WebhooksApiService Create a webhook for a workspace
-Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
+Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
@@ -1302,7 +1301,7 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context,
 
 /*
 WebhooksApiService Update a webhook for a workspace
-Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;active&#x60; * &#x60;events&#x60;
+Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the &#x60;secret&#x60; field. Passing a &#x60;null&#x60; value in the &#x60;secret&#x60; field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the &#x60;secret&#x60; field in the request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param uid Installed webhook&#x27;s ID
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.

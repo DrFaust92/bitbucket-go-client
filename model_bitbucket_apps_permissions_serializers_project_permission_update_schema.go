@@ -9,8 +9,6 @@
  */
 package bitbucket
 
-// The mapping of resource/subject types pointing to their individual event types.
-type SubjectTypes struct {
-	Repository *interface{} `json:"repository,omitempty"`
-	Workspace  *interface{} `json:"workspace,omitempty"`
+type BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema struct {
+	Permission string `json:"permission"`
 }

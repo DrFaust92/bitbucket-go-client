@@ -25,7 +25,7 @@ Method | HTTP request | Description
 > Project WorkspacesWorkspaceProjectsPost(ctx, body, workspace)
 Create a project in a workspace
 
-Creates a new project.  Note that the avatar has to be embedded as either a data-url or a URL to an external image as shown in the examples below:  ``` $ body=$(cat << EOF {     \"name\": \"Mars Project\",     \"key\": \"MARS\",     \"description\": \"Software for colonizing mars.\",     \"links\": {         \"avatar\": {             \"href\": \"data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\"         }     },     \"is_private\": false } EOF ) $ curl -H \"Content-Type: application/json\" \\        -X POST \\        -d \"$body\" \\        https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq . {   // Serialized project document } ```  or even:  ``` $ body=$(cat << EOF {     \"name\": \"Mars Project\",     \"key\": \"MARS\",     \"description\": \"Software for colonizing mars.\",     \"links\": {         \"avatar\": {             \"href\": \"http://i.imgur.com/72tRx4w.gif\"         }     },     \"is_private\": false } EOF ) $ curl -H \"Content-Type: application/json\" \\        -X POST \\        -d \"$body\" \\        https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq . {   // Serialized project document } ```
+Creates a new project.  Note that the avatar has to be embedded as either a data-url or a URL to an external image as shown in the examples below:  ``` $ body=$(cat << EOF {     \"name\": \"Mars Project\",     \"key\": \"MARS\",     \"description\": \"Software for colonizing mars.\",     \"links\": {         \"avatar\": {             \"href\": \"data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\"         }     },     \"is_private\": false } EOF ) $ curl -H \"Content-Type: application/json\" \\        -X POST \\        -d \"$body\" \\        https://api.bitbucket.org/2.0/workspaces/teams-in-space/projects/ | jq . {   // Serialized project document } ```  or even:  ``` $ body=$(cat << EOF {     \"name\": \"Mars Project\",     \"key\": \"MARS\",     \"description\": \"Software for colonizing mars.\",     \"links\": {         \"avatar\": {             \"href\": \"http://i.imgur.com/72tRx4w.gif\"         }     },     \"is_private\": false } EOF ) $ curl -H \"Content-Type: application/json\" \\        -X POST \\        -d \"$body\" \\        https://api.bitbucket.org/2.0/workspaces/teams-in-space/projects/ | jq . {   // Serialized project document } ```
 
 ### Required Parameters
 
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 > User WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserGet(ctx, projectKey, selectedUser, workspace)
 Get a default reviewer
 
-Returns the specified default reviewer.  Example: ``` $ curl https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D {     \"display_name\": \"Davis Lee\",     \"type\": \"user\",     \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\" } ```
+Returns the specified default reviewer.
 
 ### Required Parameters
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 > User WorkspacesWorkspaceProjectsProjectKeyDefaultReviewersSelectedUserPut(ctx, projectKey, selectedUser, workspace)
 Add the specific user as a default reviewer for the project
 
-Adds the specified user to the project's list of default reviewers. The method is idempotent. Accepts an optional body containing the `uuid` of the user to be added.  Example: ``` $ curl -XPUT https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D -d { 'uuid': '{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}' }  HTTP/1.1 204 ```
+Adds the specified user to the project's list of default reviewers. The method is idempotent. Accepts an optional body containing the `uuid` of the user to be added.
 
 ### Required Parameters
 
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 > WorkspacesWorkspaceProjectsProjectKeyDelete(ctx, projectKey, workspace)
 Delete a project for a workspace
 
-Deletes this project. This is an irreversible operation.  You cannot delete a project that still contains repositories. To delete the project, [delete](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-repo-slug-delete) or transfer the repositories first.  Example: ``` $ curl -X DELETE https://api.bitbucket.org/2.0/bbworkspace1/PROJ ```
+Deletes this project. This is an irreversible operation.  You cannot delete a project that still contains repositories. To delete the project, [delete](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-repo-slug-delete) or transfer the repositories first.  Example: ``` $ curl -X DELETE https://api.bitbucket.org/2.0/workspaces/bbworkspace1/projects/PROJ ```
 
 ### Required Parameters
 
@@ -237,10 +237,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGet**
-> PaginatedProjectGroupPermissions WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGet(ctx, projectKey, workspace)
+> PaginatedProjectGroupPermissions WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGet(ctx, projectKey, workspace, optional)
 List explicit group permissions for a project
 
-Returns a paginated list of explicit group permissions for the given project. This endpoint does not support BBQL features.  Example:  ``` $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/groups  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/permissions-config/groups  { \"pagelen\": 10, \"values\": [     {         \"type\": \"project_group_permission\",         \"group\": {             \"type\": \"group\",             \"name\": \"Administrators\",             \"slug\": \"administrators\"         },         \"permission\": \"admin\",         \"links\": {             \"self\": {                 \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/groups/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"             }         }     },     {         \"type\": \"project_group_permission\",         \"group\": {             \"type\": \"group\",             \"name\": \"Developers\",             \"slug\": \"developers\"         },         \"permission\": \"write\",         \"links\": {             \"self\": {                 \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                          permissions-config/groups/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"             }         }     } ], \"page\": 1, \"size\": 2 } ```
+Returns a paginated list of explicit group permissions for the given project. This endpoint does not support BBQL features.
 
 ### Required Parameters
 
@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 > WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugDelete(ctx, groupSlug, projectKey, workspace)
 Delete an explicit group permission for a project
 
-Deletes the project group permission between the requested project and group, if one exists.  Only users with admin permission for the project may access this resource.  Example:  $ curl -X DELETE https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/                  projects/PRJ/permissions-config/groups/developers  HTTP/1.1 204
+Deletes the project group permission between the requested project and group, if one exists.  Only users with admin permission for the project may access this resource.
 
 ### Required Parameters
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 > ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, projectKey, workspace)
 Get an explicit group permission for a project
 
-Returns the group permission for a given group and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * `admin` * `create-repo` * `write` * `read` * `none`  Example:  ``` $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/        permissions-config/groups/administrators  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/           permissions-config/groups/administrators  {     \"type\": \"project_group_permission\",     \"group\": {         \"type\": \"group\",         \"name\": \"Administrators\",         \"slug\": \"administrators\"     },     \"permission\": \"admin\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                     permissions-config/groups/administrators\"         }     } } ```
+Returns the group permission for a given group and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * `admin` * `create-repo` * `write` * `read` * `none`
 
 ### Required Parameters
 
@@ -335,16 +335,17 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut**
-> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx, groupSlug, projectKey, workspace)
+> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx, body, groupSlug, projectKey, workspace)
 Update an explicit group permission for a project
 
-Updates the group permission if it exists.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * `admin` * `create-repo` * `write` * `read`  Example: ``` $ curl -X PUT -H \"Content-Type: application/json\" https://api.bitbucket.org/2.0/ workspaces/atlassian_tutorial/projects/PRJ/permissions-config/groups/administrators -d         '{     \"permission\": \"write\" }'  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/           permissions-config/groups/administrators   {     \"type\": \"project_group_permission\",     \"group\": {         \"type\": \"group\",         \"name\": \"Administrators\",         \"slug\": \"administrators\"     },     \"permission\": \"write\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                     permissions-config/groups/administrators\"         }     } } ```
+Updates the group permission, or grants a new permission if one does not already exist.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * `admin` * `create-repo` * `write` * `read`
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema**](BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema.md)| The permission to grant | 
   **groupSlug** | **string**| Slug of the requested group. | 
   **projectKey** | **string**| The project in question. This is the actual key assigned to the project.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -359,7 +360,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -406,7 +407,7 @@ Name | Type | Description  | Notes
 > WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdDelete(ctx, projectKey, selectedUserId, workspace)
 Delete an explicit user permission for a project
 
-Deletes the project user permission between the requested project and user, if one exists.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  ``` $ curl -X DELETE https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                  permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a  HTTP/1.1 204 ```
+Deletes the project user permission between the requested project and user, if one exists.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.
 
 ### Required Parameters
 
@@ -436,7 +437,7 @@ Name | Type | Description  | Notes
 > ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet(ctx, projectKey, selectedUserId, workspace)
 Get an explicit user permission for a project
 
-Returns the explicit user permission for a given user and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * `admin` * `create-repo` * `write` * `read` * `none`  Example:  ``` $ curl 'https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/         PRJ/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'  HTTP/1.1 200 Location: 'https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/            PRJ/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a'  {     \"type\": \"project_user_permission\",     \"user\": {         \"type\": \"user\",         \"display_name\": \"Colin Cameron\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"     },     \"permission\": \"admin\",     \"links\": {     \"self\": {         \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/                  PRJ/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         }     } } ``` #
+Returns the explicit user permission for a given user and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * `admin` * `create-repo` * `write` * `read` * `none`
 
 ### Required Parameters
 
@@ -463,16 +464,17 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut**
-> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx, projectKey, selectedUserId, workspace)
+> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx, body, projectKey, selectedUserId, workspace)
 Update an explicit user permission for a project
 
-Updates the explicit user permission for a given user and project. The selected user must be a member of the workspace, and cannot be the workspace owner.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * `admin` * `create-repo` * `write` * `read`  Example:  ``` $ curl -X PUT -H \"Content-Type: application/json\" https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a -d {     \"permission\": \"write\" }  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a   {     \"type\": \"project_user_permission\",     \"user\": {         \"type\": \"user\",         \"display_name\": \"Colin Cameron\",         \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",         \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"     },     \"permission\": \"write\",     \"links\": {     \"self\": {         \"href\": \"https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                  permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"         }     } } ```
+Updates the explicit user permission for a given user and project. The selected user must be a member of the workspace, and cannot be the workspace owner.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * `admin` * `create-repo` * `write` * `read`
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **body** | [**BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema**](BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema.md)| The permission to grant | 
   **projectKey** | **string**| The project in question. This is the actual key assigned to the project.  | 
   **selectedUserId** | **string**| This can either be the username, the user&#x27;s UUID surrounded by curly-braces, for example: {account UUID}, or the user&#x27;s Atlassian ID.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -487,7 +489,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

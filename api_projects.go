@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -29,7 +28,7 @@ type ProjectsApiService service
 
 /*
 ProjectsApiService Create a project in a workspace
-Creates a new project.  Note that the avatar has to be embedded as either a data-url or a URL to an external image as shown in the examples below:  &#x60;&#x60;&#x60; $ body&#x3D;$(cat &lt;&lt; EOF {     \&quot;name\&quot;: \&quot;Mars Project\&quot;,     \&quot;key\&quot;: \&quot;MARS\&quot;,     \&quot;description\&quot;: \&quot;Software for colonizing mars.\&quot;,     \&quot;links\&quot;: {         \&quot;avatar\&quot;: {             \&quot;href\&quot;: \&quot;data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\&quot;         }     },     \&quot;is_private\&quot;: false } EOF ) $ curl -H \&quot;Content-Type: application/json\&quot; \\        -X POST \\        -d \&quot;$body\&quot; \\        https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq . {   // Serialized project document } &#x60;&#x60;&#x60;  or even:  &#x60;&#x60;&#x60; $ body&#x3D;$(cat &lt;&lt; EOF {     \&quot;name\&quot;: \&quot;Mars Project\&quot;,     \&quot;key\&quot;: \&quot;MARS\&quot;,     \&quot;description\&quot;: \&quot;Software for colonizing mars.\&quot;,     \&quot;links\&quot;: {         \&quot;avatar\&quot;: {             \&quot;href\&quot;: \&quot;http://i.imgur.com/72tRx4w.gif\&quot;         }     },     \&quot;is_private\&quot;: false } EOF ) $ curl -H \&quot;Content-Type: application/json\&quot; \\        -X POST \\        -d \&quot;$body\&quot; \\        https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq . {   // Serialized project document } &#x60;&#x60;&#x60;
+Creates a new project.  Note that the avatar has to be embedded as either a data-url or a URL to an external image as shown in the examples below:  &#x60;&#x60;&#x60; $ body&#x3D;$(cat &lt;&lt; EOF {     \&quot;name\&quot;: \&quot;Mars Project\&quot;,     \&quot;key\&quot;: \&quot;MARS\&quot;,     \&quot;description\&quot;: \&quot;Software for colonizing mars.\&quot;,     \&quot;links\&quot;: {         \&quot;avatar\&quot;: {             \&quot;href\&quot;: \&quot;data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\&quot;         }     },     \&quot;is_private\&quot;: false } EOF ) $ curl -H \&quot;Content-Type: application/json\&quot; \\        -X POST \\        -d \&quot;$body\&quot; \\        https://api.bitbucket.org/2.0/workspaces/teams-in-space/projects/ | jq . {   // Serialized project document } &#x60;&#x60;&#x60;  or even:  &#x60;&#x60;&#x60; $ body&#x3D;$(cat &lt;&lt; EOF {     \&quot;name\&quot;: \&quot;Mars Project\&quot;,     \&quot;key\&quot;: \&quot;MARS\&quot;,     \&quot;description\&quot;: \&quot;Software for colonizing mars.\&quot;,     \&quot;links\&quot;: {         \&quot;avatar\&quot;: {             \&quot;href\&quot;: \&quot;http://i.imgur.com/72tRx4w.gif\&quot;         }     },     \&quot;is_private\&quot;: false } EOF ) $ curl -H \&quot;Content-Type: application/json\&quot; \\        -X POST \\        -d \&quot;$body\&quot; \\        https://api.bitbucket.org/2.0/workspaces/teams-in-space/projects/ | jq . {   // Serialized project document } &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
@@ -396,7 +395,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 
 /*
 ProjectsApiService Get a default reviewer
-Returns the specified default reviewer.  Example: &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D {     \&quot;display_name\&quot;: \&quot;Davis Lee\&quot;,     \&quot;type\&quot;: \&quot;user\&quot;,     \&quot;uuid\&quot;: \&quot;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\&quot; } &#x60;&#x60;&#x60;
+Returns the specified default reviewer.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This can either be the actual &#x60;key&#x60; assigned to the project or the &#x60;UUID&#x60; (surrounded by curly-braces (&#x60;{}&#x60;)).
   - @param selectedUser This can either be the username or the UUID of the default reviewer, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
@@ -530,7 +529,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 
 /*
 ProjectsApiService Add the specific user as a default reviewer for the project
-Adds the specified user to the project&#x27;s list of default reviewers. The method is idempotent. Accepts an optional body containing the &#x60;uuid&#x60; of the user to be added.  Example: &#x60;&#x60;&#x60; $ curl -XPUT https://api.bitbucket.org/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D -d { &#x27;uuid&#x27;: &#x27;{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}&#x27; }  HTTP/1.1 204 &#x60;&#x60;&#x60;
+Adds the specified user to the project&#x27;s list of default reviewers. The method is idempotent. Accepts an optional body containing the &#x60;uuid&#x60; of the user to be added.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This can either be the actual &#x60;key&#x60; assigned to the project or the &#x60;UUID&#x60; (surrounded by curly-braces (&#x60;{}&#x60;)).
   - @param selectedUser This can either be the username or the UUID of the default reviewer, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
@@ -616,7 +615,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 204 {
+		if localVarHttpResponse.StatusCode == 200 {
 			var v User
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -664,7 +663,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyDefaultReviewe
 
 /*
 ProjectsApiService Delete a project for a workspace
-Deletes this project. This is an irreversible operation.  You cannot delete a project that still contains repositories. To delete the project, [delete](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-repo-slug-delete) or transfer the repositories first.  Example: &#x60;&#x60;&#x60; $ curl -X DELETE https://api.bitbucket.org/2.0/bbworkspace1/PROJ &#x60;&#x60;&#x60;
+Deletes this project. This is an irreversible operation.  You cannot delete a project that still contains repositories. To delete the project, [delete](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-repo-slug-delete) or transfer the repositories first.  Example: &#x60;&#x60;&#x60; $ curl -X DELETE https://api.bitbucket.org/2.0/workspaces/bbworkspace1/projects/PROJ &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This is the actual &#x60;key&#x60; assigned to the project.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
@@ -1038,7 +1037,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService Delete an explicit group permission for a project
-Deletes the project group permission between the requested project and group, if one exists.  Only users with admin permission for the project may access this resource.  Example:  $ curl -X DELETE https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/                  projects/PRJ/permissions-config/groups/developers  HTTP/1.1 204
+Deletes the project group permission between the requested project and group, if one exists.  Only users with admin permission for the project may access this resource.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param groupSlug Slug of the requested group.
   - @param projectKey The project in question. This is the actual key assigned to the project.
@@ -1151,7 +1150,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService Get an explicit group permission for a project
-Returns the group permission for a given group and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60; * &#x60;none&#x60;  Example:  &#x60;&#x60;&#x60; $ curl https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/        permissions-config/groups/administrators  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/           permissions-config/groups/administrators  {     \&quot;type\&quot;: \&quot;project_group_permission\&quot;,     \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Administrators\&quot;,         \&quot;slug\&quot;: \&quot;administrators\&quot;     },     \&quot;permission\&quot;: \&quot;admin\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                     permissions-config/groups/administrators\&quot;         }     } } &#x60;&#x60;&#x60;
+Returns the group permission for a given group and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60; * &#x60;none&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param groupSlug Slug of the requested group.
   - @param projectKey The project in question. This is the actual key assigned to the project.
@@ -1285,15 +1284,16 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService Update an explicit group permission for a project
-Updates the group permission if it exists.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example: &#x60;&#x60;&#x60; $ curl -X PUT -H \&quot;Content-Type: application/json\&quot; https://api.bitbucket.org/2.0/ workspaces/atlassian_tutorial/projects/PRJ/permissions-config/groups/administrators -d         &#x27;{     \&quot;permission\&quot;: \&quot;write\&quot; }&#x27;  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/           permissions-config/groups/administrators   {     \&quot;type\&quot;: \&quot;project_group_permission\&quot;,     \&quot;group\&quot;: {         \&quot;type\&quot;: \&quot;group\&quot;,         \&quot;name\&quot;: \&quot;Administrators\&quot;,         \&quot;slug\&quot;: \&quot;administrators\&quot;     },     \&quot;permission\&quot;: \&quot;write\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                     permissions-config/groups/administrators\&quot;         }     } } &#x60;&#x60;&#x60;
+Updates the group permission, or grants a new permission if one does not already exist.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The permission to grant
   - @param groupSlug Slug of the requested group.
   - @param projectKey The project in question. This is the actual key assigned to the project.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return ModelError
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx context.Context, groupSlug string, projectKey string, workspace string) (ModelError, *http.Response, error) {
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx context.Context, body BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema, groupSlug string, projectKey string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -1313,7 +1313,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1329,6 +1329,8 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	if ctx != nil {
 		// API Key Authentication
 		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
@@ -1580,7 +1582,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService Delete an explicit user permission for a project
-Deletes the project user permission between the requested project and user, if one exists.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  &#x60;&#x60;&#x60; $ curl -X DELETE https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                  permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a  HTTP/1.1 204 &#x60;&#x60;&#x60;
+Deletes the project user permission between the requested project and user, if one exists.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This is the actual key assigned to the project.
   - @param selectedUserId This can either be the username, the user&#x27;s UUID surrounded by curly-braces, for example: {account UUID}, or the user&#x27;s Atlassian ID.
@@ -1693,7 +1695,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService Get an explicit user permission for a project
-Returns the explicit user permission for a given user and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60; * &#x60;none&#x60;  Example:  &#x60;&#x60;&#x60; $ curl &#x27;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/         PRJ/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a&#x27;  HTTP/1.1 200 Location: &#x27;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/            PRJ/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a&#x27;  {     \&quot;type\&quot;: \&quot;project_user_permission\&quot;,     \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,         \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;     },     \&quot;permission\&quot;: \&quot;admin\&quot;,     \&quot;links\&quot;: {     \&quot;self\&quot;: {         \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/                  PRJ/permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         }     } } &#x60;&#x60;&#x60; #
+Returns the explicit user permission for a given user and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60; * &#x60;none&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param projectKey The project in question. This is the actual key assigned to the project.
   - @param selectedUserId This can either be the username, the user&#x27;s UUID surrounded by curly-braces, for example: {account UUID}, or the user&#x27;s Atlassian ID.
@@ -1827,15 +1829,16 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 
 /*
 ProjectsApiService Update an explicit user permission for a project
-Updates the explicit user permission for a given user and project. The selected user must be a member of the workspace, and cannot be the workspace owner.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Example:  &#x60;&#x60;&#x60; $ curl -X PUT -H \&quot;Content-Type: application/json\&quot; https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a -d {     \&quot;permission\&quot;: \&quot;write\&quot; }  HTTP/1.1 200 Location: https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/ permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a   {     \&quot;type\&quot;: \&quot;project_user_permission\&quot;,     \&quot;user\&quot;: {         \&quot;type\&quot;: \&quot;user\&quot;,         \&quot;display_name\&quot;: \&quot;Colin Cameron\&quot;,         \&quot;uuid\&quot;: \&quot;{d301aafa-d676-4ee0-88be-962be7417567}\&quot;,         \&quot;account_id\&quot;: \&quot;557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;     },     \&quot;permission\&quot;: \&quot;write\&quot;,     \&quot;links\&quot;: {     \&quot;self\&quot;: {         \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/workspaces/atlassian_tutorial/projects/PRJ/                  permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\&quot;         }     } } &#x60;&#x60;&#x60;
+Updates the explicit user permission for a given user and project. The selected user must be a member of the workspace, and cannot be the workspace owner.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * &#x60;admin&#x60; * &#x60;create-repo&#x60; * &#x60;write&#x60; * &#x60;read&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body The permission to grant
   - @param projectKey The project in question. This is the actual key assigned to the project.
   - @param selectedUserId This can either be the username, the user&#x27;s UUID surrounded by curly-braces, for example: {account UUID}, or the user&#x27;s Atlassian ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return ModelError
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, projectKey string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, body BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema, projectKey string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -1855,7 +1858,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1871,6 +1874,8 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	if ctx != nil {
 		// API Key Authentication
 		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {

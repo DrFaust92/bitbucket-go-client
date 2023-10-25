@@ -25,4 +25,5 @@ type PullrequestComment struct {
 	Links       *interface{} `json:"links,omitempty"`
 	Pullrequest *Pullrequest `json:"pullrequest,omitempty"`
 	Resolution  *ModelError  `json:"resolution,omitempty"`
+	Pending     bool         `json:"pending,omitempty"`
 }
