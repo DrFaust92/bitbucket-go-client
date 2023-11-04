@@ -24472,10 +24472,10 @@ components:
             type: string
             description: Provides some indication of the status of this commit
             enum:
-            - STOPPED
-            - INPROGRESS
-            - SUCCESSFUL
             - FAILED
+            - INPROGRESS
+            - STOPPED
+            - SUCCESSFUL
           name:
             type: string
             description: "An identifier for the build itself, e.g. BB-DEPLOY-1"
@@ -25066,33 +25066,33 @@ components:
           type: string
           description: The event identifier.
           enum:
-          - repo:commit_comment_created
-          - pullrequest:updated
-          - pullrequest:comment_resolved
-          - pullrequest:comment_updated
-          - repo:deleted
-          - issue:created
-          - pullrequest:comment_deleted
-          - pullrequest:approved
           - repo:commit_status_created
-          - issue:comment_created
-          - pullrequest:comment_created
+          - pullrequest:created
+          - pullrequest:fulfilled
           - pullrequest:comment_reopened
-          - pullrequest:rejected
-          - pullrequest:unapproved
-          - repo:transfer
-          - repo:imported
-          - issue:updated
-          - project:updated
-          - pullrequest:changes_request_removed
+          - pullrequest:comment_created
+          - repo:commit_comment_created
           - pullrequest:changes_request_created
+          - issue:updated
+          - issue:comment_created
+          - pullrequest:rejected
+          - pullrequest:comment_deleted
+          - pullrequest:comment_resolved
+          - pullrequest:approved
+          - pullrequest:unapproved
+          - pullrequest:updated
+          - pullrequest:comment_updated
+          - repo:created
+          - repo:imported
+          - repo:fork
+          - repo:updated
+          - pullrequest:changes_request_removed
+          - repo:deleted
+          - project:updated
           - repo:commit_status_updated
           - repo:push
-          - repo:created
-          - pullrequest:fulfilled
-          - repo:updated
-          - pullrequest:created
-          - repo:fork
+          - repo:transfer
+          - issue:created
         category:
           type: string
           description: The category this event belongs to.
@@ -25107,7 +25107,7 @@ components:
       example:
         description: description
         label: label
-        event: repo:commit_comment_created
+        event: repo:commit_status_created
         category: category
     issue:
       allOf:
@@ -26245,11 +26245,11 @@ components:
         values:
         - description: description
           label: label
-          event: repo:commit_comment_created
+          event: repo:commit_status_created
           category: category
         - description: description
           label: label
-          event: repo:commit_comment_created
+          event: repo:commit_status_created
           category: category
         page: 1
         pagelen: 1
@@ -29178,11 +29178,11 @@ components:
         merge_strategy:
           type: string
           description: The merge strategy that will be used to merge the pull request.
-          default: merge_commit
           enum:
           - merge_commit
           - squash
           - fast_forward
+          default: merge_commit
       additionalProperties: true
       description: The metadata that describes a pull request merge.
     ref:
@@ -30077,33 +30077,33 @@ components:
             items:
               type: string
               enum:
-              - repo:commit_comment_created
-              - pullrequest:updated
-              - pullrequest:comment_resolved
-              - pullrequest:comment_updated
-              - repo:deleted
-              - issue:created
-              - pullrequest:comment_deleted
-              - pullrequest:approved
               - repo:commit_status_created
-              - issue:comment_created
-              - pullrequest:comment_created
+              - pullrequest:created
+              - pullrequest:fulfilled
               - pullrequest:comment_reopened
-              - pullrequest:rejected
-              - pullrequest:unapproved
-              - repo:transfer
-              - repo:imported
-              - issue:updated
-              - project:updated
-              - pullrequest:changes_request_removed
+              - pullrequest:comment_created
+              - repo:commit_comment_created
               - pullrequest:changes_request_created
+              - issue:updated
+              - issue:comment_created
+              - pullrequest:rejected
+              - pullrequest:comment_deleted
+              - pullrequest:comment_resolved
+              - pullrequest:approved
+              - pullrequest:unapproved
+              - pullrequest:updated
+              - pullrequest:comment_updated
+              - repo:created
+              - repo:imported
+              - repo:fork
+              - repo:updated
+              - pullrequest:changes_request_removed
+              - repo:deleted
+              - project:updated
               - repo:commit_status_updated
               - repo:push
-              - repo:created
-              - pullrequest:fulfilled
-              - repo:updated
-              - pullrequest:created
-              - repo:fork
+              - repo:transfer
+              - issue:created
           secret_set:
             type: boolean
             description: Indicates whether or not the hook has an associated secret.
@@ -31769,5 +31769,5 @@ x-atlassian-narrative:
 
       For complete information see:
       [Atlassian Connect for Bitbucket Cloud](https://developer.atlassian.com/bitbucket/index.html)
-x-revision: 064769cf7355
+x-revision: 3a8d0a05d96a
 x-original-swagger-version: "2.0"
