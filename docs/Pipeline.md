@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Target** | [***PipelineTarget**](pipeline_target.md) |  | [optional] [default to null]
 **Trigger** | [***PipelineTrigger**](pipeline_trigger.md) |  | [optional] [default to null]
 **State** | [***PipelineState**](pipeline_state.md) |  | [optional] [default to null]
+**Variables** | [**[]PipelineVariable**](pipeline_variable.md) | The variables for the pipeline. | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) | The timestamp when the pipeline was created. | [optional] [default to null]
 **CompletedOn** | [**time.Time**](time.Time.md) | The timestamp when the Pipeline was completed. This is not set if the pipeline is still in progress. | [optional] [default to null]
 **BuildSecondsUsed** | **int32** | The number of build seconds used by this pipeline. | [optional] [default to null]

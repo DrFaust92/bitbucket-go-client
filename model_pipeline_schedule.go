@@ -14,16 +14,16 @@ import (
 )
 
 type PipelineSchedule struct {
-	Type_ string `json:"type,omitempty"`
+	Type_ string `json:"type"`
 	// The UUID identifying the schedule.
-	Uuid string `json:"uuid"`
+	Uuid string `json:"uuid,omitempty"`
 	// Whether the schedule is enabled.
-	Enabled bool               `json:"enabled"`
+	Enabled bool               `json:"enabled,omitempty"`
 	Target  *PipelineRefTarget `json:"target,omitempty"`
-	// The cron expression that the schedule applies.
+	// The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day.
 	CronPattern string `json:"cron_pattern,omitempty"`
 	// The timestamp when the schedule was created.
-	CreatedOn *time.Time `json:"created_on"`
+	CreatedOn time.Time `json:"created_on,omitempty"`
 	// The timestamp when the schedule was updated.
-	UpdatedOn *time.Time `json:"updated_on"`
+	UpdatedOn time.Time `json:"updated_on,omitempty"`
 }

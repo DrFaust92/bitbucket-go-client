@@ -245,6 +245,11 @@ Class | Method | HTTP request | Description
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdRequestChangesDelete**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidrequestchangesdelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes | Remove change request for a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdRequestChangesPost**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidrequestchangespost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes | Request changes for a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidstatusesget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/statuses | List commit statuses for a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidtasksget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks | List tasks on a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksPost**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidtaskspost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks | Create a task on a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdDelete**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidtaskstaskiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id} | Delete a task on a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidtaskstaskidget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id} | Get a task on a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdPut**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidtaskstaskidput) | **Put** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id} | Update a task on a pull request
 *RefsApi* | [**RepositoriesWorkspaceRepoSlugRefsBranchesGet**](docs/RefsApi.md#repositoriesworkspacereposlugrefsbranchesget) | **Get** /repositories/{workspace}/{repo_slug}/refs/branches | List open branches
 *RefsApi* | [**RepositoriesWorkspaceRepoSlugRefsBranchesNameDelete**](docs/RefsApi.md#repositoriesworkspacereposlugrefsbranchesnamedelete) | **Delete** /repositories/{workspace}/{repo_slug}/refs/branches/{name} | Delete a branch
 *RefsApi* | [**RepositoriesWorkspaceRepoSlugRefsBranchesNameGet**](docs/RefsApi.md#repositoriesworkspacereposlugrefsbranchesnameget) | **Get** /repositories/{workspace}/{repo_slug}/refs/branches/{name} | Get a branch
@@ -363,6 +368,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [APullRequestTask](docs/APullRequestTask.md)
+ - [APullrequestCommentTask](docs/APullrequestCommentTask.md)
+ - [APullrequestTaskCreate](docs/APullrequestTaskCreate.md)
+ - [APullrequestTaskUpdate](docs/APullrequestTaskUpdate.md)
  - [Account](docs/Account.md)
  - [AppUser](docs/AppUser.md)
  - [Author](docs/Author.md)
@@ -456,6 +465,7 @@ Class | Method | HTTP request | Description
  - [PaginatedSnippets](docs/PaginatedSnippets.md)
  - [PaginatedSshUserKeys](docs/PaginatedSshUserKeys.md)
  - [PaginatedTags](docs/PaginatedTags.md)
+ - [PaginatedTasks](docs/PaginatedTasks.md)
  - [PaginatedTreeentries](docs/PaginatedTreeentries.md)
  - [PaginatedVersions](docs/PaginatedVersions.md)
  - [PaginatedWebhookSubscriptions](docs/PaginatedWebhookSubscriptions.md)
@@ -540,6 +550,7 @@ Class | Method | HTTP request | Description
  - [StgWestReport](docs/StgWestReport.md)
  - [SubjectTypes](docs/SubjectTypes.md)
  - [Tag](docs/Tag.md)
+ - [Task](docs/Task.md)
  - [Team](docs/Team.md)
  - [TeamLinks](docs/TeamLinks.md)
  - [User](docs/User.md)

@@ -24,6 +24,8 @@ type Pipeline struct {
 	Target      *PipelineTarget  `json:"target,omitempty"`
 	Trigger     *PipelineTrigger `json:"trigger,omitempty"`
 	State       *PipelineState   `json:"state,omitempty"`
+	// The variables for the pipeline.
+	Variables []PipelineVariable `json:"variables,omitempty"`
 	// The timestamp when the pipeline was created.
 	CreatedOn time.Time `json:"created_on,omitempty"`
 	// The timestamp when the Pipeline was completed. This is not set if the pipeline is still in progress.

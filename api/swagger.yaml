@@ -62,7 +62,7 @@ tags:
     You can access public issues without authentication, but you can't gain access
     to private repositories' issues. By authenticating, you will get the ability
     to create issues, as well as access to updating data or deleting issues you
-    have access to.
+    have access to. Issue Tracker features are not supported for repositories in workspaces administered through admin.atlassian.com.
 - name: Pipelines
   description: |
     Bitbucket Pipelines brings continuous delivery to Bitbucket
@@ -2775,6 +2775,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/application_property'
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
     put:
       tags:
       - properties
@@ -2835,6 +2839,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -2889,6 +2897,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
   /repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests:
     get:
       tags:
@@ -3024,6 +3036,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/paginated_reports'
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
   /repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}:
     get:
       tags:
@@ -3079,6 +3096,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
     put:
       tags:
       - Reports
@@ -3175,6 +3197,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -3221,6 +3248,11 @@ paths:
         "204":
           description: No content
           content: {}
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
   /repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations:
     get:
       tags:
@@ -3279,6 +3311,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/paginated_annotations'
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
     post:
       tags:
       - Reports
@@ -3380,6 +3417,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/report_annotation'
                 x-content-type: application/json
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
   /repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}:
     get:
@@ -3444,6 +3486,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
     put:
       tags:
       - Reports
@@ -3538,6 +3585,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -3592,6 +3644,11 @@ paths:
         "204":
           description: No content
           content: {}
+      security:
+      - oauth2:
+        - repository
+      - basic: []
+      - api_key: []
   /repositories/{workspace}/{repo_slug}/commit/{commit}/statuses:
     get:
       tags:
@@ -10251,81 +10308,178 @@ paths:
       tags:
       - Pipelines
       summary: Run a pipeline
-      description: "Endpoint to create and initiate a pipeline.\nThere are a couple\
-        \ of different options to initiate a pipeline, where the payload of the request\
-        \ will determine which type of pipeline will be instantiated.\n# Trigger a\
-        \ Pipeline for a branch\nOne way to trigger pipelines is by specifying the\
-        \ branch for which you want to trigger a pipeline.\nThe specified branch will\
-        \ be used to determine which pipeline definition from the `bitbucket-pipelines.yml`\
-        \ file will be applied to initiate the pipeline. The pipeline will then do\
-        \ a clone of the repository and checkout the latest revision of the specified\
-        \ branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\
-        \n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/\
-        \ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\",\n  \
-        \    \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n\
-        \    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\n\
-        You can initiate a pipeline for a specific commit and in the context of a\
-        \ specified reference (e.g. a branch, tag or bookmark).\nThe specified reference\
-        \ will be used to determine which pipeline definition from the bitbucket-pipelines.yml\
-        \ file will be applied to initiate the pipeline. The pipeline will clone the\
-        \ repository and then do a checkout the specified reference.\n\nThe following\
-        \ reference types are supported:\n\n* `branch`\n* `named_branch`\n* `bookmark`\n\
-        \ * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\
-        \n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/\
-        \ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\"\
-        : \"commit\",\n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\
-        \n      },\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\"\
-        ,\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific\
-        \ pipeline definition for a commit\nYou can trigger a specific pipeline that\
-        \ is defined in your `bitbucket-pipelines.yml` file for a specific commit.\n\
-        In addition to the commit revision, you specify the type and pattern of the\
-        \ selector that identifies the pipeline definition. The resulting pipeline\
-        \ will then clone the repository and checkout the specified revision.\n\n\
-        ### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type:\
-        \ application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/\
-        \ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\"\
-        :\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\
-        \n       },\n        \"selector\": {\n           \"type\":\"custom\",\n  \
-        \            \"pattern\":\"Deploy to production\"\n          },\n        \"\
-        type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline\
-        \ definition for a commit on a branch or tag\nYou can trigger a specific pipeline\
-        \ that is defined in your `bitbucket-pipelines.yml` file for a specific commit\
-        \ in the context of a specified reference.\nIn addition to the commit revision,\
-        \ you specify the type and pattern of the selector that identifies the pipeline\
-        \ definition, as well as the reference information. The resulting pipeline\
-        \ will then clone the repository a checkout the specified reference.\n\n###\
-        \ Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type:\
-        \ application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/\
-        \ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\"\
-        :\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\
-        \n       },\n       \"selector\": {\n          \"type\": \"custom\",\n   \
-        \       \"pattern\": \"Deploy to production\"\n       },\n       \"type\"\
-        : \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\"\
-        : \"branch\"\n     }\n  }'\n```\n\n\n# Trigger a custom pipeline with variables\n\
-        In addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml`\
-        \ file as shown in the examples above, you can specify variables that will\
-        \ be available for your build. In the request, provide a list of variables,\
-        \ specifying the following for each variable: key, value, and whether it should\
-        \ be secured or not (this field is optional and defaults to not secured).\n\
-        \n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type:\
-        \ application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/\
-        \ \\\n -d '\n  {\n    \"target\": {\n      \"type\": \"pipeline_ref_target\"\
-        ,\n      \"ref_type\": \"branch\",\n      \"ref_name\": \"master\",\n    \
-        \  \"selector\": {\n        \"type\": \"custom\",\n        \"pattern\": \"\
-        Deploy to production\"\n      }\n    },\n    \"variables\": [\n      {\n \
-        \       \"key\": \"var1key\",\n        \"value\": \"var1value\",\n       \
-        \ \"secured\": true\n      },\n      {\n        \"key\": \"var2key\",\n  \
-        \      \"value\": \"var2value\"\n      }\n    ]\n  }'\n```\n\n# Trigger a\
-        \ pull request pipeline\n\nYou can also initiate a pipeline for a specific\
-        \ pull request.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password\
-        \ \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/\
-        \ \\\n -d '\n  {\n\t\"target\": {\n      \"type\": \"pipeline_pullrequest_target\"\
-        ,\n\t  \"source\": \"pull-request-branch\",\n      \"destination\": \"master\"\
-        ,\n      \"destination_commit\": {\n      \t \"hash\" : \"9f848b7\"\n    \
-        \  },\n      \"commit\": {\n      \t\"hash\" : \"1a372fc\"\n      },\n   \
-        \   \"pullrequest\" : {\n      \t\"id\" : \"3\"\n      },\n\t  \"selector\"\
-        : {\n        \"type\": \"pull-requests\",\n        \"pattern\": \"**\"\n \
-        \     }\n    }\n  }'\n```\n"
+      description: |
+        Endpoint to create and initiate a pipeline.
+        There are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.
+        # Trigger a Pipeline for a branch
+        One way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline.
+        The specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.
+
+        ### Example
+
+        ```
+        $ curl -X POST -is -u username:password \
+          -H 'Content-Type: application/json' \
+         https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \
+          -d '
+          {
+            "target": {
+              "ref_type": "branch",
+              "type": "pipeline_ref_target",
+              "ref_name": "master"
+            }
+          }'
+        ```
+        # Trigger a Pipeline for a commit on a branch or tag
+        You can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).
+        The specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.
+
+        The following reference types are supported:
+
+        * `branch`
+        * `named_branch`
+        * `bookmark`
+         * `tag`
+
+        ### Example
+
+        ```
+        $ curl -X POST -is -u username:password \
+          -H 'Content-Type: application/json' \
+          https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \
+          -d '
+          {
+            "target": {
+              "commit": {
+                "type": "commit",
+                "hash": "ce5b7431602f7cbba007062eeb55225c6e18e956"
+              },
+              "ref_type": "branch",
+              "type": "pipeline_ref_target",
+              "ref_name": "master"
+            }
+          }'
+        ```
+        # Trigger a specific pipeline definition for a commit
+        You can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit.
+        In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.
+
+        ### Example
+
+        ```
+        $ curl -X POST -is -u username:password \
+          -H 'Content-Type: application/json' \
+         https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \
+         -d '
+          {
+             "target": {
+              "commit": {
+                 "hash":"a3c4e02c9a3755eccdc3764e6ea13facdf30f923",
+                 "type":"commit"
+               },
+                "selector": {
+                   "type":"custom",
+                      "pattern":"Deploy to production"
+                  },
+                "type":"pipeline_commit_target"
+           }
+          }'
+        ```
+        # Trigger a specific pipeline definition for a commit on a branch or tag
+        You can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference.
+        In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.
+
+        ### Example
+
+        ```
+        $ curl -X POST -is -u username:password \
+          -H 'Content-Type: application/json' \
+         https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \
+         -d '
+          {
+             "target": {
+              "commit": {
+                 "hash":"a3c4e02c9a3755eccdc3764e6ea13facdf30f923",
+                 "type":"commit"
+               },
+               "selector": {
+                  "type": "custom",
+                  "pattern": "Deploy to production"
+               },
+               "type": "pipeline_ref_target",
+               "ref_name": "master",
+               "ref_type": "branch"
+             }
+          }'
+        ```
+
+
+        # Trigger a custom pipeline with variables
+        In addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).
+
+        ### Example
+
+        ```
+        $ curl -X POST -is -u username:password \
+          -H 'Content-Type: application/json' \
+         https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \
+         -d '
+          {
+            "target": {
+              "type": "pipeline_ref_target",
+              "ref_type": "branch",
+              "ref_name": "master",
+              "selector": {
+                "type": "custom",
+                "pattern": "Deploy to production"
+              }
+            },
+            "variables": [
+              {
+                "key": "var1key",
+                "value": "var1value",
+                "secured": true
+              },
+              {
+                "key": "var2key",
+                "value": "var2value"
+              }
+            ]
+          }'
+        ```
+
+        # Trigger a pull request pipeline
+
+        You can also initiate a pipeline for a specific pull request.
+
+        ### Example
+
+        ```
+        $ curl -X POST -is -u username:password \
+          -H 'Content-Type: application/json' \
+         https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \
+         -d '
+          {
+            "target": {
+              "type": "pipeline_pullrequest_target",
+              "source": "pull-request-branch",
+              "destination": "master",
+              "destination_commit": {
+                "hash": "9f848b7"
+              },
+              "commit": {
+                "hash": "1a372fc"
+              },
+              "pullrequest": {
+                "id": "3"
+              },
+              "selector": {
+                "type": "pull-requests",
+                "pattern": "**"
+              }
+            }
+          }'
+        ```
       operationId: createPipelineForRepository
       parameters:
       - name: workspace
@@ -10442,6 +10596,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     delete:
       tags:
       - Pipelines
@@ -10488,6 +10647,11 @@ paths:
         - pipeline:write
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - write:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}:
     delete:
       tags:
@@ -10536,6 +10700,11 @@ paths:
         - pipeline:write
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - write:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri:
     get:
       tags:
@@ -10587,6 +10756,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}:
     get:
       tags:
@@ -10634,6 +10808,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps:
     get:
       tags:
@@ -10682,6 +10866,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/paginated_pipeline_steps'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}:
     get:
       tags:
@@ -10737,6 +10931,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log:
     get:
       tags:
@@ -10806,6 +11010,16 @@ paths:
             application/octet-stream:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}:
     get:
       tags:
@@ -10871,6 +11085,16 @@ paths:
             application/octet-stream:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports:
     get:
       tags:
@@ -10922,6 +11146,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases:
     get:
       tags:
@@ -10973,6 +11207,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   ? /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons
   : get:
       tags:
@@ -11033,6 +11277,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline:
     post:
       tags:
@@ -11084,6 +11338,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pipeline:write
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - write:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines_config:
     get:
       tags:
@@ -11120,6 +11384,11 @@ paths:
         - repository:admin
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:repository:bitbucket
     put:
       tags:
       - Pipelines
@@ -11163,6 +11432,11 @@ paths:
         - repository:admin
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:repository:bitbucket
       x-codegen-request-body-name: _body
   /repositories/{workspace}/{repo_slug}/pipelines_config/build_number:
     put:
@@ -11223,6 +11497,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
   /repositories/{workspace}/{repo_slug}/pipelines_config/schedules:
     get:
@@ -11275,6 +11554,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     post:
       tags:
       - Pipelines
@@ -11336,6 +11620,12 @@ paths:
         - pipeline:write
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
+        - write:pipeline:bitbucket
       x-codegen-request-body-name: _body
   /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}:
     get:
@@ -11388,6 +11678,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     put:
       tags:
       - Pipelines
@@ -11445,6 +11740,12 @@ paths:
         - pipeline:write
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
+        - write:pipeline:bitbucket
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -11493,6 +11794,11 @@ paths:
         - pipeline:write
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - write:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions:
     get:
       tags:
@@ -11552,6 +11858,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair:
     get:
       tags:
@@ -11597,6 +11908,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     put:
       tags:
       - Pipelines
@@ -11647,6 +11963,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -11687,6 +12008,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts:
     get:
       tags:
@@ -11732,6 +12058,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     post:
       tags:
       - Pipelines
@@ -11794,6 +12125,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
   /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}:
     get:
@@ -11847,6 +12183,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     put:
       tags:
       - Pipelines
@@ -11905,6 +12246,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -11954,6 +12300,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/pipelines_config/variables:
     get:
       tags:
@@ -11999,6 +12350,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     post:
       tags:
       - Pipelines
@@ -12061,6 +12417,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
   /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}:
     get:
@@ -12114,6 +12475,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     put:
       tags:
       - Pipelines
@@ -12172,6 +12538,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -12221,6 +12592,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
   /repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}:
     get:
       tags:
@@ -12270,6 +12646,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/application_property'
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
     put:
       tags:
       - properties
@@ -12322,6 +12702,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -12368,6 +12752,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
   /repositories/{workspace}/{repo_slug}/pullrequests:
     get:
       tags:
@@ -14818,6 +15206,438 @@ paths:
         scheme: oauth2
         scopes:
         - read:pullrequest:bitbucket
+  /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks:
+    get:
+      tags:
+      - Pullrequests
+      summary: List tasks on a pull request
+      description: |-
+        Returns a paginated list of the pull request's tasks.
+
+        This endpoint supports filtering and sorting of the results by the 'task' field.
+        See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+      parameters:
+      - name: pull_request_id
+        in: path
+        description: The id of the pull request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: |2-
+
+          Query string to narrow down the response. See
+          [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: |2
+
+          Field by which the results should be sorted as per
+          [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+          Defaults to `created_on`.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: pagelen
+        in: query
+        description: |2
+
+          Current number of objects on the existing page.
+          The default value is 10 with 100 being the maximum allowed value.
+          Individual APIs may enforce different values.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: A paginated list of pull request tasks for the given pull request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paginated_tasks'
+        "400":
+          description: "If the user provides an invalid filter, sort, or fields query\
+            \ parameter."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: If the authenticated user does not have access to the pull
+            request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: If the pull request does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pullrequest
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pullrequest:bitbucket
+    post:
+      tags:
+      - Pullrequests
+      summary: Create a task on a pull request
+      description: |-
+        Creates a new pull request task.
+
+        Returns the newly created pull request task.
+
+        Tasks can optionally be created in relation to a comment specified by the comment's ID which
+        will cause the task to appear below the comment on a pull request when viewed in Bitbucket.
+      parameters:
+      - name: pull_request_id
+        in: path
+        description: The id of the pull request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The contents of the task
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/A pullrequest task create'
+        required: true
+      responses:
+        "201":
+          description: The newly created task.
+          headers:
+            Location:
+              description: The URL of the new task
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/A pullrequest comment task'
+        "400":
+          description: There is a missing required field in the request or the task
+            content is blank.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: If the authenticated user does not have access to the pull
+            request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: If the pull request does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pullrequest
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pullrequest:bitbucket
+      x-codegen-request-body-name: _body
+  /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}:
+    get:
+      tags:
+      - Pullrequests
+      summary: Get a task on a pull request
+      description: Returns a specific pull request task.
+      parameters:
+      - name: pull_request_id
+        in: path
+        description: The id of the pull request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: task_id
+        in: path
+        description: The ID of the task.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: The task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/A pullrequest comment task'
+        "403":
+          description: If the authenticated user does not have access to the pull
+            request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: If the task does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pullrequest
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pullrequest:bitbucket
+    put:
+      tags:
+      - Pullrequests
+      summary: Update a task on a pull request
+      description: Updates a specific pull request task.
+      parameters:
+      - name: pull_request_id
+        in: path
+        description: The id of the pull request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: task_id
+        in: path
+        description: The ID of the task.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The updated state and content of the task.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/A pullrequest task update'
+        required: true
+      responses:
+        "200":
+          description: The updated task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/A pullrequest comment task'
+        "400":
+          description: There is a missing required field in the request or the task
+            content is blank.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "403":
+          description: If the authenticated user does not have access to the pull
+            request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: If the task does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pullrequest
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pullrequest:bitbucket
+      x-codegen-request-body-name: _body
+    delete:
+      tags:
+      - Pullrequests
+      summary: Delete a task on a pull request
+      description: Deletes a specific pull request task.
+      parameters:
+      - name: pull_request_id
+        in: path
+        description: The id of the pull request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: repo_slug
+        in: path
+        description: |
+          This can either be the repository slug or the UUID of the repository,
+          surrounded by curly-braces, for example: `{repository UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: task_id
+        in: path
+        description: The ID of the task.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: workspace
+        in: path
+        description: |
+          This can either be the workspace ID (slug) or the workspace UUID
+          surrounded by curly-braces, for example: `{workspace UUID}`.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Successful deletion.
+          content: {}
+        "403":
+          description: If the authenticated user does not have access to delete the
+            task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: If the task does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - oauth2:
+        - pullrequest
+      - basic: []
+      - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pullrequest:bitbucket
   /repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}:
     get:
       tags:
@@ -14875,6 +15695,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/application_property'
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
     put:
       tags:
       - properties
@@ -14935,6 +15759,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -14989,6 +15817,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
   /repositories/{workspace}/{repo_slug}/refs:
     get:
       tags:
@@ -20061,6 +20893,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/application_property'
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
     put:
       tags:
       - properties
@@ -20105,6 +20941,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -20143,6 +20983,10 @@ paths:
         "204":
           description: An empty response.
           content: {}
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
   /users/{selected_user}/search/code:
     get:
       tags:
@@ -21604,6 +22448,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
   /workspaces/{workspace}/pipelines-config/identity/oidc/keys.json:
     get:
       tags:
@@ -21631,6 +22479,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+      security:
+      - oauth2: []
+      - basic: []
+      - api_key: []
   /workspaces/{workspace}/pipelines-config/variables:
     get:
       tags:
@@ -21668,6 +22520,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     post:
       tags:
       - Pipelines
@@ -21722,6 +22579,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
   /workspaces/{workspace}/pipelines-config/variables/{variable_uuid}:
     get:
@@ -21766,6 +22628,11 @@ paths:
         - pipeline
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - read:pipeline:bitbucket
     put:
       tags:
       - Pipelines
@@ -21815,6 +22682,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
       x-codegen-request-body-name: _body
     delete:
       tags:
@@ -21856,6 +22728,11 @@ paths:
         - pipeline:variable
       - basic: []
       - api_key: []
+      x-atlassian-oauth2-scopes:
+      - state: Current
+        scheme: oauth2
+        scopes:
+        - admin:pipeline:bitbucket
   /workspaces/{workspace}/projects:
     get:
       tags:
@@ -24096,6 +24973,60 @@ paths:
         - read:repository:bitbucket
 components:
   schemas:
+    A pull request task:
+      allOf:
+      - $ref: '#/components/schemas/task'
+      - title: Pull Request Task
+        type: object
+        properties:
+          links:
+            type: object
+            additionalProperties: false
+        additionalProperties: false
+        description: A pull request task.
+    A pullrequest comment task:
+      allOf:
+      - $ref: '#/components/schemas/A pull request task'
+      - title: Pull Request Comment Task
+        type: object
+        properties:
+          comment:
+            $ref: '#/components/schemas/comment'
+        additionalProperties: false
+        description: A pullrequest comment task
+    A pullrequest task create:
+      title: Pull Request Task Create
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          title: Task Raw Content
+          type: object
+          additionalProperties: false
+          description: task raw content
+        comment:
+          $ref: '#/components/schemas/comment'
+        pending:
+          type: boolean
+      additionalProperties: false
+      description: A pullrequest task create
+    A pullrequest task update:
+      title: Pull Request Task Update
+      type: object
+      properties:
+        content:
+          title: Task Raw Content
+          type: object
+          additionalProperties: false
+          description: task raw content
+        state:
+          type: string
+          enum:
+          - RESOLVED
+          - UNRESOLVED
+      additionalProperties: false
+      description: A pullrequest task update
     account:
       allOf:
       - $ref: '#/components/schemas/object'
@@ -24472,10 +25403,10 @@ components:
             type: string
             description: Provides some indication of the status of this commit
             enum:
-            - FAILED
             - INPROGRESS
-            - STOPPED
             - SUCCESSFUL
+            - FAILED
+            - STOPPED
           name:
             type: string
             description: "An identifier for the build itself, e.g. BB-DEPLOY-1"
@@ -25066,33 +25997,33 @@ components:
           type: string
           description: The event identifier.
           enum:
-          - repo:commit_status_created
           - pullrequest:created
-          - pullrequest:fulfilled
-          - pullrequest:comment_reopened
-          - pullrequest:comment_created
-          - repo:commit_comment_created
-          - pullrequest:changes_request_created
           - issue:updated
-          - issue:comment_created
-          - pullrequest:rejected
-          - pullrequest:comment_deleted
-          - pullrequest:comment_resolved
-          - pullrequest:approved
-          - pullrequest:unapproved
-          - pullrequest:updated
-          - pullrequest:comment_updated
-          - repo:created
-          - repo:imported
-          - repo:fork
-          - repo:updated
-          - pullrequest:changes_request_removed
-          - repo:deleted
-          - project:updated
-          - repo:commit_status_updated
           - repo:push
-          - repo:transfer
+          - pullrequest:approved
+          - pullrequest:comment_updated
+          - pullrequest:comment_reopened
+          - pullrequest:changes_request_created
+          - issue:comment_created
+          - project:updated
+          - pullrequest:unapproved
+          - pullrequest:comment_resolved
+          - repo:fork
+          - pullrequest:comment_deleted
           - issue:created
+          - repo:deleted
+          - repo:created
+          - pullrequest:comment_created
+          - pullrequest:updated
+          - repo:commit_status_created
+          - repo:commit_status_updated
+          - repo:transfer
+          - pullrequest:rejected
+          - repo:imported
+          - repo:updated
+          - pullrequest:fulfilled
+          - pullrequest:changes_request_removed
+          - repo:commit_comment_created
         category:
           type: string
           description: The category this event belongs to.
@@ -25107,7 +26038,7 @@ components:
       example:
         description: description
         label: label
-        event: repo:commit_status_created
+        event: pullrequest:created
         category: category
     issue:
       allOf:
@@ -26245,11 +27176,11 @@ components:
         values:
         - description: description
           label: label
-          event: repo:commit_status_created
+          event: pullrequest:created
           category: category
         - description: description
           label: label
-          event: repo:commit_status_created
+          event: pullrequest:created
           category: category
         page: 1
         pagelen: 1
@@ -27813,6 +28744,59 @@ components:
         - ""
         page: 1
         pagelen: 1
+    paginated_tasks:
+      title: Paginated Tasks
+      type: object
+      properties:
+        size:
+          minimum: 0
+          type: integer
+          description: "Total number of objects in the response. This is an optional\
+            \ element that is not provided in all responses, as it can be expensive\
+            \ to compute."
+        page:
+          minimum: 1
+          type: integer
+          description: Page number of the current results. This is an optional element
+            that is not provided in all responses.
+        pagelen:
+          minimum: 1
+          type: integer
+          description: Current number of objects on the existing page. The default
+            value is 10 with 100 being the maximum allowed value. Individual APIs
+            may enforce different values.
+        next:
+          type: string
+          description: Link to the next page if it exists. The last page of a collection
+            does not have this value. Use this link to navigate the result set and
+            refrain from constructing your own URLs.
+          format: uri
+        previous:
+          type: string
+          description: Link to previous page if it exists. A collections first page
+            does not have this value. This is an optional element that is not provided
+            in all responses. Some result sets strictly support forward navigation
+            and never provide previous links. Clients must anticipate that backwards
+            navigation is not always available. Use this link to navigate the result
+            set and refrain from constructing your own URLs.
+          format: uri
+        values:
+          minItems: 0
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/A pullrequest comment task'
+      additionalProperties: false
+      description: A paginated list of tasks.
+      example:
+        next: http://example.com/aeiou
+        size: 0
+        previous: http://example.com/aeiou
+        values:
+        - ""
+        - ""
+        page: 1
+        pagelen: 1
     paginated_treeentries:
       title: Paginated Tree Entry
       type: object
@@ -28134,6 +29118,12 @@ components:
             $ref: '#/components/schemas/pipeline_trigger'
           state:
             $ref: '#/components/schemas/pipeline_state'
+          variables:
+            minItems: 0
+            type: array
+            description: The variables for the pipeline.
+            items:
+              $ref: '#/components/schemas/pipeline_variable'
           created_on:
             type: string
             description: The timestamp when the pipeline was created.
@@ -29178,11 +30168,11 @@ components:
         merge_strategy:
           type: string
           description: The merge strategy that will be used to merge the pull request.
+          default: merge_commit
           enum:
           - merge_commit
           - squash
           - fast_forward
-          default: merge_commit
       additionalProperties: true
       description: The metadata that describes a pull request merge.
     ref:
@@ -29417,8 +30407,18 @@ components:
               \ same string used in Bitbucket URLs."
           has_issues:
             type: boolean
+            description: |2
+
+              The issue tracker for this repository is enabled. Issue Tracker
+              features are not supported for repositories in workspaces
+              administered through admin.atlassian.com.
           has_wiki:
             type: boolean
+            description: |2
+
+              The wiki for this repository is enabled. Wiki
+              features are not supported for repositories in workspaces
+              administered through admin.atlassian.com.
           is_private:
             type: boolean
           language:
@@ -29931,6 +30931,44 @@ components:
             $ref: '#/components/schemas/author'
         additionalProperties: true
         description: "A tag object, representing a tag in a repository."
+    task:
+      title: Task
+      required:
+      - content
+      - created_on
+      - creator
+      - state
+      - updated_on
+      type: object
+      properties:
+        id:
+          type: integer
+        created_on:
+          type: string
+          format: date-time
+        updated_on:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+          - RESOLVED
+          - UNRESOLVED
+        content:
+          type: object
+          additionalProperties: false
+        creator:
+          $ref: '#/components/schemas/account'
+        pending:
+          type: boolean
+        resolved_on:
+          type: string
+          description: The ISO8601 timestamp for when the task was resolved.
+          format: date-time
+        resolved_by:
+          $ref: '#/components/schemas/account'
+      additionalProperties: false
+      description: A task object.
     team:
       allOf:
       - $ref: '#/components/schemas/account'
@@ -30077,33 +31115,33 @@ components:
             items:
               type: string
               enum:
-              - repo:commit_status_created
               - pullrequest:created
-              - pullrequest:fulfilled
-              - pullrequest:comment_reopened
-              - pullrequest:comment_created
-              - repo:commit_comment_created
-              - pullrequest:changes_request_created
               - issue:updated
-              - issue:comment_created
-              - pullrequest:rejected
-              - pullrequest:comment_deleted
-              - pullrequest:comment_resolved
-              - pullrequest:approved
-              - pullrequest:unapproved
-              - pullrequest:updated
-              - pullrequest:comment_updated
-              - repo:created
-              - repo:imported
-              - repo:fork
-              - repo:updated
-              - pullrequest:changes_request_removed
-              - repo:deleted
-              - project:updated
-              - repo:commit_status_updated
               - repo:push
-              - repo:transfer
+              - pullrequest:approved
+              - pullrequest:comment_updated
+              - pullrequest:comment_reopened
+              - pullrequest:changes_request_created
+              - issue:comment_created
+              - project:updated
+              - pullrequest:unapproved
+              - pullrequest:comment_resolved
+              - repo:fork
+              - pullrequest:comment_deleted
               - issue:created
+              - repo:deleted
+              - repo:created
+              - pullrequest:comment_created
+              - pullrequest:updated
+              - repo:commit_status_created
+              - repo:commit_status_updated
+              - repo:transfer
+              - pullrequest:rejected
+              - repo:imported
+              - repo:updated
+              - pullrequest:fulfilled
+              - pullrequest:changes_request_removed
+              - repo:commit_comment_created
           secret_set:
             type: boolean
             description: Indicates whether or not the hook has an associated secret.
@@ -31769,5 +32807,5 @@ x-atlassian-narrative:
 
       For complete information see:
       [Atlassian Connect for Bitbucket Cloud](https://developer.atlassian.com/bitbucket/index.html)
-x-revision: 3a8d0a05d96a
+x-revision: 2903ffcff137
 x-original-swagger-version: "2.0"
