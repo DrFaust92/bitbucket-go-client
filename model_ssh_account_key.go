@@ -26,4 +26,7 @@ type SshAccountKey struct {
 	LastUsed  time.Time    `json:"last_used,omitempty"`
 	Links     *interface{} `json:"links,omitempty"`
 	Owner     *Account     `json:"owner,omitempty"`
+	ExpiresOn time.Time    `json:"expires_on,omitempty"`
+	// The SSH key fingerprint in SHA-256 format.
+	Fingerprint string `json:"fingerprint,omitempty"`
 }

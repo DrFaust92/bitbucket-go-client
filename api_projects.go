@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1157,15 +1156,15 @@ Returns the group permission for a given group and project.  Only users with adm
   - @param projectKey The project in question. This is the actual key assigned to the project.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return ProjectGroupPermission
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, projectKey string, workspace string) (ModelError, *http.Response, error) {
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, projectKey string, workspace string) (ProjectGroupPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue ProjectGroupPermission
 	)
 
 	// create path and map variables
@@ -1238,7 +1237,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v ProjectGroupPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1292,15 +1291,15 @@ Updates the group permission, or grants a new permission if one does not already
   - @param projectKey The project in question. This is the actual key assigned to the project.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return ProjectGroupPermission
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx context.Context, body BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema, groupSlug string, projectKey string, workspace string) (ModelError, *http.Response, error) {
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx context.Context, body BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema, groupSlug string, projectKey string, workspace string) (ProjectGroupPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue ProjectGroupPermission
 	)
 
 	// create path and map variables
@@ -1375,7 +1374,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v ProjectGroupPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1702,15 +1701,15 @@ Returns the explicit user permission for a given user and project.  Only users w
   - @param selectedUserId This can either be the username, the user&#x27;s UUID surrounded by curly-braces, for example: {account UUID}, or the user&#x27;s Atlassian ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return ProjectUserPermission
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, projectKey string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, projectKey string, selectedUserId string, workspace string) (ProjectUserPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue ProjectUserPermission
 	)
 
 	// create path and map variables
@@ -1783,7 +1782,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v ProjectUserPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1837,15 +1836,15 @@ Updates the explicit user permission for a given user and project. The selected 
   - @param selectedUserId This can either be the username, the user&#x27;s UUID surrounded by curly-braces, for example: {account UUID}, or the user&#x27;s Atlassian ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return ProjectUserPermission
 */
-func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, body BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema, projectKey string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
+func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, body BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema, projectKey string, selectedUserId string, workspace string) (ProjectUserPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue ProjectUserPermission
 	)
 
 	// create path and map variables
@@ -1920,7 +1919,7 @@ func (a *ProjectsApiService) WorkspacesWorkspaceProjectsProjectKeyPermissionsCon
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v ProjectUserPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

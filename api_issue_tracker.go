@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -269,7 +268,7 @@ A POST request to this endpoint initiates a new background celery task that arch
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *IssueTrackerApiRepositoriesWorkspaceRepoSlugIssuesExportPostOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of ModelError) -  The options to apply to the export. Available options include &#x60;project_key&#x60; and &#x60;project_name&#x60; which, if specified, are used as the project key and name in the exported Jira json format. Option &#x60;send_email&#x60; specifies whether an email should be sent upon export result. Option &#x60;include_attachments&#x60; specifies whether attachments are included in the export.
+     * @param "Body" (optional.Interface of ExportOptions) -  The options to apply to the export. Available options include &#x60;project_key&#x60; and &#x60;project_name&#x60; which, if specified, are used as the Jira space key and name in the exported Jira json format. Option &#x60;send_email&#x60; specifies whether an email should be sent upon export result. Option &#x60;include_attachments&#x60; specifies whether attachments are included in the export.
 
 */
 
@@ -1343,15 +1342,15 @@ Returns the specified issue change object.  This resource is only available on r
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return IssueChange
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesChangeIdGet(ctx context.Context, changeId string, issueId string, repoSlug string, workspace string) (ModelError, *http.Response, error) {
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesChangeIdGet(ctx context.Context, changeId string, issueId string, repoSlug string, workspace string) (IssueChange, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue IssueChange
 	)
 
 	// create path and map variables
@@ -1425,7 +1424,7 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChang
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v IssueChange
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1592,15 +1591,15 @@ Makes a change to the specified issue.  For example, to change an issue&#x27;s s
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return IssueChange
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesPost(ctx context.Context, body ModelError, issueId string, repoSlug string, workspace string) (ModelError, *http.Response, error) {
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesPost(ctx context.Context, body IssueChange, issueId string, repoSlug string, workspace string) (IssueChange, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue IssueChange
 	)
 
 	// create path and map variables
@@ -1675,7 +1674,7 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdChang
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 201 {
-			var v ModelError
+			var v IssueChange
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1729,7 +1728,7 @@ Deletes the specified comment.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdDelete(ctx context.Context, commentId int32, issueId string, repoSlug string, workspace string) (*http.Response, error) {
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdDelete(ctx context.Context, commentId int64, issueId string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -1816,7 +1815,7 @@ Returns the specified issue comment object.
 
 @return IssueComment
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdGet(ctx context.Context, commentId int32, issueId string, repoSlug string, workspace string) (IssueComment, *http.Response, error) {
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdGet(ctx context.Context, commentId int64, issueId string, repoSlug string, workspace string) (IssueComment, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1923,7 +1922,7 @@ Updates the content of the specified issue comment. Note that only the &#x60;con
 
 @return IssueComment
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdPut(ctx context.Context, body IssueComment, commentId int32, issueId string, repoSlug string, workspace string) (IssueComment, *http.Response, error) {
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdPut(ctx context.Context, body IssueComment, commentId int64, issueId string, repoSlug string, workspace string) (IssueComment, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -2251,16 +2250,13 @@ Deletes the specified issue. This requires write access to the repository.
   - @param issueId The issue id
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
-
-@return Issue
 */
-func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdDelete(ctx context.Context, issueId string, repoSlug string, workspace string) (Issue, *http.Response, error) {
+func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdDelete(ctx context.Context, issueId string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
-		localVarHttpMethod  = strings.ToUpper("Delete")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue Issue
+		localVarHttpMethod = strings.ToUpper("Delete")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
 	)
 
 	// create path and map variables
@@ -2305,26 +2301,18 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdDelet
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -2332,40 +2320,30 @@ func (a *IssueTrackerApiService) RepositoriesWorkspaceRepoSlugIssuesIssueIdDelet
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v Issue
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
 		if localVarHttpResponse.StatusCode == 403 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
+				return localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
+			return localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 404 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
+				return localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
+			return localVarHttpResponse, newErr
 		}
-		return localVarReturnValue, localVarHttpResponse, newErr
+		return localVarHttpResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHttpResponse, nil
+	return localVarHttpResponse, nil
 }
 
 /*

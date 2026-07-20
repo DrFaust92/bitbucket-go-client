@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Hash** | **string** |  | [optional] [default to null]
 **Date** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Author** | [***Author**](author.md) |  | [optional] [default to null]
+**Committer** | [***Committer**](committer.md) |  | [optional] [default to null]
 **Message** | **string** |  | [optional] [default to null]
 **Summary** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Parents** | [**[]BaseCommit**](base_commit.md) |  | [optional] [default to null]

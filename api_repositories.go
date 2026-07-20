@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -29,7 +28,7 @@ type RepositoriesApiService service
 
 /*
 RepositoriesApiService List public repositories
-Returns a paginated list of all public repositories.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get).**  Returns a paginated list of all public repositories.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *RepositoriesApiRepositoriesGetOpts - Optional Parameters:
      * @param "After" (optional.String) -  Filter the results to include only repositories created on or after this [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)  timestamp. Example: &#x60;YYYY-MM-DDTHH:mm:ss.sssZ&#x60;
@@ -1512,15 +1511,15 @@ RepositoriesApiService Retrieve the inheritance state for repository settings
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return RepositoryInheritanceState
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx context.Context, repoSlug string, workspace string) (ModelError, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx context.Context, repoSlug string, workspace string) (RepositoryInheritanceState, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue RepositoryInheritanceState
 	)
 
 	// create path and map variables
@@ -1592,7 +1591,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugOverrideSettingsGe
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v RepositoryInheritanceState
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1850,7 +1849,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 
 /*
 RepositoriesApiService Delete an explicit group permission for a repository
-Deletes the repository group permission between the requested repository and group, if one exists.  Only users with admin permission for the repository may access this resource.
+Deletes the repository group permission between the requested repository and group, if one exists.  Only users with admin permission for the repository may access this resource.  The only authentication method supported for this endpoint is via app passwords.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param groupSlug Slug of the requested group.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
@@ -1969,15 +1968,15 @@ Returns the group permission for a given group slug and repository  Only users w
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return RepositoryGroupPermission
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, repoSlug string, workspace string) (ModelError, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx context.Context, groupSlug string, repoSlug string, workspace string) (RepositoryGroupPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue RepositoryGroupPermission
 	)
 
 	// create path and map variables
@@ -2050,7 +2049,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v RepositoryGroupPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2104,15 +2103,15 @@ Updates the group permission, or grants a new permission if one does not already
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return RepositoryGroupPermission
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx context.Context, body BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema, groupSlug string, repoSlug string, workspace string) (ModelError, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx context.Context, body BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema, groupSlug string, repoSlug string, workspace string) (RepositoryGroupPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue RepositoryGroupPermission
 	)
 
 	// create path and map variables
@@ -2187,7 +2186,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigG
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v RepositoryGroupPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2514,15 +2513,15 @@ Returns the explicit user permission for a given user and repository.  Only user
   - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return RepositoryUserPermission
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx context.Context, repoSlug string, selectedUserId string, workspace string) (RepositoryUserPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue RepositoryUserPermission
 	)
 
 	// create path and map variables
@@ -2595,7 +2594,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v RepositoryUserPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2649,15 +2648,15 @@ Updates the explicit user permission for a given user and repository. The select
   - @param selectedUserId This can either be the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
-@return ModelError
+@return RepositoryUserPermission
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, body BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema, repoSlug string, selectedUserId string, workspace string) (ModelError, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx context.Context, body BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema, repoSlug string, selectedUserId string, workspace string) (RepositoryUserPermission, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue ModelError
+		localVarReturnValue RepositoryUserPermission
 	)
 
 	// create path and map variables
@@ -2732,7 +2731,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelError
+			var v RepositoryUserPermission
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3369,7 +3368,7 @@ This endpoint is used to create new commits in the repository by uploading files
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugSrcPostOpts - Optional Parameters:
      * @param "Message" (optional.String) -  The commit message. When omitted, Bitbucket uses a canned string.
      * @param "Author" (optional.String) -   The raw string to be used as the new commit&#x27;s author. This string follows the format &#x60;Erik van Zijst &lt;evzijst@atlassian.com&gt;&#x60;.  When omitted, Bitbucket uses the authenticated user&#x27;s full/display name and primary email address. Commits cannot be created anonymously.
-     * @param "Parents" (optional.String) -   A comma-separated list of SHA1s of the commits that should be the parents of the newly created commit.  When omitted, the new commit will inherit from and become a child of the main branch&#x27;s tip/HEAD commit.  When more than one SHA1 is provided, the first SHA1 identifies the commit from which the content will be inherited.\&quot;.
+     * @param "Parents" (optional.String) -   #### Deprecation Notice: Support for specifying multiple parent commits is deprecated and will be removed in a future release. Only a single SHA1 is accepted.  A SHA1 of the commit that should be the parent of the newly created commit. When omitted, the new commit will inherit from and become a child of the main branch&#x27;s tip/HEAD commit.
      * @param "Files" (optional.String) -   Optional field that declares the files that the request is manipulating. When adding a new file to a repo, or when overwriting an existing file, the client can just upload the full contents of the file in a normal form field and the use of this &#x60;files&#x60; meta data field is redundant. However, when the &#x60;files&#x60; field contains a file path that does not have a corresponding, identically-named form field, then Bitbucket interprets that as the client wanting to replace the named file with the null set and the file is deleted instead.  Paths in the repo that are referenced in neither files nor an individual file field, remain unchanged and carry over from the parent to the new commit.  This API does not support renaming as an explicit feature. To rename a file, simply delete it and recreate it under the new name in the same commit.
      * @param "Branch" (optional.String) -   The name of the branch that the new commit should be created on. When omitted, the commit will be created on top of the main branch and will become the main branch&#x27;s new head.  When a branch name is provided that already exists in the repo, then the commit will be created on top of that branch. In this case, *if* a parent SHA1 was also provided, then it is asserted that the parent is the branch&#x27;s tip/HEAD at the time the request is made. When this is not the case, a 409 is returned.  When a new branch name is specified (that does not already exist in the repo), and no parent SHA1s are provided, then the new commit will inherit from the current main branch&#x27;s tip/HEAD commit, but not advance the main branch. The new commit will be the new branch. When the request *also* specifies a parent SHA1, then the new commit and branch are created directly on top of the parent commit, regardless of the state of the main branch.  When a branch name is not specified, but a parent SHA1 is provided, then Bitbucket asserts that it represents the main branch&#x27;s current HEAD/tip, or a 409 is returned.  When a branch name is not specified and the repo is empty, the new commit will become the repo&#x27;s root commit and will be on the main branch.  When a branch name is specified and the repo is empty, the new commit will become the repo&#x27;s root commit and also define the repo&#x27;s main branch going forward.  This API cannot be used to create additional root commits in non-empty repos.  The branch field cannot be repeated.  As a side effect, this API can be used to create a new branch without modifying any files, by specifying a new branch name in this field, together with &#x60;parents&#x60;, but omitting the &#x60;files&#x60; fields, while not sending any files. This will create a new commit and branch with the same contents as the first parent. The diff of this commit against its first parent will be empty.
 
@@ -3605,7 +3604,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 
 /*
 RepositoriesApiService List repository permissions for a user
-Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;repository.name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
+**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-user-workspaces-workspace-permissions-repositories-get).**  Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;repository.name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *RepositoriesApiUserPermissionsRepositoriesGetOpts - Optional Parameters:
      * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
@@ -3706,6 +3705,150 @@ func (a *RepositoriesApiService) UserPermissionsRepositoriesGet(ctx context.Cont
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PaginatedRepositoryPermissions
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+RepositoriesApiService List repository permissions in a workspace for a user
+Returns an object for each repository the caller has explicit access to in the specified workspace and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;bits\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;repository.name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *RepositoriesApiUserWorkspacesWorkspacePermissionsRepositoriesGetOpts - Optional Parameters:
+     * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+     * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
+@return PaginatedRepositoryPermissions
+*/
+
+type RepositoriesApiUserWorkspacesWorkspacePermissionsRepositoriesGetOpts struct {
+	Q    optional.String
+	Sort optional.String
+}
+
+func (a *RepositoriesApiService) UserWorkspacesWorkspacePermissionsRepositoriesGet(ctx context.Context, workspace string, localVarOptionals *RepositoriesApiUserWorkspacesWorkspacePermissionsRepositoriesGetOpts) (PaginatedRepositoryPermissions, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue PaginatedRepositoryPermissions
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/user/workspaces/{workspace}/permissions/repositories"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
+		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
+		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Authorization"] = key
+
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PaginatedRepositoryPermissions
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 401 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 403 {
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

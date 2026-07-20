@@ -5,6 +5,8 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**UserPermissionsWorkspacesGet**](WorkspacesApi.md#UserPermissionsWorkspacesGet) | **Get** /user/permissions/workspaces | List workspaces for the current user
+[**UserWorkspacesGet**](WorkspacesApi.md#UserWorkspacesGet) | **Get** /user/workspaces | List workspaces for the current user
+[**UserWorkspacesWorkspacePermissionGet**](WorkspacesApi.md#UserWorkspacesWorkspacePermissionGet) | **Get** /user/workspaces/{workspace}/permission | Get user permission on a workspace
 [**WorkspacesGet**](WorkspacesApi.md#WorkspacesGet) | **Get** /workspaces | List workspaces for user
 [**WorkspacesWorkspaceGet**](WorkspacesApi.md#WorkspacesWorkspaceGet) | **Get** /workspaces/{workspace} | Get a workspace
 [**WorkspacesWorkspaceHooksGet**](WorkspacesApi.md#WorkspacesWorkspaceHooksGet) | **Get** /workspaces/{workspace}/hooks | List webhooks for a workspace
@@ -19,12 +21,14 @@ Method | HTTP request | Description
 [**WorkspacesWorkspacePermissionsRepositoriesRepoSlugGet**](WorkspacesApi.md#WorkspacesWorkspacePermissionsRepositoriesRepoSlugGet) | **Get** /workspaces/{workspace}/permissions/repositories/{repo_slug} | List a repository permissions for a workspace
 [**WorkspacesWorkspaceProjectsGet**](WorkspacesApi.md#WorkspacesWorkspaceProjectsGet) | **Get** /workspaces/{workspace}/projects | List projects in a workspace
 [**WorkspacesWorkspaceProjectsProjectKeyGet**](WorkspacesApi.md#WorkspacesWorkspaceProjectsProjectKeyGet) | **Get** /workspaces/{workspace}/projects/{project_key} | Get a project for a workspace
+[**WorkspacesWorkspacePullrequestsSelectedUserGet**](WorkspacesApi.md#WorkspacesWorkspacePullrequestsSelectedUserGet) | **Get** /workspaces/{workspace}/pullrequests/{selected_user} | List workspace pull requests for a user
+[**WorkspacesWorkspaceSettingsGpgPublicKeyGet**](WorkspacesApi.md#WorkspacesWorkspaceSettingsGpgPublicKeyGet) | **Get** /workspaces/{workspace}/settings/gpg/public-key | Get the workspace system GPG public key(s)
 
 # **UserPermissionsWorkspacesGet**
 > PaginatedWorkspaceMemberships UserPermissionsWorkspacesGet(ctx, optional)
 List workspaces for the current user
 
-Returns an object for each workspace the caller is a member of, and their effective role - the highest level of privilege the caller has. If a user is a member of multiple groups with distinct roles, only the highest level is returned.  Permissions can be:  * `owner` * `collaborator` * `member`  **The `collaborator` role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  **When you move your administration from Bitbucket Cloud to admin.atlassian.com, the following fields on `workspace_membership` will no longer be present: `last_accessed` and `added_on`. See the [deprecation announcement](/cloud/bitbucket/announcement-breaking-change-workspace-membership/).**  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * `q=workspace.slug=\"bbworkspace1\"` or `q=permission=\"owner\"` * `sort=workspace.slug`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
+**This endpoint is deprecated. Please use the supported alternatives:** * [List workspaces for user](/cloud/bitbucket/rest/api-group-workspaces/#api-user-workspaces-get) * [Get user permission on a workspace](/cloud/bitbucket/rest/api-group-workspaces/#api-user-workspaces-workspace-permission-get)  Returns an object for each workspace the caller is a member of, and their effective role - the highest level of privilege the caller has. If a user is a member of multiple groups with distinct roles, only the highest level is returned.  Permissions can be:  * `owner` * `collaborator` * `member`  **The `collaborator` role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  **When you move your administration from Bitbucket Cloud to admin.atlassian.com, the following fields on `workspace_membership` will no longer be present: `last_accessed` and `added_on`. See the [deprecation announcement](/cloud/bitbucket/announcement-breaking-change-workspace-membership/).**  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * `q=workspace.slug=\"bbworkspace1\"` or `q=permission=\"owner\"` * `sort=workspace.slug`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
 
 ### Required Parameters
 
@@ -56,11 +60,74 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **UserWorkspacesGet**
+> PaginatedWorkspaceAccess UserWorkspacesGet(ctx, optional)
+List workspaces for the current user
+
+Returns an object for each workspace accessible to the caller. This object also contains details on whether the caller has admin permissions on the workspace (`\"administrator\" = true`) or not (`\"administrator\" = false`).  Queries support filtering based on administrator permissions, [sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) or [filtering](/cloud/bitbucket/rest/intro/#filtering) by `slug`. Results can be [paginated](/cloud/bitbucket/rest/intro/#pagination).
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***WorkspacesApiUserWorkspacesGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WorkspacesApiUserWorkspacesGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sort** | **optional.String**| Name of a response property to sort results (only slug is supported). | 
+ **administrator** | **optional.Bool**| Filter workspaces based on which ones the caller has admin permissions or not. | 
+
+### Return type
+
+[**PaginatedWorkspaceAccess**](paginated_workspace_access.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UserWorkspacesWorkspacePermissionGet**
+> WorkspaceMembership UserWorkspacesWorkspacePermissionGet(ctx, workspace)
+Get user permission on a workspace
+
+Returns the caller's effective role; as in, the highest level of privilege the caller has for the workspace. If the calling user is a member of multiple groups with distinct roles, only the highest level is returned.  Permissions can be:  * `owner` * `create-project` * `collaborator` (deprecated; see this [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/) for more details) * `member`
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**WorkspaceMembership**](workspace_membership.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **WorkspacesGet**
 > PaginatedWorkspaces WorkspacesGet(ctx, optional)
 List workspaces for user
 
-Returns a list of workspaces accessible by the authenticated user.  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * `q=slug=\"bbworkspace1\"` or `q=is_private=true` * `sort=created_on`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.  **The `collaborator` role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**
+**This endpoint is deprecated. Please use the [supported alternative](/cloud/bitbucket/rest/api-group-workspaces/#api-user-workspaces-get).**  Returns a list of workspaces accessible by the authenticated user.  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * `q=slug=\"bbworkspace1\"` or `q=is_private=true` * `sort=created_on`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.  **The `collaborator` role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**
 
 ### Required Parameters
 
@@ -276,7 +343,7 @@ Name | Type | Description  | Notes
 > PaginatedWorkspaceMemberships WorkspacesWorkspaceMembersGet(ctx, workspace, optional)
 List users in a workspace
 
-Returns all members of the requested workspace.
+Returns all members of the requested workspace.  This endpoint additionally supports [filtering](/cloud/bitbucket/rest/intro/#filtering) by email address, if called by a workspace administrator, integration or workspace access token. This is done by adding the following query string parameter:  * `q=user.email IN (\"user1@org.com\",\"user2@org.com\")`  When filtering by email, you can query up to 90 addresses at a time. Note that the query parameter values need to be URL escaped, so the final query string should be:  * `q=user.email%20IN%20(%22user1@org.com%22,%22user2@org.com%22)`  Email addresses that you filter by (and only these email addresses) can be included in the response using the `fields` query parameter:  * `&fields=+values.user.email` - add the `email` field to the default `user` response object * `&fields=values.user.email,values.user.account_id` - only return user email addresses and account IDs  Once again, all query parameter values must be URL escaped.
 
 ### Required Parameters
 
@@ -505,6 +572,73 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Project**](project.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **WorkspacesWorkspacePullrequestsSelectedUserGet**
+> PaginatedPullrequests WorkspacesWorkspacePullrequestsSelectedUserGet(ctx, selectedUser, workspace, optional)
+List workspace pull requests for a user
+
+Returns all workspace pull requests authored by the specified user.  By default only open pull requests are returned. This can be controlled using the `state` query parameter. To retrieve pull requests that are in one of multiple states, repeat the `state` parameter for each individual state.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **selectedUser** | **string**| This can either be the username of the pull request author, the author&#x27;s UUID surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, or the author&#x27;s Atlassian ID.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***WorkspacesApiWorkspacesWorkspacePullrequestsSelectedUserGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a WorkspacesApiWorkspacesWorkspacePullrequestsSelectedUserGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **state** | **optional.String**| Only return pull requests that are in this state. This parameter can be repeated. | 
+ **page** | **optional.Int32**| page | 
+
+### Return type
+
+[**PaginatedPullrequests**](paginated_pullrequests.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **WorkspacesWorkspaceSettingsGpgPublicKeyGet**
+> WorkspacesWorkspaceSettingsGpgPublicKeyGet(ctx, workspace)
+Get the workspace system GPG public key(s)
+
+Returns the system public GPG key(s). In most cases a single key is returned. During a key rotation period, two keys may be returned.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

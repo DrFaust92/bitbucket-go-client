@@ -10,8 +10,8 @@
 package bitbucket
 
 type Branchrestriction struct {
-	Type_ string                  `json:"type"`
-	Links *BranchrestrictionLinks `json:"links,omitempty"`
+	Type_ string       `json:"type"`
+	Links *interface{} `json:"links,omitempty"`
 	// The branch restriction status' id.
 	Id int32 `json:"id,omitempty"`
 	// The type of restriction that is being applied.
@@ -21,9 +21,9 @@ type Branchrestriction struct {
 	// Apply the restriction to branches of this type. Active when `branch_match_kind` is `branching_model`. The branch type will be calculated using the branching model configured for the repository.
 	BranchType string `json:"branch_type,omitempty"`
 	// Apply the restriction to branches that match this pattern. Active when `branch_match_kind` is `glob`. Will be empty when `branch_match_kind` is `branching_model`.
-	Pattern string    `json:"pattern"`
-	Users   []Account `json:"users,omitempty"`
-	Groups  []Group   `json:"groups,omitempty"`
-	// <staticmethod object at 0x7fda69f5d690>
-	Value int32 `json:"value,omitempty"`
+	Pattern string `json:"pattern"`
+	// Value with kind-specific semantics:  * `require_approvals_to_merge` uses it to require a minimum number of approvals on a PR.  * `require_default_reviewer_approvals_to_merge` uses it to require a minimum number of approvals from default reviewers on a PR.  * `require_passing_builds_to_merge` uses it to require a minimum number of passing builds.  * `require_commits_behind` uses it to require the current branch is up to a maximum number of commits behind it destination.
+	Value  int32     `json:"value,omitempty"`
+	Users  []Account `json:"users,omitempty"`
+	Groups []Group   `json:"groups,omitempty"`
 }

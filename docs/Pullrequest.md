@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **UpdatedOn** | [**time.Time**](time.Time.md) | The ISO8601 timestamp the request was last updated. | [optional] [default to null]
 **Reviewers** | [**[]Account**](account.md) | The list of users that were added as reviewers on this pull request when it was created. For performance reasons, the API only includes this list on a pull request&#x27;s &#x60;self&#x60; URL. | [optional] [default to null]
 **Participants** | [**[]Participant**](participant.md) |         The list of users that are collaborating on this pull request.         Collaborators are user that:          * are added to the pull request as a reviewer (part of the reviewers           list)         * are not explicit reviewers, but have commented on the pull request         * are not explicit reviewers, but have approved the pull request          Each user is wrapped in an object that indicates the user&#x27;s role and         whether they have approved the pull request. For performance reasons,         the API only returns this list when an API requests a pull request by         id.          | [optional] [default to null]
+**Draft** | **bool** | A boolean flag indicating whether the pull request is a draft. | [optional] [default to null]
+**Queued** | **bool** | A boolean flag indicating whether the pull request is queued | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

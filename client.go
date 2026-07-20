@@ -59,6 +59,8 @@ type APIClient struct {
 
 	DownloadsApi *DownloadsApiService
 
+	GPGApi *GPGApiService
+
 	IssueTrackerApi *IssueTrackerApiService
 
 	PipelinesApi *PipelinesApiService
@@ -75,13 +77,13 @@ type APIClient struct {
 
 	RepositoriesApi *RepositoriesApiService
 
+	SSHApi *SSHApiService
+
 	SearchApi *SearchApiService
 
 	SnippetsApi *SnippetsApiService
 
 	SourceApi *SourceApiService
-
-	SshApi *SshApiService
 
 	UsersApi *UsersApiService
 
@@ -113,6 +115,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CommitsApi = (*CommitsApiService)(&c.common)
 	c.DeploymentsApi = (*DeploymentsApiService)(&c.common)
 	c.DownloadsApi = (*DownloadsApiService)(&c.common)
+	c.GPGApi = (*GPGApiService)(&c.common)
 	c.IssueTrackerApi = (*IssueTrackerApiService)(&c.common)
 	c.PipelinesApi = (*PipelinesApiService)(&c.common)
 	c.ProjectsApi = (*ProjectsApiService)(&c.common)
@@ -121,10 +124,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.RefsApi = (*RefsApiService)(&c.common)
 	c.ReportsApi = (*ReportsApiService)(&c.common)
 	c.RepositoriesApi = (*RepositoriesApiService)(&c.common)
+	c.SSHApi = (*SSHApiService)(&c.common)
 	c.SearchApi = (*SearchApiService)(&c.common)
 	c.SnippetsApi = (*SnippetsApiService)(&c.common)
 	c.SourceApi = (*SourceApiService)(&c.common)
-	c.SshApi = (*SshApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
 	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 	c.WorkspacesApi = (*WorkspacesApiService)(&c.common)

@@ -5,7 +5,6 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetPullrequestsForCommit**](PullrequestsApi.md#GetPullrequestsForCommit) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests | List pull requests that contain a commit
-[**PullrequestsSelectedUserGet**](PullrequestsApi.md#PullrequestsSelectedUserGet) | **Get** /pullrequests/{selected_user} | List pull requests for a user
 [**RepositoriesWorkspaceRepoSlugDefaultReviewersGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugDefaultReviewersGet) | **Get** /repositories/{workspace}/{repo_slug}/default-reviewers | List default reviewers
 [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameDelete**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameDelete) | **Delete** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Remove a user from the default reviewers
 [**RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugDefaultReviewersTargetUsernameGet) | **Get** /repositories/{workspace}/{repo_slug}/default-reviewers/{target_username} | Get a default reviewer
@@ -25,6 +24,7 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments | List comments on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsPost**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsPost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments | Create a comment on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommitsGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommitsGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits | List commits on a pull request
+[**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdConflictsGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdConflictsGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/conflicts | Get file conflicts for a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdDeclinePost**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdDeclinePost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/decline | Decline a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdDiffGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdDiffGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diff | List changes in a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdDiffstatGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdDiffstatGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diffstat | Get the diff stat for a pull request
@@ -41,6 +41,7 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdDelete**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdDelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id} | Delete a task on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id} | Get a task on a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdPut**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdPut) | **Put** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id} | Update a task on a pull request
+[**WorkspacesWorkspacePullrequestsSelectedUserGet**](PullrequestsApi.md#WorkspacesWorkspacePullrequestsSelectedUserGet) | **Get** /workspaces/{workspace}/pullrequests/{selected_user} | List workspace pull requests for a user
 
 # **GetPullrequestsForCommit**
 > PaginatedPullrequests GetPullrequestsForCommit(ctx, workspace, repoSlug, commit, optional)
@@ -67,43 +68,6 @@ Name | Type | Description  | Notes
 
  **page** | **optional.Int32**| Which page to retrieve | [default to 1]
  **pagelen** | **optional.Int32**| How many pull requests to retrieve per page | [default to 30]
-
-### Return type
-
-[**PaginatedPullrequests**](paginated_pullrequests.md)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **PullrequestsSelectedUserGet**
-> PaginatedPullrequests PullrequestsSelectedUserGet(ctx, selectedUser, optional)
-List pull requests for a user
-
-Returns all pull requests authored by the specified user.  By default only open pull requests are returned. This can be controlled using the `state` query parameter. To retrieve pull requests that are in one of multiple states, repeat the `state` parameter for each individual state.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **selectedUser** | **string**| This can either be the username of the pull request author, the author&#x27;s UUID surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, or the author&#x27;s Atlassian ID.  | 
- **optional** | ***PullrequestsApiPullrequestsSelectedUserGetOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a PullrequestsApiPullrequestsSelectedUserGetOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **state** | **optional.String**| Only return pull requests that are in this state. This parameter can be repeated. | 
- **page** | **optional.Int32**| page | 
 
 ### Return type
 
@@ -358,7 +322,7 @@ Name | Type | Description  | Notes
 > Pullrequest RepositoriesWorkspaceRepoSlugPullrequestsPost(ctx, repoSlug, workspace, optional)
 Create a pull request
 
-Creates a new pull request where the destination repository is this repository and the author is the authenticated user.  The minimum required fields to create a pull request are `title` and `source`, specified by a branch name.  ``` curl https://api.bitbucket.org/2.0/repositories/my-workspace/my-repository/pullrequests \\     -u my-username:my-password \\     --request POST \\     --header 'Content-Type: application/json' \\     --data '{         \"title\": \"My Title\",         \"source\": {             \"branch\": {                 \"name\": \"staging\"             }         }     }' ```  If the pull request's `destination` is not specified, it will default to the `repository.mainbranch`. To open a pull request to a different branch, say from a feature branch to a staging branch, specify a `destination` (same format as the `source`):  ``` {     \"title\": \"My Title\",     \"source\": {         \"branch\": {             \"name\": \"my-feature-branch\"         }     },     \"destination\": {         \"branch\": {             \"name\": \"staging\"         }     } } ```  Reviewers can be specified by adding an array of user objects as the `reviewers` property.  ``` {     \"title\": \"My Title\",     \"source\": {         \"branch\": {             \"name\": \"my-feature-branch\"         }     },     \"reviewers\": [         {             \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"         }     ] } ```  Other fields:  * `description` - a string * `close_source_branch` - boolean that specifies if the source branch should be closed upon merging
+Creates a new pull request where the destination repository is this repository and the author is the authenticated user.  The minimum required fields to create a pull request are `title` and `source`, specified by a branch name.  ``` curl https://api.bitbucket.org/2.0/repositories/my-workspace/my-repository/pullrequests \\     -u my-username:my-password \\     --request POST \\     --header 'Content-Type: application/json' \\     --data '{         \"title\": \"My Title\",         \"source\": {             \"branch\": {                 \"name\": \"staging\"             }         }     }' ```  If the pull request's `destination` is not specified, it will default to the `repository.mainbranch`. To open a pull request to a different branch, say from a feature branch to a staging branch, specify a `destination` (same format as the `source`):  ``` {     \"title\": \"My Title\",     \"source\": {         \"branch\": {             \"name\": \"my-feature-branch\"         }     },     \"destination\": {         \"branch\": {             \"name\": \"staging\"         }     } } ```  Reviewers can be specified by adding an array of user objects as the `reviewers` property.  ``` {     \"title\": \"My Title\",     \"source\": {         \"branch\": {             \"name\": \"my-feature-branch\"         }     },     \"reviewers\": [         {             \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"         }     ] } ```  Other fields:  * `description` - a string * `close_source_branch` - boolean that specifies if the source branch should be closed upon merging * `draft` - boolean that specifies whether the pull request is a draft
 
 ### Required Parameters
 
@@ -497,7 +461,7 @@ Deletes a specific pull request comment.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -528,7 +492,7 @@ Returns a specific pull request comment.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -560,7 +524,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**PullrequestComment**](PullrequestComment.md)| The contents of the updated comment. | 
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -589,7 +553,7 @@ Reopen a comment thread
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -610,7 +574,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost**
-> ModelError RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost(ctx, commentId, pullRequestId, repoSlug, workspace)
+> CommentResolution RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdCommentsCommentIdResolvePost(ctx, commentId, pullRequestId, repoSlug, workspace)
 Resolve a comment thread
 
 ### Required Parameters
@@ -618,14 +582,14 @@ Resolve a comment thread
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
 
-[**ModelError**](map.md)
+[**CommentResolution**](comment_resolution.md)
 
 ### Authorization
 
@@ -736,6 +700,36 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdConflictsGet**
+> RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdConflictsGet(ctx, pullRequestId, repoSlug, workspace)
+Get file conflicts for a pull request
+
+Redirects to the [repository file conflicts](/cloud/bitbucket/rest/api-group-commits/#api-repositories-workspace-repo-slug-file-conflicts-spec-get) with the revspec that corresponds to the pull request.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **pullRequestId** | **int32**| The id of the pull request. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -882,7 +876,7 @@ Name | Type | Description  | Notes
 
 
 
- **body** | [**optional.Interface of ModelError**](map.md)|  | 
+ **body** | [**optional.Interface of PullrequestMergeParameters**](PullrequestMergeParameters.md)|  | 
  **async** | **optional.**| Default value is false.   When set to true, runs merge asynchronously and immediately returns a 202 with polling link to the task-status API in the Location header.   When set to false, runs merge and waits for it to complete, returning 200 when it succeeds. If the duration of the merge exceeds a timeout threshold, the API returns a 202 with polling link to the task-status API in the Location header. | 
 
 ### Return type
@@ -1142,7 +1136,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksPost**
-> APullrequestCommentTask RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksPost(ctx, body, pullRequestId, repoSlug, workspace)
+> PullrequestCommentTask RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksPost(ctx, body, pullRequestId, repoSlug, workspace)
 Create a task on a pull request
 
 Creates a new pull request task.  Returns the newly created pull request task.  Tasks can optionally be created in relation to a comment specified by the comment's ID which will cause the task to appear below the comment on a pull request when viewed in Bitbucket.
@@ -1152,14 +1146,14 @@ Creates a new pull request task.  Returns the newly created pull request task.  
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**APullrequestTaskCreate**](APullrequestTaskCreate.md)| The contents of the task | 
+  **body** | [**PullrequestTaskCreate**](PullrequestTaskCreate.md)| The contents of the task | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
 
-[**APullrequestCommentTask**](A pullrequest comment task.md)
+[**PullrequestCommentTask**](pullrequest_comment_task.md)
 
 ### Authorization
 
@@ -1185,7 +1179,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **taskId** | **int32**| The ID of the task. | 
+  **taskId** | **int64**| The ID of the task. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
@@ -1204,7 +1198,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdGet**
-> APullrequestCommentTask RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdGet(ctx, pullRequestId, repoSlug, taskId, workspace)
+> PullrequestCommentTask RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdGet(ctx, pullRequestId, repoSlug, taskId, workspace)
 Get a task on a pull request
 
 Returns a specific pull request task.
@@ -1216,12 +1210,12 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **taskId** | **int32**| The ID of the task. | 
+  **taskId** | **int64**| The ID of the task. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
 
-[**APullrequestCommentTask**](A pullrequest comment task.md)
+[**PullrequestCommentTask**](pullrequest_comment_task.md)
 
 ### Authorization
 
@@ -1235,7 +1229,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdPut**
-> APullrequestCommentTask RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdPut(ctx, body, pullRequestId, repoSlug, taskId, workspace)
+> PullrequestCommentTask RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdTasksTaskIdPut(ctx, body, pullRequestId, repoSlug, taskId, workspace)
 Update a task on a pull request
 
 Updates a specific pull request task.
@@ -1245,15 +1239,15 @@ Updates a specific pull request task.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**APullrequestTaskUpdate**](APullrequestTaskUpdate.md)| The updated state and content of the task. | 
+  **body** | [**PullrequestTaskUpdate**](PullrequestTaskUpdate.md)| The updated state and content of the task. | 
   **pullRequestId** | **int32**| The id of the pull request. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **taskId** | **int32**| The ID of the task. | 
+  **taskId** | **int64**| The ID of the task. | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
 
 ### Return type
 
-[**APullrequestCommentTask**](A pullrequest comment task.md)
+[**PullrequestCommentTask**](pullrequest_comment_task.md)
 
 ### Authorization
 
@@ -1262,6 +1256,45 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **WorkspacesWorkspacePullrequestsSelectedUserGet**
+> PaginatedPullrequests WorkspacesWorkspacePullrequestsSelectedUserGet(ctx, selectedUser, workspace, optional)
+List workspace pull requests for a user
+
+Returns all workspace pull requests authored by the specified user.  By default only open pull requests are returned. This can be controlled using the `state` query parameter. To retrieve pull requests that are in one of multiple states, repeat the `state` parameter for each individual state.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **selectedUser** | **string**| This can either be the username of the pull request author, the author&#x27;s UUID surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;, or the author&#x27;s Atlassian ID.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***PullrequestsApiWorkspacesWorkspacePullrequestsSelectedUserGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PullrequestsApiWorkspacesWorkspacePullrequestsSelectedUserGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **state** | **optional.String**| Only return pull requests that are in this state. This parameter can be repeated. | 
+ **page** | **optional.Int32**| page | 
+
+### Return type
+
+[**PaginatedPullrequests**](paginated_pullrequests.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

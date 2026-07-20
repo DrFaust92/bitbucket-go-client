@@ -12,6 +12,8 @@ Method | HTTP request | Description
 [**CreateRepositoryPipelineKnownHost**](PipelinesApi.md#CreateRepositoryPipelineKnownHost) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts | Create a known host
 [**CreateRepositoryPipelineSchedule**](PipelinesApi.md#CreateRepositoryPipelineSchedule) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules | Create a schedule
 [**CreateRepositoryPipelineVariable**](PipelinesApi.md#CreateRepositoryPipelineVariable) | **Post** /repositories/{workspace}/{repo_slug}/pipelines_config/variables | Create a variable for a repository
+[**CreateRepositoryRunner**](PipelinesApi.md#CreateRepositoryRunner) | **Post** /repositories/{workspace}/{repo_slug}/pipelines-config/runners | Create repository runner
+[**CreateWorkspaceRunner**](PipelinesApi.md#CreateWorkspaceRunner) | **Post** /workspaces/{workspace}/pipelines-config/runners | Create workspace runner
 [**DeleteDeploymentVariable**](PipelinesApi.md#DeleteDeploymentVariable) | **Delete** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid} | Delete a variable for an environment
 [**DeletePipelineVariableForTeam**](PipelinesApi.md#DeletePipelineVariableForTeam) | **Delete** /teams/{username}/pipelines_config/variables/{variable_uuid} | Delete a variable for a team
 [**DeletePipelineVariableForUser**](PipelinesApi.md#DeletePipelineVariableForUser) | **Delete** /users/{selected_user}/pipelines_config/variables/{variable_uuid} | Delete a variable for a user
@@ -22,6 +24,8 @@ Method | HTTP request | Description
 [**DeleteRepositoryPipelineKnownHost**](PipelinesApi.md#DeleteRepositoryPipelineKnownHost) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Delete a known host
 [**DeleteRepositoryPipelineSchedule**](PipelinesApi.md#DeleteRepositoryPipelineSchedule) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Delete a schedule
 [**DeleteRepositoryPipelineVariable**](PipelinesApi.md#DeleteRepositoryPipelineVariable) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Delete a variable for a repository
+[**DeleteRepositoryRunner**](PipelinesApi.md#DeleteRepositoryRunner) | **Delete** /repositories/{workspace}/{repo_slug}/pipelines-config/runners/{runner_uuid} | Delete repository runner
+[**DeleteWorkspaceRunner**](PipelinesApi.md#DeleteWorkspaceRunner) | **Delete** /workspaces/{workspace}/pipelines-config/runners/{runner_uuid} | Delete workspace runner
 [**GetDeploymentVariables**](PipelinesApi.md#GetDeploymentVariables) | **Get** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables | List variables for an environment
 [**GetOIDCConfiguration**](PipelinesApi.md#GetOIDCConfiguration) | **Get** /workspaces/{workspace}/pipelines-config/identity/oidc/.well-known/openid-configuration | Get OpenID configuration for OIDC in Pipelines
 [**GetOIDCKeys**](PipelinesApi.md#GetOIDCKeys) | **Get** /workspaces/{workspace}/pipelines-config/identity/oidc/keys.json | Get keys for OIDC in Pipelines
@@ -51,6 +55,10 @@ Method | HTTP request | Description
 [**GetRepositoryPipelineSshKeyPair**](PipelinesApi.md#GetRepositoryPipelineSshKeyPair) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair | Get SSH key pair
 [**GetRepositoryPipelineVariable**](PipelinesApi.md#GetRepositoryPipelineVariable) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Get a variable for a repository
 [**GetRepositoryPipelineVariables**](PipelinesApi.md#GetRepositoryPipelineVariables) | **Get** /repositories/{workspace}/{repo_slug}/pipelines_config/variables | List variables for a repository
+[**GetRepositoryRunner**](PipelinesApi.md#GetRepositoryRunner) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/runners/{runner_uuid} | Get repository runner
+[**GetRepositoryRunners**](PipelinesApi.md#GetRepositoryRunners) | **Get** /repositories/{workspace}/{repo_slug}/pipelines-config/runners | Get repository runners
+[**GetWorkspaceRunner**](PipelinesApi.md#GetWorkspaceRunner) | **Get** /workspaces/{workspace}/pipelines-config/runners/{runner_uuid} | Get workspace runner
+[**GetWorkspaceRunners**](PipelinesApi.md#GetWorkspaceRunners) | **Get** /workspaces/{workspace}/pipelines-config/runners | Get workspace runners
 [**StopPipeline**](PipelinesApi.md#StopPipeline) | **Post** /repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline | Stop a pipeline
 [**UpdateDeploymentVariable**](PipelinesApi.md#UpdateDeploymentVariable) | **Put** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid} | Update a variable for an environment
 [**UpdatePipelineVariableForTeam**](PipelinesApi.md#UpdatePipelineVariableForTeam) | **Put** /teams/{username}/pipelines_config/variables/{variable_uuid} | Update a variable for a team
@@ -62,6 +70,8 @@ Method | HTTP request | Description
 [**UpdateRepositoryPipelineKnownHost**](PipelinesApi.md#UpdateRepositoryPipelineKnownHost) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid} | Update a known host
 [**UpdateRepositoryPipelineSchedule**](PipelinesApi.md#UpdateRepositoryPipelineSchedule) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid} | Update a schedule
 [**UpdateRepositoryPipelineVariable**](PipelinesApi.md#UpdateRepositoryPipelineVariable) | **Put** /repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid} | Update a variable for a repository
+[**UpdateRepositoryRunner**](PipelinesApi.md#UpdateRepositoryRunner) | **Put** /repositories/{workspace}/{repo_slug}/pipelines-config/runners/{runner_uuid} | Update repository runner
+[**UpdateWorkspaceRunner**](PipelinesApi.md#UpdateWorkspaceRunner) | **Put** /workspaces/{workspace}/pipelines-config/runners/{runner_uuid} | Update workspace runner
 
 # **CreateDeploymentVariable**
 > DeploymentVariable CreateDeploymentVariable(ctx, body, workspace, repoSlug, environmentUuid)
@@ -98,7 +108,7 @@ Name | Type | Description  | Notes
 > Pipeline CreatePipelineForRepository(ctx, body, workspace, repoSlug)
 Run a pipeline
 
-Endpoint to create and initiate a pipeline. There are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated. # Trigger a Pipeline for a branch One way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. The specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.  ### Example  ``` $ curl -X POST -is -u username:password \\   -H 'Content-Type: application/json' \\  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\   -d '   {     \"target\": {       \"ref_type\": \"branch\",       \"type\": \"pipeline_ref_target\",       \"ref_name\": \"master\"     }   }' ``` # Trigger a Pipeline for a commit on a branch or tag You can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark). The specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.  The following reference types are supported:  * `branch` * `named_branch` * `bookmark`  * `tag`  ### Example  ``` $ curl -X POST -is -u username:password \\   -H 'Content-Type: application/json' \\   https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\   -d '   {     \"target\": {       \"commit\": {         \"type\": \"commit\",         \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"       },       \"ref_type\": \"branch\",       \"type\": \"pipeline_ref_target\",       \"ref_name\": \"master\"     }   }' ``` # Trigger a specific pipeline definition for a commit You can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.  ### Example  ``` $ curl -X POST -is -u username:password \\   -H 'Content-Type: application/json' \\  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\  -d '   {      \"target\": {       \"commit\": {          \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",          \"type\":\"commit\"        },         \"selector\": {            \"type\":\"custom\",               \"pattern\":\"Deploy to production\"           },         \"type\":\"pipeline_commit_target\"    }   }' ``` # Trigger a specific pipeline definition for a commit on a branch or tag You can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.  ### Example  ``` $ curl -X POST -is -u username:password \\   -H 'Content-Type: application/json' \\  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\  -d '   {      \"target\": {       \"commit\": {          \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",          \"type\":\"commit\"        },        \"selector\": {           \"type\": \"custom\",           \"pattern\": \"Deploy to production\"        },        \"type\": \"pipeline_ref_target\",        \"ref_name\": \"master\",        \"ref_type\": \"branch\"      }   }' ```   # Trigger a custom pipeline with variables In addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).  ### Example  ``` $ curl -X POST -is -u username:password \\   -H 'Content-Type: application/json' \\  https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\  -d '   {     \"target\": {       \"type\": \"pipeline_ref_target\",       \"ref_type\": \"branch\",       \"ref_name\": \"master\",       \"selector\": {         \"type\": \"custom\",         \"pattern\": \"Deploy to production\"       }     },     \"variables\": [       {         \"key\": \"var1key\",         \"value\": \"var1value\",         \"secured\": true       },       {         \"key\": \"var2key\",         \"value\": \"var2value\"       }     ]   }' ```  # Trigger a pull request pipeline  You can also initiate a pipeline for a specific pull request.  ### Example  ``` $ curl -X POST -is -u username:password \\   -H 'Content-Type: application/json' \\  https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\  -d '   {     \"target\": {       \"type\": \"pipeline_pullrequest_target\",       \"source\": \"pull-request-branch\",       \"destination\": \"master\",       \"destination_commit\": {         \"hash\": \"9f848b7\"       },       \"commit\": {         \"hash\": \"1a372fc\"       },       \"pullrequest\": {         \"id\": \"3\"       },       \"selector\": {         \"type\": \"pull-requests\",         \"pattern\": \"**\"       }     }   }' ``` 
+Endpoint to create and initiate a pipeline. There are a number of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.  ## Trigger a pipeline for a branch  One way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. The specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/json' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\       -d '       {         \"target\": {           \"ref_type\": \"branch\",           \"type\": \"pipeline_ref_target\",           \"ref_name\": \"master\"         }       }' ```  ## Trigger a pipeline for a commit on a branch or tag  You can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark). The specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.  The following reference types are supported:  * `branch` * `named_branch` * `bookmark`  * `tag`  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/json' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\       -d '       {         \"target\": {           \"commit\": {             \"type\": \"commit\",             \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"           },           \"ref_type\": \"branch\",           \"type\": \"pipeline_ref_target\",           \"ref_name\": \"master\"         }       }' ```  ## Trigger a specific pipeline definition for a commit  You can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/json' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\       -d '       {         \"target\": {           \"commit\": {             \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",             \"type\":\"commit\"           },           \"selector\": {             \"type\":\"custom\",             \"pattern\":\"Deploy to production\"           },           \"type\":\"pipeline_commit_target\"         }       }' ```  ## Trigger a specific pipeline definition for a commit on a branch or tag  You can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/json' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\       -d '       {         \"target\": {           \"commit\": {             \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",             \"type\":\"commit\"           },           \"selector\": {             \"type\": \"custom\",             \"pattern\": \"Deploy to production\"           },           \"type\": \"pipeline_ref_target\",           \"ref_name\": \"master\",           \"ref_type\": \"branch\"         }       }' ```  ## Trigger a custom pipeline with variables  In addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/json' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\       -d '       {         \"target\": {           \"type\": \"pipeline_ref_target\",           \"ref_type\": \"branch\",           \"ref_name\": \"master\",           \"selector\": {             \"type\": \"custom\",             \"pattern\": \"Deploy to production\"           }         },         \"variables\": [           {             \"key\": \"var1key\",             \"value\": \"var1value\",             \"secured\": true           },           {             \"key\": \"var2key\",             \"value\": \"var2value\"           }         ]       }' ```  ## Trigger a pull request pipeline  You can also initiate a pipeline for a specific pull request.  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/json' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\       -d '       {         \"target\": {           \"type\": \"pipeline_pullrequest_target\",           \"source\": \"pull-request-branch\",           \"destination\": \"master\",           \"destination_commit\": {             \"hash\": \"9f848b7\"           },           \"commit\": {             \"hash\": \"1a372fc\"           },           \"pullrequest\": {             \"id\": \"3\"           },           \"selector\": {             \"type\": \"pull-requests\",             \"pattern\": \"**\"           }         }       }' ```  # On-demand pipeline  By default, pipelines run using the YAML in the repository’s `bitbucket-pipelines.yml` configuration file. With an _on-demand_ pipeline, you include the pipeline’s YAML in the request body. That YAML applies only to that run and overrides the YAML in `bitbucket-pipelines.yml`.  Just like with regular pipelines, there is a number of different options to initiate an on-demand pipeline. However, since the payload contains YAML configuration in this case, _query parameters_ are used to supply the necessary metadata to determine which type of pipeline will be instantiated. These query parameters are derived from the JSON equivalent by turning each property into a key-value pair with the JSON path of the property as the new key.  ## Trigger on-demand pipeline for a branch  You can initiate an on-demand pipeline for a specific branch. This branch will be used to determine which pipeline definition from the supplied YAML configuration will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and check out the latest revision of the specified branch.  To trigger an on-demand pipeline for a _branch_ the requesting user must have **write permission** for that branch (which can be limited by [branch restrictions](https://support.atlassian.com/bitbucket-cloud/docs/use-branch-permissions/)).  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/yaml' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines?target.type=pipeline_ref_target&target.ref_type=branch&target.ref_name=master \\       -d ' pipelines:   default:     - step:         script:           - echo This is an on-demand pipeline' ```  ## Trigger on-demand pipeline for a commit on a branch or tag  You can initiate an on-demand pipeline for a specific commit and in the context of a specified reference (branch or tag). The specified reference will be used to determine which pipeline definition from the supplied YAML configuration will be applied to initiate the pipeline. The pipeline will clone the repository and check out the specified reference.  To trigger an on-demand pipeline for a _branch_ the requesting user must have **write permission** for that branch (which can be limited by [branch restrictions](https://support.atlassian.com/bitbucket-cloud/docs/use-branch-permissions/)).  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/yaml' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines?target.type=pipeline_ref_target&target.ref_type=branch&target.ref_name=master&target.commit.hash=ce5b7431602f7cbba007062eeb55225c6e18e956 \\       -d ' pipelines:   default:     - step:         script:           - echo This is an on-demand pipeline' ```  ## Trigger a specific on-demand pipeline definition for a commit  You can trigger a specific pipeline that is defined in the supplied YAML configuration for a specific commit. In addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/yaml' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines?target.type=pipeline_commit_target&target.commit.hash=a3c4e02c9a3755eccdc3764e6ea13facdf30f923&target.selector.type=custom&target.selector.pattern=security-scan \\       -d ' pipelines:   custom:     security-scan:       - step:           script:             - echo Run on-demand security scan ```  ## Trigger a custom on-demand pipeline with variables  In addition to triggering a custom on-demand pipeline that is defined in the supplied YAML configuration as shown in the examples above, you can specify variables that will be available for your build. In the request, provide each variable as an indexed set of query parameters representing its key, value, and whether it should be secured or not (this field is optional and defaults to not secured).  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/yaml' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines?target.type=pipeline_ref_target&target.ref_type=branch&target.ref_name=master&target.selector.type=custom&target.selector.pattern=security-scan&variables[0].key=var1key&variables[0].value=var1value&variables[0].secured=true&variables[1].key=var2key&variables[1].value=var2value \\       -d ' pipelines:   custom:     security-scan:       - variables:           - name: var1key           - name: var2key       - step:           script:             - echo Run on-demand security scan' ```  ## Trigger a pull request pipeline  You can also initiate an on-demand pipeline for a specific pull request.  ### Example  ``` $ curl -X POST -is -u '{atlassian_account_email}:{api_token}' \\       -H 'Content-Type: application/yaml' \\       https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines?target.type=pipeline_pullrequest_target&target.source=pull-request-branch&target.destination=destination&target.destination_commit.hash=9f848b7&target.commit.hash=1a372fc&target.pullrequest.id=3&target.selector.type=pull-requests&target.selector.pattern=** \\       -d ' pipelines:   pull-requests:     \"**\":       - step:           script:             - echo This is an on-demand pipeline' ``` 
 
 ### Required Parameters
 
@@ -318,6 +328,63 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateRepositoryRunner**
+> PipelineRunner CreateRepositoryRunner(ctx, workspace, repoSlug)
+Create repository runner
+
+Create repository runner.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| The repository. | 
+
+### Return type
+
+[**PipelineRunner**](pipeline_runner.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateWorkspaceRunner**
+> PipelineRunner CreateWorkspaceRunner(ctx, workspace)
+Create workspace runner
+
+Create workspace runner.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+
+### Return type
+
+[**PipelineRunner**](pipeline_runner.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -603,6 +670,65 @@ Name | Type | Description  | Notes
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
   **repoSlug** | **string**| The repository. | 
   **variableUuid** | **string**| The UUID of the variable to delete. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DeleteRepositoryRunner**
+> DeleteRepositoryRunner(ctx, workspace, repoSlug, runnerUuid)
+Delete repository runner
+
+Delete repository runner by uuid.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| The repository. | 
+  **runnerUuid** | **string**| The runner uuid. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DeleteWorkspaceRunner**
+> DeleteWorkspaceRunner(ctx, workspace, runnerUuid)
+Delete workspace runner
+
+Delete workspace runner by uuid.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **runnerUuid** | **string**| The runner uuid. | 
 
 ### Return type
 
@@ -1166,7 +1292,7 @@ Name | Type | Description  | Notes
 > PaginatedPipelines GetPipelinesForRepository(ctx, workspace, repoSlug, optional)
 List pipelines
 
-Find pipelines
+Find pipelines in a repository.  Note that unlike other endpoints in the Bitbucket API, this endpoint utilizes query parameters to allow filtering and sorting of returned results. See [query parameters](#api-repositories-workspace-repo-slug-pipelines-get-request-Query%20parameters) for specific details. 
 
 ### Required Parameters
 
@@ -1183,7 +1309,19 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **page** | **optional.Int32**| page | 
+ **creatorUuid** | [**optional.Interface of string**](.md)| The UUID of the creator of the pipeline to filter by. | 
+ **targetRefType** | **optional.String**| The type of the reference to filter by. | 
+ **targetRefName** | **optional.String**| The reference name to filter by. | 
+ **targetBranch** | **optional.String**| The name of the branch to filter by. | 
+ **targetCommitHash** | **optional.String**| The revision to filter by. | 
+ **targetSelectorPattern** | **optional.String**| The pipeline pattern to filter by. | 
+ **targetSelectorType** | **optional.String**| The type of pipeline to filter by. | 
+ **createdOn** | **optional.Time**| The creation date to filter by. | 
+ **triggerType** | **optional.String**| The trigger type to filter by. | 
+ **status** | **optional.String**| The pipeline status to filter by. | 
+ **sort** | **optional.String**| The attribute name to sort on. | 
+ **page** | **optional.Int32**| The page number of elements to retrieve. | [default to 1]
+ **pagelen** | **optional.Int32**| The maximum number of results to return. | [default to 10]
 
 ### Return type
 
@@ -1570,6 +1708,122 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **GetRepositoryRunner**
+> PipelineRunner GetRepositoryRunner(ctx, workspace, repoSlug, runnerUuid)
+Get repository runner
+
+Retrieve repository runner by uuid.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| The repository. | 
+  **runnerUuid** | **string**| The runner uuid. | 
+
+### Return type
+
+[**PipelineRunner**](pipeline_runner.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetRepositoryRunners**
+> PaginatedPipelineRunners GetRepositoryRunners(ctx, workspace, repoSlug)
+Get repository runners
+
+Retrieve repository runners.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| The repository. | 
+
+### Return type
+
+[**PaginatedPipelineRunners**](paginated_pipeline_runners.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetWorkspaceRunner**
+> PipelineRunner GetWorkspaceRunner(ctx, workspace, runnerUuid)
+Get workspace runner
+
+Get workspace runner by uuid.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **runnerUuid** | **string**| The runner uuid. | 
+
+### Return type
+
+[**PipelineRunner**](pipeline_runner.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetWorkspaceRunners**
+> PaginatedPipelineRunners GetWorkspaceRunners(ctx, workspace)
+Get workspace runners
+
+Retrieve workspace runners.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+
+### Return type
+
+[**PaginatedPipelineRunners**](paginated_pipeline_runners.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **StopPipeline**
 > StopPipeline(ctx, workspace, repoSlug, pipelineUuid)
 Stop a pipeline
@@ -1901,6 +2155,65 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UpdateRepositoryRunner**
+> PipelineRunner UpdateRepositoryRunner(ctx, workspace, repoSlug, runnerUuid)
+Update repository runner
+
+Update repository runner.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| The repository. | 
+  **runnerUuid** | **string**| The runner uuid. | 
+
+### Return type
+
+[**PipelineRunner**](pipeline_runner.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UpdateWorkspaceRunner**
+> PipelineRunner UpdateWorkspaceRunner(ctx, workspace, runnerUuid)
+Update workspace runner
+
+Update workspace runner.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **runnerUuid** | **string**| The runner uuid. | 
+
+### Return type
+
+[**PipelineRunner**](pipeline_runner.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

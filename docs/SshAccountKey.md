@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **LastUsed** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Owner** | [***Account**](account.md) |  | [optional] [default to null]
+**ExpiresOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
+**Fingerprint** | **string** | The SSH key fingerprint in SHA-256 format. | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

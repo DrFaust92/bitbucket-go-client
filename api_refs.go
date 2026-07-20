@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1028,7 +1027,7 @@ func (a *RefsApiService) RepositoriesWorkspaceRepoSlugRefsTagsNameGet(ctx contex
 
 /*
 RefsApiService Create a tag
-Creates a new tag in the specified repository.  The payload of the POST should consist of a JSON document that contains the name of the tag and the target hash.  &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/jdoe/myrepo/refs/tags \\ -s -u jdoe -X POST -H \&quot;Content-Type: application/json\&quot; \\ -d &#x27;{     \&quot;name\&quot; : \&quot;new-tag-name\&quot;,     \&quot;target\&quot; : {         \&quot;hash\&quot; : \&quot;a1b2c3d4e5f6\&quot;,     } }&#x27; &#x60;&#x60;&#x60;  This endpoint does support using short hash prefixes for the commit hash, but it may return a 400 response if the provided prefix is ambiguous. Using a full commit hash is the preferred approach.
+Creates a new annotated tag in the specified repository.  The payload of the POST should consist of a JSON document that contains the name of the tag and the target hash.  &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/jdoe/myrepo/refs/tags \\ -s -u jdoe -X POST -H \&quot;Content-Type: application/json\&quot; \\ -d &#x27;{     \&quot;name\&quot; : \&quot;new-tag-name\&quot;,     \&quot;target\&quot; : {         \&quot;hash\&quot; : \&quot;a1b2c3d4e5f6\&quot;,     } }&#x27; &#x60;&#x60;&#x60;  This endpoint does support using short hash prefixes for the commit hash, but it may return a 400 response if the provided prefix is ambiguous. Using a full commit hash is the preferred approach.  A message for the tag object may optionally be provided. If it is omitted or the provided message is empty, a default message of \&quot;Added tag &lt;tagname&gt; for changeset &lt;shorthash&gt;\&quot; will be used.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.

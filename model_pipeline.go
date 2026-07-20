@@ -32,4 +32,7 @@ type Pipeline struct {
 	CompletedOn time.Time `json:"completed_on,omitempty"`
 	// The number of build seconds used by this pipeline.
 	BuildSecondsUsed int32 `json:"build_seconds_used,omitempty"`
+	// An ordered list of sources of the pipeline configuration
+	ConfigurationSources []PipelineConfigurationSource `json:"configuration_sources,omitempty"`
+	Links                *PipelinesPipelineLinks       `json:"links,omitempty"`
 }

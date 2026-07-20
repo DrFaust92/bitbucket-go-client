@@ -11,7 +11,6 @@ package bitbucket
 
 // The target on which the schedule will be executed.
 type PipelineSchedulePostRequestBodyTarget struct {
-	Type_    string            `json:"type"`
 	Selector *PipelineSelector `json:"selector"`
 	// The name of the reference.
 	RefName string `json:"ref_name"`

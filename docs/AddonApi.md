@@ -4,16 +4,37 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddonAddonKeyClientKeyGet**](AddonApi.md#AddonAddonKeyClientKeyGet) | **Get** /addon/{addon_key}/client-key | Get the client key of a Connect addon
 [**AddonDelete**](AddonApi.md#AddonDelete) | **Delete** /addon | Delete an app
-[**AddonLinkersGet**](AddonApi.md#AddonLinkersGet) | **Get** /addon/linkers | List linkers for an app
-[**AddonLinkersLinkerKeyGet**](AddonApi.md#AddonLinkersLinkerKeyGet) | **Get** /addon/linkers/{linker_key} | Get a linker for an app
-[**AddonLinkersLinkerKeyValuesDelete**](AddonApi.md#AddonLinkersLinkerKeyValuesDelete) | **Delete** /addon/linkers/{linker_key}/values | Delete all linker values
-[**AddonLinkersLinkerKeyValuesGet**](AddonApi.md#AddonLinkersLinkerKeyValuesGet) | **Get** /addon/linkers/{linker_key}/values | List linker values for a linker
-[**AddonLinkersLinkerKeyValuesPost**](AddonApi.md#AddonLinkersLinkerKeyValuesPost) | **Post** /addon/linkers/{linker_key}/values | Create a linker value
-[**AddonLinkersLinkerKeyValuesPut**](AddonApi.md#AddonLinkersLinkerKeyValuesPut) | **Put** /addon/linkers/{linker_key}/values | Update a linker value
-[**AddonLinkersLinkerKeyValuesValueIdDelete**](AddonApi.md#AddonLinkersLinkerKeyValuesValueIdDelete) | **Delete** /addon/linkers/{linker_key}/values/{value_id} | Delete a linker value
-[**AddonLinkersLinkerKeyValuesValueIdGet**](AddonApi.md#AddonLinkersLinkerKeyValuesValueIdGet) | **Get** /addon/linkers/{linker_key}/values/{value_id} | Get a linker value
 [**AddonPut**](AddonApi.md#AddonPut) | **Put** /addon | Update an installed app
+
+# **AddonAddonKeyClientKeyGet**
+> AddonAddonKeyClientKeyGet(ctx, addonKey)
+Get the client key of a Connect addon
+
+Get the client key of the Connect addon associated with a Forge app install via forgeAppId linkage.  This endpoint is part of the Connect -> Forge migration tooling. It is intended to be used by a Forge app using `asApp().requestBitbucket()` only. Prerequisite: app developer needs to register the linkage between their Connect and Forge app by setting `forgeAppId` in the Connect addon descriptor to `app.id` from Forge app manifest, then update the installations. If the request came from an installation of a registered Forge app, the client key of the linked Connect addon installed in the same workspace will be returned.  ``` api.asApp().requestBitbucket(route`/2.0/addon/{addon-key}/client-key`) ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **addonKey** | **string**| The Connect addon key as defined in an application descriptor.  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **AddonDelete**
 > AddonDelete(ctx, )
@@ -23,228 +44,6 @@ Deletes the application for the user.  This endpoint is intended to be used by B
 
 ### Required Parameters
 This endpoint does not need any parameter.
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersGet**
-> AddonLinkersGet(ctx, )
-List linkers for an app
-
-Gets a list of all [linkers](/cloud/bitbucket/modules/linker/) for the authenticated application.
-
-### Required Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyGet**
-> AddonLinkersLinkerKeyGet(ctx, linkerKey)
-Get a linker for an app
-
-Gets a [linker](/cloud/bitbucket/modules/linker/) specified by `linker_key` for the authenticated application.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyValuesDelete**
-> AddonLinkersLinkerKeyValuesDelete(ctx, linkerKey)
-Delete all linker values
-
-Delete all [linker](/cloud/bitbucket/modules/linker/) values for the specified linker of the authenticated application.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyValuesGet**
-> AddonLinkersLinkerKeyValuesGet(ctx, linkerKey)
-List linker values for a linker
-
-Gets a list of all [linker](/cloud/bitbucket/modules/linker/) values for the specified linker of the authenticated application.  A linker value lets applications supply values to modify its regular expression.  The base regular expression must use a Bitbucket-specific match group `(?K)` which will be translated to `([\\w\\-]+)`. A value must match this pattern.  [Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyValuesPost**
-> AddonLinkersLinkerKeyValuesPost(ctx, linkerKey)
-Create a linker value
-
-Creates a [linker](/cloud/bitbucket/modules/linker/) value for the specified linker of authenticated application.  A linker value lets applications supply values to modify its regular expression.  The base regular expression must use a Bitbucket-specific match group `(?K)` which will be translated to `([\\w\\-]+)`. A value must match this pattern.  [Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyValuesPut**
-> AddonLinkersLinkerKeyValuesPut(ctx, linkerKey)
-Update a linker value
-
-Bulk update [linker](/cloud/bitbucket/modules/linker/) values for the specified linker of the authenticated application.  A linker value lets applications supply values to modify its regular expression.  The base regular expression must use a Bitbucket-specific match group `(?K)` which will be translated to `([\\w\\-]+)`. A value must match this pattern.  [Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyValuesValueIdDelete**
-> AddonLinkersLinkerKeyValuesValueIdDelete(ctx, linkerKey, valueId)
-Delete a linker value
-
-Delete a single [linker](/cloud/bitbucket/modules/linker/) value of the authenticated application.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-  **valueId** | **int32**| The numeric ID of the linker value. | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **AddonLinkersLinkerKeyValuesValueIdGet**
-> AddonLinkersLinkerKeyValuesValueIdGet(ctx, linkerKey, valueId)
-Get a linker value
-
-Get a single [linker](/cloud/bitbucket/modules/linker/) value of the authenticated application.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **linkerKey** | **string**| The unique key of a [linker module](/cloud/bitbucket/modules/linker/) as defined in an application descriptor. | 
-  **valueId** | **int32**| The numeric ID of the linker value. | 
 
 ### Return type
 

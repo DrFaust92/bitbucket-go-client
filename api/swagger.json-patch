@@ -27,7 +27,7 @@
       "type": "integer",
       "in": "query"
     },
-    "path": "/paths/~1pullrequests~1{selected_user}/get/parameters/-"
+    "path": "/paths/~1workspaces~1{workspace}~1pullrequests~1{selected_user}/get/parameters/-"
   },
   {
     "op": "add",
@@ -325,17 +325,6 @@
       "in": "query"
     },
     "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1permissions-config~1users/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1pipelines/get/parameters/-"
   },
   {
     "op": "add",
@@ -754,5 +743,85 @@
       "in": "query"
     },
     "path": "/paths/~1workspaces~1{workspace}~1projects~1{project_key}~1permissions-config~1users/get/parameters/-"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/account_links/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/application_property/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/comment_resolution/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/commit_file/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/default_reviewer_and_type/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/diffstat/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/error/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/export_options/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/file_conflict/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/issue_change/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/object/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/project_group_permission/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/project_user_permission/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/pullrequest_merge_parameters/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/ref/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/repository_group_permission/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/repository_inheritance_state/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/repository_permission/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/repository_user_permission/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/treeentry/additionalProperties"
   }
 ]

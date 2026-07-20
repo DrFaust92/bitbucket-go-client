@@ -15,7 +15,7 @@ import (
 
 // A task object.
 type Task struct {
-	Id        int32        `json:"id,omitempty"`
+	Id        int64        `json:"id,omitempty"`
 	CreatedOn time.Time    `json:"created_on"`
 	UpdatedOn time.Time    `json:"updated_on"`
 	State     string       `json:"state"`

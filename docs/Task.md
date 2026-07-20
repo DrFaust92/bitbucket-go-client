@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** |  | [optional] [default to null]
+**Id** | **int64** |  | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [default to null]
 **UpdatedOn** | [**time.Time**](time.Time.md) |  | [default to null]
 **State** | **string** |  | [default to null]

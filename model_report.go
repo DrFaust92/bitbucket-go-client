@@ -27,7 +27,7 @@ type Report struct {
 	Reporter string `json:"reporter,omitempty"`
 	// A URL linking to the results of the report in an external tool.
 	Link string `json:"link,omitempty"`
-	// If enabled, a remote link is created in Jira for the issue associated with the commit the report belongs to.
+	// If enabled, a remote link is created in Jira for the work item associated with the commit the report belongs to.
 	RemoteLinkEnabled bool `json:"remote_link_enabled,omitempty"`
 	// A URL to the report logo. If none is provided, the default insights logo will be used.
 	LogoUrl string `json:"logo_url,omitempty"`

@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -273,7 +272,7 @@ func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugCommitCommitStat
 
 /*
 CommitStatusesApiService Create a build status for a commit
-Creates a new build status against the specified commit.  If the specified key already exists, the existing status object will be overwritten.  Example:  &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo/commit/e10dae226959c2194f2b07b077c07762d93821cf/statuses/build/           -X POST -u jdoe -H &#x27;Content-Type: application/json&#x27;           -d &#x27;{     \&quot;key\&quot;: \&quot;MY-BUILD\&quot;,     \&quot;state\&quot;: \&quot;SUCCESSFUL\&quot;,     \&quot;description\&quot;: \&quot;42 tests passed\&quot;,     \&quot;url\&quot;: \&quot;https://www.example.org/my-build-result\&quot;   }&#x27; &#x60;&#x60;&#x60;  When creating a new commit status, you can use a URI template for the URL. Templates are URLs that contain variable names that Bitbucket will evaluate at runtime whenever the URL is displayed anywhere similar to parameter substitution in [Bitbucket Connect](https://developer.atlassian.com/bitbucket/concepts/context-parameters.html). For example, one could use &#x60;https://foo.com/builds/{repository.full_name}&#x60; which Bitbucket will turn into &#x60;https://foo.com/builds/foo/bar&#x60; at render time. The context variables available are &#x60;repository&#x60; and &#x60;commit&#x60;.
+Creates a new build status against the specified commit.  If the specified key already exists, the existing status object will be overwritten.  Example:  &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo/commit/e10dae226959c2194f2b07b077c07762d93821cf/statuses/build/           -X POST -u jdoe -H &#x27;Content-Type: application/json&#x27;           -d &#x27;{     \&quot;key\&quot;: \&quot;MY-BUILD\&quot;,     \&quot;state\&quot;: \&quot;SUCCESSFUL\&quot;,     \&quot;description\&quot;: \&quot;42 tests passed\&quot;,     \&quot;url\&quot;: \&quot;https://www.example.org/my-build-result\&quot;   }&#x27; &#x60;&#x60;&#x60;  When creating a new commit status, you can use a URI template for the URL. Templates are URLs that contain variable names that Bitbucket will evaluate at runtime whenever the URL is displayed anywhere similar to parameter substitution in [Bitbucket Connect](https://developer.atlassian.com/bitbucket/concepts/context-parameters.html). For example, one could use &#x60;https://foo.com/builds/{repository.full_name}&#x60; which Bitbucket will turn into &#x60;https://foo.com/builds/foo/bar&#x60; at render time. The context variables available are &#x60;repository&#x60; and &#x60;commit&#x60;.  To associate a commit status to a pull request, the refname field must be set to the source branch of the pull request.  Example: &#x60;&#x60;&#x60; curl https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo/commit/e10dae226959c2194f2b07b077c07762d93821cf/statuses/build/           -X POST -u jdoe -H &#x27;Content-Type: application/json&#x27;           -d &#x27;{     \&quot;key\&quot;: \&quot;MY-BUILD\&quot;,     \&quot;state\&quot;: \&quot;SUCCESSFUL\&quot;,     \&quot;description\&quot;: \&quot;42 tests passed\&quot;,     \&quot;url\&quot;: \&quot;https://www.example.org/my-build-result\&quot;,     \&quot;refname\&quot;: \&quot;my-pr-branch\&quot;   }&#x27; &#x60;&#x60;&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param commit The commit&#x27;s SHA1.
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
@@ -405,6 +404,7 @@ Returns all statuses (e.g. build results) for a specific commit.
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *CommitStatusesApiRepositoriesWorkspaceRepoSlugCommitCommitStatusesGetOpts - Optional Parameters:
+     * @param "Refname" (optional.String) -  If specified, only return commit status objects that were either created without a refname, or were created with the specified refname
      * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
      * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). Defaults to &#x60;created_on&#x60;.
      * @param "Page" (optional.Int32) -  page
@@ -412,9 +412,10 @@ Returns all statuses (e.g. build results) for a specific commit.
 */
 
 type CommitStatusesApiRepositoriesWorkspaceRepoSlugCommitCommitStatusesGetOpts struct {
-	Q    optional.String
-	Sort optional.String
-	Page optional.Int32
+	Refname optional.String
+	Q       optional.String
+	Sort    optional.String
+	Page    optional.Int32
 }
 
 func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugCommitCommitStatusesGet(ctx context.Context, commit string, repoSlug string, workspace string, localVarOptionals *CommitStatusesApiRepositoriesWorkspaceRepoSlugCommitCommitStatusesGetOpts) (PaginatedCommitstatuses, *http.Response, error) {
@@ -436,6 +437,9 @@ func (a *CommitStatusesApiService) RepositoriesWorkspaceRepoSlugCommitCommitStat
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Refname.IsSet() {
+		localVarQueryParams.Add("refname", parameterToString(localVarOptionals.Refname.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
 		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
 	}

@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1226,7 +1225,7 @@ Deletes the specified commit comment.  Note that deleting comments that have vis
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
-func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete(ctx context.Context, commentId int32, commit string, repoSlug string, workspace string) (*http.Response, error) {
+func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdDelete(ctx context.Context, commentId int64, commit string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -1313,7 +1312,7 @@ Returns the specified commit comment.
 
 @return CommitComment
 */
-func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet(ctx context.Context, commentId int32, commit string, repoSlug string, workspace string) (CommitComment, *http.Response, error) {
+func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdGet(ctx context.Context, commentId int64, commit string, repoSlug string, workspace string) (CommitComment, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1418,7 +1417,7 @@ Used to update the contents of a comment. Only the content of the comment can be
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
-func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut(ctx context.Context, body CommitComment, commentId int32, commit string, repoSlug string, workspace string) (*http.Response, error) {
+func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugCommitCommitCommentsCommentIdPut(ctx context.Context, body CommitComment, commentId int64, commit string, repoSlug string, workspace string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -2303,7 +2302,7 @@ Produces a raw git-style diff.  #### Single commit spec  If the &#x60;spec&#x60;
      * @param "Binary" (optional.Bool) -  Generate diffs that include binary files, true if omitted.
      * @param "Renames" (optional.Bool) -  Whether to perform rename detection, true if omitted.
      * @param "Merge" (optional.Bool) -  This parameter is deprecated. The &#x27;topic&#x27; parameter should be used instead. The &#x27;merge&#x27; and &#x27;topic&#x27; parameters cannot be both used at the same time.  If true, the source commit is merged into the destination commit, and then a diff from the destination to the merge result is returned. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned. True if omitted.
-     * @param "Topic" (optional.Bool) -  If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned.
+     * @param "Topic" (optional.Bool) -  If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned.  If omitted, defaults to true, ie. a 2 way &#x27;three-dot&#x27; diff is returned.
 
 */
 
@@ -2556,6 +2555,120 @@ func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugDiffstatSpecGet(ctx con
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 555 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+CommitsApiService Get file conflicts for a commit spec
+Get file conflicts for a commit spec
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+  - @param spec A commit SHA (e.g. &#x60;3a8b42&#x60;) or a commit range using double dot notation (e.g. &#x60;3a8b42..9ff173&#x60;).
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+
+@return PaginatedFileConflicts
+*/
+func (a *CommitsApiService) RepositoriesWorkspaceRepoSlugFileConflictsSpecGet(ctx context.Context, repoSlug string, spec string, workspace string) (PaginatedFileConflicts, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue PaginatedFileConflicts
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/file-conflicts/{spec}"
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"spec"+"}", fmt.Sprintf("%v", spec), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Authorization"] = key
+
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PaginatedFileConflicts
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 404 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
