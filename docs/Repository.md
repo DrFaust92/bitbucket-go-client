@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **HasWiki** | **bool** |  The wiki for this repository is enabled. Wiki features are not supported for repositories in workspaces administered through admin.atlassian.com.  | [optional] [default to null]
 **IsPrivate** | **bool** |  | [optional] [default to null]
 **Language** | **string** |  | [optional] [default to null]
-**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
+**Links** | [***RepositoryLinks**](repository_links.md) |  | [optional] [default to null]
 **Mainbranch** | [***Branch**](branch.md) |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 **Owner** | [***Account**](account.md) |  | [optional] [default to null]

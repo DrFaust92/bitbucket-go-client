@@ -14,8 +14,10 @@ import (
 )
 
 type Team struct {
-	Links       *TeamLinks `json:"links,omitempty"`
 	CreatedOn   time.Time  `json:"created_on,omitempty"`
 	DisplayName string     `json:"display_name,omitempty"`
-	Uuid        string     `json:"uuid,omitempty"`
+	Links       *TeamLinks `json:"links,omitempty"`
+	// The user's Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility.
+	Username string `json:"username,omitempty"`
+	Uuid     string `json:"uuid,omitempty"`
 }

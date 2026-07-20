@@ -4,11 +4,11 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UsersSelectedUserSshKeysGet**](SSHApi.md#UsersSelectedUserSshKeysGet) | **Get** /users/{selected_user}/ssh-keys | List SSH keys
-[**UsersSelectedUserSshKeysKeyIdDelete**](SSHApi.md#UsersSelectedUserSshKeysKeyIdDelete) | **Delete** /users/{selected_user}/ssh-keys/{key_id} | Delete a SSH key
-[**UsersSelectedUserSshKeysKeyIdGet**](SSHApi.md#UsersSelectedUserSshKeysKeyIdGet) | **Get** /users/{selected_user}/ssh-keys/{key_id} | Get a SSH key
-[**UsersSelectedUserSshKeysKeyIdPut**](SSHApi.md#UsersSelectedUserSshKeysKeyIdPut) | **Put** /users/{selected_user}/ssh-keys/{key_id} | Update a SSH key
-[**UsersSelectedUserSshKeysPost**](SSHApi.md#UsersSelectedUserSshKeysPost) | **Post** /users/{selected_user}/ssh-keys | Add a new SSH key
+[**UsersSelectedUserSshKeysGet**](SshApi.md#UsersSelectedUserSshKeysGet) | **Get** /users/{selected_user}/ssh-keys | List SSH keys
+[**UsersSelectedUserSshKeysKeyIdDelete**](SshApi.md#UsersSelectedUserSshKeysKeyIdDelete) | **Delete** /users/{selected_user}/ssh-keys/{key_id} | Delete a SSH key
+[**UsersSelectedUserSshKeysKeyIdGet**](SshApi.md#UsersSelectedUserSshKeysKeyIdGet) | **Get** /users/{selected_user}/ssh-keys/{key_id} | Get a SSH key
+[**UsersSelectedUserSshKeysKeyIdPut**](SshApi.md#UsersSelectedUserSshKeysKeyIdPut) | **Put** /users/{selected_user}/ssh-keys/{key_id} | Update a SSH key
+[**UsersSelectedUserSshKeysPost**](SshApi.md#UsersSelectedUserSshKeysPost) | **Post** /users/{selected_user}/ssh-keys | Add a new SSH key
 
 # **UsersSelectedUserSshKeysGet**
 > PaginatedSshUserKeys UsersSelectedUserSshKeysGet(ctx, selectedUser, optional)
@@ -22,10 +22,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **selectedUser** | **string**| This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.  | 
- **optional** | ***SSHApiUsersSelectedUserSshKeysGetOpts** | optional parameters | nil if no parameters
+ **optional** | ***SshApiUsersSelectedUserSshKeysGetOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a SSHApiUsersSelectedUserSshKeysGetOpts struct
+Optional parameters are passed through a pointer to a SshApiUsersSelectedUserSshKeysGetOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -117,10 +117,10 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **keyId** | **string**| The SSH key&#x27;s UUID value. | 
   **selectedUser** | **string**| This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.  | 
- **optional** | ***SSHApiUsersSelectedUserSshKeysKeyIdPutOpts** | optional parameters | nil if no parameters
+ **optional** | ***SshApiUsersSelectedUserSshKeysKeyIdPutOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a SSHApiUsersSelectedUserSshKeysKeyIdPutOpts struct
+Optional parameters are passed through a pointer to a SshApiUsersSelectedUserSshKeysKeyIdPutOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -154,10 +154,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **selectedUser** | **string**| This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.  | 
- **optional** | ***SSHApiUsersSelectedUserSshKeysPostOpts** | optional parameters | nil if no parameters
+ **optional** | ***SshApiUsersSelectedUserSshKeysPostOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a SSHApiUsersSelectedUserSshKeysPostOpts struct
+Optional parameters are passed through a pointer to a SshApiUsersSelectedUserSshKeysPostOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 

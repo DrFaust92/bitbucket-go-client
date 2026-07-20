@@ -24,17 +24,17 @@ type Repository struct {
 	//  The issue tracker for this repository is enabled. Issue Tracker features are not supported for repositories in workspaces administered through admin.atlassian.com.
 	HasIssues bool `json:"has_issues,omitempty"`
 	//  The wiki for this repository is enabled. Wiki features are not supported for repositories in workspaces administered through admin.atlassian.com.
-	HasWiki    bool         `json:"has_wiki,omitempty"`
-	IsPrivate  bool         `json:"is_private,omitempty"`
-	Language   string       `json:"language,omitempty"`
-	Links      *interface{} `json:"links,omitempty"`
-	Mainbranch *Branch      `json:"mainbranch,omitempty"`
-	Name       string       `json:"name,omitempty"`
-	Owner      *Account     `json:"owner,omitempty"`
-	Parent     *Repository  `json:"parent,omitempty"`
-	Project    *Project     `json:"project,omitempty"`
-	Scm        string       `json:"scm,omitempty"`
-	Size       int32        `json:"size,omitempty"`
+	HasWiki    bool             `json:"has_wiki,omitempty"`
+	IsPrivate  bool             `json:"is_private,omitempty"`
+	Language   string           `json:"language,omitempty"`
+	Links      *RepositoryLinks `json:"links,omitempty"`
+	Mainbranch *Branch          `json:"mainbranch,omitempty"`
+	Name       string           `json:"name,omitempty"`
+	Owner      *Account         `json:"owner,omitempty"`
+	Parent     *Repository      `json:"parent,omitempty"`
+	Project    *Project         `json:"project,omitempty"`
+	Scm        string           `json:"scm,omitempty"`
+	Size       int32            `json:"size,omitempty"`
 	// Slugified name, the same string that is used in Bitbucket URLs.
 	Slug      string    `json:"slug,omitempty"`
 	UpdatedOn time.Time `json:"updated_on,omitempty"`

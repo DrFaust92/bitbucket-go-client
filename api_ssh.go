@@ -24,23 +24,23 @@ var (
 	_ context.Context
 )
 
-type SSHApiService service
+type SshApiService service
 
 /*
-SSHApiService List SSH keys
+SshApiService List SSH keys
 Returns a paginated list of the user&#x27;s SSH public keys.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param selectedUser This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
- * @param optional nil or *SSHApiUsersSelectedUserSshKeysGetOpts - Optional Parameters:
+ * @param optional nil or *SshApiUsersSelectedUserSshKeysGetOpts - Optional Parameters:
      * @param "Page" (optional.Int32) -  page
 @return PaginatedSshUserKeys
 */
 
-type SSHApiUsersSelectedUserSshKeysGetOpts struct {
+type SshApiUsersSelectedUserSshKeysGetOpts struct {
 	Page optional.Int32
 }
 
-func (a *SSHApiService) UsersSelectedUserSshKeysGet(ctx context.Context, selectedUser string, localVarOptionals *SSHApiUsersSelectedUserSshKeysGetOpts) (PaginatedSshUserKeys, *http.Response, error) {
+func (a *SshApiService) UsersSelectedUserSshKeysGet(ctx context.Context, selectedUser string, localVarOptionals *SshApiUsersSelectedUserSshKeysGetOpts) (PaginatedSshUserKeys, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -146,13 +146,13 @@ func (a *SSHApiService) UsersSelectedUserSshKeysGet(ctx context.Context, selecte
 }
 
 /*
-SSHApiService Delete a SSH key
+SshApiService Delete a SSH key
 Deletes a specific SSH public key from a user&#x27;s account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param keyId The SSH key&#x27;s UUID value.
   - @param selectedUser This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
 */
-func (a *SSHApiService) UsersSelectedUserSshKeysKeyIdDelete(ctx context.Context, keyId string, selectedUser string) (*http.Response, error) {
+func (a *SshApiService) UsersSelectedUserSshKeysKeyIdDelete(ctx context.Context, keyId string, selectedUser string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -247,7 +247,7 @@ func (a *SSHApiService) UsersSelectedUserSshKeysKeyIdDelete(ctx context.Context,
 }
 
 /*
-SSHApiService Get a SSH key
+SshApiService Get a SSH key
 Returns a specific SSH public key belonging to a user.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param keyId The SSH key&#x27;s UUID value.
@@ -255,7 +255,7 @@ Returns a specific SSH public key belonging to a user.
 
 @return SshAccountKey
 */
-func (a *SSHApiService) UsersSelectedUserSshKeysKeyIdGet(ctx context.Context, keyId string, selectedUser string) (SshAccountKey, *http.Response, error) {
+func (a *SshApiService) UsersSelectedUserSshKeysKeyIdGet(ctx context.Context, keyId string, selectedUser string) (SshAccountKey, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -359,21 +359,21 @@ func (a *SSHApiService) UsersSelectedUserSshKeysKeyIdGet(ctx context.Context, ke
 }
 
 /*
-SSHApiService Update a SSH key
+SshApiService Update a SSH key
 Updates a specific SSH public key on a user&#x27;s account  Note: Only the &#x27;comment&#x27; field can be updated using this API. To modify the key or comment values, you must delete and add the key again.  Example:  &#x60;&#x60;&#x60; $ curl -X PUT -H \&quot;Content-Type: application/json\&quot; -d &#x27;{\&quot;label\&quot;: \&quot;Work key\&quot;}&#x27; https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/ssh-keys/{b15b6026-9c02-4626-b4ad-b905f99f763a} &#x60;&#x60;&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param keyId The SSH key&#x27;s UUID value.
  * @param selectedUser This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
- * @param optional nil or *SSHApiUsersSelectedUserSshKeysKeyIdPutOpts - Optional Parameters:
+ * @param optional nil or *SshApiUsersSelectedUserSshKeysKeyIdPutOpts - Optional Parameters:
      * @param "Body" (optional.Interface of SshAccountKey) -  The updated SSH key object
 @return SshAccountKey
 */
 
-type SSHApiUsersSelectedUserSshKeysKeyIdPutOpts struct {
+type SshApiUsersSelectedUserSshKeysKeyIdPutOpts struct {
 	Body optional.Interface
 }
 
-func (a *SSHApiService) UsersSelectedUserSshKeysKeyIdPut(ctx context.Context, keyId string, selectedUser string, localVarOptionals *SSHApiUsersSelectedUserSshKeysKeyIdPutOpts) (SshAccountKey, *http.Response, error) {
+func (a *SshApiService) UsersSelectedUserSshKeysKeyIdPut(ctx context.Context, keyId string, selectedUser string, localVarOptionals *SshApiUsersSelectedUserSshKeysKeyIdPutOpts) (SshAccountKey, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -493,22 +493,22 @@ func (a *SSHApiService) UsersSelectedUserSshKeysKeyIdPut(ctx context.Context, ke
 }
 
 /*
-SSHApiService Add a new SSH key
+SshApiService Add a new SSH key
 Adds a new SSH public key to the specified user account and returns the resulting key.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -H \&quot;Content-Type: application/json\&quot; -d &#x27;{\&quot;key\&quot;: \&quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY user@myhost\&quot;}&#x27; https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/ssh-keys &#x60;&#x60;&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param selectedUser This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
- * @param optional nil or *SSHApiUsersSelectedUserSshKeysPostOpts - Optional Parameters:
+ * @param optional nil or *SshApiUsersSelectedUserSshKeysPostOpts - Optional Parameters:
      * @param "Body" (optional.Interface of SshAccountKey) -  The new SSH key object. Note that the username property has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).
      * @param "ExpiresOn" (optional.String) -  The date or date-time of when the key will expire, in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format. Example: &#x60;YYYY-MM-DDTHH:mm:ss.sssZ&#x60;
 @return SshAccountKey
 */
 
-type SSHApiUsersSelectedUserSshKeysPostOpts struct {
+type SshApiUsersSelectedUserSshKeysPostOpts struct {
 	Body      optional.Interface
 	ExpiresOn optional.String
 }
 
-func (a *SSHApiService) UsersSelectedUserSshKeysPost(ctx context.Context, selectedUser string, localVarOptionals *SSHApiUsersSelectedUserSshKeysPostOpts) (SshAccountKey, *http.Response, error) {
+func (a *SshApiService) UsersSelectedUserSshKeysPost(ctx context.Context, selectedUser string, localVarOptionals *SshApiUsersSelectedUserSshKeysPostOpts) (SshAccountKey, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}

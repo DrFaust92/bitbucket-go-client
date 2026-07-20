@@ -307,11 +307,6 @@ Class | Method | HTTP request | Description
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugWatchersGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugwatchersget) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
 *RepositoriesApi* | [**UserPermissionsRepositoriesGet**](docs/RepositoriesApi.md#userpermissionsrepositoriesget) | **Get** /user/permissions/repositories | List repository permissions for a user
 *RepositoriesApi* | [**UserWorkspacesWorkspacePermissionsRepositoriesGet**](docs/RepositoriesApi.md#userworkspacesworkspacepermissionsrepositoriesget) | **Get** /user/workspaces/{workspace}/permissions/repositories | List repository permissions in a workspace for a user
-*SSHApi* | [**UsersSelectedUserSshKeysGet**](docs/SSHApi.md#usersselectedusersshkeysget) | **Get** /users/{selected_user}/ssh-keys | List SSH keys
-*SSHApi* | [**UsersSelectedUserSshKeysKeyIdDelete**](docs/SSHApi.md#usersselectedusersshkeyskeyiddelete) | **Delete** /users/{selected_user}/ssh-keys/{key_id} | Delete a SSH key
-*SSHApi* | [**UsersSelectedUserSshKeysKeyIdGet**](docs/SSHApi.md#usersselectedusersshkeyskeyidget) | **Get** /users/{selected_user}/ssh-keys/{key_id} | Get a SSH key
-*SSHApi* | [**UsersSelectedUserSshKeysKeyIdPut**](docs/SSHApi.md#usersselectedusersshkeyskeyidput) | **Put** /users/{selected_user}/ssh-keys/{key_id} | Update a SSH key
-*SSHApi* | [**UsersSelectedUserSshKeysPost**](docs/SSHApi.md#usersselectedusersshkeyspost) | **Post** /users/{selected_user}/ssh-keys | Add a new SSH key
 *SearchApi* | [**SearchAccount**](docs/SearchApi.md#searchaccount) | **Get** /users/{selected_user}/search/code | Search for code in a user&#x27;s repositories
 *SearchApi* | [**SearchTeam**](docs/SearchApi.md#searchteam) | **Get** /teams/{username}/search/code | Search for code in a team&#x27;s repositories
 *SearchApi* | [**SearchWorkspace**](docs/SearchApi.md#searchworkspace) | **Get** /workspaces/{workspace}/search/code | Search for code in a workspace
@@ -344,6 +339,11 @@ Class | Method | HTTP request | Description
 *SourceApi* | [**RepositoriesWorkspaceRepoSlugSrcCommitPathGet**](docs/SourceApi.md#repositoriesworkspacereposlugsrccommitpathget) | **Get** /repositories/{workspace}/{repo_slug}/src/{commit}/{path} | Get file or directory contents
 *SourceApi* | [**RepositoriesWorkspaceRepoSlugSrcGet**](docs/SourceApi.md#repositoriesworkspacereposlugsrcget) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 *SourceApi* | [**RepositoriesWorkspaceRepoSlugSrcPost**](docs/SourceApi.md#repositoriesworkspacereposlugsrcpost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
+*SshApi* | [**UsersSelectedUserSshKeysGet**](docs/SshApi.md#usersselectedusersshkeysget) | **Get** /users/{selected_user}/ssh-keys | List SSH keys
+*SshApi* | [**UsersSelectedUserSshKeysKeyIdDelete**](docs/SshApi.md#usersselectedusersshkeyskeyiddelete) | **Delete** /users/{selected_user}/ssh-keys/{key_id} | Delete a SSH key
+*SshApi* | [**UsersSelectedUserSshKeysKeyIdGet**](docs/SshApi.md#usersselectedusersshkeyskeyidget) | **Get** /users/{selected_user}/ssh-keys/{key_id} | Get a SSH key
+*SshApi* | [**UsersSelectedUserSshKeysKeyIdPut**](docs/SshApi.md#usersselectedusersshkeyskeyidput) | **Put** /users/{selected_user}/ssh-keys/{key_id} | Update a SSH key
+*SshApi* | [**UsersSelectedUserSshKeysPost**](docs/SshApi.md#usersselectedusersshkeyspost) | **Post** /users/{selected_user}/ssh-keys | Add a new SSH key
 *UsersApi* | [**UserEmailsEmailGet**](docs/UsersApi.md#useremailsemailget) | **Get** /user/emails/{email} | Get an email address for current user
 *UsersApi* | [**UserEmailsGet**](docs/UsersApi.md#useremailsget) | **Get** /user/emails | List email addresses for current user
 *UsersApi* | [**UserGet**](docs/UsersApi.md#userget) | **Get** /user | Get current user
@@ -418,6 +418,7 @@ Class | Method | HTTP request | Description
  - [DeploymentVariable](docs/DeploymentVariable.md)
  - [Diffstat](docs/Diffstat.md)
  - [EffectiveRepoBranchingModel](docs/EffectiveRepoBranchingModel.md)
+ - [ErrorError](docs/ErrorError.md)
  - [ExportOptions](docs/ExportOptions.md)
  - [FileConflict](docs/FileConflict.md)
  - [GpgAccountKey](docs/GpgAccountKey.md)
@@ -552,6 +553,7 @@ Class | Method | HTTP request | Description
  - [ProjectBranchingModel](docs/ProjectBranchingModel.md)
  - [ProjectDeployKey](docs/ProjectDeployKey.md)
  - [ProjectGroupPermission](docs/ProjectGroupPermission.md)
+ - [ProjectLinks](docs/ProjectLinks.md)
  - [ProjectUserPermission](docs/ProjectUserPermission.md)
  - [Pullrequest](docs/Pullrequest.md)
  - [PullrequestComment](docs/PullrequestComment.md)
@@ -568,6 +570,7 @@ Class | Method | HTTP request | Description
  - [Repository](docs/Repository.md)
  - [RepositoryGroupPermission](docs/RepositoryGroupPermission.md)
  - [RepositoryInheritanceState](docs/RepositoryInheritanceState.md)
+ - [RepositoryLinks](docs/RepositoryLinks.md)
  - [RepositoryPermission](docs/RepositoryPermission.md)
  - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
  - [SearchCodeSearchResult](docs/SearchCodeSearchResult.md)

@@ -14,20 +14,20 @@ import (
 )
 
 type Project struct {
-	Type_ string       `json:"type"`
-	Links *interface{} `json:"links,omitempty"`
-	// The project's immutable id.
-	Uuid string `json:"uuid,omitempty"`
-	// The project's key.
-	Key   string `json:"key,omitempty"`
-	Owner *Team  `json:"owner,omitempty"`
-	// The name of the project.
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	//  Indicates whether the project is publicly accessible, or whether it is private to the team and consequently only visible to team members. Note that private projects cannot contain public repositories.
-	IsPrivate bool      `json:"is_private,omitempty"`
-	CreatedOn time.Time `json:"created_on,omitempty"`
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	Type_       string    `json:"type"`
+	CreatedOn   time.Time `json:"created_on,omitempty"`
+	Description string    `json:"description,omitempty"`
 	//  Indicates whether the project contains publicly visible repositories. Note that private projects cannot contain public repositories.
 	HasPubliclyVisibleRepos bool `json:"has_publicly_visible_repos,omitempty"`
+	//  Indicates whether the project is publicly accessible, or whether it is private to the team and consequently only visible to team members. Note that private projects cannot contain public repositories.
+	IsPrivate bool `json:"is_private,omitempty"`
+	// The project's key.
+	Key   string        `json:"key,omitempty"`
+	Links *ProjectLinks `json:"links,omitempty"`
+	// The name of the project.
+	Name      string    `json:"name,omitempty"`
+	Owner     *Team     `json:"owner,omitempty"`
+	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	// The project's immutable id.
+	Uuid string `json:"uuid,omitempty"`
 }

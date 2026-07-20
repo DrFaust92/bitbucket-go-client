@@ -10,10 +10,10 @@
 package bitbucket
 
 type PipelineSchedulePostRequestBody struct {
-	Type_  string                                 `json:"type"`
-	Target *PipelineSchedulePostRequestBodyTarget `json:"target"`
-	// Whether the schedule is enabled.
-	Enabled bool `json:"enabled,omitempty"`
+	Type_ string `json:"type"`
 	// The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day.
 	CronPattern string `json:"cron_pattern"`
+	// Whether the schedule is enabled.
+	Enabled bool                                   `json:"enabled,omitempty"`
+	Target  *PipelineSchedulePostRequestBodyTarget `json:"target"`
 }

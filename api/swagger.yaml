@@ -101,7 +101,7 @@ tags:
     allows you to save versions of your code, which you can access
     when needed. The repo resource allows you to access public repos,
     or repos that belong to a specific workspace.
-- name: SSH
+- name: Ssh
   description: |
     The SSH resource allows you to manage SSH keys.
 - name: Snippets
@@ -23338,7 +23338,7 @@ paths:
   /users/{selected_user}/ssh-keys:
     get:
       tags:
-      - SSH
+      - Ssh
       summary: List SSH keys
       description: Returns a paginated list of the user's SSH public keys.
       parameters:
@@ -23421,7 +23421,7 @@ paths:
         - read:ssh-key:bitbucket
     post:
       tags:
-      - SSH
+      - Ssh
       summary: Add a new SSH key
       description: |-
         Adds a new SSH public key to the specified user account and returns the resulting key.
@@ -23515,19 +23515,19 @@ paths:
         - account:write
       - basic: []
       - api_key: []
+      x-atlassian-auth-types:
+      - api-token
       x-atlassian-oauth2-scopes:
       - state: Current
         scheme: oauth2
         scopes:
         - read:ssh-key:bitbucket
         - write:ssh-key:bitbucket
-      x-atlassian-auth-types:
-      - api-token
       x-codegen-request-body-name: _body
   /users/{selected_user}/ssh-keys/{key_id}:
     get:
       tags:
-      - SSH
+      - Ssh
       summary: Get a SSH key
       description: Returns a specific SSH public key belonging to a user.
       parameters:
@@ -23597,16 +23597,16 @@ paths:
         - account
       - basic: []
       - api_key: []
+      x-atlassian-auth-types:
+      - api-token
       x-atlassian-oauth2-scopes:
       - state: Current
         scheme: oauth2
         scopes:
         - read:ssh-key:bitbucket
-      x-atlassian-auth-types:
-      - api-token
     put:
       tags:
-      - SSH
+      - Ssh
       summary: Update a SSH key
       description: |-
         Updates a specific SSH public key on a user's account
@@ -23698,18 +23698,18 @@ paths:
         - account:write
       - basic: []
       - api_key: []
+      x-atlassian-auth-types:
+      - api-token
       x-atlassian-oauth2-scopes:
       - state: Current
         scheme: oauth2
         scopes:
         - read:ssh-key:bitbucket
         - write:ssh-key:bitbucket
-      x-atlassian-auth-types:
-      - api-token
       x-codegen-request-body-name: _body
     delete:
       tags:
-      - SSH
+      - Ssh
       summary: Delete a SSH key
       description: Deletes a specific SSH public key from a user's account.
       parameters:
@@ -23756,13 +23756,13 @@ paths:
         - account:write
       - basic: []
       - api_key: []
+      x-atlassian-auth-types:
+      - api-token
       x-atlassian-oauth2-scopes:
       - state: Current
         scheme: oauth2
         scopes:
         - delete:ssh-key:bitbucket
-      x-atlassian-auth-types:
-      - api-token
   /workspaces:
     get:
       tags:
@@ -27901,13 +27901,17 @@ components:
       - title: Account
         type: object
         properties:
-          links:
-            $ref: '#/components/schemas/account_links'
           created_on:
             type: string
             format: date-time
           display_name:
             type: string
+          links:
+            $ref: '#/components/schemas/account_links'
+          username:
+            type: string
+            description: The user's Bitbucket username. Deprecated by Bitbucket; re-added
+              to preserve client compatibility.
           uuid:
             type: string
         additionalProperties: true
@@ -28693,17 +28697,38 @@ components:
       - type
       type: object
       properties:
+        error:
+          $ref: '#/components/schemas/error_error'
         type:
           type: string
-        error:
-          type: object
-          additionalProperties: false
       description: Base type for most resource objects. It defines the common `type`
         element that identifies an object's type. It also identifies the element as
         Swagger's `discriminator`.
       example:
+        error:
+          data: {}
+          detail: detail
+          message: message
         type: type
-        error: {}
+    error_error:
+      title: Error Error
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+        detail:
+          type: string
+        data:
+          type: object
+          properties: {}
+          description: Optional structured data that is endpoint-specific.
+          example: {}
+      example:
+        data: {}
+        detail: detail
+        message: message
     export_options:
       title: Export Options
       required:
@@ -32413,16 +32438,16 @@ components:
         - target
         type: object
         properties:
-          target:
-            $ref: '#/components/schemas/pipeline_schedule_post_request_body_target'
-          enabled:
-            type: boolean
-            description: Whether the schedule is enabled.
           cron_pattern:
             type: string
             description: "The cron expression with second precision (7 fields) that\
               \ the schedule applies. For example, for expression: 0 0 12 * * ? *,\
               \ will execute at 12pm UTC every day."
+          enabled:
+            type: boolean
+            description: Whether the schedule is enabled.
+          target:
+            $ref: '#/components/schemas/pipeline_schedule_post_request_body_target'
         additionalProperties: true
     pipeline_schedule_put_request_body:
       allOf:
@@ -32930,22 +32955,17 @@ components:
       - title: Project
         type: object
         properties:
-          links:
-            type: object
-            additionalProperties: false
-          uuid:
+          created_on:
             type: string
-            description: The project's immutable id.
-          key:
-            type: string
-            description: The project's key.
-          owner:
-            $ref: '#/components/schemas/team'
-          name:
-            type: string
-            description: The name of the project.
+            format: date-time
           description:
             type: string
+          has_publicly_visible_repos:
+            type: boolean
+            description: |2-
+
+              Indicates whether the project contains publicly visible repositories.
+              Note that private projects cannot contain public repositories.
           is_private:
             type: boolean
             description: |2-
@@ -32953,18 +32973,22 @@ components:
               Indicates whether the project is publicly accessible, or whether it is
               private to the team and consequently only visible to team members.
               Note that private projects cannot contain public repositories.
-          created_on:
+          key:
             type: string
-            format: date-time
+            description: The project's key.
+          links:
+            $ref: '#/components/schemas/project_links'
+          name:
+            type: string
+            description: The name of the project.
+          owner:
+            $ref: '#/components/schemas/team'
           updated_on:
             type: string
             format: date-time
-          has_publicly_visible_repos:
-            type: boolean
-            description: |2-
-
-              Indicates whether the project contains publicly visible repositories.
-              Note that private projects cannot contain public repositories.
+          uuid:
+            type: string
+            description: The project's immutable id.
         additionalProperties: true
         description: |-
           A Bitbucket project.
@@ -33052,6 +33076,14 @@ components:
         permission: read
         type: type
         group: ""
+    project_links:
+      title: Project Links
+      type: object
+      properties:
+        html:
+          $ref: '#/components/schemas/link'
+        avatar:
+          $ref: '#/components/schemas/link'
     project_user_permission:
       title: Project User Permission
       required:
@@ -33539,8 +33571,7 @@ components:
           language:
             type: string
           links:
-            type: object
-            additionalProperties: false
+            $ref: '#/components/schemas/repository_links'
           mainbranch:
             $ref: '#/components/schemas/branch'
           name:
@@ -33617,6 +33648,32 @@ components:
       example:
         override_settings: {}
         type: type
+    repository_links:
+      title: Repository Links
+      type: object
+      properties:
+        self:
+          $ref: '#/components/schemas/link'
+        html:
+          $ref: '#/components/schemas/link'
+        avatar:
+          $ref: '#/components/schemas/link'
+        pullrequests:
+          $ref: '#/components/schemas/link'
+        commits:
+          $ref: '#/components/schemas/link'
+        forks:
+          $ref: '#/components/schemas/link'
+        watchers:
+          $ref: '#/components/schemas/link'
+        downloads:
+          $ref: '#/components/schemas/link'
+        clone:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        hooks:
+          $ref: '#/components/schemas/link'
     repository_permission:
       title: Repository Permission
       required:
@@ -34365,8 +34422,6 @@ components:
       - selector
       type: object
       properties:
-        selector:
-          $ref: '#/components/schemas/pipeline_selector'
         ref_name:
           type: string
           description: The name of the reference.
@@ -34375,6 +34430,10 @@ components:
           description: The type of reference (branch only).
           enum:
           - branch
+        selector:
+          $ref: '#/components/schemas/pipeline_selector'
+        type:
+          type: string
       description: The target on which the schedule will be executed.
   securitySchemes:
     basic:

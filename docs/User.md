@@ -3,9 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Links** | [***UserLinks**](user_links.md) |  | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **DisplayName** | **string** |  | [optional] [default to null]
+**Links** | [***UserLinks**](user_links.md) |  | [optional] [default to null]
+**Username** | **string** | The user&#x27;s Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility. | [optional] [default to null]
 **Uuid** | **string** |  | [optional] [default to null]
 **AccountId** | **string** | The user&#x27;s Atlassian account ID. | [optional] [default to null]
 **AccountStatus** | **string** | The status of the account. Currently the only possible value is \&quot;active\&quot;, but more values may be added in the future. | [optional] [default to null]

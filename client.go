@@ -77,13 +77,13 @@ type APIClient struct {
 
 	RepositoriesApi *RepositoriesApiService
 
-	SSHApi *SSHApiService
-
 	SearchApi *SearchApiService
 
 	SnippetsApi *SnippetsApiService
 
 	SourceApi *SourceApiService
+
+	SshApi *SshApiService
 
 	UsersApi *UsersApiService
 
@@ -124,10 +124,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.RefsApi = (*RefsApiService)(&c.common)
 	c.ReportsApi = (*ReportsApiService)(&c.common)
 	c.RepositoriesApi = (*RepositoriesApiService)(&c.common)
-	c.SSHApi = (*SSHApiService)(&c.common)
 	c.SearchApi = (*SearchApiService)(&c.common)
 	c.SnippetsApi = (*SnippetsApiService)(&c.common)
 	c.SourceApi = (*SourceApiService)(&c.common)
+	c.SshApi = (*SshApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
 	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 	c.WorkspacesApi = (*WorkspacesApiService)(&c.common)
