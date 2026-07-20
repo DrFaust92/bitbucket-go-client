@@ -14,7 +14,6 @@ import (
 )
 
 type BaseCommit struct {
-	Type_     string       `json:"type"`
 	Hash      string       `json:"hash,omitempty"`
 	Date      time.Time    `json:"date,omitempty"`
 	Author    *Author      `json:"author,omitempty"`
@@ -22,4 +21,5 @@ type BaseCommit struct {
 	Message   string       `json:"message,omitempty"`
 	Summary   *interface{} `json:"summary,omitempty"`
 	Parents   []BaseCommit `json:"parents,omitempty"`
+	Type_     string       `json:"type"`
 }

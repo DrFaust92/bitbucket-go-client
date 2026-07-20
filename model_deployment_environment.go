@@ -10,9 +10,9 @@
 package bitbucket
 
 type DeploymentEnvironment struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the environment.
 	Uuid string `json:"uuid,omitempty"`
 	// The name of the environment.
-	Name string `json:"name,omitempty"`
+	Name  string `json:"name,omitempty"`
+	Type_ string `json:"type"`
 }

@@ -14,16 +14,16 @@ import (
 )
 
 type AppUser struct {
+	// The user's Atlassian account ID.
+	AccountId string `json:"account_id,omitempty"`
+	// The status of the account. Currently the only possible value is \"active\", but more values may be added in the future.
+	AccountStatus string `json:"account_status,omitempty"`
+	// The kind of App User.
+	Kind        string        `json:"kind,omitempty"`
 	CreatedOn   time.Time     `json:"created_on,omitempty"`
 	DisplayName string        `json:"display_name,omitempty"`
 	Links       *AccountLinks `json:"links,omitempty"`
 	// The user's Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility.
 	Username string `json:"username,omitempty"`
 	Uuid     string `json:"uuid,omitempty"`
-	// The user's Atlassian account ID.
-	AccountId string `json:"account_id,omitempty"`
-	// The status of the account. Currently the only possible value is \"active\", but more values may be added in the future.
-	AccountStatus string `json:"account_status,omitempty"`
-	// The kind of App User.
-	Kind string `json:"kind,omitempty"`
 }

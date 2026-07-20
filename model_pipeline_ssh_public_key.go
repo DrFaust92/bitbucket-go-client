@@ -10,7 +10,6 @@
 package bitbucket
 
 type PipelineSshPublicKey struct {
-	Type_ string `json:"type"`
 	// The type of the public key.
 	KeyType string `json:"key_type,omitempty"`
 	// The base64 encoded public key.
@@ -19,4 +18,5 @@ type PipelineSshPublicKey struct {
 	Md5Fingerprint string `json:"md5_fingerprint,omitempty"`
 	// The SHA-256 fingerprint of the public key.
 	Sha256Fingerprint string `json:"sha256_fingerprint,omitempty"`
+	Type_             string `json:"type"`
 }

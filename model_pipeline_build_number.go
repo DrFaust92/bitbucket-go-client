@@ -10,7 +10,7 @@
 package bitbucket
 
 type PipelineBuildNumber struct {
-	Type_ string `json:"type"`
 	// The next number that will be used as build number.
-	Next int32 `json:"next,omitempty"`
+	Next  int32  `json:"next,omitempty"`
+	Type_ string `json:"type"`
 }

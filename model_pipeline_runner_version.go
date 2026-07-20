@@ -10,9 +10,9 @@
 package bitbucket
 
 type PipelineRunnerVersion struct {
-	Type_ string `json:"type"`
 	// The currently installed version of the runner.
 	Version string `json:"version,omitempty"`
 	// The current recommended version of the runner.
 	Current string `json:"current,omitempty"`
+	Type_   string `json:"type"`
 }

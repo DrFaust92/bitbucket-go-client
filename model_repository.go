@@ -14,7 +14,6 @@ import (
 )
 
 type Repository struct {
-	Type_       string    `json:"type"`
 	CreatedOn   time.Time `json:"created_on,omitempty"`
 	Description string    `json:"description,omitempty"`
 	//  Controls the rules for forking this repository.  * **allow_forks**: unrestricted forking * **no_public_forks**: restrict forking to private forks (forks cannot   be made public later) * **no_forks**: deny all forking
@@ -39,5 +38,6 @@ type Repository struct {
 	Slug      string    `json:"slug,omitempty"`
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
 	// The repository's immutable id. This can be used as a substitute for the slug segment in URLs. Doing this guarantees your URLs will survive renaming of the repository by its owner, or even transfer of the repository to a different user.
-	Uuid string `json:"uuid,omitempty"`
+	Uuid  string `json:"uuid,omitempty"`
+	Type_ string `json:"type"`
 }

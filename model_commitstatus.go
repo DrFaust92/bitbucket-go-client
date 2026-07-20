@@ -14,7 +14,6 @@ import (
 )
 
 type Commitstatus struct {
-	Type_ string       `json:"type"`
 	Links *interface{} `json:"links,omitempty"`
 	// An identifier for the status that's unique to         its type (current \"build\" is the only supported type) and the vendor,         e.g. BB-DEPLOY
 	Key string `json:"key"`
@@ -30,4 +29,5 @@ type Commitstatus struct {
 	Description string    `json:"description,omitempty"`
 	CreatedOn   time.Time `json:"created_on,omitempty"`
 	UpdatedOn   time.Time `json:"updated_on,omitempty"`
+	Type_       string    `json:"type"`
 }

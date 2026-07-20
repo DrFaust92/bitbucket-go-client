@@ -14,6 +14,9 @@ import (
 )
 
 type PullrequestComment struct {
+	Pullrequest *Pullrequest       `json:"pullrequest,omitempty"`
+	Resolution  *CommentResolution `json:"resolution,omitempty"`
+	Pending     bool               `json:"pending,omitempty"`
 	Id          int64              `json:"id,omitempty"`
 	CreatedOn   time.Time          `json:"created_on,omitempty"`
 	UpdatedOn   time.Time          `json:"updated_on,omitempty"`
@@ -23,7 +26,4 @@ type PullrequestComment struct {
 	Parent      *Comment           `json:"parent,omitempty"`
 	Inline      *interface{}       `json:"inline,omitempty"`
 	Links       *interface{}       `json:"links,omitempty"`
-	Pullrequest *Pullrequest       `json:"pullrequest,omitempty"`
-	Resolution  *CommentResolution `json:"resolution,omitempty"`
-	Pending     bool               `json:"pending,omitempty"`
 }

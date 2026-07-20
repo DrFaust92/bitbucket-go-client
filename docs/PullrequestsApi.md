@@ -339,11 +339,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of Pullrequest**](Pullrequest.md)| The new pull request.
-
-The request URL you POST to becomes the destination repository URL. For this reason, you must specify an explicit source repository in the request object if you want to pull from a different repository (fork).
-
-Since not all elements are required or even mutable, you only need to include the elements you want to initialize, such as the source branch and the title. | 
+ **body** | [**optional.Interface of Pullrequest**](Pullrequest.md)| The new pull request.  The request URL you POST to becomes the destination repository URL. For this reason, you must specify an explicit source repository in the request object if you want to pull from a different repository (fork).  Since not all elements are required or even mutable, you only need to include the elements you want to initialize, such as the source branch and the title. | 
 
 ### Return type
 

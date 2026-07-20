@@ -14,7 +14,6 @@ import (
 )
 
 type Pullrequest struct {
-	Type_ string       `json:"type"`
 	Links *interface{} `json:"links,omitempty"`
 	// The pull request's unique ID. Note that pull request IDs are only unique within their associated repository.
 	Id int32 `json:"id,omitempty"`
@@ -49,5 +48,6 @@ type Pullrequest struct {
 	// A boolean flag indicating whether the pull request is a draft.
 	Draft bool `json:"draft,omitempty"`
 	// A boolean flag indicating whether the pull request is queued
-	Queued bool `json:"queued,omitempty"`
+	Queued bool   `json:"queued,omitempty"`
+	Type_  string `json:"type"`
 }

@@ -14,6 +14,7 @@ import (
 )
 
 type PullrequestTask struct {
+	Links     *interface{} `json:"links,omitempty"`
 	Id        int64        `json:"id,omitempty"`
 	CreatedOn time.Time    `json:"created_on"`
 	UpdatedOn time.Time    `json:"updated_on"`
@@ -22,7 +23,6 @@ type PullrequestTask struct {
 	Creator   *Account     `json:"creator"`
 	Pending   bool         `json:"pending,omitempty"`
 	// The ISO8601 timestamp for when the task was resolved.
-	ResolvedOn time.Time    `json:"resolved_on,omitempty"`
-	ResolvedBy *Account     `json:"resolved_by,omitempty"`
-	Links      *interface{} `json:"links,omitempty"`
+	ResolvedOn time.Time `json:"resolved_on,omitempty"`
+	ResolvedBy *Account  `json:"resolved_by,omitempty"`
 }

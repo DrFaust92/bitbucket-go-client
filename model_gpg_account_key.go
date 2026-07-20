@@ -14,7 +14,6 @@ import (
 )
 
 type GpgAccountKey struct {
-	Type_ string   `json:"type"`
 	Owner *Account `json:"owner,omitempty"`
 	// The GPG key value in X format.
 	Key string `json:"key,omitempty"`
@@ -32,4 +31,5 @@ type GpgAccountKey struct {
 	LastUsed  time.Time       `json:"last_used,omitempty"`
 	Subkeys   []GpgAccountKey `json:"subkeys,omitempty"`
 	Links     *interface{}    `json:"links,omitempty"`
+	Type_     string          `json:"type"`
 }

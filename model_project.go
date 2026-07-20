@@ -14,7 +14,6 @@ import (
 )
 
 type Project struct {
-	Type_       string    `json:"type"`
 	CreatedOn   time.Time `json:"created_on,omitempty"`
 	Description string    `json:"description,omitempty"`
 	//  Indicates whether the project contains publicly visible repositories. Note that private projects cannot contain public repositories.
@@ -29,5 +28,6 @@ type Project struct {
 	Owner     *Team     `json:"owner,omitempty"`
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
 	// The project's immutable id.
-	Uuid string `json:"uuid,omitempty"`
+	Uuid  string `json:"uuid,omitempty"`
+	Type_ string `json:"type"`
 }

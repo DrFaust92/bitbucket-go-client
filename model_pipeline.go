@@ -14,7 +14,6 @@ import (
 )
 
 type Pipeline struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the pipeline.
 	Uuid string `json:"uuid,omitempty"`
 	// The build number of the pipeline.
@@ -35,4 +34,5 @@ type Pipeline struct {
 	// An ordered list of sources of the pipeline configuration
 	ConfigurationSources []PipelineConfigurationSource `json:"configuration_sources,omitempty"`
 	Links                *PipelinesPipelineLinks       `json:"links,omitempty"`
+	Type_                string                        `json:"type"`
 }

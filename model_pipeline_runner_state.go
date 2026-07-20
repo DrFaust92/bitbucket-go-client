@@ -14,12 +14,12 @@ import (
 )
 
 type PipelineRunnerState struct {
-	Type_ string `json:"type"`
 	// The current status of the runner.
 	Status  string                 `json:"status,omitempty"`
 	Version *PipelineRunnerVersion `json:"version,omitempty"`
 	// The timestamp when the runner state was last updated.
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
 	// Whether the runner is cordoned (prevented from accepting new steps).
-	Cordoned bool `json:"cordoned,omitempty"`
+	Cordoned bool   `json:"cordoned,omitempty"`
+	Type_    string `json:"type"`
 }

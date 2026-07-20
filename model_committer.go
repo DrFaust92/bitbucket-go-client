@@ -10,8 +10,8 @@
 package bitbucket
 
 type Committer struct {
-	Type_ string `json:"type"`
 	// The raw committer value from the repository. This may be the only value available if the committer does not match a user in Bitbucket.
-	Raw  string   `json:"raw,omitempty"`
-	User *Account `json:"user,omitempty"`
+	Raw   string   `json:"raw,omitempty"`
+	User  *Account `json:"user,omitempty"`
+	Type_ string   `json:"type"`
 }

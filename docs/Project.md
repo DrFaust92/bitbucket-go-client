@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | **string** |  | [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]
 **HasPubliclyVisibleRepos** | **bool** |  Indicates whether the project contains publicly visible repositories. Note that private projects cannot contain public repositories. | [optional] [default to null]
@@ -14,6 +13,7 @@ Name | Type | Description | Notes
 **Owner** | [***Team**](team.md) |  | [optional] [default to null]
 **UpdatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Uuid** | **string** | The project&#x27;s immutable id. | [optional] [default to null]
+**Type_** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

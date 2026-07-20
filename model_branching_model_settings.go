@@ -10,9 +10,9 @@
 package bitbucket
 
 type BranchingModelSettings struct {
-	Type_       string        `json:"type"`
 	Links       *interface{}  `json:"links,omitempty"`
 	BranchTypes []interface{} `json:"branch_types,omitempty"`
 	Development *interface{}  `json:"development,omitempty"`
 	Production  *interface{}  `json:"production,omitempty"`
+	Type_       string        `json:"type"`
 }

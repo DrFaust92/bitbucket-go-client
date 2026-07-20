@@ -2803,7 +2803,7 @@ Creates a new repository.  Note: In order to set the project for the newly creat
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugPostOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Repository) -  The repository that is to be created. Note that most object elements are optional. Elements &quot;owner&quot; and &quot;full_name&quot; are ignored as the URL implies them.
+     * @param "Body" (optional.Interface of Repository) -  The repository that is to be created. Note that most object elements are optional. Elements \&quot;owner\&quot; and \&quot;full_name\&quot; are ignored as the URL implies them.
 @return Repository
 */
 
@@ -2937,11 +2937,7 @@ Since this endpoint can be used to both update and to create a repository, the r
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugPutOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Repository) -  The repository that is to be updated.
-
-Note that the elements &quot;owner&quot; and &quot;full_name&quot; are ignored since the
-URL implies them.
-
+     * @param "Body" (optional.Interface of Repository) -  The repository that is to be updated.  Note that the elements \&quot;owner\&quot; and \&quot;full_name\&quot; are ignored since the URL implies them.
 @return Repository
 */
 

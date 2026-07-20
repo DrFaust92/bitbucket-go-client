@@ -10,9 +10,9 @@
 package bitbucket
 
 type PipelineSshKeyPair struct {
-	Type_ string `json:"type"`
 	// The SSH private key. This value will be empty when retrieving the SSH key pair.
 	PrivateKey string `json:"private_key,omitempty"`
 	// The SSH public key.
 	PublicKey string `json:"public_key,omitempty"`
+	Type_     string `json:"type"`
 }

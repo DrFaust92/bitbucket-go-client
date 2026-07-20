@@ -10,10 +10,10 @@
 package bitbucket
 
 type WorkspaceBase struct {
-	Type_ string       `json:"type"`
 	Links *interface{} `json:"links,omitempty"`
 	// The workspace's immutable id.
 	Uuid string `json:"uuid,omitempty"`
 	// The short label that identifies this workspace.
-	Slug string `json:"slug,omitempty"`
+	Slug  string `json:"slug,omitempty"`
+	Type_ string `json:"type"`
 }

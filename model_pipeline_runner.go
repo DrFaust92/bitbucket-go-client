@@ -14,7 +14,6 @@ import (
 )
 
 type PipelineRunner struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the runner.
 	Uuid string `json:"uuid,omitempty"`
 	// The name of the runner.
@@ -27,4 +26,5 @@ type PipelineRunner struct {
 	// The timestamp when the runner was last updated.
 	UpdatedOn   time.Time                  `json:"updated_on,omitempty"`
 	OauthClient *PipelineRunnerOauthClient `json:"oauth_client,omitempty"`
+	Type_       string                     `json:"type"`
 }

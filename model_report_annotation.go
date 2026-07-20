@@ -14,7 +14,6 @@ import (
 )
 
 type ReportAnnotation struct {
-	Type_ string `json:"type"`
 	// ID of the annotation provided by the annotation creator. It can be used to identify the annotation as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the annotation creator for updating or deleting this specific annotation. Needs to be unique.
 	ExternalId string `json:"external_id,omitempty"`
 	// The UUID that can be used to identify the annotation.
@@ -39,4 +38,5 @@ type ReportAnnotation struct {
 	CreatedOn time.Time `json:"created_on,omitempty"`
 	// The timestamp when the report was updated.
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	Type_     string    `json:"type"`
 }

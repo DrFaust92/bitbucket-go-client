@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Id** | **int64** |  | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [default to null]
 **UpdatedOn** | [**time.Time**](time.Time.md) |  | [default to null]
@@ -12,7 +13,6 @@ Name | Type | Description | Notes
 **Pending** | **bool** |  | [optional] [default to null]
 **ResolvedOn** | [**time.Time**](time.Time.md) | The ISO8601 timestamp for when the task was resolved. | [optional] [default to null]
 **ResolvedBy** | [***Account**](account.md) |  | [optional] [default to null]
-**Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

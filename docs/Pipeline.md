@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | **string** |  | [default to null]
 **Uuid** | **string** | The UUID identifying the pipeline. | [optional] [default to null]
 **BuildNumber** | **int32** | The build number of the pipeline. | [optional] [default to null]
 **Creator** | [***Account**](account.md) |  | [optional] [default to null]
@@ -17,6 +16,7 @@ Name | Type | Description | Notes
 **BuildSecondsUsed** | **int32** | The number of build seconds used by this pipeline. | [optional] [default to null]
 **ConfigurationSources** | [**[]PipelineConfigurationSource**](pipeline_configuration_source.md) | An ordered list of sources of the pipeline configuration | [optional] [default to null]
 **Links** | [***PipelinesPipelineLinks**](pipelines_pipeline_links.md) |  | [optional] [default to null]
+**Type_** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

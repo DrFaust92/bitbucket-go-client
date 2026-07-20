@@ -14,6 +14,7 @@ import (
 )
 
 type IssueComment struct {
+	Issue     *Issue       `json:"issue,omitempty"`
 	Id        int64        `json:"id,omitempty"`
 	CreatedOn time.Time    `json:"created_on,omitempty"`
 	UpdatedOn time.Time    `json:"updated_on,omitempty"`
@@ -23,5 +24,4 @@ type IssueComment struct {
 	Parent    *Comment     `json:"parent,omitempty"`
 	Inline    *interface{} `json:"inline,omitempty"`
 	Links     *interface{} `json:"links,omitempty"`
-	Issue     *Issue       `json:"issue,omitempty"`
 }

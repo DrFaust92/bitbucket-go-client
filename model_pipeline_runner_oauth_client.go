@@ -10,7 +10,6 @@
 package bitbucket
 
 type PipelineRunnerOauthClient struct {
-	Type_ string `json:"type"`
 	// The OAuth client ID.
 	Id string `json:"id,omitempty"`
 	// The OAuth client secret. This is an optional element that is only provided once.
@@ -19,4 +18,5 @@ type PipelineRunnerOauthClient struct {
 	TokenEndpoint string `json:"token_endpoint,omitempty"`
 	// The intended audience for the OAuth token.
 	Audience string `json:"audience,omitempty"`
+	Type_    string `json:"type"`
 }

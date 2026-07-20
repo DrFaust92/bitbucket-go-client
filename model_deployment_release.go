@@ -14,7 +14,6 @@ import (
 )
 
 type DeploymentRelease struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the release.
 	Uuid string `json:"uuid,omitempty"`
 	// The name of the release.
@@ -24,4 +23,5 @@ type DeploymentRelease struct {
 	Commit *Commit `json:"commit,omitempty"`
 	// The timestamp when the release was created.
 	CreatedOn time.Time `json:"created_on,omitempty"`
+	Type_     string    `json:"type"`
 }

@@ -14,11 +14,11 @@ import (
 )
 
 type Account struct {
-	Type_       string        `json:"type"`
 	CreatedOn   time.Time     `json:"created_on,omitempty"`
 	DisplayName string        `json:"display_name,omitempty"`
 	Links       *AccountLinks `json:"links,omitempty"`
 	// The user's Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility.
 	Username string `json:"username,omitempty"`
 	Uuid     string `json:"uuid,omitempty"`
+	Type_    string `json:"type"`
 }

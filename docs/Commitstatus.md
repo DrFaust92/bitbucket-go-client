@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | **string** |  | [default to null]
 **Links** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 **Key** | **string** | An identifier for the status that&#x27;s unique to         its type (current \&quot;build\&quot; is the only supported type) and the vendor,         e.g. BB-DEPLOY | [default to null]
 **Refname** | **string** |  The name of the ref that pointed to this commit at the time the status object was created. Note that this the ref may since have moved off of the commit. This optional field can be useful for build systems whose build triggers and configuration are branch-dependent (e.g. a Pipeline build). It is legitimate for this field to not be set, or even apply (e.g. a static linting job). | [optional] [default to null]
@@ -13,6 +12,7 @@ Name | Type | Description | Notes
 **Description** | **string** | A description of the build (e.g. \&quot;Unit tests in Bamboo\&quot;) | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **UpdatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
+**Type_** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

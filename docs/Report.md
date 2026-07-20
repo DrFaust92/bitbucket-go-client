@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | **string** |  | [default to null]
 **Uuid** | **string** | The UUID that can be used to identify the report. | [optional] [default to null]
 **Title** | **string** | The title of the report. | [optional] [default to null]
 **Details** | **string** | A string to describe the purpose of the report. | [optional] [default to null]
@@ -17,6 +16,7 @@ Name | Type | Description | Notes
 **Data** | [**[]ReportData**](report_data.md) | An array of data fields to display information on the report. Maximum 10. | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) | The timestamp when the report was created. | [optional] [default to null]
 **UpdatedOn** | [**time.Time**](time.Time.md) | The timestamp when the report was updated. | [optional] [default to null]
+**Type_** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,7 +14,6 @@ import (
 )
 
 type Snippet struct {
-	Type_ string `json:"type"`
 	Id    int32  `json:"id,omitempty"`
 	Title string `json:"title,omitempty"`
 	// The DVCS used to store the snippet.
@@ -24,4 +23,5 @@ type Snippet struct {
 	Owner     *Account  `json:"owner,omitempty"`
 	Creator   *Account  `json:"creator,omitempty"`
 	IsPrivate bool      `json:"is_private,omitempty"`
+	Type_     string    `json:"type"`
 }

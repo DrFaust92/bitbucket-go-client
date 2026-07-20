@@ -10,7 +10,7 @@
 package bitbucket
 
 type PipelinesPipelineLinks struct {
-	Type_ string                     `json:"type"`
 	Self  *PipelinesLinksSectionHref `json:"self,omitempty"`
 	Steps *PipelinesLinksSectionHref `json:"steps,omitempty"`
+	Type_ string                     `json:"type"`
 }

@@ -10,6 +10,6 @@
 package bitbucket
 
 type PullrequestCommentTask struct {
-	Links   *interface{} `json:"links,omitempty"`
 	Comment *Comment     `json:"comment,omitempty"`
+	Links   *interface{} `json:"links,omitempty"`
 }

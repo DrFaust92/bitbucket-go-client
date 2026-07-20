@@ -14,14 +14,14 @@ import (
 )
 
 type Tag struct {
-	Type_ string       `json:"type"`
-	Links *interface{} `json:"links,omitempty"`
-	// The name of the ref.
-	Name   string  `json:"name,omitempty"`
-	Target *Commit `json:"target,omitempty"`
 	// The message associated with the tag, if available.
 	Message string `json:"message,omitempty"`
 	// The date that the tag was created, if available
-	Date   time.Time `json:"date,omitempty"`
-	Tagger *Author   `json:"tagger,omitempty"`
+	Date   time.Time    `json:"date,omitempty"`
+	Tagger *Author      `json:"tagger,omitempty"`
+	Type_  string       `json:"type"`
+	Links  *interface{} `json:"links,omitempty"`
+	// The name of the ref.
+	Name   string  `json:"name,omitempty"`
+	Target *Commit `json:"target,omitempty"`
 }

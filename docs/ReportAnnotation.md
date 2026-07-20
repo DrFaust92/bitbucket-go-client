@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type_** | **string** |  | [default to null]
 **ExternalId** | **string** | ID of the annotation provided by the annotation creator. It can be used to identify the annotation as an alternative to it&#x27;s generated uuid. It is not used by Bitbucket, but only by the annotation creator for updating or deleting this specific annotation. Needs to be unique. | [optional] [default to null]
 **Uuid** | **string** | The UUID that can be used to identify the annotation. | [optional] [default to null]
 **AnnotationType** | **string** | The type of the report. | [optional] [default to null]
@@ -16,6 +15,7 @@ Name | Type | Description | Notes
 **Link** | **string** | A URL linking to the annotation in an external tool. | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) | The timestamp when the report was created. | [optional] [default to null]
 **UpdatedOn** | [**time.Time**](time.Time.md) | The timestamp when the report was updated. | [optional] [default to null]
+**Type_** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

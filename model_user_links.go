@@ -10,8 +10,8 @@
 package bitbucket
 
 type UserLinks struct {
-	Avatar       *Link `json:"avatar,omitempty"`
 	Self         *Link `json:"self,omitempty"`
 	Html         *Link `json:"html,omitempty"`
 	Repositories *Link `json:"repositories,omitempty"`
+	Avatar       *Link `json:"avatar,omitempty"`
 }

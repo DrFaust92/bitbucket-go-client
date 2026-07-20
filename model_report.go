@@ -14,7 +14,6 @@ import (
 )
 
 type Report struct {
-	Type_ string `json:"type"`
 	// The UUID that can be used to identify the report.
 	Uuid string `json:"uuid,omitempty"`
 	// The title of the report.
@@ -41,4 +40,5 @@ type Report struct {
 	CreatedOn time.Time `json:"created_on,omitempty"`
 	// The timestamp when the report was updated.
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	Type_     string    `json:"type"`
 }

@@ -10,8 +10,8 @@
 package bitbucket
 
 type WorkspaceAccess struct {
-	Type_ string `json:"type"`
 	// The permission level the user has for the workspace. True if the user is an administrator, otherwise False.
 	Administrator bool           `json:"administrator,omitempty"`
 	Workspace     *WorkspaceBase `json:"workspace,omitempty"`
+	Type_         string         `json:"type"`
 }

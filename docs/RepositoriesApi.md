@@ -793,7 +793,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be created. Note that most object elements are optional. Elements &quot;owner&quot; and &quot;full_name&quot; are ignored as the URL implies them. | 
+ **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be created. Note that most object elements are optional. Elements \&quot;owner\&quot; and \&quot;full_name\&quot; are ignored as the URL implies them. | 
 
 ### Return type
 
@@ -831,11 +831,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be updated.
-
-Note that the elements &quot;owner&quot; and &quot;full_name&quot; are ignored since the
-URL implies them.
- | 
+ **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be updated.  Note that the elements \&quot;owner\&quot; and \&quot;full_name\&quot; are ignored since the URL implies them.  | 
 
 ### Return type
 

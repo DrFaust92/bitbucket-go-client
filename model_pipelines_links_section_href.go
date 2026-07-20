@@ -10,7 +10,7 @@
 package bitbucket
 
 type PipelinesLinksSectionHref struct {
-	Type_ string `json:"type"`
 	// A link
-	Href string `json:"href,omitempty"`
+	Href  string `json:"href,omitempty"`
+	Type_ string `json:"type"`
 }

@@ -991,11 +991,7 @@ Creates a new pull request where the destination repository is this repository a
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPostOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Pullrequest) -  The new pull request.
-
-The request URL you POST to becomes the destination repository URL. For this reason, you must specify an explicit source repository in the request object if you want to pull from a different repository (fork).
-
-Since not all elements are required or even mutable, you only need to include the elements you want to initialize, such as the source branch and the title.
+     * @param "Body" (optional.Interface of Pullrequest) -  The new pull request.  The request URL you POST to becomes the destination repository URL. For this reason, you must specify an explicit source repository in the request object if you want to pull from a different repository (fork).  Since not all elements are required or even mutable, you only need to include the elements you want to initialize, such as the source branch and the title.
 @return Pullrequest
 */
 

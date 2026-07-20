@@ -14,7 +14,6 @@ import (
 )
 
 type Issue struct {
-	Type_      string       `json:"type"`
 	Links      *interface{} `json:"links,omitempty"`
 	Id         int32        `json:"id,omitempty"`
 	Repository *Repository  `json:"repository,omitempty"`
@@ -32,4 +31,5 @@ type Issue struct {
 	Component  *Component   `json:"component,omitempty"`
 	Votes      int32        `json:"votes,omitempty"`
 	Content    *interface{} `json:"content,omitempty"`
+	Type_      string       `json:"type"`
 }
