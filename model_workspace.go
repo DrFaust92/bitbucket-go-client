@@ -14,7 +14,6 @@ import (
 )
 
 type Workspace struct {
-	Type_ string       `json:"type"`
 	Links *interface{} `json:"links,omitempty"`
 	// The workspace's immutable id.
 	Uuid string `json:"uuid,omitempty"`
@@ -23,7 +22,12 @@ type Workspace struct {
 	// The short label that identifies this workspace.
 	Slug string `json:"slug,omitempty"`
 	// Indicates whether the workspace is publicly accessible, or whether it is private to the members and consequently only visible to members.
-	IsPrivate bool      `json:"is_private,omitempty"`
-	CreatedOn time.Time `json:"created_on,omitempty"`
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	IsPrivate bool `json:"is_private,omitempty"`
+	// Indicates whether the workspace enforces private content, or whether it allows public content.
+	IsPrivacyEnforced bool `json:"is_privacy_enforced,omitempty"`
+	// Controls the rules for forking repositories within this workspace.  * **allow_forks**: unrestricted forking * **internal_only**: prevents forking of private repositories outside the workspace or to public repositories
+	ForkingMode string    `json:"forking_mode,omitempty"`
+	CreatedOn   time.Time `json:"created_on,omitempty"`
+	UpdatedOn   time.Time `json:"updated_on,omitempty"`
+	Type_       string    `json:"type"`
 }

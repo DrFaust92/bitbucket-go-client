@@ -14,7 +14,6 @@ import (
 )
 
 type WebhookSubscription struct {
-	Type_ string `json:"type"`
 	// The webhook's id
 	Uuid string `json:"uuid,omitempty"`
 	// The URL events get delivered to.
@@ -32,4 +31,5 @@ type WebhookSubscription struct {
 	SecretSet bool `json:"secret_set,omitempty"`
 	// The secret to associate with the hook. The secret is never returned via the API. As such, this field is only used during updates. The secret can be set to `null` or \"\" to remove the secret (or create a hook with no secret). Leaving out the secret field during updates will leave the secret unchanged. Leaving out the secret during creation will create a hook with no secret.
 	Secret string `json:"secret,omitempty"`
+	Type_  string `json:"type"`
 }

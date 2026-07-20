@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCommitHostedPropertyValue**
-> ModelError GetCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
+> ApplicationProperty GetCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
 Get a commit application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPullRequestHostedPropertyValue**
-> ModelError GetPullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
+> ApplicationProperty GetPullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
 Get a pull request application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetRepositoryHostedPropertyValue**
-> ModelError GetRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
+> ApplicationProperty GetRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
 Get a repository application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RetrieveUserHostedPropertyValue**
-> ModelError RetrieveUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
+> ApplicationProperty RetrieveUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
 Get a user application property
 
 Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ApplicationProperty**](application_property.md)
 
 ### Authorization
 
@@ -278,7 +278,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ModelError**](map.md)| The application property to create or update. | 
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **workspace** | **string**| The repository container; either the workspace slug or the UUID in curly braces. | 
   **repoSlug** | **string**| The repository. | 
   **commit** | **string**| The commit. | 
@@ -311,7 +311,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ModelError**](map.md)| The application property to create or update. | 
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **workspace** | **string**| The repository container; either the workspace slug or the UUID in curly braces. | 
   **repoSlug** | **string**| The repository. | 
   **pullrequestId** | **string**| The pull request ID. | 
@@ -344,7 +344,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ModelError**](map.md)| The application property to create or update. | 
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **workspace** | **string**| The repository container; either the workspace slug or the UUID in curly braces. | 
   **repoSlug** | **string**| The repository. | 
   **appKey** | **string**| The key of the Connect app. | 
@@ -376,7 +376,7 @@ Update an [application property](/cloud/bitbucket/application-properties/) value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**ModelError**](map.md)| The application property to create or update. | 
+  **body** | [**ApplicationProperty**](ApplicationProperty.md)| The application property to create or update. | 
   **selectedUser** | **string**| Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID. | 
   **appKey** | **string**| The key of the Connect app. | 
   **propertyName** | **string**| The name of the property. | 

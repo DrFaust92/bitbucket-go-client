@@ -14,7 +14,6 @@ import (
 )
 
 type SshKey struct {
-	Type_ string `json:"type"`
 	// The SSH key's immutable ID.
 	Uuid string `json:"uuid,omitempty"`
 	// The SSH public key value in OpenSSH format.
@@ -26,4 +25,5 @@ type SshKey struct {
 	CreatedOn time.Time    `json:"created_on,omitempty"`
 	LastUsed  time.Time    `json:"last_used,omitempty"`
 	Links     *interface{} `json:"links,omitempty"`
+	Type_     string       `json:"type"`
 }

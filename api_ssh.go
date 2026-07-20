@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -500,11 +499,13 @@ Adds a new SSH public key to the specified user account and returns the resultin
  * @param selectedUser This can either be an Atlassian Account ID OR the UUID of the account, surrounded by curly-braces, for example: &#x60;{account UUID}&#x60;.
  * @param optional nil or *SshApiUsersSelectedUserSshKeysPostOpts - Optional Parameters:
      * @param "Body" (optional.Interface of SshAccountKey) -  The new SSH key object. Note that the username property has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).
+     * @param "ExpiresOn" (optional.String) -  The date or date-time of when the key will expire, in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format. Example: &#x60;YYYY-MM-DDTHH:mm:ss.sssZ&#x60;
 @return SshAccountKey
 */
 
 type SshApiUsersSelectedUserSshKeysPostOpts struct {
-	Body optional.Interface
+	Body      optional.Interface
+	ExpiresOn optional.String
 }
 
 func (a *SshApiService) UsersSelectedUserSshKeysPost(ctx context.Context, selectedUser string, localVarOptionals *SshApiUsersSelectedUserSshKeysPostOpts) (SshAccountKey, *http.Response, error) {
@@ -524,6 +525,9 @@ func (a *SshApiService) UsersSelectedUserSshKeysPost(ctx context.Context, select
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.ExpiresOn.IsSet() {
+		localVarQueryParams.Add("expires_on", parameterToString(localVarOptionals.ExpiresOn.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/json"}
 

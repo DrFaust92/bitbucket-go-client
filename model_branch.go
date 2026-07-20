@@ -10,13 +10,13 @@
 package bitbucket
 
 type Branch struct {
-	Type_ string       `json:"type"`
-	Links *interface{} `json:"links,omitempty"`
-	// The name of the ref.
-	Name   string  `json:"name,omitempty"`
-	Target *Commit `json:"target,omitempty"`
 	// Available merge strategies for pull requests targeting this branch.
 	MergeStrategies []string `json:"merge_strategies,omitempty"`
 	// The default merge strategy for pull requests targeting this branch.
-	DefaultMergeStrategy string `json:"default_merge_strategy,omitempty"`
+	DefaultMergeStrategy string       `json:"default_merge_strategy,omitempty"`
+	Type_                string       `json:"type"`
+	Links                *interface{} `json:"links,omitempty"`
+	// The name of the ref.
+	Name   string  `json:"name,omitempty"`
+	Target *Commit `json:"target,omitempty"`
 }

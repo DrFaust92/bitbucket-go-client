@@ -10,9 +10,9 @@
 package bitbucket
 
 type PipelineStepError struct {
-	Type_ string `json:"type"`
 	// The error key.
 	Key string `json:"key,omitempty"`
 	// The error message.
 	Message string `json:"message,omitempty"`
+	Type_   string `json:"type"`
 }

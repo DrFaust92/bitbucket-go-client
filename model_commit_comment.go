@@ -14,7 +14,8 @@ import (
 )
 
 type CommitComment struct {
-	Id        int32        `json:"id,omitempty"`
+	Commit    *Commit      `json:"commit,omitempty"`
+	Id        int64        `json:"id,omitempty"`
 	CreatedOn time.Time    `json:"created_on,omitempty"`
 	UpdatedOn time.Time    `json:"updated_on,omitempty"`
 	Content   *interface{} `json:"content,omitempty"`
@@ -23,5 +24,4 @@ type CommitComment struct {
 	Parent    *Comment     `json:"parent,omitempty"`
 	Inline    *interface{} `json:"inline,omitempty"`
 	Links     *interface{} `json:"links,omitempty"`
-	Commit    *Commit      `json:"commit,omitempty"`
 }

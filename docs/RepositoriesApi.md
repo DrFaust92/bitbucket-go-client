@@ -33,12 +33,13 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugSrcPost**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcPost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 [**RepositoriesWorkspaceRepoSlugWatchersGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugWatchersGet) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
 [**UserPermissionsRepositoriesGet**](RepositoriesApi.md#UserPermissionsRepositoriesGet) | **Get** /user/permissions/repositories | List repository permissions for a user
+[**UserWorkspacesWorkspacePermissionsRepositoriesGet**](RepositoriesApi.md#UserWorkspacesWorkspacePermissionsRepositoriesGet) | **Get** /user/workspaces/{workspace}/permissions/repositories | List repository permissions in a workspace for a user
 
 # **RepositoriesGet**
 > PaginatedRepositories RepositoriesGet(ctx, optional)
 List public repositories
 
-Returns a paginated list of all public repositories.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
+**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get).**  Returns a paginated list of all public repositories.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
 
 ### Required Parameters
 
@@ -460,7 +461,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugOverrideSettingsGet**
-> ModelError RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx, repoSlug, workspace)
+> RepositoryInheritanceState RepositoriesWorkspaceRepoSlugOverrideSettingsGet(ctx, repoSlug, workspace)
 Retrieve the inheritance state for repository settings
 
 ### Required Parameters
@@ -473,7 +474,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**RepositoryInheritanceState**](repository_inheritance_state.md)
 
 ### Authorization
 
@@ -555,7 +556,7 @@ Name | Type | Description  | Notes
 > RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugDelete(ctx, groupSlug, repoSlug, workspace)
 Delete an explicit group permission for a repository
 
-Deletes the repository group permission between the requested repository and group, if one exists.  Only users with admin permission for the repository may access this resource.
+Deletes the repository group permission between the requested repository and group, if one exists.  Only users with admin permission for the repository may access this resource.  The only authentication method supported for this endpoint is via app passwords.
 
 ### Required Parameters
 
@@ -582,7 +583,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet**
-> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, repoSlug, workspace)
+> RepositoryGroupPermission RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, repoSlug, workspace)
 Get an explicit group permission for a repository
 
 Returns the group permission for a given group slug and repository  Only users with admin permission for the repository may access this resource.  Permissions can be:  * `admin` * `write` * `read` * `none`
@@ -598,7 +599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**RepositoryGroupPermission**](repository_group_permission.md)
 
 ### Authorization
 
@@ -612,7 +613,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut**
-> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx, body, groupSlug, repoSlug, workspace)
+> RepositoryGroupPermission RepositoriesWorkspaceRepoSlugPermissionsConfigGroupsGroupSlugPut(ctx, body, groupSlug, repoSlug, workspace)
 Update an explicit group permission for a repository
 
 Updates the group permission, or grants a new permission if one does not already exist.  Only users with admin permission for the repository may access this resource.  The only authentication method supported for this endpoint is via app passwords.  Permissions can be:  * `admin` * `write` * `read`
@@ -629,7 +630,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**RepositoryGroupPermission**](repository_group_permission.md)
 
 ### Authorization
 
@@ -711,7 +712,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet**
-> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx, repoSlug, selectedUserId, workspace)
+> RepositoryUserPermission RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdGet(ctx, repoSlug, selectedUserId, workspace)
 Get an explicit user permission for a repository
 
 Returns the explicit user permission for a given user and repository.  Only users with admin permission for the repository may access this resource.  Permissions can be:  * `admin` * `write` * `read` * `none`
@@ -727,7 +728,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**RepositoryUserPermission**](repository_user_permission.md)
 
 ### Authorization
 
@@ -741,7 +742,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut**
-> ModelError RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx, body, repoSlug, selectedUserId, workspace)
+> RepositoryUserPermission RepositoriesWorkspaceRepoSlugPermissionsConfigUsersSelectedUserIdPut(ctx, body, repoSlug, selectedUserId, workspace)
 Update an explicit user permission for a repository
 
 Updates the explicit user permission for a given user and repository. The selected user must be a member of the workspace, and cannot be the workspace owner. Only users with admin permission for the repository may access this resource.  The only authentication method for this endpoint is via app passwords.  Permissions can be:  * `admin` * `write` * `read`
@@ -758,7 +759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**RepositoryUserPermission**](repository_user_permission.md)
 
 ### Authorization
 
@@ -792,7 +793,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be created. Note that most object elements are optional. Elements &quot;owner&quot; and &quot;full_name&quot; are ignored as the URL implies them. | 
+ **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be created. Note that most object elements are optional. Elements \&quot;owner\&quot; and \&quot;full_name\&quot; are ignored as the URL implies them. | 
 
 ### Return type
 
@@ -830,11 +831,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be updated.
-
-Note that the elements &quot;owner&quot; and &quot;full_name&quot; are ignored since the
-URL implies them.
- | 
+ **body** | [**optional.Interface of Repository**](Repository.md)| The repository that is to be updated.  Note that the elements \&quot;owner\&quot; and \&quot;full_name\&quot; are ignored since the URL implies them.  | 
 
 ### Return type
 
@@ -959,7 +956,7 @@ Name | Type | Description  | Notes
 
  **message** | **optional.String**| The commit message. When omitted, Bitbucket uses a canned string. | 
  **author** | **optional.String**|  The raw string to be used as the new commit&#x27;s author. This string follows the format &#x60;Erik van Zijst &lt;evzijst@atlassian.com&gt;&#x60;.  When omitted, Bitbucket uses the authenticated user&#x27;s full/display name and primary email address. Commits cannot be created anonymously. | 
- **parents** | **optional.String**|  A comma-separated list of SHA1s of the commits that should be the parents of the newly created commit.  When omitted, the new commit will inherit from and become a child of the main branch&#x27;s tip/HEAD commit.  When more than one SHA1 is provided, the first SHA1 identifies the commit from which the content will be inherited.\&quot;. | 
+ **parents** | **optional.String**|  #### Deprecation Notice: Support for specifying multiple parent commits is deprecated and will be removed in a future release. Only a single SHA1 is accepted.  A SHA1 of the commit that should be the parent of the newly created commit. When omitted, the new commit will inherit from and become a child of the main branch&#x27;s tip/HEAD commit. | 
  **files** | **optional.String**|  Optional field that declares the files that the request is manipulating. When adding a new file to a repo, or when overwriting an existing file, the client can just upload the full contents of the file in a normal form field and the use of this &#x60;files&#x60; meta data field is redundant. However, when the &#x60;files&#x60; field contains a file path that does not have a corresponding, identically-named form field, then Bitbucket interprets that as the client wanting to replace the named file with the null set and the file is deleted instead.  Paths in the repo that are referenced in neither files nor an individual file field, remain unchanged and carry over from the parent to the new commit.  This API does not support renaming as an explicit feature. To rename a file, simply delete it and recreate it under the new name in the same commit.  | 
  **branch** | **optional.String**|  The name of the branch that the new commit should be created on. When omitted, the commit will be created on top of the main branch and will become the main branch&#x27;s new head.  When a branch name is provided that already exists in the repo, then the commit will be created on top of that branch. In this case, *if* a parent SHA1 was also provided, then it is asserted that the parent is the branch&#x27;s tip/HEAD at the time the request is made. When this is not the case, a 409 is returned.  When a new branch name is specified (that does not already exist in the repo), and no parent SHA1s are provided, then the new commit will inherit from the current main branch&#x27;s tip/HEAD commit, but not advance the main branch. The new commit will be the new branch. When the request *also* specifies a parent SHA1, then the new commit and branch are created directly on top of the parent commit, regardless of the state of the main branch.  When a branch name is not specified, but a parent SHA1 is provided, then Bitbucket asserts that it represents the main branch&#x27;s current HEAD/tip, or a 409 is returned.  When a branch name is not specified and the repo is empty, the new commit will become the repo&#x27;s root commit and will be on the main branch.  When a branch name is specified and the repo is empty, the new commit will become the repo&#x27;s root commit and also define the repo&#x27;s main branch going forward.  This API cannot be used to create additional root commits in non-empty repos.  The branch field cannot be repeated.  As a side effect, this API can be used to create a new branch without modifying any files, by specifying a new branch name in this field, together with &#x60;parents&#x60;, but omitting the &#x60;files&#x60; fields, while not sending any files. This will create a new commit and branch with the same contents as the first parent. The diff of this commit against its first parent will be empty.  | 
 
@@ -1020,7 +1017,7 @@ Name | Type | Description  | Notes
 > PaginatedRepositoryPermissions UserPermissionsRepositoriesGet(ctx, optional)
 List repository permissions for a user
 
-Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * `admin` * `write` * `read`  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * `q=repository.name=\"geordi\"` or `q=permission>\"read\"` * `sort=repository.name`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
+**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-user-workspaces-workspace-permissions-repositories-get).**  Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * `admin` * `write` * `read`  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * `q=repository.name=\"geordi\"` or `q=permission>\"read\"` * `sort=repository.name`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
 
 ### Required Parameters
 
@@ -1036,6 +1033,43 @@ Name | Type | Description  | Notes
  **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
  **page** | **optional.Int32**| page | 
+
+### Return type
+
+[**PaginatedRepositoryPermissions**](paginated_repository_permissions.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UserWorkspacesWorkspacePermissionsRepositoriesGet**
+> PaginatedRepositoryPermissions UserWorkspacesWorkspacePermissionsRepositoriesGet(ctx, workspace, optional)
+List repository permissions in a workspace for a user
+
+Returns an object for each repository the caller has explicit access to in the specified workspace and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * `admin` * `write` * `read`  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * `q=repository.name=\"bits\"` or `q=permission>\"read\"` * `sort=repository.name`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***RepositoriesApiUserWorkspacesWorkspacePermissionsRepositoriesGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a RepositoriesApiUserWorkspacesWorkspacePermissionsRepositoriesGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
+ **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
 
 ### Return type
 

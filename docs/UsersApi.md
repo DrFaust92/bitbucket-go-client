@@ -24,7 +24,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ModelError**](error.md)
 
 ### Authorization
 
@@ -48,7 +48,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ModelError**](error.md)
 
 ### Authorization
 

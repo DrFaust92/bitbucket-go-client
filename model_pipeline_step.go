@@ -14,7 +14,6 @@ import (
 )
 
 type PipelineStep struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the step.
 	Uuid string `json:"uuid,omitempty"`
 	// The timestamp when the step execution was started. This is not set when the step hasn't executed yet.
@@ -27,4 +26,5 @@ type PipelineStep struct {
 	SetupCommands []PipelineCommand `json:"setup_commands,omitempty"`
 	// The list of build commands. These commands are executed in the build container.
 	ScriptCommands []PipelineCommand `json:"script_commands,omitempty"`
+	Type_          string            `json:"type"`
 }

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type_** | **string** |  | [default to null]
-**Message** | **string** | The commit message that will be used on the resulting commit. | [optional] [default to null]
+**Message** | **string** | The commit message that will be used on the resulting commit. Note that the size of the message is limited to 128 KiB. | [optional] [default to null]
 **CloseSourceBranch** | **bool** | Whether the source branch should be deleted. If this is not provided, we fallback to the value used when the pull request was created, which defaults to False | [optional] [default to null]
 **MergeStrategy** | **string** | The merge strategy that will be used to merge the pull request. | [optional] [default to MERGE_STRATEGY.MERGE_COMMIT]
 

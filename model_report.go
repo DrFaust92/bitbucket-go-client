@@ -14,7 +14,6 @@ import (
 )
 
 type Report struct {
-	Type_ string `json:"type"`
 	// The UUID that can be used to identify the report.
 	Uuid string `json:"uuid,omitempty"`
 	// The title of the report.
@@ -27,7 +26,7 @@ type Report struct {
 	Reporter string `json:"reporter,omitempty"`
 	// A URL linking to the results of the report in an external tool.
 	Link string `json:"link,omitempty"`
-	// If enabled, a remote link is created in Jira for the issue associated with the commit the report belongs to.
+	// If enabled, a remote link is created in Jira for the work item associated with the commit the report belongs to.
 	RemoteLinkEnabled bool `json:"remote_link_enabled,omitempty"`
 	// A URL to the report logo. If none is provided, the default insights logo will be used.
 	LogoUrl string `json:"logo_url,omitempty"`
@@ -41,4 +40,5 @@ type Report struct {
 	CreatedOn time.Time `json:"created_on,omitempty"`
 	// The timestamp when the report was updated.
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	Type_     string    `json:"type"`
 }

@@ -10,7 +10,6 @@
 package bitbucket
 
 type Group struct {
-	Type_     string       `json:"type"`
 	Links     *interface{} `json:"links,omitempty"`
 	Owner     *Account     `json:"owner,omitempty"`
 	Workspace *Workspace   `json:"workspace,omitempty"`
@@ -19,4 +18,5 @@ type Group struct {
 	Slug string `json:"slug,omitempty"`
 	// The concatenation of the workspace's slug and the group's slug, separated with a colon (e.g. `acme:developers`)
 	FullSlug string `json:"full_slug,omitempty"`
+	Type_    string `json:"type"`
 }

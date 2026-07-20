@@ -27,6 +27,7 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugCommitsRevisionPost**](CommitsApi.md#RepositoriesWorkspaceRepoSlugCommitsRevisionPost) | **Post** /repositories/{workspace}/{repo_slug}/commits/{revision} | List commits for revision using include/exclude
 [**RepositoriesWorkspaceRepoSlugDiffSpecGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugDiffSpecGet) | **Get** /repositories/{workspace}/{repo_slug}/diff/{spec} | Compare two commits
 [**RepositoriesWorkspaceRepoSlugDiffstatSpecGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugDiffstatSpecGet) | **Get** /repositories/{workspace}/{repo_slug}/diffstat/{spec} | Compare two commit diff stats
+[**RepositoriesWorkspaceRepoSlugFileConflictsSpecGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugFileConflictsSpecGet) | **Get** /repositories/{workspace}/{repo_slug}/file-conflicts/{spec} | Get file conflicts for a commit spec
 [**RepositoriesWorkspaceRepoSlugMergeBaseRevspecGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugMergeBaseRevspecGet) | **Get** /repositories/{workspace}/{repo_slug}/merge-base/{revspec} | Get the common ancestor between two commits
 [**RepositoriesWorkspaceRepoSlugPatchSpecGet**](CommitsApi.md#RepositoriesWorkspaceRepoSlugPatchSpecGet) | **Get** /repositories/{workspace}/{repo_slug}/patch/{spec} | Get a patch for two commits
 
@@ -406,7 +407,7 @@ Deletes the specified commit comment.  Note that deleting comments that have vis
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **commit** | **string**| The commit&#x27;s SHA1. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -437,7 +438,7 @@ Returns the specified commit comment.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **commit** | **string**| The commit&#x27;s SHA1. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -469,7 +470,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**CommitComment**](CommitComment.md)| The updated comment. | 
-  **commentId** | **int32**| The id of the comment. | 
+  **commentId** | **int64**| The id of the comment. | 
   **commit** | **string**| The commit&#x27;s SHA1. | 
   **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
   **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
@@ -758,7 +759,7 @@ Name | Type | Description  | Notes
  **binary** | **optional.Bool**| Generate diffs that include binary files, true if omitted. | 
  **renames** | **optional.Bool**| Whether to perform rename detection, true if omitted. | 
  **merge** | **optional.Bool**| This parameter is deprecated. The &#x27;topic&#x27; parameter should be used instead. The &#x27;merge&#x27; and &#x27;topic&#x27; parameters cannot be both used at the same time.  If true, the source commit is merged into the destination commit, and then a diff from the destination to the merge result is returned. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned. True if omitted. | 
- **topic** | **optional.Bool**| If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned. | 
+ **topic** | **optional.Bool**| If true, returns 2-way &#x27;three-dot&#x27; diff. This is a diff between the source commit and the merge base of the source commit and the destination commit. If false, a simple &#x27;two dot&#x27; diff between the source and destination is returned.  If omitted, defaults to true, ie. a 2 way &#x27;three-dot&#x27; diff is returned.  | 
 
 ### Return type
 
@@ -808,6 +809,36 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedDiffstats**](paginated_diffstats.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugFileConflictsSpecGet**
+> PaginatedFileConflicts RepositoriesWorkspaceRepoSlugFileConflictsSpecGet(ctx, repoSlug, spec, workspace)
+Get file conflicts for a commit spec
+
+Get file conflicts for a commit spec
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **spec** | **string**| A commit SHA (e.g. &#x60;3a8b42&#x60;) or a commit range using double dot notation (e.g. &#x60;3a8b42..9ff173&#x60;).  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+
+### Return type
+
+[**PaginatedFileConflicts**](paginated_file_conflicts.md)
 
 ### Authorization
 

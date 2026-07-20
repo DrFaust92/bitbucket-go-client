@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet**
-> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, projectKey, workspace)
+> ProjectGroupPermission WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugGet(ctx, groupSlug, projectKey, workspace)
 Get an explicit group permission for a project
 
 Returns the group permission for a given group and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * `admin` * `create-repo` * `write` * `read` * `none`
@@ -321,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ProjectGroupPermission**](project_group_permission.md)
 
 ### Authorization
 
@@ -335,7 +335,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut**
-> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx, body, groupSlug, projectKey, workspace)
+> ProjectGroupPermission WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigGroupsGroupSlugPut(ctx, body, groupSlug, projectKey, workspace)
 Update an explicit group permission for a project
 
 Updates the group permission, or grants a new permission if one does not already exist.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * `admin` * `create-repo` * `write` * `read`
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ProjectGroupPermission**](project_group_permission.md)
 
 ### Authorization
 
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet**
-> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet(ctx, projectKey, selectedUserId, workspace)
+> ProjectUserPermission WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdGet(ctx, projectKey, selectedUserId, workspace)
 Get an explicit user permission for a project
 
 Returns the explicit user permission for a given user and project.  Only users with admin permission for the project may access this resource.  Permissions can be:  * `admin` * `create-repo` * `write` * `read` * `none`
@@ -450,7 +450,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ProjectUserPermission**](project_user_permission.md)
 
 ### Authorization
 
@@ -464,7 +464,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut**
-> ModelError WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx, body, projectKey, selectedUserId, workspace)
+> ProjectUserPermission WorkspacesWorkspaceProjectsProjectKeyPermissionsConfigUsersSelectedUserIdPut(ctx, body, projectKey, selectedUserId, workspace)
 Update an explicit user permission for a project
 
 Updates the explicit user permission for a given user and project. The selected user must be a member of the workspace, and cannot be the workspace owner.  Only users with admin permission for the project may access this resource.  Due to security concerns, the JWT and OAuth authentication methods are unsupported. This is to ensure integrations and add-ons are not allowed to change permissions.  Permissions can be:  * `admin` * `create-repo` * `write` * `read`
@@ -481,7 +481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelError**](map.md)
+[**ProjectUserPermission**](project_user_permission.md)
 
 ### Authorization
 

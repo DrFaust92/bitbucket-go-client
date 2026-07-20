@@ -12,7 +12,7 @@ package bitbucket
 // The metadata that describes a pull request merge.
 type PullrequestMergeParameters struct {
 	Type_ string `json:"type"`
-	// The commit message that will be used on the resulting commit.
+	// The commit message that will be used on the resulting commit. Note that the size of the message is limited to 128 KiB.
 	Message string `json:"message,omitempty"`
 	// Whether the source branch should be deleted. If this is not provided, we fallback to the value used when the pull request was created, which defaults to False
 	CloseSourceBranch bool `json:"close_source_branch,omitempty"`

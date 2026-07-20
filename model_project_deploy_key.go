@@ -14,7 +14,6 @@ import (
 )
 
 type ProjectDeployKey struct {
-	Type_ string `json:"type"`
 	// The deploy key value.
 	Key     string   `json:"key,omitempty"`
 	Project *Project `json:"project,omitempty"`
@@ -26,4 +25,5 @@ type ProjectDeployKey struct {
 	LastUsed  time.Time    `json:"last_used,omitempty"`
 	Links     *interface{} `json:"links,omitempty"`
 	CreatedBy *Account     `json:"created_by,omitempty"`
+	Type_     string       `json:"type"`
 }

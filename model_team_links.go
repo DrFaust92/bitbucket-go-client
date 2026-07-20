@@ -10,10 +10,10 @@
 package bitbucket
 
 type TeamLinks struct {
-	Avatar       *Link `json:"avatar,omitempty"`
 	Self         *Link `json:"self,omitempty"`
 	Html         *Link `json:"html,omitempty"`
 	Members      *Link `json:"members,omitempty"`
 	Projects     *Link `json:"projects,omitempty"`
 	Repositories *Link `json:"repositories,omitempty"`
+	Avatar       *Link `json:"avatar,omitempty"`
 }

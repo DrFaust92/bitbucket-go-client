@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -29,7 +28,7 @@ type SnippetsApiService service
 
 /*
 SnippetsApiService List snippets
-Returns all snippets. Like pull requests, repositories and workspaces, the full set of snippets is defined by what the current user has access to.  This includes all snippets owned by any of the workspaces the user is a member of, or snippets by other users that the current user is either watching or has collaborated on (for instance by commenting on it).  To limit the set of returned snippets, apply the &#x60;?role&#x3D;[owner|contributor|member]&#x60; query parameter where the roles are defined as follows:  * &#x60;owner&#x60;: all snippets owned by the current user * &#x60;contributor&#x60;: all snippets owned by, or watched by the current user * &#x60;member&#x60;: created in a workspaces or watched by the current user  When no role is specified, all public snippets are returned, as well as all privately owned snippets watched or commented on.  The returned response is a normal paginated JSON list. This endpoint only supports &#x60;application/json&#x60; responses and no &#x60;multipart/form-data&#x60; or &#x60;multipart/related&#x60;. As a result, it is not possible to include the file contents.
+**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-snippets/#api-snippets-workspace-get).**  Returns all snippets. Like pull requests, repositories and workspaces, the full set of snippets is defined by what the current user has access to.  This includes all snippets owned by any of the workspaces the user is a member of, or snippets by other users that the current user is either watching or has collaborated on (for instance by commenting on it).  To limit the set of returned snippets, apply the &#x60;?role&#x3D;[owner|contributor|member]&#x60; query parameter where the roles are defined as follows:  * &#x60;owner&#x60;: all snippets owned by the current user * &#x60;contributor&#x60;: all snippets owned by, or watched by the current user * &#x60;member&#x60;: created in a workspaces or watched by the current user  When no role is specified, all public snippets are returned, as well as all privately owned snippets watched or commented on.  The returned response is a normal paginated JSON list. This endpoint only supports &#x60;application/json&#x60; responses and no &#x60;multipart/form-data&#x60; or &#x60;multipart/related&#x60;. As a result, it is not possible to include the file contents.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *SnippetsApiSnippetsGetOpts - Optional Parameters:
      * @param "Role" (optional.String) -  Filter down the result based on the authenticated user&#x27;s role (&#x60;owner&#x60;, &#x60;contributor&#x60;, or &#x60;member&#x60;).
@@ -268,7 +267,7 @@ Deletes a snippet comment.  Comments can only be removed by the comment author, 
   - @param encodedId The snippet id.
   - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
-func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdDelete(ctx context.Context, commentId int32, encodedId string, workspace string) (*http.Response, error) {
+func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdDelete(ctx context.Context, commentId int64, encodedId string, workspace string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -373,7 +372,7 @@ Returns the specific snippet comment.
 
 @return SnippetComment
 */
-func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdGet(ctx context.Context, commentId int32, encodedId string, workspace string) (SnippetComment, *http.Response, error) {
+func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdGet(ctx context.Context, commentId int64, encodedId string, workspace string) (SnippetComment, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -498,7 +497,7 @@ Updates a comment.  The only required field in the body is &#x60;content.raw&#x6
 
 @return SnippetComment
 */
-func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdPut(ctx context.Context, body SnippetComment, commentId int32, encodedId string, workspace string) (SnippetComment, *http.Response, error) {
+func (a *SnippetsApiService) SnippetsWorkspaceEncodedIdCommentsCommentIdPut(ctx context.Context, body SnippetComment, commentId int64, encodedId string, workspace string) (SnippetComment, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

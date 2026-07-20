@@ -14,7 +14,6 @@ import (
 )
 
 type Pullrequest struct {
-	Type_ string       `json:"type"`
 	Links *interface{} `json:"links,omitempty"`
 	// The pull request's unique ID. Note that pull request IDs are only unique within their associated repository.
 	Id int32 `json:"id,omitempty"`
@@ -46,4 +45,9 @@ type Pullrequest struct {
 	Reviewers []Account `json:"reviewers,omitempty"`
 	//         The list of users that are collaborating on this pull request.         Collaborators are user that:          * are added to the pull request as a reviewer (part of the reviewers           list)         * are not explicit reviewers, but have commented on the pull request         * are not explicit reviewers, but have approved the pull request          Each user is wrapped in an object that indicates the user's role and         whether they have approved the pull request. For performance reasons,         the API only returns this list when an API requests a pull request by         id.
 	Participants []Participant `json:"participants,omitempty"`
+	// A boolean flag indicating whether the pull request is a draft.
+	Draft bool `json:"draft,omitempty"`
+	// A boolean flag indicating whether the pull request is queued
+	Queued bool   `json:"queued,omitempty"`
+	Type_  string `json:"type"`
 }

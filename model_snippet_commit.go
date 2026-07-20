@@ -14,12 +14,13 @@ import (
 )
 
 type SnippetCommit struct {
-	Hash    string       `json:"hash,omitempty"`
-	Date    time.Time    `json:"date,omitempty"`
-	Author  *Author      `json:"author,omitempty"`
-	Message string       `json:"message,omitempty"`
-	Summary *interface{} `json:"summary,omitempty"`
-	Parents []BaseCommit `json:"parents,omitempty"`
-	Links   *interface{} `json:"links,omitempty"`
-	Snippet *Snippet     `json:"snippet,omitempty"`
+	Links     *interface{} `json:"links,omitempty"`
+	Snippet   *Snippet     `json:"snippet,omitempty"`
+	Hash      string       `json:"hash,omitempty"`
+	Date      time.Time    `json:"date,omitempty"`
+	Author    *Author      `json:"author,omitempty"`
+	Committer *Committer   `json:"committer,omitempty"`
+	Message   string       `json:"message,omitempty"`
+	Summary   *interface{} `json:"summary,omitempty"`
+	Parents   []BaseCommit `json:"parents,omitempty"`
 }

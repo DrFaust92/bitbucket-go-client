@@ -14,7 +14,6 @@ import (
 )
 
 type PipelineSchedule struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the schedule.
 	Uuid string `json:"uuid,omitempty"`
 	// Whether the schedule is enabled.
@@ -26,4 +25,5 @@ type PipelineSchedule struct {
 	CreatedOn time.Time `json:"created_on,omitempty"`
 	// The timestamp when the schedule was updated.
 	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	Type_     string    `json:"type"`
 }

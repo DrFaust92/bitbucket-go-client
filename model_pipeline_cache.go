@@ -14,7 +14,6 @@ import (
 )
 
 type PipelineCache struct {
-	Type_ string `json:"type"`
 	// The UUID identifying the pipeline cache.
 	Uuid string `json:"uuid,omitempty"`
 	// The UUID of the pipeline that created the cache.
@@ -31,4 +30,5 @@ type PipelineCache struct {
 	FileSizeBytes int32 `json:"file_size_bytes,omitempty"`
 	// The timestamp when the cache was created.
 	CreatedOn time.Time `json:"created_on,omitempty"`
+	Type_     string    `json:"type"`
 }

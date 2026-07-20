@@ -59,6 +59,8 @@ type APIClient struct {
 
 	DownloadsApi *DownloadsApiService
 
+	GPGApi *GPGApiService
+
 	IssueTrackerApi *IssueTrackerApiService
 
 	PipelinesApi *PipelinesApiService
@@ -113,6 +115,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CommitsApi = (*CommitsApiService)(&c.common)
 	c.DeploymentsApi = (*DeploymentsApiService)(&c.common)
 	c.DownloadsApi = (*DownloadsApiService)(&c.common)
+	c.GPGApi = (*GPGApiService)(&c.common)
 	c.IssueTrackerApi = (*IssueTrackerApiService)(&c.common)
 	c.PipelinesApi = (*PipelinesApiService)(&c.common)
 	c.ProjectsApi = (*ProjectsApiService)(&c.common)

@@ -12,12 +12,11 @@ package bitbucket
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -29,7 +28,7 @@ type SearchApiService service
 
 /*
 SearchApiService Search for code in a user&#x27;s repositories
-Search for code in the repositories of the specified user.  Note that searches can match in the file&#x27;s text (&#x60;content_matches&#x60;), the path (&#x60;path_matches&#x60;), or both.  You can use the same syntax for the search query as in the UI. E.g. to search for \&quot;foo\&quot; only within the repository \&quot;demo\&quot;, use the query parameter &#x60;search_query&#x3D;foo+repo:demo&#x60;.  Similar to other APIs, you can request more fields using a &#x60;fields&#x60; query parameter. E.g. to get some more information about the repository of matched files, use the query parameter &#x60;search_query&#x3D;foo&amp;fields&#x3D;%2Bvalues.file.commit.repository&#x60; (the &#x60;%2B&#x60; is a URL-encoded &#x60;+&#x60;).
+This API will be deprecated on November 1, 2026.  Search for code in the repositories of the specified user.  Note that searches can match in the file&#x27;s text (&#x60;content_matches&#x60;), the path (&#x60;path_matches&#x60;), or both.  You can use the same syntax for the search query as in the UI. E.g. to search for \&quot;foo\&quot; only within the repository \&quot;demo\&quot;, use the query parameter &#x60;search_query&#x3D;foo+repo:demo&#x60;.  Similar to other APIs, you can request more fields using a &#x60;fields&#x60; query parameter. E.g. to get some more information about the repository of matched files, use the query parameter &#x60;search_query&#x3D;foo&amp;fields&#x3D;%2Bvalues.file.commit.repository&#x60; (the &#x60;%2B&#x60; is a URL-encoded &#x60;+&#x60;).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
  * @param searchQuery The search query
@@ -175,7 +174,7 @@ func (a *SearchApiService) SearchAccount(ctx context.Context, selectedUser strin
 
 /*
 SearchApiService Search for code in a team&#x27;s repositories
-Search for code in the repositories of the specified team.  Note that searches can match in the file&#x27;s text (&#x60;content_matches&#x60;), the path (&#x60;path_matches&#x60;), or both.  You can use the same syntax for the search query as in the UI. E.g. to search for \&quot;foo\&quot; only within the repository \&quot;demo\&quot;, use the query parameter &#x60;search_query&#x3D;foo+repo:demo&#x60;.  Similar to other APIs, you can request more fields using a &#x60;fields&#x60; query parameter. E.g. to get some more information about the repository of matched files, use the query parameter &#x60;search_query&#x3D;foo&amp;fields&#x3D;%2Bvalues.file.commit.repository&#x60; (the &#x60;%2B&#x60; is a URL-encoded &#x60;+&#x60;).  Try &#x60;fields&#x3D;%2Bvalues.*.*.*.*&#x60; to get an idea what&#x27;s possible.
+This API will be deprecated on November 1, 2026.  Search for code in the repositories of the specified team.  Note that searches can match in the file&#x27;s text (&#x60;content_matches&#x60;), the path (&#x60;path_matches&#x60;), or both.  You can use the same syntax for the search query as in the UI. E.g. to search for \&quot;foo\&quot; only within the repository \&quot;demo\&quot;, use the query parameter &#x60;search_query&#x3D;foo+repo:demo&#x60;.  Similar to other APIs, you can request more fields using a &#x60;fields&#x60; query parameter. E.g. to get some more information about the repository of matched files, use the query parameter &#x60;search_query&#x3D;foo&amp;fields&#x3D;%2Bvalues.file.commit.repository&#x60; (the &#x60;%2B&#x60; is a URL-encoded &#x60;+&#x60;).  Try &#x60;fields&#x3D;%2Bvalues.*.*.*.*&#x60; to get an idea what&#x27;s possible.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param username The account to search in; either the username or the UUID in curly braces
  * @param searchQuery The search query
@@ -321,7 +320,7 @@ func (a *SearchApiService) SearchTeam(ctx context.Context, username string, sear
 
 /*
 SearchApiService Search for code in a workspace
-Search for code in the repositories of the specified workspace.  Note that searches can match in the file&#x27;s text (&#x60;content_matches&#x60;), the path (&#x60;path_matches&#x60;), or both.  You can use the same syntax for the search query as in the UI. E.g. to search for \&quot;foo\&quot; only within the repository \&quot;demo\&quot;, use the query parameter &#x60;search_query&#x3D;foo+repo:demo&#x60;.  Similar to other APIs, you can request more fields using a &#x60;fields&#x60; query parameter. E.g. to get some more information about the repository of matched files, use the query parameter &#x60;search_query&#x3D;foo&amp;fields&#x3D;%2Bvalues.file.commit.repository&#x60; (the &#x60;%2B&#x60; is a URL-encoded &#x60;+&#x60;).  Try &#x60;fields&#x3D;%2Bvalues.*.*.*.*&#x60; to get an idea what&#x27;s possible.
+This API will be deprecated on November 1, 2026.  Search for code in the repositories of the specified workspace.  Note that searches can match in the file&#x27;s text (&#x60;content_matches&#x60;), the path (&#x60;path_matches&#x60;), or both.  You can use the same syntax for the search query as in the UI. E.g. to search for \&quot;foo\&quot; only within the repository \&quot;demo\&quot;, use the query parameter &#x60;search_query&#x3D;foo+repo:demo&#x60;.  Similar to other APIs, you can request more fields using a &#x60;fields&#x60; query parameter. E.g. to get some more information about the repository of matched files, use the query parameter &#x60;search_query&#x3D;foo&amp;fields&#x3D;%2Bvalues.file.commit.repository&#x60; (the &#x60;%2B&#x60; is a URL-encoded &#x60;+&#x60;).  Try &#x60;fields&#x3D;%2Bvalues.*.*.*.*&#x60; to get an idea what&#x27;s possible.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param workspace The workspace to search in; either the slug or the UUID in curly braces
  * @param searchQuery The search query
