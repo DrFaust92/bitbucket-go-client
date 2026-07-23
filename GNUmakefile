@@ -11,4 +11,4 @@ patch:
 	wget -q --output-document - https://api.bitbucket.org/swagger.json | "$$(go env GOPATH)/bin/json-patch" -p api/swagger.json-patch > api/swagger.output.json
 
 generate: patch
-	swagger-codegen generate -i api/swagger.output.json -l go -c swagger.conf --additional-properties packageName=bitbucket
+	swagger-codegen generate -i api/swagger.output.json -l go -c swagger.conf --additional-properties packageName=bitbucket --template-dir swagger-template

@@ -11,7 +11,7 @@ package bitbucket
 
 type PipelinesConfig struct {
 	// Whether Pipelines is enabled for the repository.
-	Enabled    bool        `json:"enabled,omitempty"`
+	Enabled    *bool       `json:"enabled,omitempty"`
 	Repository *Repository `json:"repository,omitempty"`
 	Type_      string      `json:"type"`
 }
