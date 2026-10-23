@@ -971,5 +971,26 @@
     "op": "replace",
     "path": "/tags/15/name",
     "value": "Ssh"
+  },
+  {
+    "op": "add",
+    "path": "/definitions/deployment_variable/allOf/1/required",
+    "value": [
+      "secured"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/definitions/pipeline_variable/allOf/1/required",
+    "value": [
+      "secured"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/definitions/pipelines_config/allOf/1/required",
+    "value": [
+      "enabled"
+    ]
   }
 ]
