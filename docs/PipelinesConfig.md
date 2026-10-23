@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Enabled** | **bool** | Whether Pipelines is enabled for the repository. | [optional] [default to null]
+**Enabled** | **bool** | Whether Pipelines is enabled for the repository. | [default to null]
 **Repository** | [***Repository**](repository.md) |  | [optional] [default to null]
 **Type_** | **string** |  | [default to null]
 
