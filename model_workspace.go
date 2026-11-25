@@ -31,7 +31,7 @@ type Workspace struct {
 	IsPrivacyEnforced bool `json:"is_privacy_enforced,omitempty"`
 	// Controls the rules for forking repositories within this workspace.  * **allow_forks**: unrestricted forking * **internal_only**: prevents forking of private repositories outside the workspace or to public repositories
 	ForkingMode string    `json:"forking_mode,omitempty"`
-	CreatedOn   time.Time `json:"created_on,omitempty"`
-	UpdatedOn   time.Time `json:"updated_on,omitempty"`
-	Type_       string    `json:"type"`
+	CreatedOn   time.Time `json:"created_on,omitzero"`
+	UpdatedOn   time.Time `json:"updated_on,omitzero"`
+	Type_       string    `json:"type,omitempty"`
 }

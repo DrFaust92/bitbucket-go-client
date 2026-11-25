@@ -14,5 +14,5 @@ type PipelineStepError struct {
 	Key string `json:"key,omitempty"`
 	// The error message.
 	Message string `json:"message,omitempty"`
-	Type_   string `json:"type"`
+	Type_   string `json:"type,omitempty"`
 }

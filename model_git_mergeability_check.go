@@ -14,7 +14,7 @@ type GitMergeabilityCheck struct {
 	Links *interface{} `json:"links,omitempty"`
 	// Present when `status` is `PASSED` or `FAILED`: the Git-level outcome for the selected source and destination heads. Omitted when `status` is `UNKNOWN` (Bitbucket could not evaluate Git mergeability, e.g. due to a timeout); this doesn't imply the pull request is conflict-free.
 	Reason string `json:"reason,omitempty"`
-	Type_  string `json:"type"`
+	Type_  string `json:"type,omitempty"`
 	// Whether this check passed. `UNKNOWN` means the check could not be evaluated; it does not establish that the pull request is mergeable.
 	Status string `json:"status"`
 	// Whether this check must pass for the pull request to be mergeable.

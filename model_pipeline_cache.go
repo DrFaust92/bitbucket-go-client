@@ -29,6 +29,6 @@ type PipelineCache struct {
 	// The size of the file containing the archive of the cache.
 	FileSizeBytes int32 `json:"file_size_bytes,omitempty"`
 	// The timestamp when the cache was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
-	Type_     string    `json:"type"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
+	Type_     string    `json:"type,omitempty"`
 }

@@ -14,7 +14,7 @@ type CustomMergeCheck struct {
 	Check *interface{} `json:"check"`
 	// Present when the custom check provides one; omitted when absent.
 	Message string `json:"message,omitempty"`
-	Type_   string `json:"type"`
+	Type_   string `json:"type,omitempty"`
 	// Present when a persisted result exists: the persisted custom check result UUID. Omitted for on-merge checks known but not yet triggered.
 	Uuid string `json:"uuid,omitempty"`
 	// Whether this check passed. `UNKNOWN` means the check could not be evaluated; it does not establish that the pull request is mergeable.

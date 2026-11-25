@@ -15,5 +15,5 @@ type WorkspaceBase struct {
 	Uuid string `json:"uuid,omitempty"`
 	// The short label that identifies this workspace.
 	Slug  string `json:"slug,omitempty"`
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 }

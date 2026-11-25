@@ -15,5 +15,5 @@ type Deployment struct {
 	State       *DeploymentState       `json:"state,omitempty"`
 	Environment *DeploymentEnvironment `json:"environment,omitempty"`
 	Release     *DeploymentRelease     `json:"release,omitempty"`
-	Type_       string                 `json:"type"`
+	Type_       string                 `json:"type,omitempty"`
 }

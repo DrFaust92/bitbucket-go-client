@@ -10,7 +10,7 @@
 package bitbucket
 
 type CustomPreMergeCheck struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// Identifies which custom check this is, as `{'type': 'custom_merge_check_definition', 'id': '...', 'name': '...'}`, where `id` is the ARI of the custom check extension.
 	Check *interface{} `json:"check"`
 	// Present when the custom check provides one; omitted when absent.

@@ -22,8 +22,8 @@ type SshKey struct {
 	Comment string `json:"comment,omitempty"`
 	// The user-defined label for the SSH key
 	Label     string       `json:"label,omitempty"`
-	CreatedOn time.Time    `json:"created_on,omitempty"`
-	LastUsed  time.Time    `json:"last_used,omitempty"`
+	CreatedOn time.Time    `json:"created_on,omitzero"`
+	LastUsed  time.Time    `json:"last_used,omitzero"`
 	Links     *interface{} `json:"links,omitempty"`
-	Type_     string       `json:"type"`
+	Type_     string       `json:"type,omitempty"`
 }

@@ -10,7 +10,7 @@
 package bitbucket
 
 type PullrequestStateCheck struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// The public state of the pull request. Note that a queued pull request is reported as `OPEN` here but as `blocking: true`, since it cannot be merged again while a merge is already in progress.
 	State string `json:"state"`
 	// Whether this check passed. `UNKNOWN` means the check could not be evaluated; it does not establish that the pull request is mergeable.

@@ -16,5 +16,5 @@ type MergeQueue struct {
 	Name string `json:"name"`
 	// The configuration state returned by the merge queue service. Known values are `ACTIVE`, `PAUSED`, `DRAINING`, `SUSPENDED`, `INACTIVE`, and `UNKNOWN`. `ACTIVE` accepts entries; `PAUSED` accepts entries but pauses landing; `DRAINING` and `SUSPENDED` block entry; `INACTIVE` does not require queueing. Unknown values are returned unchanged and follow the existing queue behavior: only `DRAINING` and `SUSPENDED` block entry.
 	State string `json:"state"`
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 }

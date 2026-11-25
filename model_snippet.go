@@ -18,10 +18,10 @@ type Snippet struct {
 	Title string `json:"title,omitempty"`
 	// The DVCS used to store the snippet.
 	Scm       string    `json:"scm,omitempty"`
-	CreatedOn time.Time `json:"created_on,omitempty"`
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
 	Owner     *Account  `json:"owner,omitempty"`
 	Creator   *Account  `json:"creator,omitempty"`
 	IsPrivate bool      `json:"is_private,omitempty"`
-	Type_     string    `json:"type"`
+	Type_     string    `json:"type,omitempty"`
 }

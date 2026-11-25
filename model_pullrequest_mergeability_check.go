@@ -11,7 +11,7 @@ package bitbucket
 
 // A mergeability check. The `type` identifies the concrete check and its additional fields.
 type PullrequestMergeabilityCheck struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// Whether this check passed. `UNKNOWN` means the check could not be evaluated; it does not establish that the pull request is mergeable.
 	Status string `json:"status"`
 	// Whether this check must pass for the pull request to be mergeable.

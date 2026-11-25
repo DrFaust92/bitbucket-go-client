@@ -27,7 +27,7 @@ type Commitstatus struct {
 	Name string `json:"name,omitempty"`
 	// A description of the build (e.g. \"Unit tests in Bamboo\")
 	Description string    `json:"description,omitempty"`
-	CreatedOn   time.Time `json:"created_on,omitempty"`
-	UpdatedOn   time.Time `json:"updated_on,omitempty"`
-	Type_       string    `json:"type"`
+	CreatedOn   time.Time `json:"created_on,omitzero"`
+	UpdatedOn   time.Time `json:"updated_on,omitzero"`
+	Type_       string    `json:"type,omitempty"`
 }

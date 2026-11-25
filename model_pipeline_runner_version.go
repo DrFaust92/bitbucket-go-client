@@ -14,5 +14,5 @@ type PipelineRunnerVersion struct {
 	Version string `json:"version,omitempty"`
 	// The current recommended version of the runner.
 	Current string `json:"current,omitempty"`
-	Type_   string `json:"type"`
+	Type_   string `json:"type,omitempty"`
 }

@@ -14,7 +14,7 @@ import (
 )
 
 type Project struct {
-	CreatedOn   time.Time `json:"created_on,omitempty"`
+	CreatedOn   time.Time `json:"created_on,omitzero"`
 	Description string    `json:"description,omitempty"`
 	// Whether signed commits are required for this project:  - true when the workspace is on a Premium plan and enforcement is enabled at the project or the   workspace level; - otherwise false.
 	EnforcedSignedCommits bool `json:"enforced_signed_commits,omitempty"`
@@ -28,8 +28,8 @@ type Project struct {
 	// The name of the project.
 	Name      string    `json:"name,omitempty"`
 	Owner     *Team     `json:"owner,omitempty"`
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
 	// The project's immutable id.
 	Uuid  string `json:"uuid,omitempty"`
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 }

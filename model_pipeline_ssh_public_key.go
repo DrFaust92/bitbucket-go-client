@@ -18,5 +18,5 @@ type PipelineSshPublicKey struct {
 	Md5Fingerprint string `json:"md5_fingerprint,omitempty"`
 	// The SHA-256 fingerprint of the public key.
 	Sha256Fingerprint string `json:"sha256_fingerprint,omitempty"`
-	Type_             string `json:"type"`
+	Type_             string `json:"type,omitempty"`
 }

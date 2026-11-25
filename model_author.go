@@ -13,5 +13,5 @@ type Author struct {
 	// The raw author value from the repository. This may be the only value available if the author does not match a user in Bitbucket.
 	Raw   string   `json:"raw,omitempty"`
 	User  *Account `json:"user,omitempty"`
-	Type_ string   `json:"type"`
+	Type_ string   `json:"type,omitempty"`
 }

@@ -11,7 +11,7 @@ package bitbucket
 
 // Object containing a user that is a default reviewer and the type of reviewer
 type DefaultReviewerAndType struct {
-	Type_        string `json:"type"`
+	Type_        string `json:"type,omitempty"`
 	ReviewerType string `json:"reviewer_type,omitempty"`
 	User         *User  `json:"user,omitempty"`
 }

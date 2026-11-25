@@ -11,7 +11,7 @@ package bitbucket
 
 // A user's direct permission for a given project.
 type ProjectUserPermission struct {
-	Type_      string       `json:"type"`
+	Type_      string       `json:"type,omitempty"`
 	Links      *interface{} `json:"links,omitempty"`
 	Permission string       `json:"permission,omitempty"`
 	User       *User        `json:"user,omitempty"`

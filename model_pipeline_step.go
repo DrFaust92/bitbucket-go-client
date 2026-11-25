@@ -17,14 +17,14 @@ type PipelineStep struct {
 	// The UUID identifying the step.
 	Uuid string `json:"uuid,omitempty"`
 	// The timestamp when the step execution was started. This is not set when the step hasn't executed yet.
-	StartedOn time.Time `json:"started_on,omitempty"`
+	StartedOn time.Time `json:"started_on,omitzero"`
 	// The timestamp when the step execution was completed. This is not set if the step is still in progress.
-	CompletedOn time.Time          `json:"completed_on,omitempty"`
+	CompletedOn time.Time          `json:"completed_on,omitzero"`
 	State       *PipelineStepState `json:"state,omitempty"`
 	Image       *PipelineImage     `json:"image,omitempty"`
 	// The list of commands that are executed as part of the setup phase of the build. These commands are executed outside the build container.
 	SetupCommands []PipelineCommand `json:"setup_commands,omitempty"`
 	// The list of build commands. These commands are executed in the build container.
 	ScriptCommands []PipelineCommand `json:"script_commands,omitempty"`
-	Type_          string            `json:"type"`
+	Type_          string            `json:"type,omitempty"`
 }

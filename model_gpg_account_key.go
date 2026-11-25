@@ -25,11 +25,11 @@ type GpgAccountKey struct {
 	ParentFingerprint string `json:"parent_fingerprint,omitempty"`
 	// The user-defined label for the GPG key
 	Name      string          `json:"name,omitempty"`
-	ExpiresOn time.Time       `json:"expires_on,omitempty"`
-	CreatedOn time.Time       `json:"created_on,omitempty"`
-	AddedOn   time.Time       `json:"added_on,omitempty"`
-	LastUsed  time.Time       `json:"last_used,omitempty"`
+	ExpiresOn time.Time       `json:"expires_on,omitzero"`
+	CreatedOn time.Time       `json:"created_on,omitzero"`
+	AddedOn   time.Time       `json:"added_on,omitzero"`
+	LastUsed  time.Time       `json:"last_used,omitzero"`
 	Subkeys   []GpgAccountKey `json:"subkeys,omitempty"`
 	Links     *interface{}    `json:"links,omitempty"`
-	Type_     string          `json:"type"`
+	Type_     string          `json:"type,omitempty"`
 }

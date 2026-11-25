@@ -15,5 +15,5 @@ type PipelineSchedulePostRequestBody struct {
 	// Whether the schedule is enabled.
 	Enabled bool                                   `json:"enabled,omitempty"`
 	Target  *PipelineSchedulePostRequestBodyTarget `json:"target"`
-	Type_   string                                 `json:"type"`
+	Type_   string                                 `json:"type,omitempty"`
 }

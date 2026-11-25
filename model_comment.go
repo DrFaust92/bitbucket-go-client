@@ -15,13 +15,13 @@ import (
 
 type Comment struct {
 	Id        int64        `json:"id,omitempty"`
-	CreatedOn time.Time    `json:"created_on,omitempty"`
-	UpdatedOn time.Time    `json:"updated_on,omitempty"`
+	CreatedOn time.Time    `json:"created_on,omitzero"`
+	UpdatedOn time.Time    `json:"updated_on,omitzero"`
 	Content   *interface{} `json:"content,omitempty"`
 	User      *Account     `json:"user,omitempty"`
 	Deleted   bool         `json:"deleted,omitempty"`
 	Parent    *Comment     `json:"parent,omitempty"`
 	Inline    *interface{} `json:"inline,omitempty"`
 	Links     *interface{} `json:"links,omitempty"`
-	Type_     string       `json:"type"`
+	Type_     string       `json:"type,omitempty"`
 }

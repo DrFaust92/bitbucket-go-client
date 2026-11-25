@@ -23,6 +23,6 @@ type Task struct {
 	Creator   *Account     `json:"creator"`
 	Pending   bool         `json:"pending,omitempty"`
 	// The ISO8601 timestamp for when the task was resolved.
-	ResolvedOn time.Time `json:"resolved_on,omitempty"`
+	ResolvedOn time.Time `json:"resolved_on,omitzero"`
 	ResolvedBy *Account  `json:"resolved_by,omitempty"`
 }

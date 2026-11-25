@@ -20,7 +20,7 @@ type StandardMergeCheck struct {
 	Required bool `json:"required"`
 	// The configured threshold for this check, keyed by a check.kind-specific field name (e.g. `{'minimum_approvals': 2}`). The shape varies per `check.kind`.
 	Requirement *interface{} `json:"requirement"`
-	Type_       string       `json:"type"`
+	Type_       string       `json:"type,omitempty"`
 	// Whether this check passed. `UNKNOWN` means the check could not be evaluated; it does not establish that the pull request is mergeable.
 	Status string `json:"status"`
 }

@@ -11,7 +11,7 @@ package bitbucket
 
 // A group's permission for a given repository.
 type RepositoryGroupPermission struct {
-	Type_      string       `json:"type"`
+	Type_      string       `json:"type,omitempty"`
 	Links      *interface{} `json:"links,omitempty"`
 	Permission string       `json:"permission,omitempty"`
 	Group      *Group       `json:"group,omitempty"`

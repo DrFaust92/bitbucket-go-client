@@ -27,5 +27,5 @@ type Branchrestriction struct {
 	Value  int32     `json:"value,omitempty"`
 	Users  []Account `json:"users,omitempty"`
 	Groups []Group   `json:"groups,omitempty"`
-	Type_  string    `json:"type"`
+	Type_  string    `json:"type,omitempty"`
 }

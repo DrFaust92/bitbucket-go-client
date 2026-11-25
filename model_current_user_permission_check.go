@@ -10,7 +10,7 @@
 package bitbucket
 
 type CurrentUserPermissionCheck struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// Whether this check passed. `UNKNOWN` means the check could not be evaluated; it does not establish that the pull request is mergeable.
 	Status string `json:"status"`
 	// Whether this check must pass for the pull request to be mergeable.

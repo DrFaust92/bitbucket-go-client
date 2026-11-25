@@ -16,8 +16,8 @@ import (
 type CommitComment struct {
 	Commit    *Commit      `json:"commit,omitempty"`
 	Id        int64        `json:"id,omitempty"`
-	CreatedOn time.Time    `json:"created_on,omitempty"`
-	UpdatedOn time.Time    `json:"updated_on,omitempty"`
+	CreatedOn time.Time    `json:"created_on,omitzero"`
+	UpdatedOn time.Time    `json:"updated_on,omitzero"`
 	Content   *interface{} `json:"content,omitempty"`
 	User      *Account     `json:"user,omitempty"`
 	Deleted   bool         `json:"deleted,omitempty"`

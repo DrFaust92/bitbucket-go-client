@@ -10,7 +10,7 @@
 package bitbucket
 
 type MergeQueueCheck struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// Whether the destination branch currently requires queueing.
 	Required bool `json:"required"`
 	// Whether this check is currently preventing the pull request from being merged.

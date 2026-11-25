@@ -10,5 +10,5 @@
 package bitbucket
 
 type PipelineScheduleExecution struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 }

@@ -20,5 +20,5 @@ type DeploymentStateInProgress struct {
 	Url      string   `json:"url,omitempty"`
 	Deployer *Account `json:"deployer,omitempty"`
 	// The timestamp when the deployment was started.
-	StartDate time.Time `json:"start_date,omitempty"`
+	StartDate time.Time `json:"start_date,omitzero"`
 }

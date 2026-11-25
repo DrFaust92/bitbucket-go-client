@@ -18,5 +18,5 @@ type PipelineRunnerOauthClient struct {
 	TokenEndpoint string `json:"token_endpoint,omitempty"`
 	// The intended audience for the OAuth token.
 	Audience string `json:"audience,omitempty"`
-	Type_    string `json:"type"`
+	Type_    string `json:"type,omitempty"`
 }

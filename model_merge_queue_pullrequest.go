@@ -19,8 +19,8 @@ type MergeQueuePullrequest struct {
 	Status string `json:"status,omitempty"`
 	// The one-based position of the pullrequest in the merge queue.
 	Rank           int32                `json:"rank,omitempty"`
-	QueuedOn       time.Time            `json:"queued_on,omitempty"`
-	LastActivityOn time.Time            `json:"last_activity_on,omitempty"`
+	QueuedOn       time.Time            `json:"queued_on,omitzero"`
+	LastActivityOn time.Time            `json:"last_activity_on,omitzero"`
 	MergeQueue     *MergeQueueReference `json:"merge_queue,omitempty"`
 	Pipeline       *Pipeline            `json:"pipeline,omitempty"`
 	Pullrequest    *Pullrequest         `json:"pullrequest,omitempty"`
