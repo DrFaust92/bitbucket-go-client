@@ -21,7 +21,7 @@ type DeploymentStateCompleted struct {
 	Deployer *Account                        `json:"deployer,omitempty"`
 	Status   *DeploymentStateCompletedStatus `json:"status,omitempty"`
 	// The timestamp when the deployment was started.
-	StartDate time.Time `json:"start_date,omitempty"`
+	StartDate time.Time `json:"start_date,omitzero"`
 	// The timestamp when the deployment completed.
-	CompletionDate time.Time `json:"completion_date,omitempty"`
+	CompletionDate time.Time `json:"completion_date,omitzero"`
 }

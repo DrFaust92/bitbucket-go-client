@@ -13,5 +13,5 @@ type PipelinesConfig struct {
 	// Whether Pipelines is enabled for the repository.
 	Enabled    bool        `json:"enabled"`
 	Repository *Repository `json:"repository,omitempty"`
-	Type_      string      `json:"type"`
+	Type_      string      `json:"type,omitempty"`
 }

@@ -11,6 +11,6 @@ package bitbucket
 
 // A json object representing the repository's inheritance state values
 type RepositoryInheritanceState struct {
-	Type_            string       `json:"type"`
+	Type_            string       `json:"type,omitempty"`
 	OverrideSettings *interface{} `json:"override_settings,omitempty"`
 }

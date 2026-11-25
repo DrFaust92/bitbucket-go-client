@@ -14,8 +14,10 @@ import (
 )
 
 type Repository struct {
-	CreatedOn   time.Time `json:"created_on,omitempty"`
+	CreatedOn   time.Time `json:"created_on,omitzero"`
 	Description string    `json:"description,omitempty"`
+	// Whether signed commits are required for this repository:  - true when the workspace is on a Premium plan and enforcement is enabled at the repository, project,   or workspace level; - otherwise false.
+	EnforcedSignedCommits bool `json:"enforced_signed_commits,omitempty"`
 	//  Controls the rules for forking this repository.  * **allow_forks**: unrestricted forking * **no_public_forks**: restrict forking to private forks (forks cannot   be made public later) * **no_forks**: deny all forking
 	ForkPolicy string `json:"fork_policy,omitempty"`
 	// The concatenation of the repository owner's username and the slugified name, e.g. \"evzijst/interruptingcow\". This is the same string used in Bitbucket URLs.
@@ -36,8 +38,8 @@ type Repository struct {
 	Size       int32            `json:"size,omitempty"`
 	// Slugified name, the same string that is used in Bitbucket URLs.
 	Slug      string    `json:"slug,omitempty"`
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
 	// The repository's immutable id. This can be used as a substitute for the slug segment in URLs. Doing this guarantees your URLs will survive renaming of the repository by its owner, or even transfer of the repository to a different user.
 	Uuid  string `json:"uuid,omitempty"`
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 }

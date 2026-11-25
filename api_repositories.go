@@ -27,133 +27,6 @@ var (
 type RepositoriesApiService service
 
 /*
-RepositoriesApiService List public repositories
-**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get).**  Returns a paginated list of all public repositories.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *RepositoriesApiRepositoriesGetOpts - Optional Parameters:
-     * @param "After" (optional.String) -  Filter the results to include only repositories created on or after this [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)  timestamp. Example: &#x60;YYYY-MM-DDTHH:mm:ss.sssZ&#x60;
-     * @param "Role" (optional.String) -  Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user
-     * @param "Q" (optional.String) -  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). &#x60;role&#x60; parameter must also be specified.
-     * @param "Sort" (optional.String) -  Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
-     * @param "Page" (optional.Int32) -  page
-@return PaginatedRepositories
-*/
-
-type RepositoriesApiRepositoriesGetOpts struct {
-	After optional.String
-	Role  optional.String
-	Q     optional.String
-	Sort  optional.String
-	Page  optional.Int32
-}
-
-func (a *RepositoriesApiService) RepositoriesGet(ctx context.Context, localVarOptionals *RepositoriesApiRepositoriesGetOpts) (PaginatedRepositories, *http.Response, error) {
-	var (
-		localVarHttpMethod  = strings.ToUpper("Get")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue PaginatedRepositories
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/repositories"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.After.IsSet() {
-		localVarQueryParams.Add("after", parameterToString(localVarOptionals.After.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Role.IsSet() {
-		localVarQueryParams.Add("role", parameterToString(localVarOptionals.Role.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
-		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
-		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["Authorization"] = key
-
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v PaginatedRepositories
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
 RepositoriesApiService List repositories in a workspace
 Returns a paginated list of all repositories owned by the specified workspace.  The result can be narrowed down based on the authenticated user&#x27;s role.  E.g. with &#x60;?role&#x3D;contributor&#x60;, only those repositories that the authenticated user has write access to are returned (this includes any repo the user is an admin on, as that implies write access).  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -915,8 +788,8 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugGet(ctx context.Co
 RepositoriesApiService List webhooks for a repository
 Returns a paginated list of webhooks installed on this repository.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts - Optional Parameters:
      * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
@@ -926,7 +799,7 @@ type RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts struct {
 	Page optional.Int32
 }
 
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, workspace string, repoSlug string, localVarOptionals *RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -937,8 +810,8 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx conte
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks"
-	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1044,14 +917,14 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx conte
 
 /*
 RepositoriesApiService Create a webhook for a repository
-Creates a new webhook on the specified repository.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  Note that this call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  Also note that the &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
+Creates a new webhook on the specified repository.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example: &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return WebhookSubscription
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.Context, repoSlug string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.Context, workspace string, repoSlug string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}
@@ -1062,8 +935,8 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx cont
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks"
-	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1168,11 +1041,11 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx cont
 RepositoriesApiService Delete a webhook for a repository
 Deletes the specified webhook subscription from the given repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx context.Context, repoSlug string, uid string, workspace string) (*http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx context.Context, workspace string, repoSlug string, uid string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -1182,9 +1055,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1271,13 +1144,13 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx
 RepositoriesApiService Get a webhook for a repository
 Returns the webhook with the specified id installed on the specified repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx context.Context, repoSlug string, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx context.Context, workspace string, repoSlug string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1288,9 +1161,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx co
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1385,13 +1258,13 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx co
 RepositoriesApiService Update a webhook for a repository
 Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the &#x60;secret&#x60; field. Passing a &#x60;null&#x60; value in the &#x60;secret&#x60; field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the &#x60;secret&#x60; field in the request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx context.Context, repoSlug string, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx context.Context, workspace string, repoSlug string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -1402,9 +1275,9 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx co
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2798,7 +2671,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPermissionsConfigU
 
 /*
 RepositoriesApiService Create a repository
-Creates a new repository.  Note: In order to set the project for the newly created repository, pass in either the project key or the project UUID as part of the request body as shown in the examples below:  &#x60;&#x60;&#x60; $ curl -X POST -H \&quot;Content-Type: application/json\&quot; -d &#x27;{     \&quot;scm\&quot;: \&quot;git\&quot;,     \&quot;project\&quot;: {         \&quot;key\&quot;: \&quot;MARS\&quot;     } }&#x27; https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding &#x60;&#x60;&#x60;  or  &#x60;&#x60;&#x60; $ curl -X POST -H \&quot;Content-Type: application/json\&quot; -d &#x27;{     \&quot;scm\&quot;: \&quot;git\&quot;,     \&quot;project\&quot;: {         \&quot;key\&quot;: \&quot;{ba516952-992a-4c2d-acbd-17d502922f96}\&quot;     } }&#x27; https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding &#x60;&#x60;&#x60;  The project must be assigned for all repositories. If the project is not provided, the repository is automatically assigned to the oldest project in the workspace.  Note: In the examples above, the workspace ID &#x60;teamsinspace&#x60;, and/or the repository name &#x60;hablanding&#x60; can be replaced by UUIDs.
+Creates a new repository.  Note: In order to set the project for the newly created repository, pass in either the project key or the project UUID as part of the request body as shown in the examples below:  &#x60;&#x60;&#x60; $ curl -X POST -H \&quot;Content-Type: application/json\&quot; -d &#x27;{     \&quot;scm\&quot;: \&quot;git\&quot;,     \&quot;project\&quot;: {         \&quot;key\&quot;: \&quot;MARS\&quot;     } }&#x27; https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding &#x60;&#x60;&#x60;  or  &#x60;&#x60;&#x60; $ curl -X POST -H \&quot;Content-Type: application/json\&quot; -d &#x27;{     \&quot;scm\&quot;: \&quot;git\&quot;,     \&quot;project\&quot;: {         \&quot;key\&quot;: \&quot;{ba516952-992a-4c2d-acbd-17d502922f96}\&quot;     } }&#x27; https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding &#x60;&#x60;&#x60;  The project must be assigned for all repositories. If the project is not provided, the repository is automatically assigned to the oldest project in the workspace.  Note: In order to require signed commits for the newly created repository, pass in &#x60;enforced_signed_commits&#x60; as part of the request body as shown in the example below. This requires the workspace to be on a Premium plan. Cannot be disabled while the setting is enforced at the project or workspace level.  &#x60;&#x60;&#x60; $ curl -X POST -H \&quot;Content-Type: application/json\&quot; -d &#x27;{     \&quot;enforced_signed_commits\&quot;: true }&#x27; https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding &#x60;&#x60;&#x60;  Note: In the examples above, the workspace ID &#x60;teamsinspace&#x60;, and/or the repository name &#x60;hablanding&#x60; can be replaced by UUIDs.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
@@ -2932,7 +2805,7 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugPost(ctx context.C
 
 /*
 RepositoriesApiService Update a repository
-Since this endpoint can be used to both update and to create a repository, the request body depends on the intent.  #### Creation  See the POST documentation for the repository endpoint for an example of the request body.  #### Update  Note: Changing the &#x60;name&#x60; of the repository will cause the location to be changed. This is because the URL of the repo is derived from the name (a process called slugification). In such a scenario, it is possible for the request to fail if the newly created slug conflicts with an existing repository&#x27;s slug. But if there is no conflict, the new location will be returned in the &#x60;Location&#x60; header of the response.
+Since this endpoint can be used to both update and to create a repository, the request body depends on the intent.  #### Creation  See the POST documentation for the repository endpoint for an example of the request body.  #### Update  Note: Changing the &#x60;name&#x60; of the repository will cause the location to be changed. This is because the URL of the repo is derived from the name (a process called slugification). In such a scenario, it is possible for the request to fail if the newly created slug conflicts with an existing repository&#x27;s slug. But if there is no conflict, the new location will be returned in the &#x60;Location&#x60; header of the response.  Note: Changing the &#x60;enforced_signed_commits&#x60; setting requires the workspace to be on a Premium plan. Cannot be disabled while the setting is enforced at the project or workspace level.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
  * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
@@ -3584,123 +3457,6 @@ func (a *RepositoriesApiService) RepositoriesWorkspaceRepoSlugWatchersGet(ctx co
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v PaginatedAccounts
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-RepositoriesApiService List repository permissions for a user
-**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-user-workspaces-workspace-permissions-repositories-get).**  Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * &#x60;admin&#x60; * &#x60;write&#x60; * &#x60;read&#x60;  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * &#x60;q&#x3D;repository.name&#x3D;\&quot;geordi\&quot;&#x60; or &#x60;q&#x3D;permission&gt;\&quot;read\&quot;&#x60; * &#x60;sort&#x3D;repository.name&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *RepositoriesApiUserPermissionsRepositoriesGetOpts - Optional Parameters:
-     * @param "Q" (optional.String) -   Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
-     * @param "Sort" (optional.String) -   Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).
-     * @param "Page" (optional.Int32) -  page
-@return PaginatedRepositoryPermissions
-*/
-
-type RepositoriesApiUserPermissionsRepositoriesGetOpts struct {
-	Q    optional.String
-	Sort optional.String
-	Page optional.Int32
-}
-
-func (a *RepositoriesApiService) UserPermissionsRepositoriesGet(ctx context.Context, localVarOptionals *RepositoriesApiUserPermissionsRepositoriesGetOpts) (PaginatedRepositoryPermissions, *http.Response, error) {
-	var (
-		localVarHttpMethod  = strings.ToUpper("Get")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue PaginatedRepositoryPermissions
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/user/permissions/repositories"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
-		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
-		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["Authorization"] = key
-
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v PaginatedRepositoryPermissions
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

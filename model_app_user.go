@@ -20,7 +20,7 @@ type AppUser struct {
 	AccountStatus string `json:"account_status,omitempty"`
 	// The kind of App User.
 	Kind        string        `json:"kind,omitempty"`
-	CreatedOn   time.Time     `json:"created_on,omitempty"`
+	CreatedOn   time.Time     `json:"created_on,omitzero"`
 	DisplayName string        `json:"display_name,omitempty"`
 	Links       *AccountLinks `json:"links,omitempty"`
 	// The user's Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility.

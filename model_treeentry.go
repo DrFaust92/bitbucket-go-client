@@ -11,7 +11,7 @@ package bitbucket
 
 // Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also identifies the element as Swagger's `discriminator`.
 type Treeentry struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// The path in the repository
 	Path   string  `json:"path,omitempty"`
 	Commit *Commit `json:"commit,omitempty"`

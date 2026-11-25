@@ -22,8 +22,8 @@ type PipelineSchedule struct {
 	// The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day.
 	CronPattern string `json:"cron_pattern,omitempty"`
 	// The timestamp when the schedule was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
 	// The timestamp when the schedule was updated.
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
-	Type_     string    `json:"type"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
+	Type_     string    `json:"type,omitempty"`
 }

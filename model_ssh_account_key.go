@@ -15,7 +15,7 @@ import (
 
 type SshAccountKey struct {
 	Owner     *Account  `json:"owner,omitempty"`
-	ExpiresOn time.Time `json:"expires_on,omitempty"`
+	ExpiresOn time.Time `json:"expires_on,omitzero"`
 	// The SSH key fingerprint in SHA-256 format.
 	Fingerprint string `json:"fingerprint,omitempty"`
 	// The SSH key's immutable ID.
@@ -26,7 +26,7 @@ type SshAccountKey struct {
 	Comment string `json:"comment,omitempty"`
 	// The user-defined label for the SSH key
 	Label     string       `json:"label,omitempty"`
-	CreatedOn time.Time    `json:"created_on,omitempty"`
-	LastUsed  time.Time    `json:"last_used,omitempty"`
+	CreatedOn time.Time    `json:"created_on,omitzero"`
+	LastUsed  time.Time    `json:"last_used,omitzero"`
 	Links     *interface{} `json:"links,omitempty"`
 }

@@ -35,8 +35,8 @@ type ReportAnnotation struct {
 	// A URL linking to the annotation in an external tool.
 	Link string `json:"link,omitempty"`
 	// The timestamp when the report was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
 	// The timestamp when the report was updated.
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
-	Type_     string    `json:"type"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
+	Type_     string    `json:"type,omitempty"`
 }

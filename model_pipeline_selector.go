@@ -11,7 +11,7 @@ package bitbucket
 
 type PipelineSelector struct {
 	// The type of selector.
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// The name of the matching pipeline definition.
 	Pattern string `json:"pattern,omitempty"`
 }

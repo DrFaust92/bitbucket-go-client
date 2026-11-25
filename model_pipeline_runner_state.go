@@ -18,8 +18,8 @@ type PipelineRunnerState struct {
 	Status  string                 `json:"status,omitempty"`
 	Version *PipelineRunnerVersion `json:"version,omitempty"`
 	// The timestamp when the runner state was last updated.
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
 	// Whether the runner is cordoned (prevented from accepting new steps).
 	Cordoned bool   `json:"cordoned,omitempty"`
-	Type_    string `json:"type"`
+	Type_    string `json:"type,omitempty"`
 }

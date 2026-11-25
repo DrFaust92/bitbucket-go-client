@@ -15,7 +15,7 @@ import (
 
 type Team struct {
 	Links       *TeamLinks `json:"links,omitempty"`
-	CreatedOn   time.Time  `json:"created_on,omitempty"`
+	CreatedOn   time.Time  `json:"created_on,omitzero"`
 	DisplayName string     `json:"display_name,omitempty"`
 	// The user's Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility.
 	Username string `json:"username,omitempty"`

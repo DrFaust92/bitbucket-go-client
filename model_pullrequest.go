@@ -38,9 +38,9 @@ type Pullrequest struct {
 	// Explains why a pull request was declined. This field is only applicable to pull requests in rejected state.
 	Reason string `json:"reason,omitempty"`
 	// The ISO8601 timestamp the request was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
 	// The ISO8601 timestamp the request was last updated.
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
 	// The list of users that were added as reviewers on this pull request when it was created. For performance reasons, the API only includes this list on a pull request's `self` URL.
 	Reviewers []Account `json:"reviewers,omitempty"`
 	//         The list of users that are collaborating on this pull request.         Collaborators are user that:          * are added to the pull request as a reviewer (part of the reviewers           list)         * are not explicit reviewers, but have commented on the pull request         * are not explicit reviewers, but have approved the pull request          Each user is wrapped in an object that indicates the user's role and         whether they have approved the pull request. For performance reasons,         the API only returns this list when an API requests a pull request by         id.
@@ -49,5 +49,5 @@ type Pullrequest struct {
 	Draft bool `json:"draft,omitempty"`
 	// A boolean flag indicating whether the pull request is queued
 	Queued bool   `json:"queued,omitempty"`
-	Type_  string `json:"type"`
+	Type_  string `json:"type,omitempty"`
 }

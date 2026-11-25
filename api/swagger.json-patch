@@ -38,17 +38,6 @@
       "type": "integer",
       "in": "query"
     },
-    "path": "/paths/~1repositories/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
     "path": "/paths/~1repositories~1{workspace}/get/parameters/-"
   },
   {
@@ -127,17 +116,6 @@
       "in": "query"
     },
     "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1commits~1{revision}/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1components/get/parameters/-"
   },
   {
     "op": "add",
@@ -248,61 +226,6 @@
       "in": "query"
     },
     "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues~1{issue_id}~1attachments/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues~1{issue_id}~1changes/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1issues~1{issue_id}~1comments/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1milestones/get/parameters/-"
   },
   {
     "op": "add",
@@ -489,29 +412,7 @@
       "type": "integer",
       "in": "query"
     },
-    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1versions/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
     "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1watchers/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1snippets/get/parameters/-"
   },
   {
     "op": "add",
@@ -577,28 +478,6 @@
       "type": "integer",
       "in": "query"
     },
-    "path": "/paths/~1user~1permissions~1repositories/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1user~1permissions~1workspaces/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
     "path": "/paths/~1users~1{selected_user}~1pipelines_config~1variables/get/parameters/-"
   },
   {
@@ -611,17 +490,6 @@
       "in": "query"
     },
     "path": "/paths/~1users~1{selected_user}~1ssh-keys/get/parameters/-"
-  },
-  {
-    "op": "add",
-    "value": {
-      "name": "page",
-      "description": "page",
-      "required": false,
-      "type": "integer",
-      "in": "query"
-    },
-    "path": "/paths/~1workspaces/get/parameters/-"
   },
   {
     "op": "add",
@@ -774,15 +642,7 @@
   },
   {
     "op": "remove",
-    "path": "/definitions/export_options/additionalProperties"
-  },
-  {
-    "op": "remove",
     "path": "/definitions/file_conflict/additionalProperties"
-  },
-  {
-    "op": "remove",
-    "path": "/definitions/issue_change/additionalProperties"
   },
   {
     "op": "remove",
@@ -992,5 +852,81 @@
     "value": [
       "enabled"
     ]
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/custom_merge_check/allOf/1/properties/check/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/git_mergeability_check/allOf/1/properties/links/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/pullrequest_mergeability_check/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/standard_merge_check/allOf/1/properties/check/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/standard_merge_check/allOf/1/properties/requirement/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/standard_merge_check/allOf/1/properties/observed/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/definitions/webhooks_subscription_links/additionalProperties"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1hook_events/get/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1hook_events~1{subject_type}/get/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks/get/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks/post/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks~1{uid}/get/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks~1{uid}/put/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1repositories~1{workspace}~1{repo_slug}~1hooks~1{uid}/delete/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1workspaces~1{workspace}~1hooks/get/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1workspaces~1{workspace}~1hooks/post/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1workspaces~1{workspace}~1hooks~1{uid}/get/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1workspaces~1{workspace}~1hooks~1{uid}/put/operationId"
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1workspaces~1{workspace}~1hooks~1{uid}/delete/operationId"
   }
 ]

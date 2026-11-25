@@ -4,7 +4,6 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**RepositoriesGet**](RepositoriesApi.md#RepositoriesGet) | **Get** /repositories | List public repositories
 [**RepositoriesWorkspaceGet**](RepositoriesApi.md#RepositoriesWorkspaceGet) | **Get** /repositories/{workspace} | List repositories in a workspace
 [**RepositoriesWorkspaceRepoSlugDelete**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugDelete) | **Delete** /repositories/{workspace}/{repo_slug} | Delete a repository
 [**RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet) | **Get** /repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path} | List commits that modified a file
@@ -32,46 +31,7 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugSrcGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcGet) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 [**RepositoriesWorkspaceRepoSlugSrcPost**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugSrcPost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 [**RepositoriesWorkspaceRepoSlugWatchersGet**](RepositoriesApi.md#RepositoriesWorkspaceRepoSlugWatchersGet) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
-[**UserPermissionsRepositoriesGet**](RepositoriesApi.md#UserPermissionsRepositoriesGet) | **Get** /user/permissions/repositories | List repository permissions for a user
 [**UserWorkspacesWorkspacePermissionsRepositoriesGet**](RepositoriesApi.md#UserWorkspacesWorkspacePermissionsRepositoriesGet) | **Get** /user/workspaces/{workspace}/permissions/repositories | List repository permissions in a workspace for a user
-
-# **RepositoriesGet**
-> PaginatedRepositories RepositoriesGet(ctx, optional)
-List public repositories
-
-**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get).**  Returns a paginated list of all public repositories.  This endpoint also supports filtering and sorting of the results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for more details.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***RepositoriesApiRepositoriesGetOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RepositoriesApiRepositoriesGetOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **after** | **optional.String**| Filter the results to include only repositories created on or after this [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)  timestamp. Example: &#x60;YYYY-MM-DDTHH:mm:ss.sssZ&#x60; | 
- **role** | **optional.String**| Filters the result based on the authenticated user&#x27;s role on each repository.  * **member**: returns repositories to which the user has explicit read access * **contributor**: returns repositories to which the user has explicit write access * **admin**: returns repositories to which the user has explicit administrator access * **owner**: returns all repositories owned by the current user  | 
- **q** | **optional.String**| Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). &#x60;role&#x60; parameter must also be specified.  | 
- **sort** | **optional.String**| Field by which the results should be sorted as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering).  | 
- **page** | **optional.Int32**| page | 
-
-### Return type
-
-[**PaginatedRepositories**](paginated_repositories.md)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceGet**
 > PaginatedRepositories RepositoriesWorkspaceGet(ctx, workspace, optional)
@@ -304,18 +264,18 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugHooksGet**
-> PaginatedWebhookSubscriptions RepositoriesWorkspaceRepoSlugHooksGet(ctx, repoSlug, workspace, optional)
+> PaginatedWebhookSubscriptions RepositoriesWorkspaceRepoSlugHooksGet(ctx, workspace, repoSlug, optional)
 List webhooks for a repository
 
-Returns a paginated list of webhooks installed on this repository.
+Returns a paginated list of webhooks installed on this repository. 
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;. | 
  **optional** | ***RepositoriesApiRepositoriesWorkspaceRepoSlugHooksGetOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -342,18 +302,18 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugHooksPost**
-> WebhookSubscription RepositoriesWorkspaceRepoSlugHooksPost(ctx, repoSlug, workspace)
+> WebhookSubscription RepositoriesWorkspaceRepoSlugHooksPost(ctx, workspace, repoSlug)
 Create a webhook for a repository
 
-Creates a new webhook on the specified repository.  Example:  ``` $ curl -X POST -u credentials -H 'Content-Type: application/json'   https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks   -d '     {       \"description\": \"Webhook Description\",       \"url\": \"https://example.com/\",       \"active\": true,       \"secret\": \"this is a really bad secret\",       \"events\": [         \"repo:push\",         \"issue:created\",         \"issue:updated\"       ]     }' ```  When the `secret` is provided it will be used as the key to generate a HMAC digest value sent in the `X-Hub-Signature` header at delivery time. Passing a `null` or empty `secret` or not passing a `secret` will leave the webhook's secret unset. Bitbucket only generates the `X-Hub-Signature` when the webhook's secret is set.  Note that this call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: `webhook`, `repository` and `issue`.  Also note that the `url` must properly resolve and cannot be an internal, non-routed address.
+Creates a new webhook on the specified repository.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example: ``` $ curl -X POST -u credentials -H 'Content-Type: application/json'   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d '     {       \"description\": \"Webhook Description\",       \"url\": \"https://example.com/\",       \"active\": true,       \"secret\": \"this is a really bad secret\",       \"events\": [         \"repo:push\",         \"issue:created\",         \"issue:updated\"       ]     }' ```  When the `secret` is provided it will be used as the key to generate a HMAC digest value sent in the `X-Hub-Signature` header at delivery time. Passing a `null` or empty `secret` or not passing a `secret` will leave the webhook's secret unset. Bitbucket only generates the `X-Hub-Signature` when the webhook's secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: `webhook`, `repository` and `issue`.  The `url` must properly resolve and cannot be an internal, non-routed address. 
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;. | 
 
 ### Return type
 
@@ -371,19 +331,19 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugHooksUidDelete**
-> RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx, repoSlug, uid, workspace)
+> RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx, workspace, repoSlug, uid)
 Delete a webhook for a repository
 
-Deletes the specified webhook subscription from the given repository.
+Deletes the specified webhook subscription from the given repository. 
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **uid** | **string**| Installed webhook&#x27;s ID | 
-  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;. | 
+  **uid** | **string**| The webhook&#x27;s id. | 
 
 ### Return type
 
@@ -401,19 +361,19 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugHooksUidGet**
-> WebhookSubscription RepositoriesWorkspaceRepoSlugHooksUidGet(ctx, repoSlug, uid, workspace)
+> WebhookSubscription RepositoriesWorkspaceRepoSlugHooksUidGet(ctx, workspace, repoSlug, uid)
 Get a webhook for a repository
 
-Returns the webhook with the specified id installed on the specified repository.
+Returns the webhook with the specified id installed on the specified repository. 
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **uid** | **string**| Installed webhook&#x27;s ID | 
-  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;. | 
+  **uid** | **string**| The webhook&#x27;s id. | 
 
 ### Return type
 
@@ -431,19 +391,19 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepositoriesWorkspaceRepoSlugHooksUidPut**
-> WebhookSubscription RepositoriesWorkspaceRepoSlugHooksUidPut(ctx, repoSlug, uid, workspace)
+> WebhookSubscription RepositoriesWorkspaceRepoSlugHooksUidPut(ctx, workspace, repoSlug, uid)
 Update a webhook for a repository
 
-Updates the specified webhook subscription.  The following properties can be mutated:  * `description` * `url` * `secret` * `active` * `events`  The hook's secret is used as a key to generate the HMAC hex digest sent in the `X-Hub-Signature` header at delivery time. This signature is only generated when the hook has a secret.  Set the hook's secret by passing the new value in the `secret` field. Passing a `null` value in the `secret` field will remove the secret from the hook. The hook's secret can be left unchanged by not passing the `secret` field in the request.
+Updates the specified webhook subscription.  The following properties can be mutated:  * `description` * `url` * `secret` * `active` * `events`  The hook's secret is used as a key to generate the HMAC hex digest sent in the `X-Hub-Signature` header at delivery time. This signature is only generated when the hook has a secret.  Set the hook's secret by passing the new value in the `secret` field. Passing a `null` value in the `secret` field will remove the secret from the hook. The hook's secret can be left unchanged by not passing the `secret` field in the request. 
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
-  **uid** | **string**| Installed webhook&#x27;s ID | 
-  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;. | 
+  **uid** | **string**| The webhook&#x27;s id. | 
 
 ### Return type
 
@@ -776,7 +736,7 @@ Name | Type | Description  | Notes
 > Repository RepositoriesWorkspaceRepoSlugPost(ctx, repoSlug, workspace, optional)
 Create a repository
 
-Creates a new repository.  Note: In order to set the project for the newly created repository, pass in either the project key or the project UUID as part of the request body as shown in the examples below:  ``` $ curl -X POST -H \"Content-Type: application/json\" -d '{     \"scm\": \"git\",     \"project\": {         \"key\": \"MARS\"     } }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding ```  or  ``` $ curl -X POST -H \"Content-Type: application/json\" -d '{     \"scm\": \"git\",     \"project\": {         \"key\": \"{ba516952-992a-4c2d-acbd-17d502922f96}\"     } }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding ```  The project must be assigned for all repositories. If the project is not provided, the repository is automatically assigned to the oldest project in the workspace.  Note: In the examples above, the workspace ID `teamsinspace`, and/or the repository name `hablanding` can be replaced by UUIDs.
+Creates a new repository.  Note: In order to set the project for the newly created repository, pass in either the project key or the project UUID as part of the request body as shown in the examples below:  ``` $ curl -X POST -H \"Content-Type: application/json\" -d '{     \"scm\": \"git\",     \"project\": {         \"key\": \"MARS\"     } }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding ```  or  ``` $ curl -X POST -H \"Content-Type: application/json\" -d '{     \"scm\": \"git\",     \"project\": {         \"key\": \"{ba516952-992a-4c2d-acbd-17d502922f96}\"     } }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding ```  The project must be assigned for all repositories. If the project is not provided, the repository is automatically assigned to the oldest project in the workspace.  Note: In order to require signed commits for the newly created repository, pass in `enforced_signed_commits` as part of the request body as shown in the example below. This requires the workspace to be on a Premium plan. Cannot be disabled while the setting is enforced at the project or workspace level.  ``` $ curl -X POST -H \"Content-Type: application/json\" -d '{     \"enforced_signed_commits\": true }' https://api.bitbucket.org/2.0/repositories/teamsinspace/hablanding ```  Note: In the examples above, the workspace ID `teamsinspace`, and/or the repository name `hablanding` can be replaced by UUIDs.
 
 ### Required Parameters
 
@@ -814,7 +774,7 @@ Name | Type | Description  | Notes
 > Repository RepositoriesWorkspaceRepoSlugPut(ctx, repoSlug, workspace, optional)
 Update a repository
 
-Since this endpoint can be used to both update and to create a repository, the request body depends on the intent.  #### Creation  See the POST documentation for the repository endpoint for an example of the request body.  #### Update  Note: Changing the `name` of the repository will cause the location to be changed. This is because the URL of the repo is derived from the name (a process called slugification). In such a scenario, it is possible for the request to fail if the newly created slug conflicts with an existing repository's slug. But if there is no conflict, the new location will be returned in the `Location` header of the response.
+Since this endpoint can be used to both update and to create a repository, the request body depends on the intent.  #### Creation  See the POST documentation for the repository endpoint for an example of the request body.  #### Update  Note: Changing the `name` of the repository will cause the location to be changed. This is because the URL of the repo is derived from the name (a process called slugification). In such a scenario, it is possible for the request to fail if the newly created slug conflicts with an existing repository's slug. But if there is no conflict, the new location will be returned in the `Location` header of the response.  Note: Changing the `enforced_signed_commits` setting requires the workspace to be on a Premium plan. Cannot be disabled while the setting is enforced at the project or workspace level.
 
 ### Required Parameters
 
@@ -1001,42 +961,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedAccounts**](paginated_accounts.md)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **UserPermissionsRepositoriesGet**
-> PaginatedRepositoryPermissions UserPermissionsRepositoriesGet(ctx, optional)
-List repository permissions for a user
-
-**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-repositories/#api-user-workspaces-workspace-permissions-repositories-get).**  Returns an object for each repository the caller has explicit access to and their effective permission — the highest level of permission the caller has. This does not return public repositories that the user was not granted any specific permission in, and does not distinguish between explicit and implicit privileges.  Permissions can be:  * `admin` * `write` * `read`  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by repository or permission by adding the following query string parameters:  * `q=repository.name=\"geordi\"` or `q=permission>\"read\"` * `sort=repository.name`  Note that the query parameter values need to be URL escaped so that `=` would become `%3D`.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***RepositoriesApiUserPermissionsRepositoriesGetOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a RepositoriesApiUserPermissionsRepositoriesGetOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **q** | **optional.String**|  Query string to narrow down the response as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
- **sort** | **optional.String**|  Name of a response property sort the result by as per [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering). | 
- **page** | **optional.Int32**| page | 
-
-### Return type
-
-[**PaginatedRepositoryPermissions**](paginated_repository_permissions.md)
 
 ### Authorization
 

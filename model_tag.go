@@ -17,9 +17,9 @@ type Tag struct {
 	// The message associated with the tag, if available.
 	Message string `json:"message,omitempty"`
 	// The date that the tag was created, if available
-	Date   time.Time    `json:"date,omitempty"`
+	Date   time.Time    `json:"date,omitzero"`
 	Tagger *Author      `json:"tagger,omitempty"`
-	Type_  string       `json:"type"`
+	Type_  string       `json:"type,omitempty"`
 	Links  *interface{} `json:"links,omitempty"`
 	// The name of the ref.
 	Name   string  `json:"name,omitempty"`

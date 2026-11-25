@@ -12,5 +12,5 @@ package bitbucket
 type SnippetComment struct {
 	Links   *interface{} `json:"links,omitempty"`
 	Snippet *Snippet     `json:"snippet,omitempty"`
-	Type_   string       `json:"type"`
+	Type_   string       `json:"type,omitempty"`
 }

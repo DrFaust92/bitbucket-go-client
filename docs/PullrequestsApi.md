@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id} | Get a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergePost**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergePost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge | Merge a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeTaskStatusTaskIdGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeTaskStatusTaskIdGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id} | Get the merge task status for a pull request
+[**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/mergeability/checks | List pull request mergeability checks
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdPatchGet**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdPatchGet) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch | Get the patch for a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdPut**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdPut) | **Put** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id} | Update a pull request
 [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdRequestChangesDelete**](PullrequestsApi.md#RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdRequestChangesDelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes | Remove change request for a pull request
@@ -853,7 +854,7 @@ Name | Type | Description  | Notes
 > Pullrequest RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergePost(ctx, pullRequestId, repoSlug, workspace, optional)
 Merge a pull request
 
-Merges the pull request.
+Merges the pull request.  If the destination branch has an active merge queue, the pull request is added to the queue instead. The API returns a 202 with a polling link to the task-status API in the Location header, even when `async` is false. Calling it again on a queued pull request returns the same link.  Merge queues support the `merge_commit`, `squash` and `rebase_merge` strategies. If no strategy is given, the queue's default is used.
 
 ### Required Parameters
 
@@ -894,7 +895,7 @@ Name | Type | Description  | Notes
 > RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeTaskStatusTaskIdGet(ctx, pullRequestId, repoSlug, taskId, workspace)
 Get the merge task status for a pull request
 
-When merging a pull request takes too long, the client receives a task ID along with a 202 status code. The task ID can be used in a call to this endpoint to check the status of a merge task.  ``` curl -X GET https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/<task_id> ```  If the merge task is not yet finished, a PENDING status will be returned.  ``` HTTP/2 200 {     \"task_status\": \"PENDING\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/<task_id>\"         }     } } ```  If the merge was successful, a SUCCESS status will be returned.  ``` HTTP/2 200 {     \"task_status\": \"SUCCESS\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/<task_id>\"         }     },     \"merge_result\": <the merged pull request object> } ```  If the merge task failed, an error will be returned.  ``` {     \"type\": \"error\",     \"error\": {         \"message\": \"<error message>\"     } } ```
+When merging a pull request takes too long, the client receives a task ID along with a 202 status code. The task ID can be used in a call to this endpoint to check the status of a merge task.  ``` curl -X GET https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/<task_id> ```  If the merge task is not yet finished, a PENDING status will be returned.  ``` HTTP/2 200 {     \"task_status\": \"PENDING\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/<task_id>\"         }     } } ```  If the merge was successful, a SUCCESS status will be returned.  ``` HTTP/2 200 {     \"task_status\": \"SUCCESS\",     \"links\": {         \"self\": {             \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/<task_id>\"         }     },     \"merge_result\": <the merged pull request object> } ```  If the merge task failed, an error will be returned.  ``` {     \"type\": \"error\",     \"error\": {         \"message\": \"<error message>\"     } } ```  If the pull request was added to a merge queue, the task reports its landing through the queue. A PENDING status is returned while it is in the queue, with a `queued_pullrequest` object once the queue has it. A SUCCESS status is returned once it merges, and an error if it leaves the queue without merging. The error message can contain Markdown.  Unknown or expired task IDs return a PENDING status.
 
 ### Required Parameters
 
@@ -918,6 +919,46 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGet**
+> PullrequestMergeabilityChecks RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGet(ctx, pullRequestId, repoSlug, workspace, optional)
+List pull request mergeability checks
+
+Returns the mergeability checks Bitbucket performs for this pull request, and whether each one currently allows the pull request to be merged - simulating what the merge endpoint checks before actually merging.  Checks cover pull request state, the current user's merge permissions, Git conflicts, configured standard and custom merge checks, and merge queue status when available. Each check's `blocking` attribute indicates whether it currently prevents merging. A failed check does not necessarily block a merge.  `pullrequest_state_check`, `current_user_permission_check`, and `git_mergeability_check` cover state, permission, and Git eligibility. One `standard_merge_check` is included per configured branch/merge restriction, and one `custom_pre_merge_check`/`custom_on_merge_check` per activated custom check - both omitted entirely, not reported as passing, when not configured. Not exhaustive: conditions Bitbucket can't evaluate without attempting the merge (e.g. dependency-merge requirements) aren't included. See `PullRequestMergeabilityCheckSchema` for per-check fields, and `q` below to exclude the checks that are expensive to evaluate.  For repositories with merge queues enabled, a `merge_queue_check` reports queue availability and whether the pull request is already queued. It is included for open, non-draft pull requests when the destination branch requires queueing, and for already-queued pull requests with a configured queue. The check is omitted when no merge queue is configured for the destination branch. When the check is present, `merge_queue` contains that configured queue's UUID, name and state. Already-queued pull requests return their blocking state check and any applicable queue check, without evaluating Git or other merge checks. A failed queue configuration read fails the whole request with `500`, as for custom merge check results.  Returns `500` if custom merge checks are configured but their results aren't currently retrievable, since the real merge action requires them too and would fail the same way.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **pullRequestId** | **int32**| The id of the pull request. | 
+  **repoSlug** | **string**| This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.  | 
+  **workspace** | **string**| This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.  | 
+ **optional** | ***PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGetOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGetOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **q** | **optional.String**| Only a limited subset of BBQL is supported here. Checks that are expensive to calculate can be excluded: &#x60;type!&#x3D;\&quot;git_mergeability_check\&quot;&#x60; skips Git conflict evaluation, and &#x60;check.kind!&#x3D;\&quot;maximum_commits_behind\&quot;&#x60; skips the bounded Git ancestry check behind that standard merge check. Combine both with &#x60;AND&#x60; (either order). Anything else returns &#x60;400 Bad Request&#x60;. | 
+
+### Return type
+
+[**PullrequestMergeabilityChecks**](pullrequest_mergeability_checks.md)
+
+### Authorization
+
+[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

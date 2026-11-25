@@ -11,7 +11,7 @@ package bitbucket
 
 // A file object, representing a file at a commit in a repository
 type CommitFile struct {
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 	// The path in the repository
 	Path       string  `json:"path,omitempty"`
 	Commit     *Commit `json:"commit,omitempty"`

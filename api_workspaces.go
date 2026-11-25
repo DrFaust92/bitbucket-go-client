@@ -28,133 +28,6 @@ type WorkspacesApiService service
 
 /*
 WorkspacesApiService List workspaces for the current user
-**This endpoint is deprecated. Please use the supported alternatives:** * [List workspaces for user](/cloud/bitbucket/rest/api-group-workspaces/#api-user-workspaces-get) * [Get user permission on a workspace](/cloud/bitbucket/rest/api-group-workspaces/#api-user-workspaces-workspace-permission-get)  Returns an object for each workspace the caller is a member of, and their effective role - the highest level of privilege the caller has. If a user is a member of multiple groups with distinct roles, only the highest level is returned.  Permissions can be:  * &#x60;owner&#x60; * &#x60;collaborator&#x60; * &#x60;member&#x60;  **The &#x60;collaborator&#x60; role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**  **When you move your administration from Bitbucket Cloud to admin.atlassian.com, the following fields on &#x60;workspace_membership&#x60; will no longer be present: &#x60;last_accessed&#x60; and &#x60;added_on&#x60;. See the [deprecation announcement](/cloud/bitbucket/announcement-breaking-change-workspace-membership/).**  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * &#x60;q&#x3D;workspace.slug&#x3D;\&quot;bbworkspace1\&quot;&#x60; or &#x60;q&#x3D;permission&#x3D;\&quot;owner\&quot;&#x60; * &#x60;sort&#x3D;workspace.slug&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *WorkspacesApiUserPermissionsWorkspacesGetOpts - Optional Parameters:
-     * @param "Q" (optional.String) -   Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details.
-     * @param "Sort" (optional.String) -   Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.
-     * @param "Page" (optional.Int32) -  page
-@return PaginatedWorkspaceMemberships
-*/
-
-type WorkspacesApiUserPermissionsWorkspacesGetOpts struct {
-	Q    optional.String
-	Sort optional.String
-	Page optional.Int32
-}
-
-func (a *WorkspacesApiService) UserPermissionsWorkspacesGet(ctx context.Context, localVarOptionals *WorkspacesApiUserPermissionsWorkspacesGetOpts) (PaginatedWorkspaceMemberships, *http.Response, error) {
-	var (
-		localVarHttpMethod  = strings.ToUpper("Get")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue PaginatedWorkspaceMemberships
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/user/permissions/workspaces"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
-		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
-		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	if ctx != nil {
-		// API Key Authentication
-		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
-			var key string
-			if auth.Prefix != "" {
-				key = auth.Prefix + " " + auth.Key
-			} else {
-				key = auth.Key
-			}
-			localVarHeaderParams["Authorization"] = key
-
-		}
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v PaginatedWorkspaceMemberships
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-WorkspacesApiService List workspaces for the current user
 Returns an object for each workspace accessible to the caller. This object also contains details on whether the caller has admin permissions on the workspace (&#x60;\&quot;administrator\&quot; &#x3D; true&#x60;) or not (&#x60;\&quot;administrator\&quot; &#x3D; false&#x60;).  Queries support filtering based on administrator permissions, [sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) or [filtering](/cloud/bitbucket/rest/intro/#filtering) by &#x60;slug&#x60;. Results can be [paginated](/cloud/bitbucket/rest/intro/#pagination).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *WorkspacesApiUserWorkspacesGetOpts - Optional Parameters:
@@ -406,52 +279,27 @@ func (a *WorkspacesApiService) UserWorkspacesWorkspacePermissionGet(ctx context.
 }
 
 /*
-WorkspacesApiService List workspaces for user
-**This endpoint is deprecated. Please use the [supported alternative](/cloud/bitbucket/rest/api-group-workspaces/#api-user-workspaces-get).**  Returns a list of workspaces accessible by the authenticated user.  Results may be further [filtered or sorted](/cloud/bitbucket/rest/intro/#filtering) by workspace or permission by adding the following query string parameters:  * &#x60;q&#x3D;slug&#x3D;\&quot;bbworkspace1\&quot;&#x60; or &#x60;q&#x3D;is_private&#x3D;true&#x60; * &#x60;sort&#x3D;created_on&#x60;  Note that the query parameter values need to be URL escaped so that &#x60;&#x3D;&#x60; would become &#x60;%3D&#x60;.  **The &#x60;collaborator&#x60; role is being removed from the Bitbucket Cloud API. For more information, see the [deprecation announcement](/cloud/bitbucket/deprecation-notice-collaborator-role/).**
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *WorkspacesApiWorkspacesGetOpts - Optional Parameters:
-     * @param "Role" (optional.String) -               Filters the workspaces based on the authenticated user&#x27;s role on each workspace.              * **member**: returns a list of all the workspaces which the caller is a member of                 at least one workspace group or repository             * **collaborator**: returns a list of workspaces which the caller has write access                 to at least one repository in the workspace             * **owner**: returns a list of workspaces which the caller has administrator access
-     * @param "Q" (optional.String) -   Query string to narrow down the response. See [filtering and sorting](/cloud/bitbucket/rest/intro/#filtering) for details.
-     * @param "Sort" (optional.String) -   Name of a response property to sort results. See [filtering and sorting](/cloud/bitbucket/rest/intro/#sorting-query-results) for details.
-     * @param "Page" (optional.Int32) -  page
-@return PaginatedWorkspaces
+WorkspacesApiService Search code in a workspace
+Search code across repositories in a workspace.  Results are limited to the repositories that the calling user can access.  #### Supported authentication  The endpoint requires a credential that identifies the calling user. The following authentication modes are accepted:  - Browser session cookie (Bitbucket web UI) - Atlassian API token (Basic auth using your email and a scoped API   token that includes both &#x60;repository:read&#x60; and &#x60;workspace:read&#x60;) - OAuth 2.0 via Forge or an Atlassian app (3LO or 2LO, with both   &#x60;repository:read&#x60; and &#x60;workspace:read&#x60; granted to the app) - Bitbucket repository, project, or workspace access tokens  Authentication modes that **do not** identify the user, including Atlassian Connect JWT, legacy Bitbucket OAuth not migrated to identity, app passwords, and API keys, are rejected with a &#x60;403&#x60;.  #### Request body  Requires &#x60;Content-Type: application/json&#x60;. Anything else returns &#x60;415&#x60;.  &#x60;query.search_term&#x60; is required. These fields are accepted:  - &#x60;query.search_term&#x60;: non-blank, at most 1024 characters - &#x60;query.filters&#x60; - &#x60;config.max_results&#x60;: a JSON integer (a string or float is rejected),   1 to 100, default 50 - &#x60;config.search_mode&#x60;: &#x60;LEXICAL&#x60; or omitted - &#x60;request_id&#x60; and &#x60;pagination.next_cursor&#x60;: see \&quot;Pagination\&quot;  Any other field is ignored.  &#x60;&#x60;&#x60;json {   \&quot;query\&quot;: {     \&quot;search_term\&quot;: \&quot;logr\&quot;,     \&quot;filters\&quot;: { \&quot;attribute\&quot;: \&quot;language\&quot;, \&quot;eq\&quot;: \&quot;go\&quot; }   },   \&quot;config\&quot;: {     \&quot;max_results\&quot;: 10   } } &#x60;&#x60;&#x60;  #### Search mode  This endpoint performs lexical code search only. &#x60;config.search_mode&#x60; is fixed to &#x60;LEXICAL&#x60; server-side, so callers may omit the field or set it explicitly to &#x60;LEXICAL&#x60;. Any other value returns a &#x60;400&#x60;.  #### Filters  Use &#x60;query.filters&#x60; to narrow a search. For example, to search for &#x60;logr&#x60; only in Go files whose path matches &#x60;cmd/_*_/main.go&#x60;:  &#x60;&#x60;&#x60;json {   \&quot;query\&quot;: {     \&quot;search_term\&quot;: \&quot;logr\&quot;,     \&quot;filters\&quot;: {       \&quot;and\&quot;: [         { \&quot;attribute\&quot;: \&quot;language\&quot;, \&quot;eq\&quot;: \&quot;go\&quot; },         { \&quot;attribute\&quot;: \&quot;path\&quot;, \&quot;wildcard\&quot;: \&quot;cmd/_*_/main.go\&quot; }       ]     }   } } &#x60;&#x60;&#x60;  A filter names an &#x60;attribute&#x60; and exactly one operator:  * &#x60;eq&#x60; matches a value, and works with every attribute. Values are   not case-sensitive. * &#x60;wildcard&#x60; matches a pattern, and works only with &#x60;path&#x60; and   &#x60;repository&#x60;. In a pattern, &#x60;*&#x60; matches any run of characters and &#x60;?&#x60;   matches one character. A pattern must match the whole value. On   &#x60;repository&#x60; it ignores case, and on &#x60;path&#x60; it is case-sensitive.  Setting both &#x60;eq&#x60; and &#x60;wildcard&#x60; on one filter returns &#x60;400&#x60;.  These attributes are supported:  * &#x60;repository&#x60;: a repository slug, such as &#x60;my-repo&#x60;. Use a wildcard   such as &#x60;my-*&#x60; to match every slug that starts with &#x60;my-&#x60;. * &#x60;path&#x60;: with &#x60;eq&#x60;, a value such as &#x60;src/main&#x60; matches any path that   contains those folder or file names in that order, such as   &#x60;app/src/main/App.java&#x60;. Each name must match in full. With   &#x60;wildcard&#x60;, the pattern must match the whole file path, such as   &#x60;*_/main.go&#x60;. * &#x60;language&#x60;: a language name, such as &#x60;go&#x60;, &#x60;python&#x60;, or   &#x60;javascript&#x60;. To filter by file extension, use &#x60;extension&#x60;. * &#x60;extension&#x60;: a file extension without the dot, such as &#x60;go&#x60; or &#x60;py&#x60;. * &#x60;project&#x60;: a project key or name. * &#x60;scm&#x60;: the source control host of the repository. * &#x60;branches&#x60;: searches run on the default branch only. Set &#x60;branches&#x60;   to &#x60;\&quot;true\&quot;&#x60; to search all indexed branches. * &#x60;forks&#x60;: by default, results include repositories that are forks. Set   &#x60;forks&#x60; to &#x60;\&quot;true\&quot;&#x60; to get results from forks only, or to &#x60;\&quot;false\&quot;&#x60; to   get results from repositories that are not forks.  &#x60;branches&#x60; only accepts the value &#x60;\&quot;true\&quot;&#x60;. &#x60;branches&#x60; and &#x60;forks&#x60; only work when they are the whole of &#x60;query.filters&#x60;. You cannot combine them with other filters.  Combine filters with &#x60;and&#x60;, &#x60;or&#x60;, and &#x60;not&#x60;. Filters can nest up to 5 levels deep, and the workspace filter this endpoint adds uses one of them. That leaves 3 levels of &#x60;and&#x60;, &#x60;or&#x60;, or &#x60;not&#x60; around a filter. Deeper filters return &#x60;400&#x60;. This filter uses all 3 levels:  &#x60;&#x60;&#x60;json {   \&quot;and\&quot;: [     { \&quot;or\&quot;: [       { \&quot;not\&quot;: { \&quot;attribute\&quot;: \&quot;language\&quot;, \&quot;eq\&quot;: \&quot;python\&quot; } }     ] },     { \&quot;attribute\&quot;: \&quot;extension\&quot;, \&quot;eq\&quot;: \&quot;go\&quot; }   ] } &#x60;&#x60;&#x60;  #### Workspace scoping  The endpoint always applies a &#x60;namespace &#x3D; &lt;workspace_slug&gt;&#x60; filter and passes the workspace&#x27;s wrapped UUID as &#x60;scope.workspace_ids&#x60;. Callers must **not** include a &#x60;namespace&#x60; filter in &#x60;query.filters&#x60; (anywhere in the tree, including nested AND/OR/NOT). Doing so returns &#x60;400&#x60;. A &#x60;scope.workspace_ids&#x60; value in the request body is ignored. The workspace in the URL always sets the scope.  #### Pagination  Pagination uses a cursor. To page beyond the first result set, include the &#x60;id&#x60; from the previous response as &#x60;request_id&#x60;, and the previous response&#x27;s &#x60;pagination.next_cursor&#x60; as &#x60;pagination.next_cursor&#x60;. &#x60;request_id&#x60; is required whenever &#x60;pagination&#x60; is sent. Repeat until &#x60;pagination.has_more&#x60; is &#x60;false&#x60;.  On every page, &#x60;query.search_term&#x60; and &#x60;query.filters&#x60; must be the same as on the first page, including the order of items inside &#x60;and&#x60;/&#x60;or&#x60;. A different value returns &#x60;400&#x60;. &#x60;config.max_results&#x60; may change between pages.  &#x60;&#x60;&#x60;json {   \&quot;query\&quot;: { \&quot;search_term\&quot;: \&quot;logr\&quot; },   \&quot;config\&quot;: { \&quot;max_results\&quot;: 10 },   \&quot;request_id\&quot;: \&quot;550e8400-e29b-41d4-a716-446655440000\&quot;,   \&quot;pagination\&quot;: { \&quot;next_cursor\&quot;: \&quot;eyJlbnRyaWVzIjpbeyJsZXhpY2FsS2V5Ijoi...\&quot; } } &#x60;&#x60;&#x60;  #### Response  You can rely on these fields:  - &#x60;id&#x60;, &#x60;pagination.next_cursor&#x60;, &#x60;pagination.has_more&#x60; - &#x60;repositories[]&#x60;: &#x60;url&#x60;, &#x60;host&#x60;, &#x60;ns&#x60;, &#x60;name&#x60; - &#x60;matched_files[]&#x60;: &#x60;path&#x60;, &#x60;name&#x60;, &#x60;language&#x60;, &#x60;url&#x60;, &#x60;repositoryId&#x60;,   &#x60;version&#x60; (the commit hash), &#x60;branch_or_tag_name&#x60;, &#x60;is_default_branch&#x60; - &#x60;matched_files[].matched_chunks[]&#x60;: &#x60;source_code&#x60;, &#x60;line_range&#x60;,   &#x60;matched_line_numbers&#x60;, &#x60;matched_ranges&#x60; - &#x60;metadata.total_count&#x60;: an approximate size, meaningful on page 1 only  &#x60;branch_or_tag_name&#x60; and &#x60;is_default_branch&#x60; are left out when not known, and &#x60;language&#x60; can be &#x60;null&#x60;.  Line numbers start at 1, and &#x60;line_range.end&#x60; is the last line of the chunk. Each &#x60;matched_ranges&#x60; entry is &#x60;[line, start_column, end_column]&#x60;, where &#x60;line&#x60; is the line number in the file, the columns start at 0, and &#x60;end_column&#x60; is exclusive.  &#x60;matched_line_numbers&#x60; and &#x60;matched_ranges&#x60; mark where a search term appears as a whole word in the chunk. They can be empty even when the chunk matched.  Other fields can change or be removed without notice, so ignore any field not listed here. Treat ids and &#x60;pagination.next_cursor&#x60; as opaque.  Errors from this endpoint, including errors from the search backend, use the standard Bitbucket error envelope: &#x60;{\&quot;type\&quot;: \&quot;error\&quot;, \&quot;error\&quot;: {\&quot;message\&quot;: ..., \&quot;code\&quot;: ...}}&#x60;. A backend error keeps its status code, except that a backend 5xx is returned as &#x60;502 Bad Gateway&#x60;. The backend&#x27;s own error code, when there is one, is in &#x60;error.detail.upstream_code&#x60;. A &#x60;429&#x60; includes the backend&#x27;s &#x60;Retry-After&#x60; header when the backend sends one.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 */
-
-type WorkspacesApiWorkspacesGetOpts struct {
-	Role optional.String
-	Q    optional.String
-	Sort optional.String
-	Page optional.Int32
-}
-
-func (a *WorkspacesApiService) WorkspacesGet(ctx context.Context, localVarOptionals *WorkspacesApiWorkspacesGetOpts) (PaginatedWorkspaces, *http.Response, error) {
+func (a *WorkspacesApiService) WorkspacesWorkspaceCodesearchPost(ctx context.Context, workspace string) (*http.Response, error) {
 	var (
-		localVarHttpMethod  = strings.ToUpper("Get")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue PaginatedWorkspaces
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/workspaces"
+	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/codesearch"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Role.IsSet() {
-		localVarQueryParams.Add("role", parameterToString(localVarOptionals.Role.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
-		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Sort.IsSet() {
-		localVarQueryParams.Add("sort", parameterToString(localVarOptionals.Sort.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -484,26 +332,18 @@ func (a *WorkspacesApiService) WorkspacesGet(ctx context.Context, localVarOption
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-		// If we succeed, return the data, otherwise pass on to decode error.
-		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -511,30 +351,80 @@ func (a *WorkspacesApiService) WorkspacesGet(ctx context.Context, localVarOption
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v PaginatedWorkspaces
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
+				return localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
+			return localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 401 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
+				return localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
+			return localVarHttpResponse, newErr
 		}
-		return localVarReturnValue, localVarHttpResponse, newErr
+		if localVarHttpResponse.StatusCode == 403 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 404 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 415 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 429 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 502 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarHttpResponse, newErr
+		}
+		return localVarHttpResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHttpResponse, nil
+	return localVarHttpResponse, nil
 }
 
 /*
@@ -651,7 +541,7 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceGet(ctx context.Context, works
 WorkspacesApiService List webhooks for a workspace
 Returns a paginated list of webhooks installed on this workspace.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *WorkspacesApiWorkspacesWorkspaceHooksGetOpts - Optional Parameters:
      * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
@@ -778,9 +668,9 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, 
 
 /*
 WorkspacesApiService Create a webhook for a workspace
-Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
+Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example: &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
 
 @return WebhookSubscription
 */
@@ -900,10 +790,10 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksPost(ctx context.Context,
 WorkspacesApiService Delete a webhook for a workspace
 Deletes the specified webhook subscription from the given workspace.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Context, uid string, workspace string) (*http.Response, error) {
+func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Context, workspace string, uid string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -913,8 +803,8 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Con
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/hooks/{uid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -999,14 +889,14 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Con
 
 /*
 WorkspacesApiService Get a webhook for a workspace
-Returns the webhook with the specified id installed on the given workspace.
+Returns the webhook with the specified id installed on the specified workspace.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context, workspace string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1017,8 +907,8 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Contex
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/hooks/{uid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1111,14 +1001,14 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Contex
 
 /*
 WorkspacesApiService Update a webhook for a workspace
-Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the &#x60;secret&#x60; field. Passing a &#x60;null&#x60; value in the &#x60;secret&#x60; field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the &#x60;secret&#x60; field in the request.
+Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the X-Hub-Signature header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the secret field . Passing a null value in the secret field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the secret field in the request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Context, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Context, workspace string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -1129,8 +1019,8 @@ func (a *WorkspacesApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Contex
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/hooks/{uid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]
+**EnforcedSignedCommits** | **bool** | Whether signed commits are required for this project:  - true when the workspace is on a Premium plan and enforcement is enabled at the project or the   workspace level; - otherwise false. | [optional] [default to null]
 **HasPubliclyVisibleRepos** | **bool** |  Indicates whether the project contains publicly visible repositories. Note that private projects cannot contain public repositories. | [optional] [default to null]
 **IsPrivate** | **bool** |  Indicates whether the project is publicly accessible, or whether it is private to the team and consequently only visible to team members. Note that private projects cannot contain public repositories. | [optional] [default to null]
 **Key** | **string** | The project&#x27;s key. | [optional] [default to null]

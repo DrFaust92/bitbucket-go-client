@@ -12,5 +12,5 @@ package bitbucket
 // Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also identifies the element as Swagger's `discriminator`.
 type ModelError struct {
 	Error_ *ErrorError `json:"error,omitempty"`
-	Type_  string      `json:"type"`
+	Type_  string      `json:"type,omitempty"`
 }

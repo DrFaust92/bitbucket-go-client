@@ -27,7 +27,7 @@ type PropertiesApiService service
 
 /*
 PropertiesApiService Delete a commit application property
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
   - @param repoSlug The repository.
@@ -114,7 +114,7 @@ func (a *PropertiesApiService) DeleteCommitHostedPropertyValue(ctx context.Conte
 
 /*
 PropertiesApiService Delete a pull request application property
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
   - @param repoSlug The repository.
@@ -201,7 +201,7 @@ func (a *PropertiesApiService) DeletePullRequestHostedPropertyValue(ctx context.
 
 /*
 PropertiesApiService Delete a repository application property
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
   - @param repoSlug The repository.
@@ -286,7 +286,7 @@ func (a *PropertiesApiService) DeleteRepositoryHostedPropertyValue(ctx context.C
 
 /*
 PropertiesApiService Delete a user application property
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
   - @param appKey The key of the Connect app.
@@ -369,7 +369,7 @@ func (a *PropertiesApiService) DeleteUserHostedPropertyValue(ctx context.Context
 
 /*
 PropertiesApiService Get a commit application property
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
   - @param repoSlug The repository.
@@ -477,7 +477,7 @@ func (a *PropertiesApiService) GetCommitHostedPropertyValue(ctx context.Context,
 
 /*
 PropertiesApiService Get a pull request application property
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
   - @param repoSlug The repository.
@@ -585,7 +585,7 @@ func (a *PropertiesApiService) GetPullRequestHostedPropertyValue(ctx context.Con
 
 /*
 PropertiesApiService Get a repository application property
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
   - @param repoSlug The repository.
@@ -691,7 +691,7 @@ func (a *PropertiesApiService) GetRepositoryHostedPropertyValue(ctx context.Cont
 
 /*
 PropertiesApiService Get a user application property
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.
   - @param appKey The key of the Connect app.
@@ -795,7 +795,7 @@ func (a *PropertiesApiService) RetrieveUserHostedPropertyValue(ctx context.Conte
 
 /*
 PropertiesApiService Update a commit application property
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body The application property to create or update.
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
@@ -885,7 +885,7 @@ func (a *PropertiesApiService) UpdateCommitHostedPropertyValue(ctx context.Conte
 
 /*
 PropertiesApiService Update a pull request application property
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull  request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body The application property to create or update.
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
@@ -975,7 +975,7 @@ func (a *PropertiesApiService) UpdatePullRequestHostedPropertyValue(ctx context.
 
 /*
 PropertiesApiService Update a repository application property
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body The application property to create or update.
   - @param workspace The repository container; either the workspace slug or the UUID in curly braces.
@@ -1063,7 +1063,7 @@ func (a *PropertiesApiService) UpdateRepositoryHostedPropertyValue(ctx context.C
 
 /*
 PropertiesApiService Update a user application property
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body The application property to create or update.
   - @param selectedUser Either the UUID of the account surrounded by curly-braces, for example &#x60;{account UUID}&#x60;, OR an Atlassian Account ID.

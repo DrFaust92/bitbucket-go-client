@@ -1,2 +1,5 @@
 # See https://github.com/swagger-api/swagger-codegen#ignore-file-format
 .gitignore
+
+# Not used: CI runs on GitHub Actions.
+.travis.yml

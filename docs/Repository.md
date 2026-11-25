@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]
+**EnforcedSignedCommits** | **bool** | Whether signed commits are required for this repository:  - true when the workspace is on a Premium plan and enforcement is enabled at the repository, project,   or workspace level; - otherwise false. | [optional] [default to null]
 **ForkPolicy** | **string** |  Controls the rules for forking this repository.  * **allow_forks**: unrestricted forking * **no_public_forks**: restrict forking to private forks (forks cannot   be made public later) * **no_forks**: deny all forking  | [optional] [default to null]
 **FullName** | **string** | The concatenation of the repository owner&#x27;s username and the slugified name, e.g. \&quot;evzijst/interruptingcow\&quot;. This is the same string used in Bitbucket URLs. | [optional] [default to null]
 **HasIssues** | **bool** |  The issue tracker for this repository is enabled. Issue Tracker features are not supported for repositories in workspaces administered through admin.atlassian.com.  | [optional] [default to null]

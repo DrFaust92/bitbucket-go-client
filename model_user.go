@@ -23,7 +23,7 @@ type User struct {
 	// Account name defined by the owner. Should be used instead of the \"username\" field. Note that \"nickname\" cannot be used in place of \"username\" in URLs and queries, as \"nickname\" is not guaranteed to be unique.
 	Nickname    string    `json:"nickname,omitempty"`
 	IsStaff     bool      `json:"is_staff,omitempty"`
-	CreatedOn   time.Time `json:"created_on,omitempty"`
+	CreatedOn   time.Time `json:"created_on,omitzero"`
 	DisplayName string    `json:"display_name,omitempty"`
 	// The user's Bitbucket username. Deprecated by Bitbucket; re-added to preserve client compatibility.
 	Username string `json:"username,omitempty"`

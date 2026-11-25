@@ -14,5 +14,5 @@ type PipelineSshKeyPair struct {
 	PrivateKey string `json:"private_key,omitempty"`
 	// The SSH public key.
 	PublicKey string `json:"public_key,omitempty"`
-	Type_     string `json:"type"`
+	Type_     string `json:"type,omitempty"`
 }

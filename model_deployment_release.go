@@ -22,6 +22,6 @@ type DeploymentRelease struct {
 	Url    string  `json:"url,omitempty"`
 	Commit *Commit `json:"commit,omitempty"`
 	// The timestamp when the release was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
-	Type_     string    `json:"type"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
+	Type_     string    `json:"type,omitempty"`
 }

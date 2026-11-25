@@ -13,5 +13,5 @@ type WorkspaceMembership struct {
 	Links     *interface{} `json:"links,omitempty"`
 	User      *Account     `json:"user,omitempty"`
 	Workspace *Workspace   `json:"workspace,omitempty"`
-	Type_     string       `json:"type"`
+	Type_     string       `json:"type,omitempty"`
 }

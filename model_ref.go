@@ -11,7 +11,7 @@ package bitbucket
 
 // A ref object, representing a branch or tag in a repository.
 type Ref struct {
-	Type_ string       `json:"type"`
+	Type_ string       `json:"type,omitempty"`
 	Links *interface{} `json:"links,omitempty"`
 	// The name of the ref.
 	Name   string  `json:"name,omitempty"`

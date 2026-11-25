@@ -14,7 +14,7 @@ import (
 )
 
 type WebhookSubscription struct {
-	// The webhook's id
+	// The webhook's id.
 	Uuid string `json:"uuid,omitempty"`
 	// The URL events get delivered to.
 	Url string `json:"url,omitempty"`
@@ -23,13 +23,16 @@ type WebhookSubscription struct {
 	// The type of entity. Set to either `repository` or `workspace` based on where the subscription is defined.
 	SubjectType string       `json:"subject_type,omitempty"`
 	Subject     *interface{} `json:"subject,omitempty"`
-	Active      bool         `json:"active,omitempty"`
-	CreatedAt   time.Time    `json:"created_at,omitempty"`
+	// Whether or not the webhook subscription is enabled.
+	Active bool `json:"active,omitempty"`
+	// The timestamp when the webhook subscription was created.
+	CreatedAt time.Time `json:"created_at,omitzero"`
 	// The events this webhook is subscribed to.
 	Events []string `json:"events,omitempty"`
 	// Indicates whether or not the hook has an associated secret. It is not possible to see the hook's secret. This field is ignored during updates.
 	SecretSet bool `json:"secret_set,omitempty"`
-	// The secret to associate with the hook. The secret is never returned via the API. As such, this field is only used during updates. The secret can be set to `null` or \"\" to remove the secret (or create a hook with no secret). Leaving out the secret field during updates will leave the secret unchanged. Leaving out the secret during creation will create a hook with no secret.
-	Secret string `json:"secret,omitempty"`
-	Type_  string `json:"type"`
+	// The secret to associate with the hook. The secret is never returned via the API. As such, this field is only used during updates. The secret can be set to `null`` or `\"\"`` to remove the secret (or create a hook with no secret). Leaving out the secret field during updates will leave the secret unchanged. Leaving out the secret during creation will create a hook with no secret.
+	Secret string                     `json:"secret,omitempty"`
+	Links  *WebhooksSubscriptionLinks `json:"links,omitempty"`
+	Type_  string                     `json:"type,omitempty"`
 }

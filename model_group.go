@@ -18,5 +18,5 @@ type Group struct {
 	Slug string `json:"slug,omitempty"`
 	// The concatenation of the workspace's slug and the group's slug, separated with a colon (e.g. `acme:developers`)
 	FullSlug string `json:"full_slug,omitempty"`
-	Type_    string `json:"type"`
+	Type_    string `json:"type,omitempty"`
 }

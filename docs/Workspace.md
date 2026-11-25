@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the workspace. | [optional] [default to null]
 **Slug** | **string** | The short label that identifies this workspace. | [optional] [default to null]
 **IsPrivate** | **bool** | Indicates whether the workspace is publicly accessible, or whether it is private to the members and consequently only visible to members. | [optional] [default to null]
+**IsPersonal** | **bool** | Indicates whether the workspace belongs to an individual user. | [optional] [default to null]
+**EnforcedSignedCommits** | **bool** | Whether signed commits are required for this workspace:  - true when enforcement is enabled at the workspace level, even if the workspace is no longer on a   Premium plan. Signed commits are only enforced on a Premium plan; - otherwise false. | [optional] [default to null]
 **IsPrivacyEnforced** | **bool** | Indicates whether the workspace enforces private content, or whether it allows public content. | [optional] [default to null]
 **ForkingMode** | **string** | Controls the rules for forking repositories within this workspace.  * **allow_forks**: unrestricted forking * **internal_only**: prevents forking of private repositories outside the workspace or to public repositories  | [optional] [default to null]
 **CreatedOn** | [**time.Time**](time.Time.md) |  | [optional] [default to null]

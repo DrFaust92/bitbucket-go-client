@@ -4,7 +4,6 @@ All URIs are relative to *https://api.bitbucket.org/2.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SnippetsGet**](SnippetsApi.md#SnippetsGet) | **Get** /snippets | List snippets
 [**SnippetsPost**](SnippetsApi.md#SnippetsPost) | **Post** /snippets | Create a snippet
 [**SnippetsWorkspaceEncodedIdCommentsCommentIdDelete**](SnippetsApi.md#SnippetsWorkspaceEncodedIdCommentsCommentIdDelete) | **Delete** /snippets/{workspace}/{encoded_id}/comments/{comment_id} | Delete a comment on a snippet
 [**SnippetsWorkspaceEncodedIdCommentsCommentIdGet**](SnippetsApi.md#SnippetsWorkspaceEncodedIdCommentsCommentIdGet) | **Get** /snippets/{workspace}/{encoded_id}/comments/{comment_id} | Get a comment on a snippet
@@ -29,41 +28,6 @@ Method | HTTP request | Description
 [**SnippetsWorkspaceEncodedIdWatchersGet**](SnippetsApi.md#SnippetsWorkspaceEncodedIdWatchersGet) | **Get** /snippets/{workspace}/{encoded_id}/watchers | List users watching a snippet
 [**SnippetsWorkspaceGet**](SnippetsApi.md#SnippetsWorkspaceGet) | **Get** /snippets/{workspace} | List snippets in a workspace
 [**SnippetsWorkspacePost**](SnippetsApi.md#SnippetsWorkspacePost) | **Post** /snippets/{workspace} | Create a snippet for a workspace
-
-# **SnippetsGet**
-> PaginatedSnippets SnippetsGet(ctx, optional)
-List snippets
-
-**This endpoint is deprecated. Please use the [workspace scoped alternative](/cloud/bitbucket/rest/api-group-snippets/#api-snippets-workspace-get).**  Returns all snippets. Like pull requests, repositories and workspaces, the full set of snippets is defined by what the current user has access to.  This includes all snippets owned by any of the workspaces the user is a member of, or snippets by other users that the current user is either watching or has collaborated on (for instance by commenting on it).  To limit the set of returned snippets, apply the `?role=[owner|contributor|member]` query parameter where the roles are defined as follows:  * `owner`: all snippets owned by the current user * `contributor`: all snippets owned by, or watched by the current user * `member`: created in a workspaces or watched by the current user  When no role is specified, all public snippets are returned, as well as all privately owned snippets watched or commented on.  The returned response is a normal paginated JSON list. This endpoint only supports `application/json` responses and no `multipart/form-data` or `multipart/related`. As a result, it is not possible to include the file contents.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***SnippetsApiSnippetsGetOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a SnippetsApiSnippetsGetOpts struct
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **role** | **optional.String**| Filter down the result based on the authenticated user&#x27;s role (&#x60;owner&#x60;, &#x60;contributor&#x60;, or &#x60;member&#x60;). | 
- **page** | **optional.Int32**| page | 
-
-### Return type
-
-[**PaginatedSnippets**](paginated_snippets.md)
-
-### Authorization
-
-[api_key](../README.md#api_key), [basic](../README.md#basic), [oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SnippetsPost**
 > Snippet SnippetsPost(ctx, body)
@@ -757,7 +721,7 @@ Name | Type | Description  | Notes
 > PaginatedSnippets SnippetsWorkspaceGet(ctx, workspace, optional)
 List snippets in a workspace
 
-Identical to [`/snippets`](/cloud/bitbucket/rest/api-group-snippets/#api-snippets-get), except that the result is further filtered by the snippet owner and only those that are owned by `{workspace}` are returned.
+Returns a paginated list of snippets owned by `{workspace}`.  To limit the set of returned snippets, apply the `?role=[owner|contributor|member]` query parameter where the roles are defined as follows:  * `owner`: snippets owned by `{workspace}` that also belong to the current user     (only returns results when `{workspace}` is the current user's personal workspace) * `contributor`: snippets owned by `{workspace}` that the current user is watching,     plus any owned by `{workspace}` and the current user * `member`: all snippets owned by `{workspace}` if the current user is a member,     otherwise only those the current user is watching  When no role is specified, all snippets owned by `{workspace}` are returned.  If the current user is not a member of `{workspace}`, only public snippets are returned regardless of role.  The returned response is a normal paginated JSON list. This endpoint only supports `application/json` responses and no `multipart/form-data` or `multipart/related`. As a result, it is not possible to include the file contents.
 
 ### Required Parameters
 

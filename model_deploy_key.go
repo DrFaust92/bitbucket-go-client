@@ -21,9 +21,9 @@ type DeployKey struct {
 	Comment string `json:"comment,omitempty"`
 	// The user-defined label for the deploy key
 	Label    string       `json:"label,omitempty"`
-	AddedOn  time.Time    `json:"added_on,omitempty"`
-	LastUsed time.Time    `json:"last_used,omitempty"`
+	AddedOn  time.Time    `json:"added_on,omitzero"`
+	LastUsed time.Time    `json:"last_used,omitzero"`
 	Links    *interface{} `json:"links,omitempty"`
 	Owner    *Account     `json:"owner,omitempty"`
-	Type_    string       `json:"type"`
+	Type_    string       `json:"type,omitempty"`
 }

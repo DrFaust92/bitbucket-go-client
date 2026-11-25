@@ -14,8 +14,10 @@ import (
 )
 
 type Project struct {
-	CreatedOn   time.Time `json:"created_on,omitempty"`
+	CreatedOn   time.Time `json:"created_on,omitzero"`
 	Description string    `json:"description,omitempty"`
+	// Whether signed commits are required for this project:  - true when the workspace is on a Premium plan and enforcement is enabled at the project or the   workspace level; - otherwise false.
+	EnforcedSignedCommits bool `json:"enforced_signed_commits,omitempty"`
 	//  Indicates whether the project contains publicly visible repositories. Note that private projects cannot contain public repositories.
 	HasPubliclyVisibleRepos bool `json:"has_publicly_visible_repos,omitempty"`
 	//  Indicates whether the project is publicly accessible, or whether it is private to the team and consequently only visible to team members. Note that private projects cannot contain public repositories.
@@ -26,8 +28,8 @@ type Project struct {
 	// The name of the project.
 	Name      string    `json:"name,omitempty"`
 	Owner     *Team     `json:"owner,omitempty"`
-	UpdatedOn time.Time `json:"updated_on,omitempty"`
+	UpdatedOn time.Time `json:"updated_on,omitzero"`
 	// The project's immutable id.
 	Uuid  string `json:"uuid,omitempty"`
-	Type_ string `json:"type"`
+	Type_ string `json:"type,omitempty"`
 }

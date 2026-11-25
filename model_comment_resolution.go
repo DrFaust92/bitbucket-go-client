@@ -15,8 +15,8 @@ import (
 
 // The resolution object for a Comment.
 type CommentResolution struct {
-	Type_ string   `json:"type"`
+	Type_ string   `json:"type,omitempty"`
 	User  *Account `json:"user,omitempty"`
 	// The ISO8601 timestamp the resolution was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
 }

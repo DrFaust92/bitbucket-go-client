@@ -21,9 +21,11 @@ type Branchrestriction struct {
 	BranchType string `json:"branch_type,omitempty"`
 	// Apply the restriction to branches that match this pattern. Active when `branch_match_kind` is `glob`. Will be empty when `branch_match_kind` is `branching_model`.
 	Pattern string `json:"pattern"`
+	// List of source branch names allowed to push back to the restricted branch. Used in conjunction with pipeline-based restrictions.
+	PipelinesSourceBranches []string `json:"pipelines_source_branches,omitempty"`
 	// Value with kind-specific semantics:  * `require_approvals_to_merge` uses it to require a minimum number of approvals on a PR.  * `require_default_reviewer_approvals_to_merge` uses it to require a minimum number of approvals from default reviewers on a PR.  * `require_passing_builds_to_merge` uses it to require a minimum number of passing builds.  * `require_commits_behind` uses it to require the current branch is up to a maximum number of commits behind it destination.
 	Value  int32     `json:"value,omitempty"`
 	Users  []Account `json:"users,omitempty"`
 	Groups []Group   `json:"groups,omitempty"`
-	Type_  string    `json:"type"`
+	Type_  string    `json:"type,omitempty"`
 }

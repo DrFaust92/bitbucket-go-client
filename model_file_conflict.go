@@ -11,7 +11,7 @@ package bitbucket
 
 // A file conflict object.
 type FileConflict struct {
-	Type_    string `json:"type"`
+	Type_    string `json:"type,omitempty"`
 	Path     string `json:"path,omitempty"`
 	Scenario string `json:"scenario,omitempty"`
 	Message  string `json:"message,omitempty"`

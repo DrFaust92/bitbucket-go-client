@@ -21,7 +21,7 @@ Method | HTTP request | Description
 > DeleteCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
 Delete a commit application property
 
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a commit. 
 
 ### Required Parameters
 
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 > DeletePullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
 Delete a pull request application property
 
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request. 
 
 ### Required Parameters
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 > DeleteRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
 Delete a repository application property
 
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a repository. 
 
 ### Required Parameters
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 > DeleteUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
 Delete a user application property
 
-Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Delete an [application property](/cloud/bitbucket/application-properties/) value stored against a user. 
 
 ### Required Parameters
 
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 > ApplicationProperty GetCommitHostedPropertyValue(ctx, workspace, repoSlug, commit, appKey, propertyName)
 Get a commit application property
 
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a commit. 
 
 ### Required Parameters
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 > ApplicationProperty GetPullRequestHostedPropertyValue(ctx, workspace, repoSlug, pullrequestId, appKey, propertyName)
 Get a pull request application property
 
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request. 
 
 ### Required Parameters
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 > ApplicationProperty GetRepositoryHostedPropertyValue(ctx, workspace, repoSlug, appKey, propertyName)
 Get a repository application property
 
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a repository. 
 
 ### Required Parameters
 
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 > ApplicationProperty RetrieveUserHostedPropertyValue(ctx, selectedUser, appKey, propertyName)
 Get a user application property
 
-Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Retrieve an [application property](/cloud/bitbucket/application-properties/) value stored against a user. 
 
 ### Required Parameters
 
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 > UpdateCommitHostedPropertyValue(ctx, body, workspace, repoSlug, commit, appKey, propertyName)
 Update a commit application property
 
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a commit. 
 
 ### Required Parameters
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 > UpdatePullRequestHostedPropertyValue(ctx, body, workspace, repoSlug, pullrequestId, appKey, propertyName)
 Update a pull request application property
 
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull request.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a pull  request. 
 
 ### Required Parameters
 
@@ -337,7 +337,7 @@ Name | Type | Description  | Notes
 > UpdateRepositoryHostedPropertyValue(ctx, body, workspace, repoSlug, appKey, propertyName)
 Update a repository application property
 
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a repository. 
 
 ### Required Parameters
 
@@ -369,7 +369,7 @@ Name | Type | Description  | Notes
 > UpdateUserHostedPropertyValue(ctx, body, selectedUser, appKey, propertyName)
 Update a user application property
 
-Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user.
+This API will be deprecated on January 31, 2027 as part of [end of support for Connect app](https://community.developer.atlassian.com/t/bitbucket-cloud-announcing-connect-end-of-support-timeline-and-next-steps/98760).  Update an [application property](/cloud/bitbucket/application-properties/) value stored against a user. 
 
 ### Required Parameters
 

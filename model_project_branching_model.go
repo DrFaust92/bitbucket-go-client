@@ -14,5 +14,5 @@ type ProjectBranchingModel struct {
 	BranchTypes []interface{} `json:"branch_types,omitempty"`
 	Development *interface{}  `json:"development,omitempty"`
 	Production  *interface{}  `json:"production,omitempty"`
-	Type_       string        `json:"type"`
+	Type_       string        `json:"type,omitempty"`
 }

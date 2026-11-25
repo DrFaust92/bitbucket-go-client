@@ -22,9 +22,9 @@ type PipelineRunner struct {
 	Labels []string             `json:"labels,omitempty"`
 	State  *PipelineRunnerState `json:"state,omitempty"`
 	// The timestamp when the runner was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
 	// The timestamp when the runner was last updated.
-	UpdatedOn   time.Time                  `json:"updated_on,omitempty"`
+	UpdatedOn   time.Time                  `json:"updated_on,omitzero"`
 	OauthClient *PipelineRunnerOauthClient `json:"oauth_client,omitempty"`
-	Type_       string                     `json:"type"`
+	Type_       string                     `json:"type,omitempty"`
 }

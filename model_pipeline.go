@@ -26,13 +26,13 @@ type Pipeline struct {
 	// The variables for the pipeline.
 	Variables []PipelineVariable `json:"variables,omitempty"`
 	// The timestamp when the pipeline was created.
-	CreatedOn time.Time `json:"created_on,omitempty"`
+	CreatedOn time.Time `json:"created_on,omitzero"`
 	// The timestamp when the Pipeline was completed. This is not set if the pipeline is still in progress.
-	CompletedOn time.Time `json:"completed_on,omitempty"`
+	CompletedOn time.Time `json:"completed_on,omitzero"`
 	// The number of build seconds used by this pipeline.
 	BuildSecondsUsed int32 `json:"build_seconds_used,omitempty"`
 	// An ordered list of sources of the pipeline configuration
 	ConfigurationSources []PipelineConfigurationSource `json:"configuration_sources,omitempty"`
 	Links                *PipelinesPipelineLinks       `json:"links,omitempty"`
-	Type_                string                        `json:"type"`
+	Type_                string                        `json:"type,omitempty"`
 }
