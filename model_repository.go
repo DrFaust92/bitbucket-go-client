@@ -16,6 +16,8 @@ import (
 type Repository struct {
 	CreatedOn   time.Time `json:"created_on,omitempty"`
 	Description string    `json:"description,omitempty"`
+	// Whether signed commits are required for this repository:  - true when the workspace is on a Premium plan and enforcement is enabled at the repository, project,   or workspace level; - otherwise false.
+	EnforcedSignedCommits bool `json:"enforced_signed_commits,omitempty"`
 	//  Controls the rules for forking this repository.  * **allow_forks**: unrestricted forking * **no_public_forks**: restrict forking to private forks (forks cannot   be made public later) * **no_forks**: deny all forking
 	ForkPolicy string `json:"fork_policy,omitempty"`
 	// The concatenation of the repository owner's username and the slugified name, e.g. \"evzijst/interruptingcow\". This is the same string used in Bitbucket URLs.

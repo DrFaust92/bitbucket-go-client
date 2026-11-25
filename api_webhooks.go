@@ -28,7 +28,7 @@ type WebhooksApiService service
 
 /*
 WebhooksApiService Get a webhook resource
-Returns the webhook resource or subject types on which webhooks can be registered.  Each resource/subject type contains an &#x60;events&#x60; link that returns the paginated list of specific events each individual subject type can emit.  This endpoint is publicly accessible and does not require authentication or scopes.
+Returns the webhook resource or subject types on which webhooks can be registered. Each resource/subject type contains an &#x60;events&#x60; link that returns the paginated list of specific events each individual subject type can emit. This endpoint is publicly accessible and does not require authentication or scopes.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return SubjectTypes
@@ -126,7 +126,7 @@ func (a *WebhooksApiService) HookEventsGet(ctx context.Context) (SubjectTypes, *
 
 /*
 WebhooksApiService List subscribable webhook types
-Returns a paginated list of all valid webhook events for the specified entity. **The team and user webhooks are deprecated, and you should use workspace instead. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**  This is public data that does not require any scopes or authentication.  NOTE: The example response is a truncated response object for the &#x60;workspace&#x60; &#x60;subject_type&#x60;. We return the same structure for the other &#x60;subject_type&#x60; objects.
+Returns a paginated list of all valid webhook events for the specified entity. **The team and user webhooks are deprecated, and you should use workspace instead. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).** This is public data that does not require any scopes or authentication. NOTE: The example response is a truncated response object for the &#x60;workspace&#x60; &#x60;subject_type&#x60;. We return the same structure for the other &#x60;subject_type&#x60; objects.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subjectType A resource or subject type.
  * @param optional nil or *WebhooksApiHookEventsSubjectTypeGetOpts - Optional Parameters:
@@ -247,8 +247,8 @@ func (a *WebhooksApiService) HookEventsSubjectTypeGet(ctx context.Context, subje
 WebhooksApiService List webhooks for a repository
 Returns a paginated list of webhooks installed on this repository.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts - Optional Parameters:
      * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
@@ -258,7 +258,7 @@ type WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts struct {
 	Page optional.Int32
 }
 
-func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, repoSlug string, workspace string, localVarOptionals *WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
+func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.Context, workspace string, repoSlug string, localVarOptionals *WebhooksApiRepositoriesWorkspaceRepoSlugHooksGetOpts) (PaginatedWebhookSubscriptions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -269,8 +269,8 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.C
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks"
-	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -376,14 +376,14 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksGet(ctx context.C
 
 /*
 WebhooksApiService Create a webhook for a repository
-Creates a new webhook on the specified repository.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  Note that this call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  Also note that the &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
+Creates a new webhook on the specified repository.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example: &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
 
 @return WebhookSubscription
 */
-func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.Context, repoSlug string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.Context, workspace string, repoSlug string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}
@@ -394,8 +394,8 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks"
-	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -500,11 +500,11 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksPost(ctx context.
 WebhooksApiService Delete a webhook for a repository
 Deletes the specified webhook subscription from the given repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 */
-func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx context.Context, repoSlug string, uid string, workspace string) (*http.Response, error) {
+func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx context.Context, workspace string, repoSlug string, uid string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -514,9 +514,9 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx con
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -603,13 +603,13 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidDelete(ctx con
 WebhooksApiService Get a webhook for a repository
 Returns the webhook with the specified id installed on the specified repository.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx context.Context, repoSlug string, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx context.Context, workspace string, repoSlug string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -620,9 +620,9 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx contex
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -717,13 +717,13 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidGet(ctx contex
 WebhooksApiService Update a webhook for a repository
 Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the &#x60;secret&#x60; field. Passing a &#x60;null&#x60; value in the &#x60;secret&#x60; field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the &#x60;secret&#x60; field in the request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx context.Context, repoSlug string, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx context.Context, workspace string, repoSlug string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -734,9 +734,9 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx contex
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -841,7 +841,7 @@ func (a *WebhooksApiService) RepositoriesWorkspaceRepoSlugHooksUidPut(ctx contex
 WebhooksApiService List webhooks for a workspace
 Returns a paginated list of webhooks installed on this workspace.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
  * @param optional nil or *WebhooksApiWorkspacesWorkspaceHooksGetOpts - Optional Parameters:
      * @param "Page" (optional.Int32) -  page
 @return PaginatedWebhookSubscriptions
@@ -968,9 +968,9 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksGet(ctx context.Context, wo
 
 /*
 WebhooksApiService Create a webhook for a workspace
-Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example:  &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
+Creates a new webhook on the specified workspace.  Workspace webhooks are fired for events from all repositories contained by that workspace.  Example: &#x60;&#x60;&#x60; $ curl -X POST -u credentials -H &#x27;Content-Type: application/json&#x27;   https://api.bitbucket.org/2.0/workspaces/my-workspace/hooks   -d &#x27;     {       \&quot;description\&quot;: \&quot;Webhook Description\&quot;,       \&quot;url\&quot;: \&quot;https://example.com/\&quot;,       \&quot;active\&quot;: true,       \&quot;secret\&quot;: \&quot;this is a really bad secret\&quot;,       \&quot;events\&quot;: [         \&quot;repo:push\&quot;,         \&quot;issue:created\&quot;,         \&quot;issue:updated\&quot;       ]     }&#x27; &#x60;&#x60;&#x60;  When the &#x60;secret&#x60; is provided it will be used as the key to generate a HMAC digest value sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. Passing a &#x60;null&#x60; or empty &#x60;secret&#x60; or not passing a &#x60;secret&#x60; will leave the webhook&#x27;s secret unset. Bitbucket only generates the &#x60;X-Hub-Signature&#x60; when the webhook&#x27;s secret is set.  This call requires the webhook scope, as well as any scope that applies to the events that the webhook subscribes to. In the example above that means: &#x60;webhook&#x60;, &#x60;repository&#x60; and &#x60;issue&#x60;.  The &#x60;url&#x60; must properly resolve and cannot be an internal, non-routed address.  Only workspace owners can install webhooks on workspaces.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
 
 @return WebhookSubscription
 */
@@ -1090,10 +1090,10 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksPost(ctx context.Context, w
 WebhooksApiService Delete a webhook for a workspace
 Deletes the specified webhook subscription from the given workspace.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 */
-func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Context, uid string, workspace string) (*http.Response, error) {
+func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Context, workspace string, uid string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -1103,8 +1103,8 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Conte
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/hooks/{uid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1189,14 +1189,14 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidDelete(ctx context.Conte
 
 /*
 WebhooksApiService Get a webhook for a workspace
-Returns the webhook with the specified id installed on the given workspace.
+Returns the webhook with the specified id installed on the specified workspace.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context, workspace string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1207,8 +1207,8 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/hooks/{uid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1301,14 +1301,14 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidGet(ctx context.Context,
 
 /*
 WebhooksApiService Update a webhook for a workspace
-Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the &#x60;X-Hub-Signature&#x60; header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the &#x60;secret&#x60; field. Passing a &#x60;null&#x60; value in the &#x60;secret&#x60; field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the &#x60;secret&#x60; field in the request.
+Updates the specified webhook subscription.  The following properties can be mutated:  * &#x60;description&#x60; * &#x60;url&#x60; * &#x60;secret&#x60; * &#x60;active&#x60; * &#x60;events&#x60;  The hook&#x27;s secret is used as a key to generate the HMAC hex digest sent in the X-Hub-Signature header at delivery time. This signature is only generated when the hook has a secret.  Set the hook&#x27;s secret by passing the new value in the secret field . Passing a null value in the secret field will remove the secret from the hook. The hook&#x27;s secret can be left unchanged by not passing the secret field in the request.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param uid Installed webhook&#x27;s ID
-  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+  - @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example &#x60;{workspace UUID}&#x60;.
+  - @param uid The webhook&#x27;s id.
 
 @return WebhookSubscription
 */
-func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Context, uid string, workspace string) (WebhookSubscription, *http.Response, error) {
+func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Context, workspace string, uid string) (WebhookSubscription, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -1319,8 +1319,8 @@ func (a *WebhooksApiService) WorkspacesWorkspaceHooksUidPut(ctx context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/workspaces/{workspace}/hooks/{uid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", fmt.Sprintf("%v", uid), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

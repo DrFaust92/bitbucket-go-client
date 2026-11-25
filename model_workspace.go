@@ -23,6 +23,10 @@ type Workspace struct {
 	Slug string `json:"slug,omitempty"`
 	// Indicates whether the workspace is publicly accessible, or whether it is private to the members and consequently only visible to members.
 	IsPrivate bool `json:"is_private,omitempty"`
+	// Indicates whether the workspace belongs to an individual user.
+	IsPersonal bool `json:"is_personal,omitempty"`
+	// Whether signed commits are required for this workspace:  - true when enforcement is enabled at the workspace level, even if the workspace is no longer on a   Premium plan. Signed commits are only enforced on a Premium plan; - otherwise false.
+	EnforcedSignedCommits bool `json:"enforced_signed_commits,omitempty"`
 	// Indicates whether the workspace enforces private content, or whether it allows public content.
 	IsPrivacyEnforced bool `json:"is_privacy_enforced,omitempty"`
 	// Controls the rules for forking repositories within this workspace.  * **allow_forks**: unrestricted forking * **internal_only**: prevents forking of private repositories outside the workspace or to public repositories

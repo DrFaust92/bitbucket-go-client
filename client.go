@@ -61,7 +61,7 @@ type APIClient struct {
 
 	GPGApi *GPGApiService
 
-	IssueTrackerApi *IssueTrackerApiService
+	MergeQueuesApi *MergeQueuesApiService
 
 	PipelinesApi *PipelinesApiService
 
@@ -76,8 +76,6 @@ type APIClient struct {
 	ReportsApi *ReportsApiService
 
 	RepositoriesApi *RepositoriesApiService
-
-	SearchApi *SearchApiService
 
 	SnippetsApi *SnippetsApiService
 
@@ -116,7 +114,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DeploymentsApi = (*DeploymentsApiService)(&c.common)
 	c.DownloadsApi = (*DownloadsApiService)(&c.common)
 	c.GPGApi = (*GPGApiService)(&c.common)
-	c.IssueTrackerApi = (*IssueTrackerApiService)(&c.common)
+	c.MergeQueuesApi = (*MergeQueuesApiService)(&c.common)
 	c.PipelinesApi = (*PipelinesApiService)(&c.common)
 	c.ProjectsApi = (*ProjectsApiService)(&c.common)
 	c.PropertiesApi = (*PropertiesApiService)(&c.common)
@@ -124,7 +122,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.RefsApi = (*RefsApiService)(&c.common)
 	c.ReportsApi = (*ReportsApiService)(&c.common)
 	c.RepositoriesApi = (*RepositoriesApiService)(&c.common)
-	c.SearchApi = (*SearchApiService)(&c.common)
 	c.SnippetsApi = (*SnippetsApiService)(&c.common)
 	c.SourceApi = (*SourceApiService)(&c.common)
 	c.SshApi = (*SshApiService)(&c.common)

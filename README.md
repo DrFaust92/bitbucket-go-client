@@ -92,39 +92,11 @@ Class | Method | HTTP request | Description
 *GPGApi* | [**UsersSelectedUserGpgKeysFingerprintGet**](docs/GPGApi.md#usersselectedusergpgkeysfingerprintget) | **Get** /users/{selected_user}/gpg-keys/{fingerprint} | Get a GPG key
 *GPGApi* | [**UsersSelectedUserGpgKeysGet**](docs/GPGApi.md#usersselectedusergpgkeysget) | **Get** /users/{selected_user}/gpg-keys | List GPG keys
 *GPGApi* | [**UsersSelectedUserGpgKeysPost**](docs/GPGApi.md#usersselectedusergpgkeyspost) | **Post** /users/{selected_user}/gpg-keys | Add a new GPG key
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugComponentsComponentIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugcomponentscomponentidget) | **Get** /repositories/{workspace}/{repo_slug}/components/{component_id} | Get a component for issues
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugComponentsGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugcomponentsget) | **Get** /repositories/{workspace}/{repo_slug}/components | List components
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesExportPost**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesexportpost) | **Post** /repositories/{workspace}/{repo_slug}/issues/export | Export issues
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesExportRepoNameIssuesTaskIdZipGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesexportreponameissuestaskidzipget) | **Get** /repositories/{workspace}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip | Check issue export status
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesget) | **Get** /repositories/{workspace}/{repo_slug}/issues | List issues
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesImportGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesimportget) | **Get** /repositories/{workspace}/{repo_slug}/issues/import | Check issue import status
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesImportPost**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesimportpost) | **Post** /repositories/{workspace}/{repo_slug}/issues/import | Import issues
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidattachmentsget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments | List attachments for an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsPathDelete**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidattachmentspathdelete) | **Delete** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path} | Delete an attachment for an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsPathGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidattachmentspathget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path} | Get attachment for an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdAttachmentsPost**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidattachmentspost) | **Post** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments | Upload an attachment to an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesChangeIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidchangeschangeidget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes/{change_id} | Get issue change object
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidchangesget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes | List changes on an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdChangesPost**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidchangespost) | **Post** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes | Modify the state of an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdDelete**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidcommentscommentiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id} | Delete a comment on an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidcommentscommentidget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id} | Get a comment on an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsCommentIdPut**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidcommentscommentidput) | **Put** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id} | Update a comment on an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidcommentsget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments | List comments on an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdCommentsPost**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidcommentspost) | **Post** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments | Create a comment on an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdDelete**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueiddelete) | **Delete** /repositories/{workspace}/{repo_slug}/issues/{issue_id} | Delete an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id} | Get an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdPut**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidput) | **Put** /repositories/{workspace}/{repo_slug}/issues/{issue_id} | Update an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdVoteDelete**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidvotedelete) | **Delete** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote | Remove vote for an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdVoteGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidvoteget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote | Check if current user voted for an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdVotePut**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidvoteput) | **Put** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote | Vote for an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdWatchDelete**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidwatchdelete) | **Delete** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch | Stop watching an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdWatchGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidwatchget) | **Get** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch | Check if current user is watching a issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesIssueIdWatchPut**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuesissueidwatchput) | **Put** /repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch | Watch an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugIssuesPost**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugissuespost) | **Post** /repositories/{workspace}/{repo_slug}/issues | Create an issue
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugMilestonesGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugmilestonesget) | **Get** /repositories/{workspace}/{repo_slug}/milestones | List milestones
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugMilestonesMilestoneIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugmilestonesmilestoneidget) | **Get** /repositories/{workspace}/{repo_slug}/milestones/{milestone_id} | Get a milestone
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugVersionsGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugversionsget) | **Get** /repositories/{workspace}/{repo_slug}/versions | List defined versions for issues
-*IssueTrackerApi* | [**RepositoriesWorkspaceRepoSlugVersionsVersionIdGet**](docs/IssueTrackerApi.md#repositoriesworkspacereposlugversionsversionidget) | **Get** /repositories/{workspace}/{repo_slug}/versions/{version_id} | Get a defined version for issues
+*MergeQueuesApi* | [**GetMergeQueue**](docs/MergeQueuesApi.md#getmergequeue) | **Get** /repositories/{workspace}/{repo_slug}/merge-queues/{merge_queue_uuid} | Get a merge queue
+*MergeQueuesApi* | [**GetMergeQueuePullRequest**](docs/MergeQueuesApi.md#getmergequeuepullrequest) | **Get** /repositories/{workspace}/{repo_slug}/merge-queues/{merge_queue_uuid}/queue/{pullrequest_id} | Get a pullrequest in a merge queue
+*MergeQueuesApi* | [**ListMergeQueuePullRequests**](docs/MergeQueuesApi.md#listmergequeuepullrequests) | **Get** /repositories/{workspace}/{repo_slug}/merge-queues/{merge_queue_uuid}/queue | List pullrequests in a merge queue
+*MergeQueuesApi* | [**ListMergeQueues**](docs/MergeQueuesApi.md#listmergequeues) | **Get** /repositories/{workspace}/{repo_slug}/merge-queues | List merge queues
+*MergeQueuesApi* | [**RemovePullRequestFromMergeQueue**](docs/MergeQueuesApi.md#removepullrequestfrommergequeue) | **Delete** /repositories/{workspace}/{repo_slug}/merge-queues/{merge_queue_uuid}/queue/{pullrequest_id} | Remove a pullrequest from a merge queue
 *PipelinesApi* | [**CreateDeploymentVariable**](docs/PipelinesApi.md#createdeploymentvariable) | **Post** /repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables | Create a variable for an environment
 *PipelinesApi* | [**CreatePipelineForRepository**](docs/PipelinesApi.md#createpipelineforrepository) | **Post** /repositories/{workspace}/{repo_slug}/pipelines | Run a pipeline
 *PipelinesApi* | [**CreatePipelineVariableForTeam**](docs/PipelinesApi.md#createpipelinevariableforteam) | **Post** /teams/{username}/pipelines_config/variables | Create a variable for a user
@@ -248,6 +220,7 @@ Class | Method | HTTP request | Description
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id} | Get a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergePost**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidmergepost) | **Post** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge | Merge a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeTaskStatusTaskIdGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidmergetaskstatustaskidget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id} | Get the merge task status for a pull request
+*PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidmergeabilitychecksget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/mergeability/checks | List pull request mergeability checks
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdPatchGet**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidpatchget) | **Get** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch | Get the patch for a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdPut**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidput) | **Put** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id} | Update a pull request
 *PullrequestsApi* | [**RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdRequestChangesDelete**](docs/PullrequestsApi.md#repositoriesworkspacereposlugpullrequestspullrequestidrequestchangesdelete) | **Delete** /repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes | Remove change request for a pull request
@@ -277,7 +250,6 @@ Class | Method | HTTP request | Description
 *ReportsApi* | [**GetAnnotationsForReport**](docs/ReportsApi.md#getannotationsforreport) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations | List annotations
 *ReportsApi* | [**GetReport**](docs/ReportsApi.md#getreport) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId} | Get a report
 *ReportsApi* | [**GetReportsForCommit**](docs/ReportsApi.md#getreportsforcommit) | **Get** /repositories/{workspace}/{repo_slug}/commit/{commit}/reports | List reports
-*RepositoriesApi* | [**RepositoriesGet**](docs/RepositoriesApi.md#repositoriesget) | **Get** /repositories | List public repositories
 *RepositoriesApi* | [**RepositoriesWorkspaceGet**](docs/RepositoriesApi.md#repositoriesworkspaceget) | **Get** /repositories/{workspace} | List repositories in a workspace
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugDelete**](docs/RepositoriesApi.md#repositoriesworkspacereposlugdelete) | **Delete** /repositories/{workspace}/{repo_slug} | Delete a repository
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugFilehistoryCommitPathGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugfilehistorycommitpathget) | **Get** /repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path} | List commits that modified a file
@@ -305,12 +277,7 @@ Class | Method | HTTP request | Description
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrcget) | **Get** /repositories/{workspace}/{repo_slug}/src | Get the root directory of the main branch
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugSrcPost**](docs/RepositoriesApi.md#repositoriesworkspacereposlugsrcpost) | **Post** /repositories/{workspace}/{repo_slug}/src | Create a commit by uploading a file
 *RepositoriesApi* | [**RepositoriesWorkspaceRepoSlugWatchersGet**](docs/RepositoriesApi.md#repositoriesworkspacereposlugwatchersget) | **Get** /repositories/{workspace}/{repo_slug}/watchers | List repositories watchers
-*RepositoriesApi* | [**UserPermissionsRepositoriesGet**](docs/RepositoriesApi.md#userpermissionsrepositoriesget) | **Get** /user/permissions/repositories | List repository permissions for a user
 *RepositoriesApi* | [**UserWorkspacesWorkspacePermissionsRepositoriesGet**](docs/RepositoriesApi.md#userworkspacesworkspacepermissionsrepositoriesget) | **Get** /user/workspaces/{workspace}/permissions/repositories | List repository permissions in a workspace for a user
-*SearchApi* | [**SearchAccount**](docs/SearchApi.md#searchaccount) | **Get** /users/{selected_user}/search/code | Search for code in a user&#x27;s repositories
-*SearchApi* | [**SearchTeam**](docs/SearchApi.md#searchteam) | **Get** /teams/{username}/search/code | Search for code in a team&#x27;s repositories
-*SearchApi* | [**SearchWorkspace**](docs/SearchApi.md#searchworkspace) | **Get** /workspaces/{workspace}/search/code | Search for code in a workspace
-*SnippetsApi* | [**SnippetsGet**](docs/SnippetsApi.md#snippetsget) | **Get** /snippets | List snippets
 *SnippetsApi* | [**SnippetsPost**](docs/SnippetsApi.md#snippetspost) | **Post** /snippets | Create a snippet
 *SnippetsApi* | [**SnippetsWorkspaceEncodedIdCommentsCommentIdDelete**](docs/SnippetsApi.md#snippetsworkspaceencodedidcommentscommentiddelete) | **Delete** /snippets/{workspace}/{encoded_id}/comments/{comment_id} | Delete a comment on a snippet
 *SnippetsApi* | [**SnippetsWorkspaceEncodedIdCommentsCommentIdGet**](docs/SnippetsApi.md#snippetsworkspaceencodedidcommentscommentidget) | **Get** /snippets/{workspace}/{encoded_id}/comments/{comment_id} | Get a comment on a snippet
@@ -360,10 +327,9 @@ Class | Method | HTTP request | Description
 *WebhooksApi* | [**WorkspacesWorkspaceHooksUidDelete**](docs/WebhooksApi.md#workspacesworkspacehooksuiddelete) | **Delete** /workspaces/{workspace}/hooks/{uid} | Delete a webhook for a workspace
 *WebhooksApi* | [**WorkspacesWorkspaceHooksUidGet**](docs/WebhooksApi.md#workspacesworkspacehooksuidget) | **Get** /workspaces/{workspace}/hooks/{uid} | Get a webhook for a workspace
 *WebhooksApi* | [**WorkspacesWorkspaceHooksUidPut**](docs/WebhooksApi.md#workspacesworkspacehooksuidput) | **Put** /workspaces/{workspace}/hooks/{uid} | Update a webhook for a workspace
-*WorkspacesApi* | [**UserPermissionsWorkspacesGet**](docs/WorkspacesApi.md#userpermissionsworkspacesget) | **Get** /user/permissions/workspaces | List workspaces for the current user
 *WorkspacesApi* | [**UserWorkspacesGet**](docs/WorkspacesApi.md#userworkspacesget) | **Get** /user/workspaces | List workspaces for the current user
 *WorkspacesApi* | [**UserWorkspacesWorkspacePermissionGet**](docs/WorkspacesApi.md#userworkspacesworkspacepermissionget) | **Get** /user/workspaces/{workspace}/permission | Get user permission on a workspace
-*WorkspacesApi* | [**WorkspacesGet**](docs/WorkspacesApi.md#workspacesget) | **Get** /workspaces | List workspaces for user
+*WorkspacesApi* | [**WorkspacesWorkspaceCodesearchPost**](docs/WorkspacesApi.md#workspacesworkspacecodesearchpost) | **Post** /workspaces/{workspace}/codesearch | Search code in a workspace
 *WorkspacesApi* | [**WorkspacesWorkspaceGet**](docs/WorkspacesApi.md#workspacesworkspaceget) | **Get** /workspaces/{workspace} | Get a workspace
 *WorkspacesApi* | [**WorkspacesWorkspaceHooksGet**](docs/WorkspacesApi.md#workspacesworkspacehooksget) | **Get** /workspaces/{workspace}/hooks | List webhooks for a workspace
 *WorkspacesApi* | [**WorkspacesWorkspaceHooksPost**](docs/WorkspacesApi.md#workspacesworkspacehookspost) | **Post** /workspaces/{workspace}/hooks | Create a webhook for a workspace
@@ -401,7 +367,10 @@ Class | Method | HTTP request | Description
  - [CommitFile](docs/CommitFile.md)
  - [Commitstatus](docs/Commitstatus.md)
  - [Committer](docs/Committer.md)
- - [Component](docs/Component.md)
+ - [CurrentUserPermissionCheck](docs/CurrentUserPermissionCheck.md)
+ - [CustomMergeCheck](docs/CustomMergeCheck.md)
+ - [CustomOnMergeCheck](docs/CustomOnMergeCheck.md)
+ - [CustomPreMergeCheck](docs/CustomPreMergeCheck.md)
  - [DefaultReviewerAndType](docs/DefaultReviewerAndType.md)
  - [DeployKey](docs/DeployKey.md)
  - [Deployment](docs/Deployment.md)
@@ -419,18 +388,16 @@ Class | Method | HTTP request | Description
  - [Diffstat](docs/Diffstat.md)
  - [EffectiveRepoBranchingModel](docs/EffectiveRepoBranchingModel.md)
  - [ErrorError](docs/ErrorError.md)
- - [ExportOptions](docs/ExportOptions.md)
  - [FileConflict](docs/FileConflict.md)
+ - [GitMergeabilityCheck](docs/GitMergeabilityCheck.md)
  - [GpgAccountKey](docs/GpgAccountKey.md)
  - [Group](docs/Group.md)
  - [HookEvent](docs/HookEvent.md)
- - [Issue](docs/Issue.md)
- - [IssueAttachment](docs/IssueAttachment.md)
- - [IssueChange](docs/IssueChange.md)
- - [IssueComment](docs/IssueComment.md)
- - [IssueJobStatus](docs/IssueJobStatus.md)
  - [Link](docs/Link.md)
- - [Milestone](docs/Milestone.md)
+ - [MergeQueue](docs/MergeQueue.md)
+ - [MergeQueueCheck](docs/MergeQueueCheck.md)
+ - [MergeQueuePullrequest](docs/MergeQueuePullrequest.md)
+ - [MergeQueueReference](docs/MergeQueueReference.md)
  - [ModelError](docs/ModelError.md)
  - [Object](docs/Object.md)
  - [PaginatedAccounts](docs/PaginatedAccounts.md)
@@ -440,7 +407,6 @@ Class | Method | HTTP request | Description
  - [PaginatedChangeset](docs/PaginatedChangeset.md)
  - [PaginatedCommitComments](docs/PaginatedCommitComments.md)
  - [PaginatedCommitstatuses](docs/PaginatedCommitstatuses.md)
- - [PaginatedComponents](docs/PaginatedComponents.md)
  - [PaginatedDefaultReviewerAndType](docs/PaginatedDefaultReviewerAndType.md)
  - [PaginatedDeployKeys](docs/PaginatedDeployKeys.md)
  - [PaginatedDeploymentVariable](docs/PaginatedDeploymentVariable.md)
@@ -451,11 +417,8 @@ Class | Method | HTTP request | Description
  - [PaginatedFiles](docs/PaginatedFiles.md)
  - [PaginatedGpgUserKeys](docs/PaginatedGpgUserKeys.md)
  - [PaginatedHookEvents](docs/PaginatedHookEvents.md)
- - [PaginatedIssueAttachments](docs/PaginatedIssueAttachments.md)
- - [PaginatedIssueComments](docs/PaginatedIssueComments.md)
- - [PaginatedIssues](docs/PaginatedIssues.md)
- - [PaginatedLogEntries](docs/PaginatedLogEntries.md)
- - [PaginatedMilestones](docs/PaginatedMilestones.md)
+ - [PaginatedMergeQueuePullrequests](docs/PaginatedMergeQueuePullrequests.md)
+ - [PaginatedMergeQueues](docs/PaginatedMergeQueues.md)
  - [PaginatedPipelineCaches](docs/PaginatedPipelineCaches.md)
  - [PaginatedPipelineKnownHosts](docs/PaginatedPipelineKnownHosts.md)
  - [PaginatedPipelineRunners](docs/PaginatedPipelineRunners.md)
@@ -483,11 +446,9 @@ Class | Method | HTTP request | Description
  - [PaginatedTags](docs/PaginatedTags.md)
  - [PaginatedTasks](docs/PaginatedTasks.md)
  - [PaginatedTreeentries](docs/PaginatedTreeentries.md)
- - [PaginatedVersions](docs/PaginatedVersions.md)
  - [PaginatedWebhookSubscriptions](docs/PaginatedWebhookSubscriptions.md)
  - [PaginatedWorkspaceAccess](docs/PaginatedWorkspaceAccess.md)
  - [PaginatedWorkspaceMemberships](docs/PaginatedWorkspaceMemberships.md)
- - [PaginatedWorkspaces](docs/PaginatedWorkspaces.md)
  - [Participant](docs/Participant.md)
  - [Pipeline](docs/Pipeline.md)
  - [PipelineBuildNumber](docs/PipelineBuildNumber.md)
@@ -560,6 +521,9 @@ Class | Method | HTTP request | Description
  - [PullrequestCommentTask](docs/PullrequestCommentTask.md)
  - [PullrequestEndpoint](docs/PullrequestEndpoint.md)
  - [PullrequestMergeParameters](docs/PullrequestMergeParameters.md)
+ - [PullrequestMergeabilityCheck](docs/PullrequestMergeabilityCheck.md)
+ - [PullrequestMergeabilityChecks](docs/PullrequestMergeabilityChecks.md)
+ - [PullrequestStateCheck](docs/PullrequestStateCheck.md)
  - [PullrequestTask](docs/PullrequestTask.md)
  - [PullrequestTaskCreate](docs/PullrequestTaskCreate.md)
  - [PullrequestTaskUpdate](docs/PullrequestTaskUpdate.md)
@@ -573,16 +537,12 @@ Class | Method | HTTP request | Description
  - [RepositoryLinks](docs/RepositoryLinks.md)
  - [RepositoryPermission](docs/RepositoryPermission.md)
  - [RepositoryUserPermission](docs/RepositoryUserPermission.md)
- - [SearchCodeSearchResult](docs/SearchCodeSearchResult.md)
- - [SearchContentMatch](docs/SearchContentMatch.md)
- - [SearchLine](docs/SearchLine.md)
- - [SearchResultPage](docs/SearchResultPage.md)
- - [SearchSegment](docs/SearchSegment.md)
  - [Snippet](docs/Snippet.md)
  - [SnippetComment](docs/SnippetComment.md)
  - [SnippetCommit](docs/SnippetCommit.md)
  - [SshAccountKey](docs/SshAccountKey.md)
  - [SshKey](docs/SshKey.md)
+ - [StandardMergeCheck](docs/StandardMergeCheck.md)
  - [SubjectTypes](docs/SubjectTypes.md)
  - [Tag](docs/Tag.md)
  - [Task](docs/Task.md)
@@ -591,8 +551,9 @@ Class | Method | HTTP request | Description
  - [Treeentry](docs/Treeentry.md)
  - [User](docs/User.md)
  - [UserLinks](docs/UserLinks.md)
- - [Version](docs/Version.md)
  - [WebhookSubscription](docs/WebhookSubscription.md)
+ - [WebhooksSubscriptionLink](docs/WebhooksSubscriptionLink.md)
+ - [WebhooksSubscriptionLinks](docs/WebhooksSubscriptionLinks.md)
  - [Workspace](docs/Workspace.md)
  - [WorkspaceAccess](docs/WorkspaceAccess.md)
  - [WorkspaceBase](docs/WorkspaceBase.md)

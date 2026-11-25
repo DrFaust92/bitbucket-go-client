@@ -2889,7 +2889,7 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 
 /*
 PullrequestsApiService Merge a pull request
-Merges the pull request.
+Merges the pull request.  If the destination branch has an active merge queue, the pull request is added to the queue instead. The API returns a 202 with a polling link to the task-status API in the Location header, even when &#x60;async&#x60; is false. Calling it again on a queued pull request returns the same link.  Merge queues support the &#x60;merge_commit&#x60;, &#x60;squash&#x60; and &#x60;rebase_merge&#x60; strategies. If no strategy is given, the queue&#x27;s default is used.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param pullRequestId The id of the pull request.
  * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
@@ -3002,6 +3002,26 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 			newErr.model = v
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 503 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 555 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -3020,7 +3040,7 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 
 /*
 PullrequestsApiService Get the merge task status for a pull request
-When merging a pull request takes too long, the client receives a task ID along with a 202 status code. The task ID can be used in a call to this endpoint to check the status of a merge task.  &#x60;&#x60;&#x60; curl -X GET https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/&lt;task_id&gt; &#x60;&#x60;&#x60;  If the merge task is not yet finished, a PENDING status will be returned.  &#x60;&#x60;&#x60; HTTP/2 200 {     \&quot;task_status\&quot;: \&quot;PENDING\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/&lt;task_id&gt;\&quot;         }     } } &#x60;&#x60;&#x60;  If the merge was successful, a SUCCESS status will be returned.  &#x60;&#x60;&#x60; HTTP/2 200 {     \&quot;task_status\&quot;: \&quot;SUCCESS\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/&lt;task_id&gt;\&quot;         }     },     \&quot;merge_result\&quot;: &lt;the merged pull request object&gt; } &#x60;&#x60;&#x60;  If the merge task failed, an error will be returned.  &#x60;&#x60;&#x60; {     \&quot;type\&quot;: \&quot;error\&quot;,     \&quot;error\&quot;: {         \&quot;message\&quot;: \&quot;&lt;error message&gt;\&quot;     } } &#x60;&#x60;&#x60;
+When merging a pull request takes too long, the client receives a task ID along with a 202 status code. The task ID can be used in a call to this endpoint to check the status of a merge task.  &#x60;&#x60;&#x60; curl -X GET https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/&lt;task_id&gt; &#x60;&#x60;&#x60;  If the merge task is not yet finished, a PENDING status will be returned.  &#x60;&#x60;&#x60; HTTP/2 200 {     \&quot;task_status\&quot;: \&quot;PENDING\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/&lt;task_id&gt;\&quot;         }     } } &#x60;&#x60;&#x60;  If the merge was successful, a SUCCESS status will be returned.  &#x60;&#x60;&#x60; HTTP/2 200 {     \&quot;task_status\&quot;: \&quot;SUCCESS\&quot;,     \&quot;links\&quot;: {         \&quot;self\&quot;: {             \&quot;href\&quot;: \&quot;https://api.bitbucket.org/2.0/repositories/atlassian/bitbucket/pullrequests/2286/merge/task-status/&lt;task_id&gt;\&quot;         }     },     \&quot;merge_result\&quot;: &lt;the merged pull request object&gt; } &#x60;&#x60;&#x60;  If the merge task failed, an error will be returned.  &#x60;&#x60;&#x60; {     \&quot;type\&quot;: \&quot;error\&quot;,     \&quot;error\&quot;: {         \&quot;message\&quot;: \&quot;&lt;error message&gt;\&quot;     } } &#x60;&#x60;&#x60;  If the pull request was added to a merge queue, the task reports its landing through the queue. A PENDING status is returned while it is in the queue, with a &#x60;queued_pullrequest&#x60; object once the queue has it. A SUCCESS status is returned once it merges, and an error if it leaves the queue without merging. The error message can contain Markdown.  Unknown or expired task IDs return a PENDING status.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param pullRequestId The id of the pull request.
   - @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
@@ -3101,6 +3121,169 @@ func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRe
 	}
 
 	return localVarHttpResponse, nil
+}
+
+/*
+PullrequestsApiService List pull request mergeability checks
+Returns the mergeability checks Bitbucket performs for this pull request, and whether each one currently allows the pull request to be merged - simulating what the merge endpoint checks before actually merging.  Checks cover pull request state, the current user&#x27;s merge permissions, Git conflicts, configured standard and custom merge checks, and merge queue status when available. Each check&#x27;s &#x60;blocking&#x60; attribute indicates whether it currently prevents merging. A failed check does not necessarily block a merge.  &#x60;pullrequest_state_check&#x60;, &#x60;current_user_permission_check&#x60;, and &#x60;git_mergeability_check&#x60; cover state, permission, and Git eligibility. One &#x60;standard_merge_check&#x60; is included per configured branch/merge restriction, and one &#x60;custom_pre_merge_check&#x60;/&#x60;custom_on_merge_check&#x60; per activated custom check - both omitted entirely, not reported as passing, when not configured. Not exhaustive: conditions Bitbucket can&#x27;t evaluate without attempting the merge (e.g. dependency-merge requirements) aren&#x27;t included. See &#x60;PullRequestMergeabilityCheckSchema&#x60; for per-check fields, and &#x60;q&#x60; below to exclude the checks that are expensive to evaluate.  For repositories with merge queues enabled, a &#x60;merge_queue_check&#x60; reports queue availability and whether the pull request is already queued. It is included for open, non-draft pull requests when the destination branch requires queueing, and for already-queued pull requests with a configured queue. The check is omitted when no merge queue is configured for the destination branch. When the check is present, &#x60;merge_queue&#x60; contains that configured queue&#x27;s UUID, name and state. Already-queued pull requests return their blocking state check and any applicable queue check, without evaluating Git or other merge checks. A failed queue configuration read fails the whole request with &#x60;500&#x60;, as for custom merge check results.  Returns &#x60;500&#x60; if custom merge checks are configured but their results aren&#x27;t currently retrievable, since the real merge action requires them too and would fail the same way.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param pullRequestId The id of the pull request.
+ * @param repoSlug This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: &#x60;{repository UUID}&#x60;.
+ * @param workspace This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example: &#x60;{workspace UUID}&#x60;.
+ * @param optional nil or *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGetOpts - Optional Parameters:
+     * @param "Q" (optional.String) -  Only a limited subset of BBQL is supported here. Checks that are expensive to calculate can be excluded: &#x60;type!&#x3D;\&quot;git_mergeability_check\&quot;&#x60; skips Git conflict evaluation, and &#x60;check.kind!&#x3D;\&quot;maximum_commits_behind\&quot;&#x60; skips the bounded Git ancestry check behind that standard merge check. Combine both with &#x60;AND&#x60; (either order). Anything else returns &#x60;400 Bad Request&#x60;.
+@return PullrequestMergeabilityChecks
+*/
+
+type PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGetOpts struct {
+	Q optional.String
+}
+
+func (a *PullrequestsApiService) RepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGet(ctx context.Context, pullRequestId int32, repoSlug string, workspace string, localVarOptionals *PullrequestsApiRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdMergeabilityChecksGetOpts) (PullrequestMergeabilityChecks, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue PullrequestMergeabilityChecks
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/mergeability/checks"
+	localVarPath = strings.Replace(localVarPath, "{"+"pull_request_id"+"}", fmt.Sprintf("%v", pullRequestId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo_slug"+"}", fmt.Sprintf("%v", repoSlug), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"workspace"+"}", fmt.Sprintf("%v", workspace), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Q.IsSet() {
+		localVarQueryParams.Add("q", parameterToString(localVarOptionals.Q.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Authorization"] = key
+
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PullrequestMergeabilityChecks
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 400 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 401 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 403 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 404 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 500 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*
